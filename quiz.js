@@ -1,6 +1,7 @@
+cat > /mnt/user-data/outputs/quiz.js << 'EOFQUIZ'
 /**
- * TESTIFY QUIZ MANAGER - TAM TAMAMLANMIŞ SÜRÜM
- * AI Test Desteği + Tüm Özellikler
+ * TESTIFY QUIZ MANAGER - ÇOK DİLLİ VERSİYON
+ * AI Test Desteği + Tüm Özellikler + Çoklu Dil
  */
 
 'use strict';
@@ -77,24 +78,21 @@ const QuizManager = {
                 
                 this.state.answers = new Array(aiTest.questions.length).fill(null);
                 
-                // AI testini kullandıktan sonra sil (tek kullanımlık)
-                // localStorage.removeItem('testify_generated_test'); // İsterseniz silebilirsiniz
-                
                 // Bildirim göster
-                Utils.showToast(`🤖 AI Testi: ${aiTest.title} - ${aiTest.questions.length} soru`, 'info', 4000);
+                Utils.showToast(`🤖 ${i18n.t('test.aiTest')}: ${aiTest.title} - ${aiTest.questions.length} ${i18n.t('quiz.questions')}`, 'info', 4000);
                 
             } else {
                 console.log('📚 Varsayılan sorular kullanılıyor');
                 
                 // Soru bankası kontrolü
                 if (!window.questionBank || !Array.isArray(window.questionBank)) {
-                    Utils.showToast('Soru bankası yüklenemedi!', 'error');
+                    Utils.showToast(i18n.t('quiz.questionBankError'), 'error');
                     console.error('questionBank bulunamadı!');
                     return;
                 }
 
                 if (window.questionBank.length === 0) {
-                    Utils.showToast('Soru bankası boş!', 'error');
+                    Utils.showToast(i18n.t('quiz.questionBankEmpty'), 'error');
                     return;
                 }
 
@@ -140,11 +138,11 @@ const QuizManager = {
             this.saveState();
 
             const questionCount = this.state.questions.length;
-            Utils.showToast(`Test başladı! ${questionCount} soru - Bol şans!`, 'success');
+            Utils.showToast(`${i18n.t('quiz.testStarted')} ${questionCount} ${i18n.t('quiz.questions')} - ${i18n.t('quiz.goodLuck')}`, 'success');
             
         } catch (error) {
             console.error('Quiz başlatma hatası:', error);
-            Utils.showToast('Test başlatılamadı: ' + error.message, 'error');
+            Utils.showToast(i18n.t('quiz.startError') + ': ' + error.message, 'error');
         }
     },
 
@@ -250,7 +248,7 @@ const QuizManager = {
             this.updateButtons();
         } catch (error) {
             console.error('Soru gösterme hatası:', error);
-            Utils.showToast('Soru gösterilemedi', 'error');
+            Utils.showToast(i18n.t('quiz.questionDisplayError'), 'error');
         }
     },
 
@@ -321,7 +319,7 @@ const QuizManager = {
             explanationDiv.innerHTML = `
                 <div class="explanation-header">
                     <span class="explanation-icon">💡</span>
-                    <strong>Açıklama:</strong>
+                    <strong data-i18n="quiz.explanation">${i18n.t('quiz.explanation')}:</strong>
                 </div>
                 <p>${Utils.sanitizeHTML(question.explanation)}</p>
             `;
@@ -399,7 +397,7 @@ const QuizManager = {
         explanationDiv.style.cssText = 'margin-top: 20px; padding: 15px; background: var(--bg-tertiary); border-left: 4px solid var(--info); border-radius: 8px; animation: slideIn 0.3s ease-out;';
         
         const statusIcon = isCorrect ? '✅' : '❌';
-        const statusText = isCorrect ? 'Doğru!' : 'Yanlış!';
+        const statusText = isCorrect ? i18n.t('quiz.correctAnswer') : i18n.t('quiz.wrongAnswer');
         const statusColor = isCorrect ? 'var(--success)' : 'var(--danger)';
         
         explanationDiv.innerHTML = `
@@ -410,7 +408,7 @@ const QuizManager = {
             <div style="display: flex; align-items: flex-start; gap: 8px; margin-top: 10px;">
                 <span style="font-size: 1.2rem;">💡</span>
                 <div>
-                    <strong style="color: var(--info);">Açıklama:</strong>
+                    <strong style="color: var(--info);" data-i18n="quiz.explanation">${i18n.t('quiz.explanation')}:</strong>
                     <p style="color: var(--text-secondary); line-height: 1.6; margin: 5px 0 0;">${Utils.sanitizeHTML(question.explanation)}</p>
                 </div>
             </div>
@@ -439,7 +437,7 @@ const QuizManager = {
         if (nextBtn) {
             if (this.state.isReviewing) {
                 nextBtn.style.display = isLastQuestion ? 'none' : 'inline-flex';
-                nextBtn.textContent = 'Sonraki Soru →';
+                nextBtn.innerHTML = '<span data-i18n="quiz.nextQuestion">' + i18n.t('quiz.nextQuestion') + '</span> →';
             } else {
                 nextBtn.style.display = isLastQuestion ? 'none' : 'inline-flex';
             }
@@ -487,9 +485,8 @@ const QuizManager = {
             const unanswered = this.state.answers.filter(a => a === null).length;
             
             if (unanswered > 0) {
-                const confirmed = await Utils.confirm(
-                    `${unanswered} soru cevaplanmadı. Testi bitirmek istediğinizden emin misiniz?`
-                );
+                const confirmMsg = `${unanswered} ${i18n.t('quiz.unansweredQuestions')}. ${i18n.t('quiz.finishConfirm')}`;
+                const confirmed = await Utils.confirm(confirmMsg);
                 
                 if (!confirmed) return;
             }
@@ -513,7 +510,7 @@ const QuizManager = {
             this.showResults(results);
         } catch (error) {
             console.error('Quiz bitirme hatası:', error);
-            Utils.showToast('Test bitirilemedi', 'error');
+            Utils.showToast(i18n.t('quiz.finishError'), 'error');
         }
     },
 
@@ -604,7 +601,7 @@ const QuizManager = {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (error) {
             console.error('Sonuç gösterme hatası:', error);
-            Utils.showToast('Sonuçlar gösterilemedi', 'error');
+            Utils.showToast(i18n.t('quiz.resultsDisplayError'), 'error');
         }
     },
 
@@ -639,13 +636,13 @@ const QuizManager = {
             if (nextBtn) nextBtn.style.display = 'inline-flex';
             if (submitBtn) submitBtn.style.display = 'none';
 
-            Utils.showToast('İnceleme modu - Açıklamaları okuyabilirsiniz', 'info');
+            Utils.showToast(i18n.t('quiz.reviewMode'), 'info');
             
             // Smooth scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (error) {
             console.error('İnceleme modu hatası:', error);
-            Utils.showToast('İnceleme modu başlatılamadı', 'error');
+            Utils.showToast(i18n.t('quiz.reviewModeError'), 'error');
         }
     },
 
@@ -687,7 +684,7 @@ const QuizManager = {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (error) {
             console.error('Yeni quiz başlatma hatası:', error);
-            Utils.showToast('Yeni test başlatılamadı', 'error');
+            Utils.showToast(i18n.t('quiz.newTestError'), 'error');
         }
     },
 
@@ -695,9 +692,7 @@ const QuizManager = {
      * Quiz'den çıkar
      */
     async exitQuiz() {
-        const confirmed = await Utils.confirm(
-            'Testi bırakmak istediğinize emin misiniz? İlerlemeniz kaydedilmeyecek.'
-        );
+        const confirmed = await Utils.confirm(i18n.t('quiz.exitConfirm'));
         
         if (!confirmed) return;
 
@@ -714,7 +709,7 @@ const QuizManager = {
             if (resultsPage) resultsPage.classList.remove('active');
             if (testSelection) testSelection.classList.add('active');
 
-            Utils.showToast('Test iptal edildi', 'info');
+            Utils.showToast(i18n.t('quiz.testCancelled'), 'info');
         } catch (error) {
             console.error('Quiz çıkış hatası:', error);
         }
@@ -784,12 +779,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedState = StorageManager.getQuizState();
     if (savedState && savedState.questionCount > 0) {
         setTimeout(async () => {
-            const continueQuiz = await Utils.confirm(
-                'Yarım kalan bir testiniz var. Devam etmek ister misiniz?'
-            );
+            const continueQuiz = await Utils.confirm(i18n.t('quiz.continueTest'));
             
             if (continueQuiz) {
-                Utils.showToast('Devam etme özelliği yakında eklenecek', 'info');
+                Utils.showToast(i18n.t('quiz.continueFeatureComingSoon'), 'info');
             } else {
                 StorageManager.clearQuizState();
             }
@@ -801,9 +794,10 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('beforeunload', (e) => {
     if (QuizManager.state.questions.length > 0 && !QuizManager.state.isReviewing) {
         e.preventDefault();
-        e.returnValue = 'Test devam ediyor. Çıkmak istediğinize emin misiniz?';
+        e.returnValue = i18n.t('quiz.exitWarning');
     }
 });
 
 // Export
 window.QuizManager = QuizManager;
+EOFQUIZ
