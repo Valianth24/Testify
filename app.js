@@ -1,6 +1,7 @@
 /**
  * TESTIFY MAIN APPLICATION
  * Tüm özellikleri çalışır hale getiren ana uygulama
+ * GÜNCELLENDİ: Library (Kütüphane) tab desteği eklendi
  */
 
 'use strict';
@@ -113,7 +114,7 @@ const App = {
     },
 
     /**
-     * Tab navigasyonu
+     * Tab navigasyonu - GÜNCELLENDİ
      */
     switchTab(tabName) {
         // Tab butonlarını güncelle
@@ -130,6 +131,12 @@ const App = {
 
         // Tab'a özel yüklemeler
         switch(tabName) {
+            case 'library':
+                // Kütüphaneyi yükle
+                if (window.LibraryManager) {
+                    LibraryManager.loadLibrary();
+                }
+                break;
             case 'leaderboard':
                 this.updateLeaderboard();
                 break;
@@ -209,6 +216,10 @@ const App = {
         switch(activity.type) {
             case 'test_completed':
                 return '✅ Test Tamamlandı';
+            case 'test_saved':
+                return '💾 Test Kaydedildi';
+            case 'test_exported':
+                return '📥 Test İndirildi';
             case 'note_created':
                 return '📝 Not Oluşturuldu';
             case 'level_up':
@@ -225,6 +236,10 @@ const App = {
         switch(activity.type) {
             case 'test_completed':
                 return `${activity.data.correctAnswers}/${activity.data.totalQuestions} doğru - %${activity.data.successRate} başarı`;
+            case 'test_saved':
+                return `${activity.data.title} - ${activity.data.questionCount} soru`;
+            case 'test_exported':
+                return `${activity.data.title} - ${activity.data.format.toUpperCase()}`;
             case 'note_created':
                 return activity.data.title || 'Yeni not';
             case 'level_up':
