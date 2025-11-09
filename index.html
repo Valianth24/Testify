@@ -48,6 +48,9 @@
     <!-- External CSS -->
     <link rel="stylesheet" href="styles.css">
     
+    <!-- jsPDF for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
     <!-- Schema.org Markup -->
     <script type="application/ld+json">
     {
@@ -114,8 +117,11 @@
                 <button class="nav-tab" data-tab="create" role="tab" aria-selected="false" aria-controls="create">
                     <span role="img" aria-hidden="true">➕</span> Test Oluştur
                 </button>
+                <button class="nav-tab" data-tab="library" role="tab" aria-selected="false" aria-controls="library">
+                    <span role="img" aria-hidden="true">📚</span> Kütüphanem
+                </button>
                 <button class="nav-tab" data-tab="notes" role="tab" aria-selected="false" aria-controls="notes">
-                    <span role="img" aria-hidden="true">📚</span> Notlarım
+                    <span role="img" aria-hidden="true">📝</span> Notlarım
                 </button>
                 <button class="nav-tab" data-tab="leaderboard" role="tab" aria-selected="false" aria-controls="leaderboard">
                     <span role="img" aria-hidden="true">🏆</span> Liderlik
@@ -156,7 +162,6 @@
                 <!-- Mesajlar buraya eklenecek -->
             </div>
             
-            <!-- ✅ DÜZELTİLDİ: form yerine div, type="button" -->
             <div class="ai-input-container">
                 <div class="ai-input-group">
                     <label for="aiInput" class="sr-only">Testify AI'ya mesajınız</label>
@@ -284,7 +289,7 @@
                         </article>
 
                         <nav class="quiz-actions" aria-label="Test navigasyonu">
-                            <button class="btn btn-secondary" id="prevBtn" aria-label="Önceki soru">
+                            <button class="btn btn-secondary" id="prevBtn" aria-label="Önceki soru" style="display:none">
                                 ← Önceki
                             </button>
                             <button class="btn btn-primary" id="nextBtn" aria-label="Sonraki soru">
@@ -389,6 +394,25 @@
                 </form>
             </section>
 
+            <!-- Library Tab (YENİ!) -->
+            <section class="tab-content" id="library" role="tabpanel" aria-labelledby="tab-library">
+                <div class="library-header">
+                    <h1>📚 Kütüphanem</h1>
+                    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-xl);">
+                        AI ile oluşturduğun testler burada saklanır (24 saat)
+                    </p>
+                </div>
+                <div id="libraryList" class="library-list">
+                    <div class="empty-state">
+                        <div class="empty-state-icon" aria-hidden="true">📚</div>
+                        <p>Henüz test oluşturmadın</p>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">
+                            AI'dan "test oluştur" diyerek başla!
+                        </p>
+                    </div>
+                </div>
+            </section>
+
             <!-- Notes Tab -->
             <section class="tab-content" id="notes" role="tabpanel" aria-labelledby="tab-notes">
                 <div class="notes-header">
@@ -399,7 +423,7 @@
                 </div>
                 <div id="notesList" class="notes-list">
                     <div class="empty-state">
-                        <div class="empty-state-icon" aria-hidden="true">📚</div>
+                        <div class="empty-state-icon" aria-hidden="true">📝</div>
                         <p>Henüz not eklemedin</p>
                     </div>
                 </div>
@@ -531,6 +555,7 @@
     <script src="storage.js"></script>
     <script src="sorular.js"></script>
     <script src="testify-ai.js"></script>
+    <script src="library.js"></script>
     <script src="quiz.js"></script>
     <script src="app.js"></script>
 </body>
