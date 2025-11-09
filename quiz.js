@@ -1,6 +1,6 @@
 /**
- * TESTIFY QUIZ MANAGER - TAM TAMAMLANMIŞ SÜRÜM
- * AI Test Desteği + Tüm Özellikler
+ * TESTIFY QUIZ MANAGER - EXIT BUTONU İLE
+ * Kullanıcı istediği zaman testi bırakabilir
  */
 
 'use strict';
@@ -77,10 +77,6 @@ const QuizManager = {
                 
                 this.state.answers = new Array(aiTest.questions.length).fill(null);
                 
-                // AI testini kullandıktan sonra sil (tek kullanımlık)
-                // localStorage.removeItem('testify_generated_test'); // İsterseniz silebilirsiniz
-                
-                // Bildirim göster
                 Utils.showToast(`🤖 AI Testi: ${aiTest.title} - ${aiTest.questions.length} soru`, 'info', 4000);
                 
             } else {
@@ -130,6 +126,9 @@ const QuizManager = {
             testSelection.classList.remove('active');
             quizPage.classList.add('active');
 
+            // YENİ: Exit butonunu göster
+            this.showExitButton();
+
             // Timer'ı başlat
             this.startTimer();
 
@@ -145,6 +144,16 @@ const QuizManager = {
         } catch (error) {
             console.error('Quiz başlatma hatası:', error);
             Utils.showToast('Test başlatılamadı: ' + error.message, 'error');
+        }
+    },
+
+    /**
+     * YENİ: Exit butonunu göster/gizle
+     */
+    showExitButton() {
+        const exitBtn = document.getElementById('exitQuizBtn');
+        if (exitBtn) {
+            exitBtn.style.display = this.state.isReviewing ? 'none' : 'inline-flex';
         }
     },
 
@@ -448,6 +457,9 @@ const QuizManager = {
         if (submitBtn) {
             submitBtn.style.display = isLastQuestion && !this.state.isReviewing ? 'inline-flex' : 'none';
         }
+
+        // YENİ: Exit butonunu güncelle
+        this.showExitButton();
     },
 
     /**
@@ -639,6 +651,9 @@ const QuizManager = {
             if (nextBtn) nextBtn.style.display = 'inline-flex';
             if (submitBtn) submitBtn.style.display = 'none';
 
+            // YENİ: Exit butonunu gizle (inceleme modunda)
+            this.showExitButton();
+
             Utils.showToast('İnceleme modu - Açıklamaları okuyabilirsiniz', 'info');
             
             // Smooth scroll to top
@@ -692,19 +707,36 @@ const QuizManager = {
     },
 
     /**
-     * Quiz'den çıkar
+     * YENİ: Quiz'den çıkar (İYİLEŞTİRİLMİŞ)
      */
     async exitQuiz() {
+        // Eğer inceleme modundaysa uyarma
+        if (this.state.isReviewing) {
+            this.newQuiz();
+            return;
+        }
+
         const confirmed = await Utils.confirm(
-            'Testi bırakmak istediğinize emin misiniz? İlerlemeniz kaydedilmeyecek.'
+            '🚪 Testi bırakmak istediğine emin misin?\n\n' +
+            '⚠️ İlerleme kaydedilmeyecek!\n' +
+            '💡 Daha sonra devam edemezsin.'
         );
         
         if (!confirmed) return;
 
         try {
-            this.stopTimer();
-            StorageManager.clearQuizState();
+            // İstatistikler
+            const answeredCount = this.state.answers.filter(a => a !== null).length;
+            const totalCount = this.state.questions.length;
             
+            console.log(`📊 Test bırakıldı: ${answeredCount}/${totalCount} soru cevaplanmış`);
+
+            // Timer'ı durdur
+            this.stopTimer();
+
+            // Quiz state'i temizle
+            StorageManager.clearQuizState();
+
             // Test selection'a dön
             const quizPage = document.getElementById('quizPage');
             const resultsPage = document.getElementById('resultsPage');
@@ -714,9 +746,37 @@ const QuizManager = {
             if (resultsPage) resultsPage.classList.remove('active');
             if (testSelection) testSelection.classList.add('active');
 
-            Utils.showToast('Test iptal edildi', 'info');
+            // State'i sıfırla
+            this.state = {
+                currentMode: null,
+                questions: [],
+                currentIndex: 0,
+                answers: [],
+                startTime: null,
+                timerInterval: null,
+                elapsedSeconds: 0,
+                isReviewing: false,
+                testTitle: null,
+                testDescription: null
+            };
+
+            // Bilgilendirme mesajı
+            if (answeredCount > 0) {
+                Utils.showToast(
+                    `📋 Test bırakıldı (${answeredCount}/${totalCount} soru cevaplanmıştı)`,
+                    'info',
+                    4000
+                );
+            } else {
+                Utils.showToast('Test iptal edildi', 'info');
+            }
+
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
         } catch (error) {
             console.error('Quiz çıkış hatası:', error);
+            Utils.showToast('Çıkış yapılamadı', 'error');
         }
     }
 };
@@ -759,6 +819,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitBtn = document.getElementById('submitBtn');
     const reviewBtn = document.getElementById('reviewBtn');
     const newQuizBtn = document.getElementById('newQuizBtn');
+    const exitQuizBtn = document.getElementById('exitQuizBtn'); // YENİ
 
     if (prevBtn) {
         prevBtn.addEventListener('click', () => QuizManager.previousQuestion());
@@ -780,6 +841,12 @@ document.addEventListener('DOMContentLoaded', () => {
         newQuizBtn.addEventListener('click', () => QuizManager.newQuiz());
     }
 
+    // YENİ: Exit Quiz Button
+    if (exitQuizBtn) {
+        exitQuizBtn.addEventListener('click', () => QuizManager.exitQuiz());
+        console.log('✅ Exit buton listener eklendi');
+    }
+
     // Kaydedilmiş quiz state'i yükle
     const savedState = StorageManager.getQuizState();
     if (savedState && savedState.questionCount > 0) {
@@ -793,17 +860,4 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 StorageManager.clearQuizState();
             }
-        }, 1000);
-    }
-});
-
-// Sayfa kapatılırken uyarı
-window.addEventListener('beforeunload', (e) => {
-    if (QuizManager.state.questions.length > 0 && !QuizManager.state.isReviewing) {
-        e.preventDefault();
-        e.returnValue = 'Test devam ediyor. Çıkmak istediğinize emin misiniz?';
-    }
-});
-
-// Export
-window.QuizManager = QuizManager;
+        },
