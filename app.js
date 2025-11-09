@@ -1,5 +1,6 @@
+cat > /mnt/user-data/outputs/app.js << 'EOFAPP'
 /**
- * TESTIFY MAIN APPLICATION
+ * TESTIFY MAIN APPLICATION - ÇOK DİLLİ VERSİYON
  * Tüm özellikleri çalışır hale getiren ana uygulama
  */
 
@@ -42,7 +43,7 @@ const App = {
             localStorage.setItem(test, test);
             localStorage.removeItem(test);
         } catch (e) {
-            Utils.showToast('LocalStorage kullanılamıyor! Veriler kaydedilmeyecek.', 'warning');
+            Utils.showToast(i18n.t('messages.error.storage'), 'warning');
             console.error('Storage hatası:', e);
         }
     },
@@ -57,8 +58,8 @@ const App = {
             // Header'daki bilgileri güncelle
             document.getElementById('userAvatar').textContent = 
                 userData.username.charAt(0).toUpperCase();
-            document.getElementById('streak').textContent = 
-                userData.stats.streak + ' Gün';
+            document.getElementById('streak').innerHTML = 
+                userData.stats.streak + ' <span data-i18n="time.days">' + i18n.t('time.days') + '</span>';
             document.getElementById('totalPoints').textContent = 
                 userData.stats.xp + ' XP';
             document.getElementById('rank').textContent = 
@@ -179,7 +180,7 @@ const App = {
             activityList.innerHTML = `
                 <div class="empty-state">
                     <div class="empty-state-icon">📊</div>
-                    <p>Henüz aktivite yok. Test çözerek başla!</p>
+                    <p data-i18n="dashboard.noActivity">${i18n.t('dashboard.noActivity')}</p>
                 </div>
             `;
             return;
@@ -208,13 +209,13 @@ const App = {
     getActivityTitle(activity) {
         switch(activity.type) {
             case 'test_completed':
-                return '✅ Test Tamamlandı';
+                return '✅ ' + i18n.t('activity.testCompleted');
             case 'note_created':
-                return '📝 Not Oluşturuldu';
+                return '📝 ' + i18n.t('activity.noteCreated');
             case 'level_up':
-                return '🎉 Level Atlandı';
+                return '🎉 ' + i18n.t('activity.levelUp');
             default:
-                return 'Aktivite';
+                return i18n.t('activity.activity');
         }
     },
 
@@ -224,11 +225,13 @@ const App = {
     getActivityDescription(activity) {
         switch(activity.type) {
             case 'test_completed':
-                return `${activity.data.correctAnswers}/${activity.data.totalQuestions} doğru - %${activity.data.successRate} başarı`;
+                const correct = i18n.t('quiz.correct');
+                const success = i18n.t('quiz.success');
+                return `${activity.data.correctAnswers}/${activity.data.totalQuestions} ${correct} - %${activity.data.successRate} ${success}`;
             case 'note_created':
-                return activity.data.title || 'Yeni not';
+                return activity.data.title || i18n.t('notes.newNote');
             case 'level_up':
-                return `Level ${activity.data.level}!`;
+                return `${i18n.t('stats.level')} ${activity.data.level}!`;
             default:
                 return '';
         }
@@ -246,7 +249,7 @@ const App = {
         if (leaderboard.length === 0) {
             tbody.innerHTML = `
                 <tr>
-                    <td colspan="5" class="empty-cell">Henüz veri bulunmuyor</td>
+                    <td colspan="5" class="empty-cell" data-i18n="leaderboard.noData">${i18n.t('leaderboard.noData')}</td>
                 </tr>
             `;
             return;
@@ -293,24 +296,27 @@ const App = {
             notesList.innerHTML = `
                 <div class="empty-state">
                     <div class="empty-state-icon">📚</div>
-                    <p>Henüz not eklemedin</p>
+                    <p data-i18n="notes.empty">${i18n.t('notes.empty')}</p>
                 </div>
             `;
             return;
         }
 
+        const editText = i18n.t('edit');
+        const deleteText = i18n.t('delete');
+
         notesList.innerHTML = notes.map(note => `
             <div class="note-card">
-                <h3 class="note-title">${Utils.sanitizeHTML(note.title || 'Başlıksız Not')}</h3>
+                <h3 class="note-title">${Utils.sanitizeHTML(note.title || i18n.t('notes.untitled'))}</h3>
                 <p class="note-content">${Utils.sanitizeHTML(note.content || '')}</p>
                 <div class="note-meta">
                     <span>${Utils.formatDate(note.createdAt)}</span>
                     <div>
                         <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.85rem;" onclick="App.editNote('${note.id}')">
-                            Düzenle
+                            ${editText}
                         </button>
                         <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.85rem;" onclick="App.deleteNote('${note.id}')">
-                            Sil
+                            ${deleteText}
                         </button>
                     </div>
                 </div>
@@ -322,10 +328,10 @@ const App = {
      * Not ekler
      */
     async addNote() {
-        const title = prompt('Not Başlığı:');
+        const title = prompt(i18n.t('notes.noteTitle') + ':');
         if (!title) return;
 
-        const content = prompt('Not İçeriği:');
+        const content = prompt(i18n.t('notes.noteContent') + ':');
         if (!content) return;
 
         const note = {
@@ -335,6 +341,7 @@ const App = {
 
         if (StorageManager.saveNote(note)) {
             this.updateNotes();
+            Utils.showToast(i18n.t('messages.success.saved'), 'success');
         }
     },
 
@@ -347,10 +354,10 @@ const App = {
         
         if (!note) return;
 
-        const title = prompt('Not Başlığı:', note.title);
+        const title = prompt(i18n.t('notes.noteTitle') + ':', note.title);
         if (title === null) return;
 
-        const content = prompt('Not İçeriği:', note.content);
+        const content = prompt(i18n.t('notes.noteContent') + ':', note.content);
         if (content === null) return;
 
         note.title = title;
@@ -358,6 +365,7 @@ const App = {
 
         if (StorageManager.saveNote(note)) {
             this.updateNotes();
+            Utils.showToast(i18n.t('messages.success.updated'), 'success');
         }
     },
 
@@ -365,10 +373,11 @@ const App = {
      * Not siler
      */
     async deleteNote(noteId) {
-        const confirmed = await Utils.confirm('Bu notu silmek istediğinizden emin misiniz?');
+        const confirmed = await Utils.confirm(i18n.t('messages.warning.deleteConfirm'));
         
         if (confirmed && StorageManager.deleteNote(noteId)) {
             this.updateNotes();
+            Utils.showToast(i18n.t('messages.success.deleted'), 'success');
         }
     },
 
@@ -386,7 +395,7 @@ const App = {
             analysisContent.innerHTML = `
                 <div class="empty-state">
                     <div class="empty-state-icon">📈</div>
-                    <p>Analiz için daha fazla test çöz</p>
+                    <p data-i18n="analysis.empty">${i18n.t('analysis.empty')}</p>
                 </div>
             `;
             return;
@@ -400,26 +409,26 @@ const App = {
                 <div class="stat-card">
                     <div class="stat-icon">📊</div>
                     <div class="stat-value">${successRate}%</div>
-                    <div class="stat-label">Ortalama Başarı</div>
+                    <div class="stat-label" data-i18n="stats.avgSuccess">${i18n.t('stats.avgSuccess')}</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">⏱️</div>
                     <div class="stat-value">${Utils.formatTime(avgTime)}</div>
-                    <div class="stat-label">Ortalama Süre</div>
+                    <div class="stat-label" data-i18n="stats.avgTime">${i18n.t('stats.avgTime')}</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">🎯</div>
                     <div class="stat-value">${stats.correctAnswers}</div>
-                    <div class="stat-label">Toplam Doğru</div>
+                    <div class="stat-label" data-i18n="stats.totalCorrect">${i18n.t('stats.totalCorrect')}</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">❌</div>
                     <div class="stat-value">${stats.wrongAnswers}</div>
-                    <div class="stat-label">Toplam Yanlış</div>
+                    <div class="stat-label" data-i18n="stats.totalWrong">${i18n.t('stats.totalWrong')}</div>
                 </div>
             </div>
             <div style="margin-top: 30px; padding: 20px; background: var(--bg-secondary); border-radius: 10px;">
-                <h3>Performans Değerlendirmesi</h3>
+                <h3 data-i18n="analysis.performance">${i18n.t('analysis.performance')}</h3>
                 <p style="margin-top: 10px; line-height: 1.6;">
                     ${this.getPerformanceText(successRate)}
                 </p>
@@ -432,15 +441,15 @@ const App = {
      */
     getPerformanceText(successRate) {
         if (successRate >= 90) {
-            return '🌟 Mükemmel! Harika bir performans gösteriyorsun. Böyle devam et!';
+            return '🌟 ' + i18n.t('analysis.excellent');
         } else if (successRate >= 75) {
-            return '👏 Çok iyi! Başarılı bir performans. Biraz daha çalışarak daha da iyileştirebilirsin.';
+            return '👏 ' + i18n.t('analysis.veryGood');
         } else if (successRate >= 60) {
-            return '💪 İyi gidiyorsun! Biraz daha pratik yaparsan hedeflerine ulaşabilirsin.';
+            return '💪 ' + i18n.t('analysis.good');
         } else if (successRate >= 40) {
-            return '📚 Daha fazla çalışma gerekiyor. Düzenli pratik yaparak gelişebilirsin.';
+            return '📚 ' + i18n.t('analysis.needMore');
         } else {
-            return '🎯 Temel konuları tekrar etmen önerilir. Yavaş yavaş ilerlemeye devam et!';
+            return '🎯 ' + i18n.t('analysis.needBasics');
         }
     },
 
@@ -456,12 +465,12 @@ const App = {
 
         // Validasyon
         if (!Utils.validateUsername(username)) {
-            Utils.showToast('Geçersiz kullanıcı adı! (3-20 karakter, sadece harf, rakam ve _)', 'error');
+            Utils.showToast(i18n.t('messages.error.invalidUsername'), 'error');
             return;
         }
 
         if (email && !Utils.validateEmail(email)) {
-            Utils.showToast('Geçersiz e-posta adresi!', 'error');
+            Utils.showToast(i18n.t('messages.error.invalidEmail'), 'error');
             return;
         }
 
@@ -481,10 +490,10 @@ const App = {
         userData.settings.notifications = settings.notifications;
 
         if (StorageManager.updateUserData(userData)) {
-            Utils.showToast(Config.SUCCESS.SAVED, 'success');
+            Utils.showToast(i18n.t('messages.success.saved'), 'success');
             this.loadUserData();
         } else {
-            Utils.showToast(Config.ERRORS.GENERIC, 'error');
+            Utils.showToast(i18n.t('messages.error.generic'), 'error');
         }
     },
 
@@ -492,7 +501,7 @@ const App = {
      * Ayarları sıfırlar
      */
     async resetSettings() {
-        const confirmed = await Utils.confirm('Ayarlar varsayılan değerlere dönecek. Emin misiniz?');
+        const confirmed = await Utils.confirm(i18n.t('settings.resetConfirm'));
         
         if (!confirmed) return;
 
@@ -502,7 +511,7 @@ const App = {
         document.getElementById('emailNotif').checked = true;
         document.getElementById('pushNotif').checked = false;
 
-        Utils.showToast('Ayarlar sıfırlandı', 'info');
+        Utils.showToast(i18n.t('settings.resetSuccess'), 'info');
     },
 
     /**
@@ -514,14 +523,14 @@ const App = {
 
         // Dosya boyutu kontrolü
         if (file.size > Config.FILE_UPLOAD.MAX_SIZE) {
-            Utils.showToast(Config.ERRORS.FILE_SIZE, 'error');
+            Utils.showToast(i18n.t('messages.error.fileSize'), 'error');
             return;
         }
 
         // Dosya türü kontrolü
         const ext = file.name.split('.').pop().toLowerCase();
         if (!Config.FILE_UPLOAD.ALLOWED_TYPES.includes(ext)) {
-            Utils.showToast(Config.ERRORS.FILE_TYPE, 'error');
+            Utils.showToast(i18n.t('messages.error.fileType'), 'error');
             return;
         }
 
@@ -539,7 +548,7 @@ const App = {
             `;
         }
 
-        Utils.showToast(Config.SUCCESS.FILE_UPLOADED, 'success');
+        Utils.showToast(i18n.t('messages.success.fileUploaded'), 'success');
     },
 
     /**
@@ -553,16 +562,16 @@ const App = {
         const category = form.testCategory.value;
 
         if (!title) {
-            Utils.showToast('Test başlığı gerekli!', 'error');
+            Utils.showToast(i18n.t('create.titleRequired'), 'error');
             return;
         }
 
         if (!category) {
-            Utils.showToast('Kategori seçmelisiniz!', 'error');
+            Utils.showToast(i18n.t('create.categoryRequired'), 'error');
             return;
         }
 
-        Utils.showToast('Test oluşturma özelliği yakında eklenecek!', 'info');
+        Utils.showToast(i18n.t('create.comingSoon'), 'info');
         
         // Form sıfırla
         form.reset();
@@ -610,6 +619,15 @@ const App = {
 
         // Tema değiştir
         window.themeManager = this.themeManager;
+        
+        // Dil değiştiğinde
+        window.addEventListener('languageChanged', () => {
+            this.loadUserData();
+            this.updateDashboard();
+            this.updateLeaderboard();
+            this.updateNotes();
+            this.updateAnalysis();
+        });
     }
 };
 
@@ -620,3 +638,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Export
 window.App = App;
+EOFAPP
