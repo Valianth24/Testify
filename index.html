@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="light">
+<head>
+    <!-- Meta Tags - SEO Optimization -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>Testify - Yapay Zeka Destekli Akıllı Eğitim Platformu | Online Test Çözme</title>
+    <meta name="description" content="Testify ile yapay zeka destekli test çözün, performansınızı analiz edin ve sınava hazırlanın. Ücretsiz online test platformu.">
+    <meta name="keywords" content="online test, sınav hazırlık, yapay zeka test, eğitim platformu, test çözme, YKS, LGS, KPSS">
+    <meta name="author" content="Testify Team">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://testify.com">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://testify.com">
+    <meta property="og:title" content="Testify - Akıllı Eğitim Platformu">
+    <meta property="og:description" content="Yapay zeka destekli test çözme platformu. Performansını analiz et, hedefine ulaş!">
+    <meta property="og:image" content="https://testify.com/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://testify.com">
+    <meta property="twitter:title" content="Testify - Akıllı Eğitim Platformu">
+    <meta property="twitter:description" content="Yapay zeka destekli test çözme platformu">
+    <meta property="twitter:image" content="https://testify.com/twitter-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+    
+    <!-- Font - Preload for Performance -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456" crossorigin="anonymous"></script>
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Schema.org Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "Testify",
+      "description": "Yapay zeka destekli online test ve eğitim platformu",
+      "url": "https://testify.com"
+    }
+    </script>
+</head>
+<body>
+    <!-- Skip to Main Content (Accessibility) -->
+    <a href="#main-content" class="skip-link">Ana içeriğe geç</a>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="header-content">
+            <div class="header-top">
+                <a href="/" class="logo" aria-label="Testify Ana Sayfa">
+                    <span role="img" aria-label="Eğitim ikonu">🎓</span>
+                    <span>Testify</span>
+                </a>
+                
+                <div class="header-actions">
+                    <!-- Theme Toggle -->
+                    <button 
+                        class="theme-toggle" 
+                        onclick="themeManager.toggle()"
+                        aria-label="Tema değiştir"
+                        aria-pressed="false"
+                        title="Karanlık/Aydınlık mod">
+                        <span class="theme-toggle-slider">
+                            <span id="themeIcon" aria-hidden="true">☀️</span>
+                        </span>
+                    </button>
+                    
+                    <div class="user-stats" role="status" aria-live="polite">
+                        <div class="stat-badge" title="Günlük seri">
+                            <span role="img" aria-label="Ateş ikonu">🔥</span>
+                            <span id="streak" aria-label="Seri günler">0 Gün</span>
+                        </div>
+                        <div class="stat-badge" title="Toplam puan">
+                            <span role="img" aria-label="Yıldız ikonu">⭐</span>
+                            <span id="totalPoints" aria-label="Toplam XP">0 XP</span>
+                        </div>
+                        <div class="stat-badge" title="Sıralama">
+                            <span role="img" aria-label="Kupa ikonu">🏆</span>
+                            <span id="rank" aria-label="Sıralama">#--</span>
+                        </div>
+                    </div>
+                    <button class="user-avatar" id="userAvatar" aria-label="Kullanıcı menüsü" title="Profil">U</button>
+                </div>
+            </div>
+            
+            <!-- Navigation Tabs -->
+            <nav class="nav-tabs" role="navigation" aria-label="Ana navigasyon">
+                <button class="nav-tab active" data-tab="dashboard" role="tab" aria-selected="true" aria-controls="dashboard">
+                    <span role="img" aria-hidden="true">📊</span> Dashboard
+                </button>
+                <button class="nav-tab" data-tab="test" role="tab" aria-selected="false" aria-controls="test">
+                    <span role="img" aria-hidden="true">📝</span> Test Çöz
+                </button>
+                <button class="nav-tab" data-tab="create" role="tab" aria-selected="false" aria-controls="create">
+                    <span role="img" aria-hidden="true">➕</span> Test Oluştur
+                </button>
+                <button class="nav-tab" data-tab="notes" role="tab" aria-selected="false" aria-controls="notes">
+                    <span role="img" aria-hidden="true">📚</span> Notlarım
+                </button>
+                <button class="nav-tab" data-tab="leaderboard" role="tab" aria-selected="false" aria-controls="leaderboard">
+                    <span role="img" aria-hidden="true">🏆</span> Liderlik
+                </button>
+                <button class="nav-tab" data-tab="analysis" role="tab" aria-selected="false" aria-controls="analysis">
+                    <span role="img" aria-hidden="true">📈</span> Analizler
+                </button>
+                <button class="nav-tab" data-tab="settings" role="tab" aria-selected="false" aria-controls="settings">
+                    <span role="img" aria-hidden="true">⚙️</span> Ayarlar
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Top Ad Banner -->
+    <aside class="ad-banner" aria-label="Reklam" role="complementary">
+        <div id="ad-top" class="ad-container">
+            <span>📢 Reklam Alanı (728x90)</span>
+        </div>
+    </aside>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- AI Assistant Sidebar -->
+        <aside class="ai-sidebar" role="complementary" aria-label="Yapay zeka asistanı">
+            <div class="ai-header">
+                <h2 class="ai-title">
+                    <span role="img" aria-label="Robot ikonu">🤖</span>
+                    <span>Testify AI</span>
+                </h2>
+                <div class="ai-status" role="status" aria-live="polite">
+                    <span class="status-dot" aria-hidden="true"></span>
+                    <span>Çevrimiçi</span>
+                </div>
+            </div>
+            
+            <div class="ai-chat" id="aiChat" role="log" aria-live="polite" aria-atomic="false">
+                <!-- Mesajlar buraya eklenecek -->
+            </div>
+            
+            <!-- ✅ DÜZELTİLDİ: form yerine div, type="button" -->
+            <div class="ai-input-container">
+                <div class="ai-input-group">
+                    <label for="aiInput" class="sr-only">Testify AI'ya mesajınız</label>
+                    <input 
+                        type="text" 
+                        class="ai-input" 
+                        id="aiInput" 
+                        placeholder="Testify AI'ya sor..." 
+                        maxlength="500"
+                        aria-label="Mesaj giriş alanı"
+                        autocomplete="off" />
+                    <button 
+                        type="button" 
+                        class="ai-send-btn" 
+                        id="aiSendBtn"
+                        aria-label="Mesaj gönder">→</button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content" id="main-content" role="main">
+            <!-- Dashboard Tab -->
+            <section class="tab-content active" id="dashboard" role="tabpanel" aria-labelledby="tab-dashboard">
+                <h1>Dashboard</h1>
+                
+                <div class="stats-grid" role="region" aria-label="İstatistikler">
+                    <article class="stat-card">
+                        <div class="stat-icon" aria-hidden="true">📝</div>
+                        <div class="stat-value" id="totalTests" aria-label="Çözülen test sayısı">0</div>
+                        <div class="stat-label">Çözülen Test</div>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-icon" aria-hidden="true">✅</div>
+                        <div class="stat-value" id="successRate" aria-label="Başarı oranı">0%</div>
+                        <div class="stat-label">Başarı Oranı</div>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-icon" aria-hidden="true">🎯</div>
+                        <div class="stat-value" id="totalQuestions" aria-label="Toplam soru sayısı">0</div>
+                        <div class="stat-label">Toplam Soru</div>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-icon" aria-hidden="true">⏱️</div>
+                        <div class="stat-value" id="avgTime" aria-label="Ortalama süre">0s</div>
+                        <div class="stat-label">Ort. Süre</div>
+                    </article>
+                </div>
+
+                <!-- Recent Activity -->
+                <section class="recent-activity" aria-labelledby="recent-activity-title">
+                    <h2 id="recent-activity-title">Son Aktiviteler</h2>
+                    <div id="activityList" class="activity-list">
+                        <div class="empty-state">
+                            <div class="empty-state-icon" aria-hidden="true">📊</div>
+                            <p>Henüz aktivite yok. Test çözerek başla!</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Side Ad -->
+                <aside class="ad-banner" aria-label="Reklam">
+                    <div id="ad-dashboard" class="ad-container">
+                        <span>📢 Reklam Alanı (300x250)</span>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- Test Tab -->
+            <section class="tab-content" id="test" role="tabpanel" aria-labelledby="tab-test">
+                <!-- Test Selection Page -->
+                <div class="test-page active" id="testSelection">
+                    <div class="test-selection">
+                        <h1>Test Seç</h1>
+                        <div class="test-options" role="group" aria-label="Test modu seçenekleri">
+                            <article class="test-option-card" tabindex="0" role="button" aria-label="Pratik modu">
+                                <div class="test-option-icon" aria-hidden="true">📖</div>
+                                <h3 class="test-option-title">Pratik Modu</h3>
+                                <p class="test-option-desc">Zaman baskısı olmadan pratik yap</p>
+                            </article>
+                            <article class="test-option-card" tabindex="0" role="button" aria-label="Sınav modu">
+                                <div class="test-option-icon" aria-hidden="true">⏱️</div>
+                                <h3 class="test-option-title">Sınav Modu</h3>
+                                <p class="test-option-desc">Gerçek sınav deneyimi</p>
+                            </article>
+                            <article class="test-option-card" tabindex="0" role="button" aria-label="AI test">
+                                <div class="test-option-icon" aria-hidden="true">🤖</div>
+                                <h3 class="test-option-title">AI Test</h3>
+                                <p class="test-option-desc">AI tarafından oluşturulan sorular</p>
+                            </article>
+                            <article class="test-option-card" tabindex="0" role="button" aria-label="Özel test">
+                                <div class="test-option-icon" aria-hidden="true">⚙️</div>
+                                <h3 class="test-option-title">Özel Test</h3>
+                                <p class="test-option-desc">Kendi kriterlerine göre</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quiz Page -->
+                <div class="test-page" id="quizPage" aria-live="polite">
+                    <div class="quiz-container">
+                        <div class="quiz-header">
+                            <div class="quiz-info">
+                                <span>Soru <span id="currentQuestion">1</span> / <span id="totalQuestionsQuiz">10</span></span>
+                            </div>
+                            <div class="quiz-info">
+                                <span role="img" aria-label="Süre">⏱️</span> 
+                                <time id="quizTimer">00:00</time>
+                            </div>
+                        </div>
+
+                        <div class="quiz-progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+                            <div class="quiz-progress-fill" id="progressFill"></div>
+                        </div>
+
+                        <article class="question-card">
+                            <h2 class="question-text" id="questionText">
+                                İşletim sisteminin temel görevlerinden biri nedir?
+                            </h2>
+
+                            <fieldset class="options-list" id="optionsList" aria-label="Cevap seçenekleri">
+                                <legend class="sr-only">Cevabınızı seçin</legend>
+                            </fieldset>
+                        </article>
+
+                        <nav class="quiz-actions" aria-label="Test navigasyonu">
+                            <button class="btn btn-secondary" id="prevBtn" aria-label="Önceki soru">
+                                ← Önceki
+                            </button>
+                            <button class="btn btn-primary" id="nextBtn" aria-label="Sonraki soru">
+                                Sonraki →
+                            </button>
+                            <button class="btn btn-primary" id="submitBtn" style="display:none" aria-label="Testi bitir">
+                                Testi Bitir
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Results Page -->
+                <div class="test-page" id="resultsPage">
+                    <article class="results-container">
+                        <div class="results-icon" aria-hidden="true">🏆</div>
+                        <h1 class="results-title">Test Tamamlandı!</h1>
+                        <div class="results-score" id="finalScore" role="status" aria-live="polite">8/10</div>
+                        
+                        <div class="results-stats" role="region" aria-label="Test sonuçları">
+                            <div class="result-stat">
+                                <div class="result-value success-color" id="correctAnswers">8</div>
+                                <div class="result-label">Doğru</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-value danger-color" id="wrongAnswers">2</div>
+                                <div class="result-label">Yanlış</div>
+                            </div>
+                            <div class="result-stat">
+                                <div class="result-value primary-color" id="successPercent">80%</div>
+                                <div class="result-label">Başarı</div>
+                            </div>
+                            <div class="result-stat">
+                                <time class="result-value" id="totalTimeResult">00:00</time>
+                                <div class="result-label">Süre</div>
+                            </div>
+                        </div>
+
+                        <nav class="quiz-actions" aria-label="Sonuç sayfası aksiyonları">
+                            <button class="btn btn-secondary" id="reviewBtn" aria-label="Cevapları incele">
+                                Cevapları Gör
+                            </button>
+                            <button class="btn btn-primary" id="newQuizBtn" aria-label="Yeni test başlat">
+                                Yeni Test
+                            </button>
+                        </nav>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Create Test Tab -->
+            <section class="tab-content" id="create" role="tabpanel" aria-labelledby="tab-create">
+                <h1>Test Oluştur</h1>
+                
+                <form class="create-test-form" id="createTestForm" aria-label="Test oluşturma formu">
+                    <div class="form-group">
+                        <label for="testTitle">Test Başlığı <span class="required">*</span></label>
+                        <input 
+                            type="text" 
+                            id="testTitle" 
+                            name="testTitle"
+                            placeholder="Örn: Matematik Final Sınavı" 
+                            required
+                            maxlength="100"
+                            aria-required="true">
+                        <span class="error-message" id="testTitleError" role="alert"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="testCategory">Kategori <span class="required">*</span></label>
+                        <select id="testCategory" name="testCategory" required aria-required="true">
+                            <option value="">Seçiniz...</option>
+                            <option value="matematik">Matematik</option>
+                            <option value="fen">Fen Bilimleri</option>
+                            <option value="turkce">Türkçe</option>
+                            <option value="sosyal">Sosyal Bilgiler</option>
+                            <option value="ingilizce">İngilizce</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fileUpload">Dosya Yükle</label>
+                        <div class="file-upload-area" id="fileUploadArea">
+                            <input 
+                                type="file" 
+                                id="fileUpload" 
+                                name="fileUpload"
+                                accept=".pdf,.docx,.txt"
+                                aria-label="Dosya seç">
+                            <div class="file-upload-content">
+                                <div class="file-icon" aria-hidden="true">📁</div>
+                                <p>PDF, DOCX veya TXT dosyası yükle</p>
+                                <p class="file-hint">veya sürükle bırak</p>
+                            </div>
+                        </div>
+                        <div id="fileInfo" class="file-info" role="status"></div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary btn-large">
+                        <span role="img" aria-hidden="true">🤖</span> Testify AI ile Oluştur
+                    </button>
+                </form>
+            </section>
+
+            <!-- Notes Tab -->
+            <section class="tab-content" id="notes" role="tabpanel" aria-labelledby="tab-notes">
+                <div class="notes-header">
+                    <h1>Notlarım</h1>
+                    <button class="btn btn-primary" id="addNoteBtn" aria-label="Yeni not ekle">
+                        <span aria-hidden="true">+</span> Yeni Not
+                    </button>
+                </div>
+                <div id="notesList" class="notes-list">
+                    <div class="empty-state">
+                        <div class="empty-state-icon" aria-hidden="true">📚</div>
+                        <p>Henüz not eklemedin</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Leaderboard Tab -->
+            <section class="tab-content" id="leaderboard" role="tabpanel" aria-labelledby="tab-leaderboard">
+                <article class="leaderboard-container">
+                    <header class="leaderboard-header">
+                        <h1>🏆 Liderlik Tablosu</h1>
+                        <p>Haftalık Sıralama</p>
+                    </header>
+                    
+                    <div class="table-responsive">
+                        <table class="leaderboard-table" role="table" aria-label="Liderlik tablosu">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Sıra</th>
+                                    <th scope="col">Kullanıcı</th>
+                                    <th scope="col">XP</th>
+                                    <th scope="col">Test</th>
+                                    <th scope="col">Başarı</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leaderboardBody">
+                                <tr>
+                                    <td colspan="5" class="empty-cell">
+                                        Henüz veri bulunmuyor
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <!-- Ad Banner -->
+                <aside class="ad-banner" aria-label="Reklam">
+                    <div id="ad-leaderboard" class="ad-container">
+                        <span>📢 Reklam Alanı (728x90)</span>
+                    </div>
+                </aside>
+            </section>
+
+            <!-- Analysis Tab -->
+            <section class="tab-content" id="analysis" role="tabpanel" aria-labelledby="tab-analysis">
+                <h1>Performans Analizi</h1>
+                <div id="analysisContent">
+                    <div class="empty-state">
+                        <div class="empty-state-icon" aria-hidden="true">📈</div>
+                        <p>Analiz için daha fazla test çöz</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Tab -->
+            <section class="tab-content" id="settings" role="tabpanel" aria-labelledby="tab-settings">
+                <h1>Ayarlar</h1>
+                
+                <form class="settings-form" id="settingsForm" aria-label="Ayarlar formu">
+                    <div class="form-group">
+                        <label for="username">Kullanıcı Adı <span class="required">*</span></label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            name="username"
+                            value="user123"
+                            required
+                            minlength="3"
+                            maxlength="20"
+                            aria-required="true">
+                        <span class="error-message" id="usernameError" role="alert"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">E-posta <span class="required">*</span></label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email"
+                            value="user@example.com"
+                            required
+                            aria-required="true">
+                        <span class="error-message" id="emailError" role="alert"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="notifications">Bildirimler</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="emailNotif" name="emailNotif" checked>
+                                <span>E-posta bildirimleri</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="pushNotif" name="pushNotif">
+                                <span>Push bildirimleri</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                        <button type="button" class="btn btn-secondary" id="resetBtn">Sıfırla</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <!-- Bottom Ad Banner -->
+    <aside class="ad-banner" aria-label="Reklam" role="complementary">
+        <div id="ad-bottom" class="ad-container">
+            <span>📢 Reklam Alanı (728x90)</span>
+        </div>
+    </aside>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
+        <div class="loading-spinner" role="status">
+            <span class="sr-only">Yükleniyor...</span>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- External JavaScript -->
+    <script src="utils.js"></script>
+    <script src="config.js"></script>
+    <script src="storage.js"></script>
+    <script src="sorular.js"></script>
+    <script src="testify-ai.js"></script>
+    <script src="quiz.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
