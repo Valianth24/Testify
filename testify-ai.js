@@ -414,7 +414,7 @@ KURALLAR:
                 `• Daha açık bir konu belirt\n` +
                 `• Soru sayısını belirt (10-20 arası)\n` +
                 `• Birkaç saniye bekleyip tekrar dene\n` +
-                `• **\"demo test\"** yazarak API olmadan dene\n\n` +
+                `• **"demo test"** yazarak API olmadan dene\n\n` +
                 `**Örnek doğru format:**\n` +
                 `"Linux temel komutları hakkında 15 soruluk test oluştur"\n\n` +
                 `Tekrar dener misin? 🔄`,
@@ -849,12 +849,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function openWidget() {
         widget.classList.add('chat-widget--open');
         widget.classList.remove('chat-widget--minimized');
-        toggleBtn.classList.add('chat-toggle-btn--hidden');
     }
 
     function closeWidget() {
         widget.classList.remove('chat-widget--open', 'chat-widget--minimized');
-        toggleBtn.classList.remove('chat-toggle-btn--hidden');
+    }
+
+    function toggleWidgetVisibility() {
+        if (widget.classList.contains('chat-widget--open')) {
+            closeWidget();      // açıkken tıkla → tamamen kapan
+        } else {
+            openWidget();       // kapalıyken tıkla → aç
+        }
     }
 
     function toggleMinimize() {
@@ -865,7 +871,8 @@ document.addEventListener('DOMContentLoaded', () => {
         widget.classList.toggle('chat-widget--minimized');
     }
 
-    toggleBtn.addEventListener('click', openWidget);
+    // Sağ alttaki "Testify" butonu
+    toggleBtn.addEventListener('click', toggleWidgetVisibility);
 
     if (minimizeBtn) {
         minimizeBtn.addEventListener('click', toggleMinimize);
@@ -881,8 +888,12 @@ document.addEventListener('DOMContentLoaded', () => {
         let offsetX = 0;
         let offsetY = 0;
 
+        // move yerine el imleci
+        header.style.cursor = 'grab';
+
         const startDrag = (clientX, clientY) => {
             isDragging = true;
+            header.style.cursor = 'grabbing';
 
             const rect = widget.getBoundingClientRect();
             offsetX = clientX - rect.left;
@@ -924,6 +935,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const stopDrag = () => {
             if (!isDragging) return;
             isDragging = false;
+            header.style.cursor = 'grab';
 
             widget.classList.remove('chat-widget--dragging');
 
@@ -960,7 +972,7 @@ document.addEventListener('DOMContentLoaded', () => {
         header.addEventListener('touchstart', onTouchStart, { passive: true });
     }
 
-    // Chat gövdesi mouse ile doğal kayacak.
+    // Chat içi scroll davranışı
     if (chatBody) {
         chatBody.style.scrollBehavior = 'smooth';
     }
