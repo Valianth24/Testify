@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="tr" data-theme="light">
 <head>
@@ -268,29 +267,29 @@
             </div>
             
             <!-- Navigation Tabs -->
-            <nav class="nav-tabs" role="navigation" aria-label="Ana navigasyon">
-                <button class="nav-tab active" data-tab="dashboard" role="tab" aria-selected="true" aria-controls="dashboard">
+            <nav class="nav-tabs" role="tablist" aria-label="Ana navigasyon">
+                <button id="tab-dashboard" class="nav-tab active" data-tab="dashboard" role="tab" aria-selected="true" aria-controls="dashboard">
                     <span role="img" aria-hidden="true">📊</span> <span data-i18n="nav.dashboard">Dashboard</span>
                 </button>
-                <button class="nav-tab" data-tab="test" role="tab" aria-selected="false" aria-controls="test">
+                <button id="tab-test" class="nav-tab" data-tab="test" role="tab" aria-selected="false" aria-controls="test">
                     <span role="img" aria-hidden="true">📝</span> <span data-i18n="nav.test">Test Çöz</span>
                 </button>
-                <button class="nav-tab" data-tab="create" role="tab" aria-selected="false" aria-controls="create">
+                <button id="tab-create" class="nav-tab" data-tab="create" role="tab" aria-selected="false" aria-controls="create">
                     <span role="img" aria-hidden="true">➕</span> <span data-i18n="nav.create">Test Oluştur</span>
                 </button>
-                <button class="nav-tab" data-tab="library" role="tab" aria-selected="false" aria-controls="library">
+                <button id="tab-library" class="nav-tab" data-tab="library" role="tab" aria-selected="false" aria-controls="library">
                     <span role="img" aria-hidden="true">📚</span> <span data-i18n="nav.library">Kütüphanem</span>
                 </button>
-                <button class="nav-tab" data-tab="notes" role="tab" aria-selected="false" aria-controls="notes">
+                <button id="tab-notes" class="nav-tab" data-tab="notes" role="tab" aria-selected="false" aria-controls="notes">
                     <span role="img" aria-hidden="true">📝</span> <span data-i18n="nav.notes">Notlarım</span>
                 </button>
-                <button class="nav-tab" data-tab="leaderboard" role="tab" aria-selected="false" aria-controls="leaderboard">
+                <button id="tab-leaderboard" class="nav-tab" data-tab="leaderboard" role="tab" aria-selected="false" aria-controls="leaderboard">
                     <span role="img" aria-hidden="true">🏆</span> <span data-i18n="nav.leaderboard">Liderlik</span>
                 </button>
-                <button class="nav-tab" data-tab="analysis" role="tab" aria-selected="false" aria-controls="analysis">
+                <button id="tab-analysis" class="nav-tab" data-tab="analysis" role="tab" aria-selected="false" aria-controls="analysis">
                     <span role="img" aria-hidden="true">📈</span> <span data-i18n="nav.analysis">Analizler</span>
                 </button>
-                <button class="nav-tab" data-tab="settings" role="tab" aria-selected="false" aria-controls="settings">
+                <button id="tab-settings" class="nav-tab" data-tab="settings" role="tab" aria-selected="false" aria-controls="settings">
                     <span role="img" aria-hidden="true">⚙️</span> <span data-i18n="nav.settings">Ayarlar</span>
                 </button>
             </nav>
@@ -747,945 +746,1543 @@
 
     <!-- Birleştirilmiş APP + QUIZ + CHAT JS -->
     <script>
-/**
- * TESTIFY MAIN APPLICATION - TAM HATASIZ
- * Tüm özellikler çalışır hale getiren ana uygulama
- */
-
-'use strict';
-
-const App = {
     /**
-     * Uygulamayı başlatır
+     * TESTIFY MAIN APPLICATION - TAM HATASIZ
+     * Tüm özellikler çalışır hale getiren ana uygulama
      */
-    init() {
-        console.log('🎓 Testify başlatılıyor...');
-        
-        try {
-            // Storage'ı kontrol et
-            this.checkStorage();
-            
-            // Kullanıcı verilerini yükle
-            this.loadUserData();
-            
-            // Tema yükle
-            this.loadTheme();
-            
-            // Event listener'ları ekle
-            this.attachEventListeners();
-            
-            // Dashboard'ı güncelle
-            this.updateDashboard();
-            
-            // Leaderboard'ı güncelle
-            this.updateLeaderboard();
-            
-            console.log('✅ Testify hazır!');
-        } catch (error) {
-            console.error('❌ Başlatma hatası:', error);
-            Utils.handleError(error, 'App.init');
-        }
-    },
 
-    /**
-     * Storage kontrolü
-     */
-    checkStorage() {
-        try {
-            const test = '__storage_test__';
-            localStorage.setItem(test, test);
-            localStorage.removeItem(test);
-        } catch (e) {
-            Utils.showToast('LocalStorage kullanılamıyor! Veriler kaydedilmeyecek.', 'warning');
-            console.error('Storage hatası:', e);
-        }
-    },
+    'use strict';
 
-    /**
-     * Kullanıcı verilerini yükler
-     */
-    loadUserData() {
-        try {
-            const userData = StorageManager.getUserData();
+    const App = {
+        /**
+         * Uygulamayı başlatır
+         */
+        init() {
+            console.log('🎓 Testify başlatılıyor...');
             
-            // Header'daki bilgileri güncelle
-            const userAvatar = document.getElementById('userAvatar');
-            const streak = document.getElementById('streak');
-            const totalPoints = document.getElementById('totalPoints');
-            const rank = document.getElementById('rank');
-            
-            if (userAvatar) {
-                userAvatar.textContent = userData.username.charAt(0).toUpperCase();
+            try {
+                // Storage'ı kontrol et
+                this.checkStorage();
+                
+                // Kullanıcı verilerini yükle
+                this.loadUserData();
+                
+                // Tema yükle
+                this.loadTheme();
+                
+                // Event listener'ları ekle
+                this.attachEventListeners();
+                
+                // Dashboard'ı güncelle
+                this.updateDashboard();
+                
+                // Leaderboard'ı güncelle
+                this.updateLeaderboard();
+                
+                console.log('✅ Testify hazır!');
+            } catch (error) {
+                console.error('❌ Başlatma hatası:', error);
+                Utils.handleError(error, 'App.init');
             }
-            
-            if (streak) {
-                const streakText = window.t ? t('header.streak', 'Gün') : 'Gün';
-                const streakSpan = streak.querySelector('span[data-i18n="header.streak"]');
-                if (streakSpan) {
-                    streak.innerHTML = `${userData.stats.streak} <span data-i18n="header.streak">${streakText}</span>`;
-                } else {
-                    streak.textContent = userData.stats.streak + ' ' + streakText;
+        },
+
+        /**
+         * Storage kontrolü
+         */
+        checkStorage() {
+            try {
+                const test = '__storage_test__';
+                localStorage.setItem(test, test);
+                localStorage.removeItem(test);
+            } catch (e) {
+                Utils.showToast('LocalStorage kullanılamıyor! Veriler kaydedilmeyecek.', 'warning');
+                console.error('Storage hatası:', e);
+            }
+        },
+
+        /**
+         * Kullanıcı verilerini yükler
+         */
+        loadUserData() {
+            try {
+                const userData = StorageManager.getUserData();
+                
+                // Header'daki bilgileri güncelle
+                const userAvatar = document.getElementById('userAvatar');
+                const streak = document.getElementById('streak');
+                const totalPoints = document.getElementById('totalPoints');
+                const rank = document.getElementById('rank');
+                
+                if (userAvatar) {
+                    const username = userData.username || 'U';
+                    userAvatar.textContent = username.charAt(0).toUpperCase();
                 }
-            }
-            
-            if (totalPoints) {
-                const xpText = window.t ? t('header.points', 'XP') : 'XP';
-                const xpSpan = totalPoints.querySelector('span[data-i18n="header.points"]');
-                if (xpSpan) {
-                    totalPoints.innerHTML = `${userData.stats.xp} <span data-i18n="header.points">${xpText}</span>`;
-                } else {
-                    totalPoints.textContent = userData.stats.xp + ' ' + xpText;
+                
+                if (streak) {
+                    const streakText = window.t ? t('header.streak', 'Gün') : 'Gün';
+                    const streakSpan = streak.querySelector('span[data-i18n="header.streak"]');
+                    if (streakSpan) {
+                        streak.innerHTML = `${userData.stats.streak} <span data-i18n="header.streak">${streakText}</span>`;
+                    } else {
+                        streak.textContent = userData.stats.streak + ' ' + streakText;
+                    }
                 }
+                
+                if (totalPoints) {
+                    const xpText = window.t ? t('header.points', 'XP') : 'XP';
+                    const xpSpan = totalPoints.querySelector('span[data-i18n="header.points"]');
+                    if (xpSpan) {
+                        totalPoints.innerHTML = `${userData.stats.xp} <span data-i18n="header.points">${xpText}</span>`;
+                    } else {
+                        totalPoints.textContent = userData.stats.xp + ' ' + xpText;
+                    }
+                }
+                
+                if (rank) {
+                    rank.textContent = userData.stats.rank ? '#' + userData.stats.rank : '#--';
+                }
+            } catch (error) {
+                console.error('Kullanıcı verisi yükleme hatası:', error);
+                Utils.handleError(error, 'loadUserData');
             }
-            
-            if (rank) {
-                rank.textContent = userData.stats.rank ? '#' + userData.stats.rank : '#--';
-            }
-        } catch (error) {
-            console.error('Kullanıcı verisi yükleme hatası:', error);
-            Utils.handleError(error, 'loadUserData');
-        }
-    },
+        },
 
-    /**
-     * Tema yöneticisi
-     */
-    themeManager: {
-        toggle() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
-            html.setAttribute('data-theme', newTheme);
+        /**
+         * Tema yöneticisi
+         */
+        themeManager: {
+            toggle() {
+                const html = document.documentElement;
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                html.setAttribute('data-theme', newTheme);
+                
+                const themeIcon = document.getElementById('themeIcon');
+                if (themeIcon) {
+                    themeIcon.textContent = newTheme === 'light' ? '☀️' : '🌙';
+                }
+                
+                const themeBtn = document.querySelector('.theme-toggle');
+                if (themeBtn) {
+                    themeBtn.setAttribute('aria-pressed', newTheme === 'dark');
+                }
+                
+                Utils.setToStorage(Config.STORAGE_KEYS.THEME, newTheme);
+            }
+        },
+
+        /**
+         * Temayı yükler
+         */
+        loadTheme() {
+            const savedTheme = Utils.getFromStorage(Config.STORAGE_KEYS.THEME, 'light');
+            document.documentElement.setAttribute('data-theme', savedTheme);
             
             const themeIcon = document.getElementById('themeIcon');
             if (themeIcon) {
-                themeIcon.textContent = newTheme === 'light' ? '☀️' : '🌙';
+                themeIcon.textContent = savedTheme === 'light' ? '☀️' : '🌙';
             }
             
             const themeBtn = document.querySelector('.theme-toggle');
             if (themeBtn) {
-                themeBtn.setAttribute('aria-pressed', newTheme === 'dark');
+                themeBtn.setAttribute('aria-pressed', savedTheme === 'dark');
             }
-            
-            Utils.setToStorage(Config.STORAGE_KEYS.THEME, newTheme);
-        }
-    },
+        },
 
-    /**
-     * Temayı yükler
-     */
-    loadTheme() {
-        const savedTheme = Utils.getFromStorage(Config.STORAGE_KEYS.THEME, 'light');
-        document.documentElement.setAttribute('data-theme', savedTheme);
-        
-        const themeIcon = document.getElementById('themeIcon');
-        if (themeIcon) {
-            themeIcon.textContent = savedTheme === 'light' ? '☀️' : '🌙';
-        }
-        
-        const themeBtn = document.querySelector('.theme-toggle');
-        if (themeBtn) {
-            themeBtn.setAttribute('aria-pressed', savedTheme === 'dark');
-        }
-    },
+        /**
+         * ✅ DÜZELTME: Tab navigasyonu - Library kontrolü eklendi
+         */
+        switchTab(tabName) {
+            try {
+                // Tab butonlarını güncelle
+                document.querySelectorAll('.nav-tab').forEach(tab => {
+                    const isActive = tab.dataset.tab === tabName;
+                    tab.classList.toggle('active', isActive);
+                    tab.setAttribute('aria-selected', isActive);
+                });
 
-    /**
-     * ✅ DÜZELTME: Tab navigasyonu - Library kontrolü eklendi
-     */
-    switchTab(tabName) {
-        try {
-            // Tab butonlarını güncelle
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                const isActive = tab.dataset.tab === tabName;
-                tab.classList.toggle('active', isActive);
-                tab.setAttribute('aria-selected', isActive);
-            });
+                // Tab içeriklerini güncelle
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.toggle('active', content.id === tabName);
+                });
 
-            // Tab içeriklerini güncelle
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.toggle('active', content.id === tabName);
-            });
-
-            // ✅ Tab'a özel yüklemeler
-            switch(tabName) {
-                case 'library':
-                    // ✅ DÜZELTME: LibraryManager kontrolü
-                    if (window.LibraryManager && typeof LibraryManager.loadLibrary === 'function') {
-                        LibraryManager.loadLibrary();
-                    } else {
-                        console.warn('⚠️ LibraryManager henüz yüklenmedi');
-                        // Biraz bekleyip tekrar dene
-                        setTimeout(() => {
-                            if (window.LibraryManager) {
-                                LibraryManager.loadLibrary();
-                            } else {
-                                console.error('❌ LibraryManager yüklenemedi');
-                            }
-                        }, 100);
-                    }
-                    break;
-                case 'leaderboard':
-                    this.updateLeaderboard();
-                    break;
-                case 'notes':
-                    this.updateNotes();
-                    break;
-                case 'analysis':
-                    this.updateAnalysis();
-                    break;
-                case 'dashboard':
-                    this.updateDashboard();
-                    break;
+                // ✅ Tab'a özel yüklemeler
+                switch(tabName) {
+                    case 'library':
+                        // ✅ DÜZELTME: LibraryManager kontrolü
+                        if (window.LibraryManager && typeof LibraryManager.loadLibrary === 'function') {
+                            LibraryManager.loadLibrary();
+                        } else {
+                            console.warn('⚠️ LibraryManager henüz yüklenmedi');
+                            // Biraz bekleyip tekrar dene
+                            setTimeout(() => {
+                                if (window.LibraryManager) {
+                                    LibraryManager.loadLibrary();
+                                } else {
+                                    console.error('❌ LibraryManager yüklenemedi');
+                                }
+                            }, 100);
+                        }
+                        break;
+                    case 'leaderboard':
+                        this.updateLeaderboard();
+                        break;
+                    case 'notes':
+                        this.updateNotes();
+                        break;
+                    case 'analysis':
+                        this.updateAnalysis();
+                        break;
+                    case 'dashboard':
+                        this.updateDashboard();
+                        break;
+                }
+            } catch (error) {
+                console.error('Tab değiştirme hatası:', error);
+                Utils.handleError(error, 'switchTab');
             }
-        } catch (error) {
-            console.error('Tab değiştirme hatası:', error);
-            Utils.handleError(error, 'switchTab');
-        }
-    },
+        },
 
-    /**
-     * Dashboard'ı günceller
-     */
-    updateDashboard() {
-        try {
-            const userData = StorageManager.getUserData();
-            const stats = userData.stats;
+        /**
+         * Dashboard'ı günceller
+         */
+        updateDashboard() {
+            try {
+                const userData = StorageManager.getUserData();
+                const stats = userData.stats;
 
-            const totalTests = document.getElementById('totalTests');
-            const totalQuestions = document.getElementById('totalQuestions');
-            const successRate = document.getElementById('successRate');
-            const avgTime = document.getElementById('avgTime');
+                const totalTests = document.getElementById('totalTests');
+                const totalQuestions = document.getElementById('totalQuestions');
+                const successRate = document.getElementById('successRate');
+                const avgTime = document.getElementById('avgTime');
 
-            if (totalTests) totalTests.textContent = stats.totalTests;
-            if (totalQuestions) totalQuestions.textContent = stats.totalQuestions;
-            
-            if (successRate) {
-                const rate = stats.totalQuestions > 0 
-                    ? Math.round((stats.correctAnswers / stats.totalQuestions) * 100)
-                    : 0;
-                successRate.textContent = rate + '%';
-            }
-            
-            if (avgTime) {
-                const avg = stats.totalTests > 0 
-                    ? Math.round(stats.totalTime / stats.totalTests)
-                    : 0;
-                avgTime.textContent = avg + 's';
-            }
-
-            // Son aktiviteleri göster
-            this.updateActivityList();
-        } catch (error) {
-            console.error('Dashboard güncelleme hatası:', error);
-            Utils.handleError(error, 'updateDashboard');
-        }
-    },
-
-    /**
-     * Aktivite listesini günceller
-     */
-    updateActivityList() {
-        try {
-            const activities = StorageManager.getActivities(5);
-            const activityList = document.getElementById('activityList');
-            
-            if (!activityList) return;
-
-            if (activities.length === 0) {
-                const emptyText = window.t 
-                    ? t('dashboard.empty', 'Henüz aktivite yok. Test çözerek başla!')
-                    : 'Henüz aktivite yok. Test çözerek başla!';
+                if (totalTests) totalTests.textContent = stats.totalTests;
+                if (totalQuestions) totalQuestions.textContent = stats.totalQuestions;
                 
-                activityList.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📊</div>
-                        <p>${emptyText}</p>
-                    </div>
-                `;
-                return;
-            }
+                if (successRate) {
+                    const rate = stats.totalQuestions > 0 
+                        ? Math.round((stats.correctAnswers / stats.totalQuestions) * 100)
+                        : 0;
+                    successRate.textContent = rate + '%';
+                }
+                
+                if (avgTime) {
+                    const avg = stats.totalTests > 0 
+                        ? Math.round(stats.totalTime / stats.totalTests)
+                        : 0;
+                    avgTime.textContent = avg + 's';
+                }
 
-            activityList.innerHTML = activities.map(activity => `
-                <div class="activity-item" style="padding: 15px; background: var(--bg-secondary); border-radius: 8px; margin-bottom: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <div>
-                            <strong>${this.getActivityTitle(activity)}</strong>
-                            <p style="margin: 5px 0 0; color: var(--text-secondary); font-size: 0.9rem;">
-                                ${this.getActivityDescription(activity)}
-                            </p>
+                // Son aktiviteleri göster
+                this.updateActivityList();
+            } catch (error) {
+                console.error('Dashboard güncelleme hatası:', error);
+                Utils.handleError(error, 'updateDashboard');
+            }
+        },
+
+        /**
+         * Aktivite listesini günceller
+         */
+        updateActivityList() {
+            try {
+                const activities = StorageManager.getActivities(5);
+                const activityList = document.getElementById('activityList');
+                
+                if (!activityList) return;
+
+                if (activities.length === 0) {
+                    const emptyText = window.t 
+                        ? t('dashboard.empty', 'Henüz aktivite yok. Test çözerek başla!')
+                        : 'Henüz aktivite yok. Test çözerek başla!';
+                    
+                    activityList.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📊</div>
+                            <p>${emptyText}</p>
                         </div>
-                        <small style="color: var(--text-tertiary);">
-                            ${Utils.formatDate(activity.timestamp)}
-                        </small>
-                    </div>
-                </div>
-            `).join('');
-        } catch (error) {
-            console.error('Aktivite listesi hatası:', error);
-        }
-    },
+                    `;
+                    return;
+                }
 
-    /**
-     * Aktivite başlığı
-     */
-    getActivityTitle(activity) {
-        const titles = {
-            'test_completed': '✅ ' + (window.t ? t('activity.testCompleted', 'Test Tamamlandı') : 'Test Tamamlandı'),
-            'test_saved': '💾 ' + (window.t ? t('activity.testSaved', 'Test Kaydedildi') : 'Test Kaydedildi'),
-            'test_exported': '📥 ' + (window.t ? t('activity.testExported', 'Test İndirildi') : 'Test İndirildi'),
-            'note_created': '📝 ' + (window.t ? t('activity.noteCreated', 'Not Oluşturuldu') : 'Not Oluşturuldu'),
-            'level_up': '🎉 ' + (window.t ? t('activity.levelUp', 'Level Atlandı') : 'Level Atlandı')
-        };
-        return titles[activity.type] || 'Aktivite';
-    },
-
-    /**
-     * Aktivite açıklaması
-     */
-    getActivityDescription(activity) {
-        switch(activity.type) {
-            case 'test_completed':
-                return `${activity.data.correctAnswers}/${activity.data.totalQuestions} doğru - %${activity.data.successRate} başarı`;
-            case 'test_saved':
-                return `${activity.data.title} - ${activity.data.questionCount} soru`;
-            case 'test_exported':
-                return `${activity.data.title} - ${activity.data.format.toUpperCase()}`;
-            case 'note_created':
-                return activity.data.title || 'Yeni not';
-            case 'level_up':
-                return `Level ${activity.data.level}!`;
-            default:
-                return '';
-        }
-    },
-
-    /**
-     * Leaderboard'ı günceller
-     */
-    updateLeaderboard() {
-        try {
-            const leaderboard = StorageManager.getLeaderboard(100);
-            const tbody = document.getElementById('leaderboardBody');
-            
-            if (!tbody) return;
-
-            if (leaderboard.length === 0) {
-                const emptyText = window.t 
-                    ? t('leaderboard.empty', 'Henüz veri bulunmuyor')
-                    : 'Henüz veri bulunmuyor';
-                
-                tbody.innerHTML = `
-                    <tr>
-                        <td colspan="5" class="empty-cell">${emptyText}</td>
-                    </tr>
-                `;
-                return;
-            }
-
-            tbody.innerHTML = leaderboard.map(user => `
-                <tr>
-                    <td>
-                        <span class="rank-badge ${this.getRankClass(user.rank)}">${user.rank}</span>
-                    </td>
-                    <td>
-                        <div class="user-info">
-                            <div class="user-avatar-small">${user.username.charAt(0).toUpperCase()}</div>
-                            <span>${Utils.sanitizeHTML(user.username)}</span>
-                        </div>
-                    </td>
-                    <td><strong>${user.xp} XP</strong></td>
-                    <td>${user.totalTests}</td>
-                    <td><span style="color: var(--success);">${user.successRate}%</span></td>
-                </tr>
-            `).join('');
-        } catch (error) {
-            console.error('Leaderboard güncelleme hatası:', error);
-            Utils.handleError(error, 'updateLeaderboard');
-        }
-    },
-
-    /**
-     * Rank class
-     */
-    getRankClass(rank) {
-        if (rank === 1) return 'rank-1';
-        if (rank === 2) return 'rank-2';
-        if (rank === 3) return 'rank-3';
-        return 'rank-default';
-    },
-
-    /**
-     * Notları günceller
-     */
-    updateNotes() {
-        try {
-            const notes = StorageManager.getNotes();
-            const notesList = document.getElementById('notesList');
-            
-            if (!notesList) return;
-
-            if (notes.length === 0) {
-                const emptyText = window.t 
-                    ? t('notes.empty', 'Henüz not eklemedin')
-                    : 'Henüz not eklemedin';
-                
-                notesList.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📚</div>
-                        <p>${emptyText}</p>
-                    </div>
-                `;
-                return;
-            }
-
-            notesList.innerHTML = notes.map(note => {
-                const editText = window.t ? t('notes.edit', 'Düzenle') : 'Düzenle';
-                const deleteText = window.t ? t('notes.delete', 'Sil') : 'Sil';
-                
-                return `
-                    <div class="note-card">
-                        <h3 class="note-title">${Utils.sanitizeHTML(note.title || 'Başlıksız Not')}</h3>
-                        <p class="note-content">${Utils.sanitizeHTML(note.content || '')}</p>
-                        <div class="note-meta">
-                            <span>${Utils.formatDate(note.createdAt)}</span>
+                activityList.innerHTML = activities.map(activity => `
+                    <div class="activity-item" style="padding: 15px; background: var(--bg-secondary); border-radius: 8px; margin-bottom: 10px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
                             <div>
-                                <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.85rem;" onclick="App.editNote('${note.id}')">
-                                    ${editText}
-                                </button>
-                                <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.85rem;" onclick="App.deleteNote('${note.id}')">
-                                    ${deleteText}
-                                </button>
+                                <strong>${this.getActivityTitle(activity)}</strong>
+                                <p style="margin: 5px 0 0; color: var(--text-secondary); font-size: 0.9rem;">
+                                    ${this.getActivityDescription(activity)}
+                                </p>
+                            </div>
+                            <small style="color: var(--text-tertiary);">
+                                ${Utils.formatDate(activity.timestamp)}
+                            </small>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Aktivite listesi hatası:', error);
+            }
+        },
+
+        /**
+         * Aktivite başlığı
+         */
+        getActivityTitle(activity) {
+            const titles = {
+                'test_completed': '✅ ' + (window.t ? t('activity.testCompleted', 'Test Tamamlandı') : 'Test Tamamlandı'),
+                'test_saved': '💾 ' + (window.t ? t('activity.testSaved', 'Test Kaydedildi') : 'Test Kaydedildi'),
+                'test_exported': '📥 ' + (window.t ? t('activity.testExported', 'Test İndirildi') : 'Test İndirildi'),
+                'note_created': '📝 ' + (window.t ? t('activity.noteCreated', 'Not Oluşturuldu') : 'Not Oluşturuldu'),
+                'level_up': '🎉 ' + (window.t ? t('activity.levelUp', 'Level Atlandı') : 'Level Atlandı')
+            };
+            return titles[activity.type] || 'Aktivite';
+        },
+
+        /**
+         * Aktivite açıklaması
+         */
+        getActivityDescription(activity) {
+            switch(activity.type) {
+                case 'test_completed':
+                    return `${activity.data.correctAnswers}/${activity.data.totalQuestions} doğru - %${activity.data.successRate} başarı`;
+                case 'test_saved':
+                    return `${activity.data.title} - ${activity.data.questionCount} soru`;
+                case 'test_exported':
+                    return `${activity.data.title} - ${activity.data.format.toUpperCase()}`;
+                case 'note_created':
+                    return activity.data.title || 'Yeni not';
+                case 'level_up':
+                    return `Level ${activity.data.level}!`;
+                default:
+                    return '';
+            }
+        },
+
+        /**
+         * Leaderboard'ı günceller
+         */
+        updateLeaderboard() {
+            try {
+                const leaderboard = StorageManager.getLeaderboard(100);
+                const tbody = document.getElementById('leaderboardBody');
+                
+                if (!tbody) return;
+
+                if (leaderboard.length === 0) {
+                    const emptyText = window.t 
+                        ? t('leaderboard.empty', 'Henüz veri bulunmuyor')
+                        : 'Henüz veri bulunmuyor';
+                    
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="5" class="empty-cell">${emptyText}</td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                tbody.innerHTML = leaderboard.map(user => `
+                    <tr>
+                        <td>
+                            <span class="rank-badge ${this.getRankClass(user.rank)}">${user.rank}</span>
+                        </td>
+                        <td>
+                            <div class="user-info">
+                                <div class="user-avatar-small">${user.username.charAt(0).toUpperCase()}</div>
+                                <span>${Utils.sanitizeHTML(user.username)}</span>
+                            </div>
+                        </td>
+                        <td><strong>${user.xp} XP</strong></td>
+                        <td>${user.totalTests}</td>
+                        <td><span style="color: var(--success);">${user.successRate}%</span></td>
+                    </tr>
+                `).join('');
+            } catch (error) {
+                console.error('Leaderboard güncelleme hatası:', error);
+                Utils.handleError(error, 'updateLeaderboard');
+            }
+        },
+
+        /**
+         * Rank class
+         */
+        getRankClass(rank) {
+            if (rank === 1) return 'rank-1';
+            if (rank === 2) return 'rank-2';
+            if (rank === 3) return 'rank-3';
+            return 'rank-default';
+        },
+
+        /**
+         * Notları günceller
+         */
+        updateNotes() {
+            try {
+                const notes = StorageManager.getNotes();
+                const notesList = document.getElementById('notesList');
+                
+                if (!notesList) return;
+
+                if (notes.length === 0) {
+                    const emptyText = window.t 
+                        ? t('notes.empty', 'Henüz not eklemedin')
+                        : 'Henüz not eklemedin';
+                    
+                    notesList.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📚</div>
+                            <p>${emptyText}</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                notesList.innerHTML = notes.map(note => {
+                    const editText = window.t ? t('notes.edit', 'Düzenle') : 'Düzenle';
+                    const deleteText = window.t ? t('notes.delete', 'Sil') : 'Sil';
+                    
+                    return `
+                        <div class="note-card">
+                            <h3 class="note-title">${Utils.sanitizeHTML(note.title || 'Başlıksız Not')}</h3>
+                            <p class="note-content">${Utils.sanitizeHTML(note.content || '')}</p>
+                            <div class="note-meta">
+                                <span>${Utils.formatDate(note.createdAt)}</span>
+                                <div>
+                                    <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.85rem;" onclick="App.editNote('${note.id}')">
+                                        ${editText}
+                                    </button>
+                                    <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.85rem;" onclick="App.deleteNote('${note.id}')">
+                                        ${deleteText}
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `;
-            }).join('');
-        } catch (error) {
-            console.error('Notlar güncelleme hatası:', error);
-            Utils.handleError(error, 'updateNotes');
-        }
-    },
-
-    /**
-     * Not ekler
-     */
-    async addNote() {
-        try {
-            const titlePrompt = window.t ? t('notes.titlePrompt', 'Not Başlığı:') : 'Not Başlığı:';
-            const contentPrompt = window.t ? t('notes.contentPrompt', 'Not İçeriği:') : 'Not İçeriği:';
-            
-            const title = prompt(titlePrompt);
-            if (!title) return;
-
-            const content = prompt(contentPrompt);
-            if (!content) return;
-
-            const note = {
-                title: title,
-                content: content
-            };
-
-            if (StorageManager.saveNote(note)) {
-                this.updateNotes();
+                    `;
+                }).join('');
+            } catch (error) {
+                console.error('Notlar güncelleme hatası:', error);
+                Utils.handleError(error, 'updateNotes');
             }
-        } catch (error) {
-            console.error('Not ekleme hatası:', error);
-            Utils.handleError(error, 'addNote');
-        }
-    },
+        },
 
-    /**
-     * Not düzenler
-     */
-    async editNote(noteId) {
-        try {
-            const notes = StorageManager.getNotes();
-            const note = notes.find(n => n.id === noteId);
-            
-            if (!note) return;
-
-            const titlePrompt = window.t ? t('notes.titlePrompt', 'Not Başlığı:') : 'Not Başlığı:';
-            const contentPrompt = window.t ? t('notes.contentPrompt', 'Not İçeriği:') : 'Not İçeriği:';
-            
-            const title = prompt(titlePrompt, note.title);
-            if (title === null) return;
-
-            const content = prompt(contentPrompt, note.content);
-            if (content === null) return;
-
-            note.title = title;
-            note.content = content;
-
-            if (StorageManager.saveNote(note)) {
-                this.updateNotes();
-            }
-        } catch (error) {
-            console.error('Not düzenleme hatası:', error);
-            Utils.handleError(error, 'editNote');
-        }
-    },
-
-    /**
-     * Not siler
-     */
-    async deleteNote(noteId) {
-        try {
-            const confirmMsg = window.t 
-                ? t('notes.deleteConfirm', 'Bu notu silmek istediğinizden emin misiniz?')
-                : 'Bu notu silmek istediğinizden emin misiniz?';
-            
-            const confirmed = await Utils.confirm(confirmMsg);
-            
-            if (confirmed && StorageManager.deleteNote(noteId)) {
-                this.updateNotes();
-            }
-        } catch (error) {
-            console.error('Not silme hatası:', error);
-            Utils.handleError(error, 'deleteNote');
-        }
-    },
-
-    /**
-     * Analiz sayfasını günceller
-     */
-    updateAnalysis() {
-        try {
-            const userData = StorageManager.getUserData();
-            const stats = userData.stats;
-            const analysisContent = document.getElementById('analysisContent');
-            
-            if (!analysisContent) return;
-
-            if (stats.totalTests === 0) {
-                const emptyText = window.t 
-                    ? t('analysis.empty', 'Analiz için daha fazla test çöz')
-                    : 'Analiz için daha fazla test çöz';
+        /**
+         * Not ekler
+         */
+        async addNote() {
+            try {
+                const titlePrompt = window.t ? t('notes.titlePrompt', 'Not Başlığı:') : 'Not Başlığı:';
+                const contentPrompt = window.t ? t('notes.contentPrompt', 'Not İçeriği:') : 'Not İçeriği:';
                 
-                analysisContent.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📈</div>
-                        <p>${emptyText}</p>
-                    </div>
-                `;
-                return;
-            }
+                const title = prompt(titlePrompt);
+                if (!title) return;
 
-            const successRate = Math.round((stats.correctAnswers / stats.totalQuestions) * 100);
-            const avgTime = Math.round(stats.totalTime / stats.totalTests);
+                const content = prompt(contentPrompt);
+                if (!content) return;
 
-            const avgSuccessText = window.t ? t('analysis.avgSuccess', 'Ortalama Başarı') : 'Ortalama Başarı';
-            const avgTimeText = window.t ? t('analysis.avgTime', 'Ortalama Süre') : 'Ortalama Süre';
-            const totalCorrectText = window.t ? t('analysis.totalCorrect', 'Toplam Doğru') : 'Toplam Doğru';
-            const totalWrongText = window.t ? t('analysis.totalWrong', 'Toplam Yanlış') : 'Toplam Yanlış';
-            const evaluationText = window.t ? t('analysis.evaluation', 'Performans Değerlendirmesi') : 'Performans Değerlendirmesi';
+                const note = {
+                    title: title,
+                    content: content
+                };
 
-            analysisContent.innerHTML = `
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">📊</div>
-                        <div class="stat-value">${successRate}%</div>
-                        <div class="stat-label">${avgSuccessText}</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">⏱️</div>
-                        <div class="stat-value">${Utils.formatTime(avgTime)}</div>
-                        <div class="stat-label">${avgTimeText}</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">🎯</div>
-                        <div class="stat-value">${stats.correctAnswers}</div>
-                        <div class="stat-label">${totalCorrectText}</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">❌</div>
-                        <div class="stat-value">${stats.wrongAnswers}</div>
-                        <div class="stat-label">${totalWrongText}</div>
-                    </div>
-                </div>
-                <div style="margin-top: 30px; padding: 20px; background: var(--bg-secondary); border-radius: 10px;">
-                    <h3>${evaluationText}</h3>
-                    <p style="margin-top: 10px; line-height: 1.6;">
-                        ${this.getPerformanceText(successRate)}
-                    </p>
-                </div>
-            `;
-        } catch (error) {
-            console.error('Analiz güncelleme hatası:', error);
-            Utils.handleError(error, 'updateAnalysis');
-        }
-    },
-
-    /**
-     * Performans metni (TR/EN)
-     */
-    getPerformanceText(successRate) {
-        const lang =
-            window.LanguageManager && LanguageManager.currentLang === 'en' ? 'en' : 'tr';
-
-        if (lang === 'en') {
-            if (successRate >= 90) {
-                return '🌟 Excellent! Your performance is great. Keep it up!';
-            } else if (successRate >= 75) {
-                return '👏 Very good! Strong performance. With a bit more study you can improve even further.';
-            } else if (successRate >= 60) {
-                return '💪 You are doing well! With some more practice you can reach your goals.';
-            } else if (successRate >= 40) {
-                return '📚 You need to study more. Regular practice will help you improve.';
-            } else {
-                return '🎯 It is recommended to review the basics. Keep going step by step!';
-            }
-        } else {
-            if (successRate >= 90) {
-                return '🌟 Mükemmel! Harika bir performans gösteriyorsun. Böyle devam et!';
-            } else if (successRate >= 75) {
-                return '👏 Çok iyi! Başarılı bir performans. Biraz daha çalışarak daha da iyileştirebilirsin.';
-            } else if (successRate >= 60) {
-                return '💪 İyi gidiyorsun! Biraz daha pratik yaparsan hedeflerine ulaşabilirsin.';
-            } else if (successRate >= 40) {
-                return '📚 Daha fazla çalışma gerekiyor. Düzenli pratik yaparak gelişebilirsin.';
-            } else {
-                return '🎯 Temel konuları tekrar etmen önerilir. Yavaş yavaş ilerlemeye devam et!';
-            }
-        }
-    },
-
-    /**
-     * ✅ DÜZELTME: Ayarları kaydeder - Validation ile
-     */
-    saveSettings(event) {
-        event.preventDefault();
-
-        try {
-            const form = event.target;
-            const usernameInput = form.username;
-            const emailInput = form.email;
-
-            // ✅ Validation
-            const isUsernameValid = Utils.validateInput(usernameInput, 'username');
-            const isEmailValid = Utils.validateInput(emailInput, 'email');
-
-            if (!isUsernameValid || !isEmailValid) {
-                return;
-            }
-
-            const username = usernameInput.value.trim();
-            const email = emailInput.value.trim();
-
-            // Kaydet
-            const settings = {
-                username: username,
-                email: email,
-                notifications: {
-                    email: form.emailNotif.checked,
-                    push: form.pushNotif.checked
+                if (StorageManager.saveNote(note)) {
+                    this.updateNotes();
                 }
-            };
-
-            const userData = StorageManager.getUserData();
-            userData.username = username;
-            userData.email = email;
-            userData.settings.notifications = settings.notifications;
-
-            if (StorageManager.updateUserData(userData)) {
-                const successMsg = window.t ? t('msg.saved', 'Başarıyla kaydedildi!') : 'Başarıyla kaydedildi!';
-                Utils.showToast(successMsg, 'success');
-                this.loadUserData();
-            } else {
-                const errorMsg = window.t ? t('msg.error', 'Bir hata oluştu!') : 'Bir hata oluştu!';
-                Utils.showToast(errorMsg, 'error');
+            } catch (error) {
+                console.error('Not ekleme hatası:', error);
+                Utils.handleError(error, 'addNote');
             }
-        } catch (error) {
-            console.error('Ayar kaydetme hatası:', error);
-            Utils.handleError(error, 'saveSettings');
-        }
-    },
+        },
 
-    /**
-     * Ayarları sıfırlar
-     */
-    async resetSettings() {
-        try {
-            const confirmMsg = window.t 
-                ? t('settings.resetConfirm', 'Ayarlar varsayılan değerlere dönecek. Emin misiniz?')
-                : 'Ayarlar varsayılan değerlere dönecek. Emin misiniz?';
-            
-            const confirmed = await Utils.confirm(confirmMsg);
-            
-            if (!confirmed) return;
+        /**
+         * Not düzenler
+         */
+        async editNote(noteId) {
+            try {
+                const notes = StorageManager.getNotes();
+                const note = notes.find(n => n.id === noteId);
+                
+                if (!note) return;
 
-            const userData = StorageManager.getUserData();
-            document.getElementById('username').value = userData.username;
-            document.getElementById('email').value = userData.email || '';
-            document.getElementById('emailNotif').checked = true;
-            document.getElementById('pushNotif').checked = false;
+                const titlePrompt = window.t ? t('notes.titlePrompt', 'Not Başlığı:') : 'Not Başlığı:';
+                const contentPrompt = window.t ? t('notes.contentPrompt', 'Not İçeriği:') : 'Not İçeriği:';
+                
+                const title = prompt(titlePrompt, note.title);
+                if (title === null) return;
 
-            const infoMsg = window.t ? t('msg.reset', 'Ayarlar sıfırlandı') : 'Ayarlar sıfırlandı';
-            Utils.showToast(infoMsg, 'info');
-        } catch (error) {
-            console.error('Ayar sıfırlama hatası:', error);
-            Utils.handleError(error, 'resetSettings');
-        }
-    },
+                const content = prompt(contentPrompt, note.content);
+                if (content === null) return;
 
-    /**
-     * ✅ DÜZELTME: Dosya yükleme - Validation ile
-     */
-    handleFileUpload(event) {
-        try {
-            const file = event.target.files[0];
-            if (!file) return;
+                note.title = title;
+                note.content = content;
 
-            // Dosya boyutu kontrolü
-            if (file.size > Config.FILE_UPLOAD.MAX_SIZE) {
-                const errorMsg = window.t ? t('error.fileSize', 'Dosya boyutu çok büyük') : 'Dosya boyutu çok büyük';
-                Utils.showToast(errorMsg, 'error');
-                return;
+                if (StorageManager.saveNote(note)) {
+                    this.updateNotes();
+                }
+            } catch (error) {
+                console.error('Not düzenleme hatası:', error);
+                Utils.handleError(error, 'editNote');
             }
+        },
 
-            // Dosya türü kontrolü
-            const ext = file.name.split('.').pop().toLowerCase();
-            if (!Config.FILE_UPLOAD.ALLOWED_TYPES.includes(ext)) {
-                const errorMsg = window.t ? t('error.fileType', 'Desteklenmeyen dosya türü') : 'Desteklenmeyen dosya türü';
-                Utils.showToast(errorMsg, 'error');
-                return;
+        /**
+         * Not siler
+         */
+        async deleteNote(noteId) {
+            try {
+                const confirmMsg = window.t 
+                    ? t('notes.deleteConfirm', 'Bu notu silmek istediğinizden emin misiniz?')
+                    : 'Bu notu silmek istediğinizden emin misiniz?';
+                
+                const confirmed = await Utils.confirm(confirmMsg);
+                
+                if (confirmed && StorageManager.deleteNote(noteId)) {
+                    this.updateNotes();
+                }
+            } catch (error) {
+                console.error('Not silme hatası:', error);
+                Utils.handleError(error, 'deleteNote');
             }
+        },
 
-            // Dosya bilgisini göster
-            const fileInfo = document.getElementById('fileInfo');
-            if (fileInfo) {
-                fileInfo.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <span>📄</span>
-                        <div>
-                            <div><strong>${Utils.sanitizeHTML(file.name)}</strong></div>
-                            <small style="color: var(--text-secondary);">${Utils.formatFileSize(file.size)}</small>
+        /**
+         * Analiz sayfasını günceller
+         */
+        updateAnalysis() {
+            try {
+                const userData = StorageManager.getUserData();
+                const stats = userData.stats;
+                const analysisContent = document.getElementById('analysisContent');
+                
+                if (!analysisContent) return;
+
+                if (stats.totalTests === 0) {
+                    const emptyText = window.t 
+                        ? t('analysis.empty', 'Analiz için daha fazla test çöz')
+                        : 'Analiz için daha fazla test çöz';
+                    
+                    analysisContent.innerHTML = `
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📈</div>
+                            <p>${emptyText}</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const successRate = Math.round((stats.correctAnswers / stats.totalQuestions) * 100);
+                const avgTime = Math.round(stats.totalTime / stats.totalTests);
+
+                const avgSuccessText = window.t ? t('analysis.avgSuccess', 'Ortalama Başarı') : 'Ortalama Başarı';
+                const avgTimeText = window.t ? t('analysis.avgTime', 'Ortalama Süre') : 'Ortalama Süre';
+                const totalCorrectText = window.t ? t('analysis.totalCorrect', 'Toplam Doğru') : 'Toplam Doğru';
+                const totalWrongText = window.t ? t('analysis.totalWrong', 'Toplam Yanlış') : 'Toplam Yanlış';
+                const evaluationText = window.t ? t('analysis.evaluation', 'Performans Değerlendirmesi') : 'Performans Değerlendirmesi';
+
+                analysisContent.innerHTML = `
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">📊</div>
+                            <div class="stat-value">${successRate}%</div>
+                            <div class="stat-label">${avgSuccessText}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">⏱️</div>
+                            <div class="stat-value">${Utils.formatTime(avgTime)}</div>
+                            <div class="stat-label">${avgTimeText}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🎯</div>
+                            <div class="stat-value">${stats.correctAnswers}</div>
+                            <div class="stat-label">${totalCorrectText}</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">❌</div>
+                            <div class="stat-value">${stats.wrongAnswers}</div>
+                            <div class="stat-label">${totalWrongText}</div>
                         </div>
                     </div>
+                    <div style="margin-top: 30px; padding: 20px; background: var(--bg-secondary); border-radius: 10px;">
+                        <h3>${evaluationText}</h3>
+                        <p style="margin-top: 10px; line-height: 1.6;">
+                            ${this.getPerformanceText(successRate)}
+                        </p>
+                    </div>
                 `;
+            } catch (error) {
+                console.error('Analiz güncelleme hatası:', error);
+                Utils.handleError(error, 'updateAnalysis');
             }
+        },
 
-            const successMsg = window.t ? t('msg.fileUploaded', 'Dosya yüklendi!') : 'Dosya yüklendi!';
-            Utils.showToast(successMsg, 'success');
-        } catch (error) {
-            console.error('Dosya yükleme hatası:', error);
-            Utils.handleError(error, 'handleFileUpload');
+        /**
+         * Performans metni (TR/EN)
+         */
+        getPerformanceText(successRate) {
+            const lang =
+                window.LanguageManager && LanguageManager.currentLang === 'en' ? 'en' : 'tr';
+
+            if (lang === 'en') {
+                if (successRate >= 90) {
+                    return '🌟 Excellent! Your performance is great. Keep it up!';
+                } else if (successRate >= 75) {
+                    return '👏 Very good! Strong performance. With a bit more study you can improve even further.';
+                } else if (successRate >= 60) {
+                    return '💪 You are doing well! With some more practice you can reach your goals.';
+                } else if (successRate >= 40) {
+                    return '📚 You need to study more. Regular practice will help you improve.';
+                } else {
+                    return '🎯 It is recommended to review the basics. Keep going step by step!';
+                }
+            } else {
+                if (successRate >= 90) {
+                    return '🌟 Mükemmel! Harika bir performans gösteriyorsun. Böyle devam et!';
+                } else if (successRate >= 75) {
+                    return '👏 Çok iyi! Başarılı bir performans. Biraz daha çalışarak daha da iyileştirebilirsin.';
+                } else if (successRate >= 60) {
+                    return '💪 İyi gidiyorsun! Biraz daha pratik yaparsan hedeflerine ulaşabilirsin.';
+                } else if (successRate >= 40) {
+                    return '📚 Daha fazla çalışma gerekiyor. Düzenli pratik yaparak gelişebilirsin.';
+                } else {
+                    return '🎯 Temel konuları tekrar etmen önerilir. Yavaş yavaş ilerlemeye devam et!';
+                }
+            }
+        },
+
+        /**
+         * ✅ DÜZELTME: Ayarları kaydeder - Validation ile
+         */
+        saveSettings(event) {
+            event.preventDefault();
+
+            try {
+                const form = event.target;
+                const usernameInput = form.username;
+                const emailInput = form.email;
+
+                // ✅ Validation
+                const isUsernameValid = Utils.validateInput(usernameInput, 'username');
+                const isEmailValid = Utils.validateInput(emailInput, 'email');
+
+                if (!isUsernameValid || !isEmailValid) {
+                    return;
+                }
+
+                const username = usernameInput.value.trim();
+                const email = emailInput.value.trim();
+
+                // Kaydet
+                const settings = {
+                    username: username,
+                    email: email,
+                    notifications: {
+                        email: form.emailNotif.checked,
+                        push: form.pushNotif.checked
+                    }
+                };
+
+                const userData = StorageManager.getUserData();
+                userData.username = username;
+                userData.email = email;
+                userData.settings.notifications = settings.notifications;
+
+                if (StorageManager.updateUserData(userData)) {
+                    const successMsg = window.t ? t('msg.saved', 'Başarıyla kaydedildi!') : 'Başarıyla kaydedildi!';
+                    Utils.showToast(successMsg, 'success');
+                    this.loadUserData();
+                } else {
+                    const errorMsg = window.t ? t('msg.error', 'Bir hata oluştu!') : 'Bir hata oluştu!';
+                    Utils.showToast(errorMsg, 'error');
+                }
+            } catch (error) {
+                console.error('Ayar kaydetme hatası:', error);
+                Utils.handleError(error, 'saveSettings');
+            }
+        },
+
+        /**
+         * Ayarları sıfırlar
+         */
+        async resetSettings() {
+            try {
+                const confirmMsg = window.t 
+                    ? t('settings.resetConfirm', 'Ayarlar varsayılan değerlere dönecek. Emin misiniz?')
+                    : 'Ayarlar varsayılan değerlere dönecek. Emin misiniz?';
+                
+                const confirmed = await Utils.confirm(confirmMsg);
+                
+                if (!confirmed) return;
+
+                const userData = StorageManager.getUserData();
+                document.getElementById('username').value = userData.username;
+                document.getElementById('email').value = userData.email || '';
+                document.getElementById('emailNotif').checked = true;
+                document.getElementById('pushNotif').checked = false;
+
+                const infoMsg = window.t ? t('msg.reset', 'Ayarlar sıfırlandı') : 'Ayarlar sıfırlandı';
+                Utils.showToast(infoMsg, 'info');
+            } catch (error) {
+                console.error('Ayar sıfırlama hatası:', error);
+                Utils.handleError(error, 'resetSettings');
+            }
+        },
+
+        /**
+         * ✅ DÜZELTME: Dosya yükleme - Validation ile
+         */
+        handleFileUpload(event) {
+            try {
+                const file = event.target.files[0];
+                if (!file) return;
+
+                // Dosya boyutu kontrolü
+                if (file.size > Config.FILE_UPLOAD.MAX_SIZE) {
+                    const errorMsg = window.t ? t('error.fileSize', 'Dosya boyutu çok büyük') : 'Dosya boyutu çok büyük';
+                    Utils.showToast(errorMsg, 'error');
+                    return;
+                }
+
+                // Dosya türü kontrolü
+                const ext = file.name.split('.').pop().toLowerCase();
+                if (!Config.FILE_UPLOAD.ALLOWED_TYPES.includes(ext)) {
+                    const errorMsg = window.t ? t('error.fileType', 'Desteklenmeyen dosya türü') : 'Desteklenmeyen dosya türü';
+                    Utils.showToast(errorMsg, 'error');
+                    return;
+                }
+
+                // Dosya bilgisini göster
+                const fileInfo = document.getElementById('fileInfo');
+                if (fileInfo) {
+                    fileInfo.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <span>📄</span>
+                            <div>
+                                <div><strong>${Utils.sanitizeHTML(file.name)}</strong></div>
+                                <small style="color: var(--text-secondary);">${Utils.formatFileSize(file.size)}</small>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                const successMsg = window.t ? t('msg.fileUploaded', 'Dosya yüklendi!') : 'Dosya yüklendi!';
+                Utils.showToast(successMsg, 'success');
+            } catch (error) {
+                console.error('Dosya yükleme hatası:', error);
+                Utils.handleError(error, 'handleFileUpload');
+            }
+        },
+
+        /**
+         * ✅ DÜZELTME: Test oluşturma formu - Validation ile
+         */
+        handleCreateTest(event) {
+            event.preventDefault();
+
+            try {
+                const form = event.target;
+                const titleInput = form.testTitle;
+                const categorySelect = form.testCategory;
+
+                // ✅ Validation
+                const isTitleValid = Utils.validateInput(titleInput, 'required');
+                
+                if (!isTitleValid) {
+                    return;
+                }
+
+                const title = titleInput.value.trim();
+                const category = categorySelect.value;
+
+                if (!category) {
+                    const errorMsg = window.t ? t('error.categoryRequired', 'Kategori seçmelisiniz!') : 'Kategori seçmelisiniz!';
+                    Utils.showToast(errorMsg, 'error');
+                    return;
+                }
+
+                const infoMsg = window.t ? t('msg.featureComingSoon', 'Test oluşturma özelliği yakında eklenecek!') : 'Test oluşturma özelliği yakında eklenecek!';
+                Utils.showToast(infoMsg, 'info');
+                
+                // Form sıfırla
+                form.reset();
+                const fileInfo = document.getElementById('fileInfo');
+                if (fileInfo) {
+                    fileInfo.innerHTML = '';
+                }
+            } catch (error) {
+                console.error('Test oluşturma hatası:', error);
+                Utils.handleError(error, 'handleCreateTest');
+            }
+        },
+
+        /**
+         * Event listener'ları ekler
+         */
+        attachEventListeners() {
+            try {
+                // Tab navigasyonu
+                document.querySelectorAll('.nav-tab').forEach(tab => {
+                    tab.addEventListener('click', () => this.switchTab(tab.dataset.tab));
+                });
+
+                // Ayarlar formu
+                const settingsForm = document.getElementById('settingsForm');
+                if (settingsForm) {
+                    settingsForm.addEventListener('submit', (e) => this.saveSettings(e));
+                }
+
+                // Ayarları sıfırla
+                const resetBtn = document.getElementById('resetBtn');
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', () => this.resetSettings());
+                }
+
+                // Dosya yükleme
+                const fileUpload = document.getElementById('fileUpload');
+                if (fileUpload) {
+                    fileUpload.addEventListener('change', (e) => this.handleFileUpload(e));
+                }
+
+                // Test oluşturma formu
+                const createForm = document.getElementById('createTestForm');
+                if (createForm) {
+                    createForm.addEventListener('submit', (e) => this.handleCreateTest(e));
+                }
+
+                // Not ekleme butonu
+                const addNoteBtn = document.getElementById('addNoteBtn');
+                if (addNoteBtn) {
+                    addNoteBtn.addEventListener('click', () => this.addNote());
+                }
+
+                // Tema değiştir
+                window.themeManager = this.themeManager;
+
+                console.log('✅ Event listener\'lar eklendi');
+            } catch (error) {
+                console.error('Event listener hatası:', error);
+                Utils.handleError(error, 'attachEventListeners');
+            }
         }
-    },
+    };
+
+    // Uygulamayı başlat
+    document.addEventListener('DOMContentLoaded', () => {
+        App.init();
+    });
+
+    // Export
+    window.App = App;
 
     /**
-     * ✅ DÜZELTME: Test oluşturma formu - Validation ile
+     * TESTIFY QUIZ MANAGER - HATASIZ FINAL
+     * Tüm memory leak, event listener ve bug'lar düzeltildi
      */
-    handleCreateTest(event) {
-        event.preventDefault();
 
-        try {
-            const form = event.target;
-            const titleInput = form.testTitle;
-            const categorySelect = form.testCategory;
+    'use strict';
 
-            // ✅ Validation
-            const isTitleValid = Utils.validateInput(titleInput, 'required');
+    const QuizManager = {
+        // Quiz durumu
+        state: {
+            currentMode: null,
+            questions: [],
+            currentIndex: 0,
+            answers: [],
+            startTime: null,
+            timerInterval: null,
+            elapsedSeconds: 0,
+            isReviewing: false,
+            testTitle: null,
+            testDescription: null,
+            eventListenersAttached: false // ✅ YENİ: Duplicate önleme
+        },
+
+        /**
+         * AI TARAFINDAN OLUŞTURULAN TESTİ YÜKLE
+         */
+        loadAIGeneratedTest() {
+            try {
+                const aiTest = localStorage.getItem('testify_generated_test');
+                if (!aiTest) {
+                    console.log('ℹ️ AI testi bulunamadı');
+                    return null;
+                }
+                
+                const testData = JSON.parse(aiTest);
+                
+                // Süresi dolmuş mu kontrol et (24 saat)
+                if (testData.expiresAt && Date.now() > testData.expiresAt) {
+                    console.log('⏰ AI testi süresi dolmuş');
+                    localStorage.removeItem('testify_generated_test');
+                    return null;
+                }
+                
+                console.log('✅ AI testi yüklendi:', testData.title);
+                console.log('📊 Soru sayısı:', testData.questions.length);
+                return testData;
+                
+            } catch (error) {
+                console.error('❌ AI test yükleme hatası:', error);
+                return null;
+            }
+        },
+
+        /**
+         * Quiz'i başlatır - TAM HATASIZ
+         */
+        startQuiz(mode) {
+            console.log('🎯 Quiz başlatılıyor, mod:', mode);
             
-            if (!isTitleValid) {
-                return;
-            }
-
-            const title = titleInput.value.trim();
-            const category = categorySelect.value;
-
-            if (!category) {
-                const errorMsg = window.t ? t('error.categoryRequired', 'Kategori seçmelisiniz!') : 'Kategori seçmelisiniz!';
-                Utils.showToast(errorMsg, 'error');
-                return;
-            }
-
-            const infoMsg = window.t ? t('msg.featureComingSoon', 'Test oluşturma özelliği yakında eklenecek!') : 'Test oluşturma özelliği yakında eklenecek!';
-            Utils.showToast(infoMsg, 'info');
+            // ✅ Önceki timer'ı temizle
+            this.cleanupPreviousQuiz();
             
-            // Form sıfırla
-            form.reset();
-            const fileInfo = document.getElementById('fileInfo');
-            if (fileInfo) {
-                fileInfo.innerHTML = '';
-            }
-        } catch (error) {
-            console.error('Test oluşturma hatası:', error);
-            Utils.handleError(error, 'handleCreateTest');
-        }
-    },
+            try {
+                // Önce AI testi var mı kontrol et
+                const aiTest = this.loadAIGeneratedTest();
+                
+                if (aiTest && aiTest.questions && aiTest.questions.length > 0) {
+                    console.log('🤖 AI testi kullanılıyor');
+                    
+                    // AI testini kullan
+                    this.state = {
+                        currentMode: 'ai',
+                        questions: aiTest.questions,
+                        currentIndex: 0,
+                        answers: [],
+                        startTime: Date.now(),
+                        timerInterval: null,
+                        elapsedSeconds: 0,
+                        isReviewing: false,
+                        testTitle: aiTest.title,
+                        testDescription: aiTest.description,
+                        eventListenersAttached: this.state.eventListenersAttached
+                    };
+                    
+                    this.state.answers = new Array(aiTest.questions.length).fill(null);
+                    
+                    Utils.showToast(`🤖 AI Testi: ${aiTest.title} - ${aiTest.questions.length} soru`, 'info', 4000);
+                    
+                } else {
+                    console.log('📚 Varsayılan sorular kullanılıyor');
+                    
+                    // Soru bankası kontrolü
+                    if (!window.questionBank || !Array.isArray(window.questionBank)) {
+                        Utils.showToast('Soru bankası yüklenemedi!', 'error');
+                        console.error('questionBank bulunamadı!');
+                        return;
+                    }
 
-    /**
-     * Event listener'ları ekler
-     */
-    attachEventListeners() {
-        try {
-            // Tab navigasyonu
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.addEventListener('click', () => this.switchTab(tab.dataset.tab));
+                    if (window.questionBank.length === 0) {
+                        Utils.showToast('Soru bankası boş!', 'error');
+                        return;
+                    }
+
+                    // Tüm soruları karıştır ve al
+                    const allQuestions = [...window.questionBank];
+                    
+                    this.state = {
+                        currentMode: mode,
+                        questions: Utils.shuffleArray(allQuestions),
+                        currentIndex: 0,
+                        answers: [],
+                        startTime: Date.now(),
+                        timerInterval: null,
+                        elapsedSeconds: 0,
+                        isReviewing: false,
+                        testTitle: null,
+                        testDescription: null,
+                        eventListenersAttached: this.state.eventListenersAttached
+                    };
+                    
+                    this.state.answers = new Array(this.state.questions.length).fill(null);
+                }
+
+                console.log(`✅ ${this.state.questions.length} soru yüklendi`);
+
+                // Sayfaları değiştir
+                const testSelection = document.getElementById('testSelection');
+                const quizPage = document.getElementById('quizPage');
+                
+                if (!testSelection || !quizPage) {
+                    throw new Error('Quiz sayfaları bulunamadı');
+                }
+
+                testSelection.classList.remove('active');
+                quizPage.classList.add('active');
+
+                // Exit butonunu göster
+                this.showExitButton();
+
+                // Timer'ı başlat
+                this.startTimer();
+
+                // İlk soruyu göster
+                this.displayQuestion();
+
+                // Quiz durumunu kaydet
+                this.saveState();
+
+                const questionCount = this.state.questions.length;
+                Utils.showToast(`Test başladı! ${questionCount} soru - Bol şans!`, 'success');
+                
+            } catch (error) {
+                console.error('❌ Quiz başlatma hatası:', error);
+                Utils.showToast('Test başlatılamadı: ' + error.message, 'error');
+            }
+        },
+
+        /**
+         * ✅ YENİ: Önceki quiz'i temizle
+         */
+        cleanupPreviousQuiz() {
+            // Timer'ı durdur
+            if (this.state.timerInterval) {
+                clearInterval(this.state.timerInterval);
+                this.state.timerInterval = null;
+                console.log('🧹 Önceki timer temizlendi');
+            }
+            
+            // Event listener'ları temizle (gerekirse)
+            const optionsList = document.getElementById('optionsList');
+            if (optionsList) {
+                optionsList.innerHTML = '';
+            }
+        },
+
+        /**
+         * Exit butonunu göster/gizle
+         */
+        showExitButton() {
+            const exitBtn = document.getElementById('exitQuizBtn');
+            if (exitBtn) {
+                exitBtn.style.display = this.state.isReviewing ? 'none' : 'inline-flex';
+            }
+        },
+
+        /**
+         * Quiz durumunu kaydeder
+         */
+        saveState() {
+            try {
+                if (window.StorageManager) {
+                    StorageManager.saveQuizState({
+                        currentMode: this.state.currentMode,
+                        currentIndex: this.state.currentIndex,
+                        answers: this.state.answers,
+                        startTime: this.state.startTime,
+                        elapsedSeconds: this.state.elapsedSeconds,
+                        questionCount: this.state.questions.length
+                    });
+                }
+            } catch (error) {
+                console.warn('Quiz durumu kaydedilemedi:', error);
+            }
+        },
+
+        /**
+         * Timer'ı başlatır
+         */
+        startTimer() {
+            // ✅ Önceki timer'ı temizle
+            if (this.state.timerInterval) {
+                clearInterval(this.state.timerInterval);
+            }
+
+            this.state.timerInterval = setInterval(() => {
+                this.state.elapsedSeconds++;
+                this.updateTimerDisplay();
+                
+                // Her 10 saniyede bir state'i kaydet
+                if (this.state.elapsedSeconds % 10 === 0) {
+                    this.saveState();
+                }
+            }, 1000);
+        },
+
+        /**
+         * Timer'ı durdurur
+         */
+        stopTimer() {
+            if (this.state.timerInterval) {
+                clearInterval(this.state.timerInterval);
+                this.state.timerInterval = null;
+                console.log('⏹️ Timer durduruldu');
+            }
+        },
+
+        /**
+         * Timer'ı günceller
+         */
+        updateTimerDisplay() {
+            const timerEl = document.getElementById('quizTimer');
+            if (timerEl) {
+                timerEl.textContent = Utils.formatTime(this.state.elapsedSeconds);
+            }
+        },
+
+        /**
+         * Soruyu gösterir
+         */
+        displayQuestion() {
+            try {
+                const question = this.state.questions[this.state.currentIndex];
+                if (!question) {
+                    throw new Error('Soru bulunamadı');
+                }
+
+                // Soru numarası ve toplam
+                const currentQuestionEl = document.getElementById('currentQuestion');
+                const totalQuestionsEl = document.getElementById('totalQuestionsQuiz');
+                
+                if (currentQuestionEl) {
+                    currentQuestionEl.textContent = this.state.currentIndex + 1;
+                }
+                if (totalQuestionsEl) {
+                    totalQuestionsEl.textContent = this.state.questions.length;
+                }
+
+                // Progress bar
+                const progress = ((this.state.currentIndex + 1) / this.state.questions.length) * 100;
+                const progressFill = document.getElementById('progressFill');
+                if (progressFill) {
+                    progressFill.style.width = progress + '%';
+                    const progressBar = progressFill.parentElement;
+                    if (progressBar) {
+                        progressBar.setAttribute('aria-valuenow', Math.round(progress));
+                    }
+                }
+
+                // Soru metni
+                const questionTextEl = document.getElementById('questionText');
+                if (questionTextEl) {
+                    questionTextEl.textContent = question.q;
+                }
+
+                // Seçenekleri göster
+                this.displayOptions(question);
+
+                // Butonları güncelle
+                this.updateButtons();
+            } catch (error) {
+                console.error('Soru gösterme hatası:', error);
+                Utils.showToast('Soru gösterilemedi', 'error');
+            }
+        },
+
+        /**
+         * Seçenekleri gösterir
+         */
+        displayOptions(question) {
+            const optionsList = document.getElementById('optionsList');
+            if (!optionsList) return;
+
+            // ✅ Eski event listener'ları temizle
+            optionsList.innerHTML = '';
+
+            const letters = ['A', 'B', 'C', 'D', 'E'];
+
+            question.o.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option-item';
+                optionDiv.setAttribute('role', 'radio');
+                optionDiv.setAttribute('aria-checked', 'false');
+                optionDiv.setAttribute('tabindex', '0');
+                
+                // Seçilmiş mi kontrol et
+                const isSelected = this.state.answers[this.state.currentIndex] === index;
+                if (isSelected) {
+                    optionDiv.classList.add('selected');
+                    optionDiv.setAttribute('aria-checked', 'true');
+                }
+
+                // Review modundaysa doğru/yanlış göster
+                if (this.state.isReviewing) {
+                    optionDiv.classList.add('disabled');
+                    const correctAnswer = question.a;
+                    const isCorrect = option === correctAnswer;
+                    const isUserAnswer = isSelected;
+                    
+                    if (isCorrect) {
+                        optionDiv.classList.add('correct');
+                    }
+                    
+                    if (isUserAnswer && !isCorrect) {
+                        optionDiv.classList.add('incorrect');
+                    }
+                }
+
+                optionDiv.innerHTML = `
+                    <span class="option-letter">${letters[index]}</span>
+                    <span>${Utils.sanitizeHTML(option)}</span>
+                `;
+
+                // ✅ Event listener (memory leak yok)
+                if (!this.state.isReviewing) {
+                    const clickHandler = () => this.selectOption(index);
+                    const keyHandler = (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            this.selectOption(index);
+                        }
+                    };
+                    
+                    optionDiv.addEventListener('click', clickHandler);
+                    optionDiv.addEventListener('keypress', keyHandler);
+                }
+
+                optionsList.appendChild(optionDiv);
             });
 
-            // Ayarlar formu
-            const settingsForm = document.getElementById('settingsForm');
-            if (settingsForm) {
-                settingsForm.addEventListener('submit', (e) => this.saveSettings(e));
+            // Review modunda açıklama göster
+            if (this.state.isReviewing && question.explanation) {
+                const explanationDiv = document.createElement('div');
+                explanationDiv.className = 'question-explanation';
+                explanationDiv.innerHTML = `
+                    <div class="explanation-header">
+                        <span class="explanation-icon">💡</span>
+                        <strong>${window.t ? t('quiz.explanation', 'Açıklama') : 'Açıklama'}:</strong>
+                    </div>
+                    <p>${Utils.sanitizeHTML(question.explanation)}</p>
+                `;
+                optionsList.appendChild(explanationDiv);
+            }
+        },
+
+        /**
+         * Seçenek seçer
+         */
+        selectOption(index) {
+            if (this.state.isReviewing) return;
+
+            try {
+                const question = this.state.questions[this.state.currentIndex];
+                const selectedOption = question.o[index];
+                const correctAnswer = question.a;
+                const isCorrect = selectedOption === correctAnswer;
+
+                // Cevabı kaydet
+                this.state.answers[this.state.currentIndex] = index;
+
+                // Tüm seçenekleri disable et
+                document.querySelectorAll('.option-item').forEach((item, idx) => {
+                    item.classList.add('disabled');
+                    item.style.pointerEvents = 'none';
+                    
+                    // Doğru cevabı yeşil yap
+                    if (question.o[idx] === correctAnswer) {
+                        item.classList.add('correct');
+                    }
+                    
+                    // Yanlış seçimi kırmızı yap
+                    if (idx === index && !isCorrect) {
+                        item.classList.add('incorrect');
+                    }
+                    
+                    if (idx === index) {
+                        item.classList.add('selected');
+                        item.setAttribute('aria-checked', 'true');
+                    } else {
+                        item.classList.remove('selected');
+                        item.setAttribute('aria-checked', 'false');
+                    }
+                });
+
+                // Açıklamayı göster
+                this.showExplanation(question, isCorrect);
+
+                // State'i kaydet
+                this.saveState();
+            } catch (error) {
+                console.error('Seçenek seçme hatası:', error);
+            }
+        },
+
+        /**
+         * Açıklamayı gösterir
+         */
+        showExplanation(question, isCorrect) {
+            // Eski açıklamayı kaldır
+            const oldExplanation = document.querySelector('.question-explanation');
+            if (oldExplanation) {
+                oldExplanation.remove();
             }
 
-            // Ayarları sıfırla
-            const resetBtn = document.getElementById('resetBtn');
-            if (resetBtn) {
-                resetBtn.addEventListener('click', () => this.resetSettings());
+            // Açıklama yoksa çık
+            if (!question.explanation) return;
+
+            const optionsList = document.getElementById('optionsList');
+            if (!optionsList) return;
+
+            const explanationDiv = document.createElement('div');
+            explanationDiv.className = 'question-explanation';
+            explanationDiv.style.cssText = 'margin-top: 20px; padding: 15px; background: var(--bg-tertiary); border-left: 4px solid var(--info); border-radius: 8px; animation: slideIn 0.3s ease-out;';
+            
+            const statusIcon = isCorrect ? '✅' : '❌';
+            const statusText = isCorrect ? (window.t ? t('quiz.correct', 'Doğru!') : 'Doğru!') : (window.t ? t('quiz.wrong', 'Yanlış!') : 'Yanlış!');
+            const statusColor = isCorrect ? 'var(--success)' : 'var(--danger)';
+            
+            explanationDiv.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                    <span style="font-size: 1.2rem;">${statusIcon}</span>
+                    <strong style="color: ${statusColor}; font-size: 1.1rem;">${statusText}</strong>
+                </div>
+                <div style="display: flex; align-items: flex-start; gap: 8px; margin-top: 10px;">
+                    <span style="font-size: 1.2rem;">💡</span>
+                    <div>
+                        <strong style="color: var(--info);">${window.t ? t('quiz.explanation', 'Açıklama') : 'Açıklama'}:</strong>
+                        <p style="color: var(--text-secondary); line-height: 1.6; margin: 5px 0 0;">${Utils.sanitizeHTML(question.explanation)}</p>
+                    </div>
+                </div>
+            `;
+            
+            optionsList.appendChild(explanationDiv);
+        },
+
+        /**
+         * Butonları günceller - TAM HATASIZ
+         */
+        updateButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+
+            const isFirstQuestion = this.state.currentIndex === 0;
+            const isLastQuestion = this.state.currentIndex === this.state.questions.length - 1;
+
+            // ÖNCEKİ BUTONU
+            if (prevBtn) {
+                prevBtn.disabled = isFirstQuestion;
+                
+                if (!isFirstQuestion || this.state.isReviewing) {
+                    prevBtn.style.display = 'inline-flex';
+                    prevBtn.style.opacity = isFirstQuestion ? '0.5' : '1';
+                } else {
+                    prevBtn.style.display = 'none';
+                }
             }
 
-            // Dosya yükleme
-            const fileUpload = document.getElementById('fileUpload');
-            if (fileUpload) {
-                fileUpload.addEventListener('change', (e) => this.handleFileUpload(e));
-            }
-
-            // Test oluşturma formu
-            const createForm = document.getElementById('createTestForm');
-            if (createForm) {
-                createForm.addEventListener('submit', (e) => this.handleCreateTest(e));
-            }
-
-            // Not ekleme butonu
-            const addNoteBtn = document.getElementById('addNoteBtn');
-            if (addNoteBtn) {
-                addNoteBtn.addEventListener('click', () => this.addNote());
-            }
-
-            // Tema değiştir
-            window.themeManager = this.themeManager;
-
-            console.log('✅ Event listener\'lar eklendi');
-        } catch (error) {
-            console.error('Event listener hatası:', error);
-            Utils.handleError(error, 'attachEventListeners');
-        }
-    }
-};
-
-// Uygulamayı başlat
-document.addEventListener('DOMContentLoaded', () => {
-    App.init();
-});
-
-// Export
-window.App = App;
-
-/**
- * TESTIFY QUIZ MANAGER - HATASIZ FINAL
- * Tüm memory leak, event listener ve bug'lar düzeltildi
- */
-
-'use strict';
-
-const QuizManager = {
-    // Quiz durumu
-    state: {
-        currentMode: null,
-        questions: [],
-        currentIndex: 0,
-        answers: [],
-        startTime: null,
-        timerInterval: null,
-        elapsedSeconds: 0,
-        isReviewing: false,
-        testTitle: null,
-        testDescription: null,
-        eventListenersAttached: false // ✅ YENİ: Duplicate önleme
-    },
-
-    /**
-     * AI TARAFINDAN OLUŞTURULAN TESTİ YÜKLE
-     */
-    loadAIGeneratedTest() {
-        try {
-            const aiTest = localStorage.getItem('testify_generated_test');
-            if (!aiTest) {
-                console.log('ℹ️ AI testi bulunamadı');
-                return null;
+            // SONRAKİ BUTONU
+            if (nextBtn) {
+                if (this.state.isReviewing) {
+                    nextBtn.style.display = isLastQuestion ? 'none' : 'inline-flex';
+                    const nextText = window.t ? t('quiz.next', 'Sonraki') : 'Sonraki';
+                    nextBtn.innerHTML = `${nextText} →`;
+                } else {
+                    nextBtn.style.display = isLastQuestion ? 'none' : 'inline-flex';
+                }
             }
             
-            const testData = JSON.parse(aiTest);
-            
-            // Süresi dolmuş mu kontrol et (24 saat)
-            if (testData.expiresAt && Date.now() > testData.expiresAt) {
-                console.log('⏰ AI testi süresi dolmuş');
+            // BİTİR BUTONU
+            if (submitBtn) {
+                submitBtn.style.display = isLastQuestion && !this.state.isReviewing ? 'inline-flex' : 'none';
+            }
+
+            // Exit butonunu güncelle
+            this.showExitButton();
+        },
+
+        /**
+         * Sonraki soruya geçer
+         */
+        nextQuestion() {
+            if (this.state.currentIndex < this.state.questions.length - 1) {
+                this.state.currentIndex++;
+                this.displayQuestion();
+                this.saveState();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        },
+
+        /**
+         * Önceki soruya gider
+         */
+        previousQuestion() {
+            if (this.state.currentIndex > 0) {
+                this.state.currentIndex--;
+                this.displayQuestion();
+                this.saveState();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        },
+
+        /**
+         * Testi bitirir
+         */
+        async finishQuiz() {
+            try {
+                const unanswered = this.state.answers.filter(a => a === null).length;
+                
+                if (unanswered > 0) {
+                    const confirmMsg = window.t 
+                        ? t('quiz.unansweredConfirm', `${unanswered} soru cevaplanmadı. Testi bitirmek istediğinizden emin misiniz?`)
+                        : `${unanswered} soru cevaplanmadı. Testi bitirmek istediğinizden emin misiniz?`;
+                    
+                    const confirmed = await Utils.confirm(confirmMsg);
+                    if (!confirmed) return;
+                }
+
+                this.stopTimer();
+                const results = this.calculateResults();
+
+                if (window.StorageManager) {
+                    StorageManager.saveTestResult(results);
+                    StorageManager.clearQuizState();
+                }
+
                 localStorage.removeItem('testify_generated_test');
-                return null;
+                this.showResults(results);
+                
+            } catch (error) {
+                console.error('Quiz bitirme hatası:', error);
+                Utils.showToast('Test bitirilemedi', 'error');
             }
-            
-            console.log('✅ AI testi yüklendi:', testData.title);
-            console.log('📊 Soru sayısı:', testData.questions.length);
-            return testData;
-            
-        } catch (error) {
-            console.error('❌ AI test yükleme hatası:', error);
-            return null;
-        }
-    },
+        },
 
-    /**
-     * Quiz'i başlatır - TAM HATASIZ
-     */
-    startQuiz(mode) {
-        console.log('🎯 Quiz başlatılıyor, mod:', mode);
-        
-        // ✅ Önceki timer'ı temizle
-        this.cleanupPreviousQuiz();
-        
-        try {
-            // Önce AI testi var mı kontrol et
-            const aiTest = this.loadAIGeneratedTest();
-            
-            if (aiTest && aiTest.questions && aiTest.questions.length > 0) {
-                console.log('🤖 AI testi kullanılıyor');
+        /**
+         * Sonuçları hesaplar
+         */
+        calculateResults() {
+            let correct = 0;
+            let wrong = 0;
+
+            this.state.questions.forEach((question, index) => {
+                const userAnswer = this.state.answers[index];
                 
-                // AI testini kullan
-                this.state = {
-                    currentMode: 'ai',
-                    questions: aiTest.questions,
-                    currentIndex: 0,
-                    answers: [],
-                    startTime: Date.now(),
-                    timerInterval: null,
-                    elapsedSeconds: 0,
-                    isReviewing: false,
-                    testTitle: aiTest.title,
-                    testDescription: aiTest.description,
-                    eventListenersAttached: this.state.eventListenersAttached
-                };
+                if (userAnswer !== null) {
+                    const selectedOption = question.o[userAnswer];
+                    if (selectedOption === question.a) {
+                        correct++;
+                    } else {
+                        wrong++;
+                    }
+                }
+            });
+
+            const unanswered = this.state.questions.length - (correct + wrong);
+            const successRate = this.state.questions.length > 0 
+                ? Math.round((correct / this.state.questions.length) * 100) 
+                : 0;
+
+            return {
+                mode: this.state.currentMode,
+                totalQuestions: this.state.questions.length,
+                correctAnswers: correct,
+                wrongAnswers: wrong,
+                unanswered: unanswered,
+                successRate: successRate,
+                time: this.state.elapsedSeconds,
+                timestamp: Date.now(),
+                testTitle: this.state.testTitle
+            };
+        },
+
+        /**
+         * Sonuçları gösterir
+         */
+        showResults(results) {
+            try {
+                const quizPage = document.getElementById('quizPage');
+                const resultsPage = document.getElementById('resultsPage');
                 
-                this.state.answers = new Array(aiTest.questions.length).fill(null);
-                
-                Utils.showToast(`🤖 AI Testi: ${aiTest.title} - ${aiTest.questions.length} soru`, 'info', 4000);
-                
-            } else {
-                console.log('📚 Varsayılan sorular kullanılıyor');
-                
-                // Soru bankası kontrolü
-                if (!window.questionBank || !Array.isArray(window.questionBank)) {
-                    Utils.showToast('Soru bankası yüklenemedi!', 'error');
-                    console.error('questionBank bulunamadı!');
-                    return;
+                if (!quizPage || !resultsPage) {
+                    throw new Error('Sonuç sayfası bulunamadı');
                 }
 
-                if (window.questionBank.length === 0) {
-                    Utils.showToast('Soru bankası boş!', 'error');
-                    return;
+                quizPage.classList.remove('active');
+                resultsPage.classList.add('active');
+
+                const finalScore = document.getElementById('finalScore');
+                const correctAnswers = document.getElementById('correctAnswers');
+                const wrongAnswers = document.getElementById('wrongAnswers');
+                const successPercent = document.getElementById('successPercent');
+                const totalTimeResult = document.getElementById('totalTimeResult');
+
+                if (finalScore) finalScore.textContent = `${results.correctAnswers}/${results.totalQuestions}`;
+                if (correctAnswers) correctAnswers.textContent = results.correctAnswers;
+                if (wrongAnswers) wrongAnswers.textContent = results.wrongAnswers;
+                if (successPercent) successPercent.textContent = results.successRate + '%';
+                if (totalTimeResult) totalTimeResult.textContent = Utils.formatTime(results.time);
+
+                const resultsIcon = document.querySelector('.results-icon');
+                if (resultsIcon) {
+                    if (results.successRate >= 90) resultsIcon.textContent = '🏆';
+                    else if (results.successRate >= 75) resultsIcon.textContent = '🎉';
+                    else if (results.successRate >= 60) resultsIcon.textContent = '👏';
+                    else if (results.successRate >= 40) resultsIcon.textContent = '💪';
+                    else resultsIcon.textContent = '📚';
                 }
 
-                // Tüm soruları karıştır ve al
-                const allQuestions = [...window.questionBank];
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (error) {
+                console.error('Sonuç gösterme hatası:', error);
+                Utils.showToast('Sonuçlar gösterilemedi', 'error');
+            }
+        },
+
+        /**
+         * Cevapları inceler
+         */
+        reviewAnswers() {
+            try {
+                this.state.isReviewing = true;
+                this.state.currentIndex = 0;
+
+                const resultsPage = document.getElementById('resultsPage');
+                const quizPage = document.getElementById('quizPage');
                 
+                if (!resultsPage || !quizPage) {
+                    throw new Error('Quiz sayfası bulunamadı');
+                }
+
+                resultsPage.classList.remove('active');
+                quizPage.classList.add('active');
+
+                this.displayQuestion();
+
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                const submitBtn = document.getElementById('submitBtn');
+
+                if (prevBtn) prevBtn.style.display = 'inline-flex';
+                if (nextBtn) nextBtn.style.display = 'inline-flex';
+                if (submitBtn) submitBtn.style.display = 'none';
+
+                this.showExitButton();
+
+                const reviewMsg = window.t 
+                    ? t('quiz.reviewMode', 'İnceleme modu - Açıklamaları okuyabilirsiniz')
+                    : 'İnceleme modu - Açıklamaları okuyabilirsiniz';
+                Utils.showToast(reviewMsg, 'info');
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (error) {
+                console.error('İnceleme modu hatası:', error);
+                Utils.showToast('İnceleme modu başlatılamadı', 'error');
+            }
+        },
+
+        /**
+         * Yeni quiz başlatır
+         */
+        newQuiz() {
+            try {
+                this.cleanupPreviousQuiz(); // ✅ Temizlik
+                
+                const resultsPage = document.getElementById('resultsPage');
+                const quizPage = document.getElementById('quizPage');
+                const testSelection = document.getElementById('testSelection');
+                
+                if (resultsPage) resultsPage.classList.remove('active');
+                if (quizPage) quizPage.classList.remove('active');
+                if (testSelection) testSelection.classList.add('active');
+
+                // State'i sıfırla
                 this.state = {
-                    currentMode: mode,
-                    questions: Utils.shuffleArray(allQuestions),
+                    currentMode: null,
+                    questions: [],
                     currentIndex: 0,
                     answers: [],
-                    startTime: Date.now(),
+                    startTime: null,
                     timerInterval: null,
                     elapsedSeconds: 0,
                     isReviewing: false,
@@ -1693,850 +2290,252 @@ const QuizManager = {
                     testDescription: null,
                     eventListenersAttached: this.state.eventListenersAttached
                 };
+
+                localStorage.removeItem('testify_generated_test');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (error) {
+                console.error('Yeni quiz başlatma hatası:', error);
+                Utils.showToast('Yeni test başlatılamadı', 'error');
+            }
+        },
+
+        /**
+         * Quiz'den çıkar
+         */
+        async exitQuiz() {
+            if (this.state.isReviewing) {
+                this.newQuiz();
+                return;
+            }
+
+            const confirmMsg = window.t 
+                ? t('quiz.exitConfirm', 'Testi bırakmak istediğine emin misin?\n\nİlerleme kaydedilmeyecek!')
+                : 'Testi bırakmak istediğine emin misin?\n\nİlerleme kaydedilmeyecek!';
+            
+            const confirmed = await Utils.confirm(confirmMsg);
+            if (!confirmed) return;
+
+            try {
+                const answeredCount = this.state.answers.filter(a => a !== null).length;
+                const totalCount = this.state.questions.length;
+
+                this.cleanupPreviousQuiz(); // ✅ Temizlik
+
+                if (window.StorageManager) {
+                    StorageManager.clearQuizState();
+                }
+
+                const quizPage = document.getElementById('quizPage');
+                const resultsPage = document.getElementById('resultsPage');
+                const testSelection = document.getElementById('testSelection');
                 
-                this.state.answers = new Array(this.state.questions.length).fill(null);
+                if (quizPage) quizPage.classList.remove('active');
+                if (resultsPage) resultsPage.classList.remove('active');
+                if (testSelection) testSelection.classList.add('active');
+
+                this.state = {
+                    currentMode: null,
+                    questions: [],
+                    currentIndex: 0,
+                    answers: [],
+                    startTime: null,
+                    timerInterval: null,
+                    elapsedSeconds: 0,
+                    isReviewing: false,
+                    testTitle: null,
+                    testDescription: null,
+                    eventListenersAttached: this.state.eventListenersAttached
+                };
+
+                if (answeredCount > 0) {
+                    Utils.showToast(
+                        `📋 Test bırakıldı (${answeredCount}/${totalCount} soru cevaplanmıştı)`,
+                        'info',
+                        4000
+                    );
+                } else {
+                    Utils.showToast('Test iptal edildi', 'info');
+                }
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            } catch (error) {
+                console.error('Quiz çıkış hatası:', error);
+                Utils.showToast('Çıkış yapılamadı', 'error');
+            }
+        },
+
+        /**
+         * ✅ YENİ: Event listener'ları kur (sadece bir kez)
+         */
+        setupEventListeners() {
+            if (this.state.eventListenersAttached) {
+                console.log('⚠️ Event listener\'lar zaten ekli');
+                return;
             }
 
-            console.log(`✅ ${this.state.questions.length} soru yüklendi`);
-
-            // Sayfaları değiştir
-            const testSelection = document.getElementById('testSelection');
-            const quizPage = document.getElementById('quizPage');
+            console.log('🔧 Quiz event listener\'lar kuruluyor...');
             
-            if (!testSelection || !quizPage) {
-                throw new Error('Quiz sayfaları bulunamadı');
-            }
-
-            testSelection.classList.remove('active');
-            quizPage.classList.add('active');
-
-            // Exit butonunu göster
-            this.showExitButton();
-
-            // Timer'ı başlat
-            this.startTimer();
-
-            // İlk soruyu göster
-            this.displayQuestion();
-
-            // Quiz durumunu kaydet
-            this.saveState();
-
-            const questionCount = this.state.questions.length;
-            Utils.showToast(`Test başladı! ${questionCount} soru - Bol şans!`, 'success');
-            
-        } catch (error) {
-            console.error('❌ Quiz başlatma hatası:', error);
-            Utils.showToast('Test başlatılamadı: ' + error.message, 'error');
-        }
-    },
-
-    /**
-     * ✅ YENİ: Önceki quiz'i temizle
-     */
-    cleanupPreviousQuiz() {
-        // Timer'ı durdur
-        if (this.state.timerInterval) {
-            clearInterval(this.state.timerInterval);
-            this.state.timerInterval = null;
-            console.log('🧹 Önceki timer temizlendi');
-        }
-        
-        // Event listener'ları temizle (gerekirse)
-        const optionsList = document.getElementById('optionsList');
-        if (optionsList) {
-            optionsList.innerHTML = '';
-        }
-    },
-
-    /**
-     * Exit butonunu göster/gizle
-     */
-    showExitButton() {
-        const exitBtn = document.getElementById('exitQuizBtn');
-        if (exitBtn) {
-            exitBtn.style.display = this.state.isReviewing ? 'none' : 'inline-flex';
-        }
-    },
-
-    /**
-     * Quiz durumunu kaydeder
-     */
-    saveState() {
-        try {
-            if (window.StorageManager) {
-                StorageManager.saveQuizState({
-                    currentMode: this.state.currentMode,
-                    currentIndex: this.state.currentIndex,
-                    answers: this.state.answers,
-                    startTime: this.state.startTime,
-                    elapsedSeconds: this.state.elapsedSeconds,
-                    questionCount: this.state.questions.length
+            // Test kartları
+            const testOptions = document.querySelector('.test-options');
+            if (testOptions) {
+                const modes = ['practice', 'exam', 'ai', 'custom'];
+                const cards = testOptions.querySelectorAll('.test-option-card');
+                
+                cards.forEach((card, index) => {
+                    const mode = modes[index];
+                    
+                    card.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.startQuiz(mode);
+                    });
+                    
+                    card.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            this.startQuiz(mode);
+                        }
+                    });
                 });
             }
-        } catch (error) {
-            console.warn('Quiz durumu kaydedilemedi:', error);
-        }
-    },
 
-    /**
-     * Timer'ı başlatır
-     */
-    startTimer() {
-        // ✅ Önceki timer'ı temizle
-        if (this.state.timerInterval) {
-            clearInterval(this.state.timerInterval);
-        }
-
-        this.state.timerInterval = setInterval(() => {
-            this.state.elapsedSeconds++;
-            this.updateTimerDisplay();
-            
-            // Her 10 saniyede bir state'i kaydet
-            if (this.state.elapsedSeconds % 10 === 0) {
-                this.saveState();
-            }
-        }, 1000);
-    },
-
-    /**
-     * Timer'ı durdurur
-     */
-    stopTimer() {
-        if (this.state.timerInterval) {
-            clearInterval(this.state.timerInterval);
-            this.state.timerInterval = null;
-            console.log('⏹️ Timer durduruldu');
-        }
-    },
-
-    /**
-     * Timer'ı günceller
-     */
-    updateTimerDisplay() {
-        const timerEl = document.getElementById('quizTimer');
-        if (timerEl) {
-            timerEl.textContent = Utils.formatTime(this.state.elapsedSeconds);
-        }
-    },
-
-    /**
-     * Soruyu gösterir
-     */
-    displayQuestion() {
-        try {
-            const question = this.state.questions[this.state.currentIndex];
-            if (!question) {
-                throw new Error('Soru bulunamadı');
-            }
-
-            // Soru numarası ve toplam
-            const currentQuestionEl = document.getElementById('currentQuestion');
-            const totalQuestionsEl = document.getElementById('totalQuestionsQuiz');
-            
-            if (currentQuestionEl) {
-                currentQuestionEl.textContent = this.state.currentIndex + 1;
-            }
-            if (totalQuestionsEl) {
-                totalQuestionsEl.textContent = this.state.questions.length;
-            }
-
-            // Progress bar
-            const progress = ((this.state.currentIndex + 1) / this.state.questions.length) * 100;
-            const progressFill = document.getElementById('progressFill');
-            if (progressFill) {
-                progressFill.style.width = progress + '%';
-                const progressBar = progressFill.parentElement;
-                if (progressBar) {
-                    progressBar.setAttribute('aria-valuenow', Math.round(progress));
-                }
-            }
-
-            // Soru metni
-            const questionTextEl = document.getElementById('questionText');
-            if (questionTextEl) {
-                questionTextEl.textContent = question.q;
-            }
-
-            // Seçenekleri göster
-            this.displayOptions(question);
-
-            // Butonları güncelle
-            this.updateButtons();
-        } catch (error) {
-            console.error('Soru gösterme hatası:', error);
-            Utils.showToast('Soru gösterilemedi', 'error');
-        }
-    },
-
-    /**
-     * Seçenekleri gösterir
-     */
-    displayOptions(question) {
-        const optionsList = document.getElementById('optionsList');
-        if (!optionsList) return;
-
-        // ✅ Eski event listener'ları temizle
-        optionsList.innerHTML = '';
-
-        const letters = ['A', 'B', 'C', 'D', 'E'];
-
-        question.o.forEach((option, index) => {
-            const optionDiv = document.createElement('div');
-            optionDiv.className = 'option-item';
-            optionDiv.setAttribute('role', 'radio');
-            optionDiv.setAttribute('aria-checked', 'false');
-            optionDiv.setAttribute('tabindex', '0');
-            
-            // Seçilmiş mi kontrol et
-            const isSelected = this.state.answers[this.state.currentIndex] === index;
-            if (isSelected) {
-                optionDiv.classList.add('selected');
-                optionDiv.setAttribute('aria-checked', 'true');
-            }
-
-            // Review modundaysa doğru/yanlış göster
-            if (this.state.isReviewing) {
-                optionDiv.classList.add('disabled');
-                const correctAnswer = question.a;
-                const isCorrect = option === correctAnswer;
-                const isUserAnswer = isSelected;
-                
-                if (isCorrect) {
-                    optionDiv.classList.add('correct');
-                }
-                
-                if (isUserAnswer && !isCorrect) {
-                    optionDiv.classList.add('incorrect');
-                }
-            }
-
-            optionDiv.innerHTML = `
-                <span class="option-letter">${letters[index]}</span>
-                <span>${Utils.sanitizeHTML(option)}</span>
-            `;
-
-            // ✅ Event listener (memory leak yok)
-            if (!this.state.isReviewing) {
-                const clickHandler = () => this.selectOption(index);
-                const keyHandler = (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        this.selectOption(index);
-                    }
-                };
-                
-                optionDiv.addEventListener('click', clickHandler);
-                optionDiv.addEventListener('keypress', keyHandler);
-            }
-
-            optionsList.appendChild(optionDiv);
-        });
-
-        // Review modunda açıklama göster
-        if (this.state.isReviewing && question.explanation) {
-            const explanationDiv = document.createElement('div');
-            explanationDiv.className = 'question-explanation';
-            explanationDiv.innerHTML = `
-                <div class="explanation-header">
-                    <span class="explanation-icon">💡</span>
-                    <strong>${window.t ? t('quiz.explanation', 'Açıklama') : 'Açıklama'}:</strong>
-                </div>
-                <p>${Utils.sanitizeHTML(question.explanation)}</p>
-            `;
-            optionsList.appendChild(explanationDiv);
-        }
-    },
-
-    /**
-     * Seçenek seçer
-     */
-    selectOption(index) {
-        if (this.state.isReviewing) return;
-
-        try {
-            const question = this.state.questions[this.state.currentIndex];
-            const selectedOption = question.o[index];
-            const correctAnswer = question.a;
-            const isCorrect = selectedOption === correctAnswer;
-
-            // Cevabı kaydet
-            this.state.answers[this.state.currentIndex] = index;
-
-            // Tüm seçenekleri disable et
-            document.querySelectorAll('.option-item').forEach((item, idx) => {
-                item.classList.add('disabled');
-                item.style.pointerEvents = 'none';
-                
-                // Doğru cevabı yeşil yap
-                if (question.o[idx] === correctAnswer) {
-                    item.classList.add('correct');
-                }
-                
-                // Yanlış seçimi kırmızı yap
-                if (idx === index && !isCorrect) {
-                    item.classList.add('incorrect');
-                }
-                
-                if (idx === index) {
-                    item.classList.add('selected');
-                    item.setAttribute('aria-checked', 'true');
-                } else {
-                    item.classList.remove('selected');
-                    item.setAttribute('aria-checked', 'false');
-                }
-            });
-
-            // Açıklamayı göster
-            this.showExplanation(question, isCorrect);
-
-            // State'i kaydet
-            this.saveState();
-        } catch (error) {
-            console.error('Seçenek seçme hatası:', error);
-        }
-    },
-
-    /**
-     * Açıklamayı gösterir
-     */
-    showExplanation(question, isCorrect) {
-        // Eski açıklamayı kaldır
-        const oldExplanation = document.querySelector('.question-explanation');
-        if (oldExplanation) {
-            oldExplanation.remove();
-        }
-
-        // Açıklama yoksa çık
-        if (!question.explanation) return;
-
-        const optionsList = document.getElementById('optionsList');
-        if (!optionsList) return;
-
-        const explanationDiv = document.createElement('div');
-        explanationDiv.className = 'question-explanation';
-        explanationDiv.style.cssText = 'margin-top: 20px; padding: 15px; background: var(--bg-tertiary); border-left: 4px solid var(--info); border-radius: 8px; animation: slideIn 0.3s ease-out;';
-        
-        const statusIcon = isCorrect ? '✅' : '❌';
-        const statusText = isCorrect ? (window.t ? t('quiz.correct', 'Doğru!') : 'Doğru!') : (window.t ? t('quiz.wrong', 'Yanlış!') : 'Yanlış!');
-        const statusColor = isCorrect ? 'var(--success)' : 'var(--danger)';
-        
-        explanationDiv.innerHTML = `
-            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                <span style="font-size: 1.2rem;">${statusIcon}</span>
-                <strong style="color: ${statusColor}; font-size: 1.1rem;">${statusText}</strong>
-            </div>
-            <div style="display: flex; align-items: flex-start; gap: 8px; margin-top: 10px;">
-                <span style="font-size: 1.2rem;">💡</span>
-                <div>
-                    <strong style="color: var(--info);">${window.t ? t('quiz.explanation', 'Açıklama') : 'Açıklama'}:</strong>
-                    <p style="color: var(--text-secondary); line-height: 1.6; margin: 5px 0 0;">${Utils.sanitizeHTML(question.explanation)}</p>
-                </div>
-            </div>
-        `;
-        
-        optionsList.appendChild(explanationDiv);
-    },
-
-    /**
-     * Butonları günceller - TAM HATASIZ
-     */
-    updateButtons() {
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const submitBtn = document.getElementById('submitBtn');
-
-        const isFirstQuestion = this.state.currentIndex === 0;
-        const isLastQuestion = this.state.currentIndex === this.state.questions.length - 1;
-
-        // ÖNCEKİ BUTONU
-        if (prevBtn) {
-            prevBtn.disabled = isFirstQuestion;
-            
-            if (!isFirstQuestion || this.state.isReviewing) {
-                prevBtn.style.display = 'inline-flex';
-                prevBtn.style.opacity = isFirstQuestion ? '0.5' : '1';
-            } else {
-                prevBtn.style.display = 'none';
-            }
-        }
-
-        // SONRAKİ BUTONU
-        if (nextBtn) {
-            if (this.state.isReviewing) {
-                nextBtn.style.display = isLastQuestion ? 'none' : 'inline-flex';
-                const nextText = window.t ? t('quiz.next', 'Sonraki') : 'Sonraki';
-                nextBtn.innerHTML = `${nextText} →`;
-            } else {
-                nextBtn.style.display = isLastQuestion ? 'none' : 'inline-flex';
-            }
-        }
-        
-        // BİTİR BUTONU
-        if (submitBtn) {
-            submitBtn.style.display = isLastQuestion && !this.state.isReviewing ? 'inline-flex' : 'none';
-        }
-
-        // Exit butonunu güncelle
-        this.showExitButton();
-    },
-
-    /**
-     * Sonraki soruya geçer
-     */
-    nextQuestion() {
-        if (this.state.currentIndex < this.state.questions.length - 1) {
-            this.state.currentIndex++;
-            this.displayQuestion();
-            this.saveState();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    },
-
-    /**
-     * Önceki soruya gider
-     */
-    previousQuestion() {
-        if (this.state.currentIndex > 0) {
-            this.state.currentIndex--;
-            this.displayQuestion();
-            this.saveState();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    },
-
-    /**
-     * Testi bitirir
-     */
-    async finishQuiz() {
-        try {
-            const unanswered = this.state.answers.filter(a => a === null).length;
-            
-            if (unanswered > 0) {
-                const confirmMsg = window.t 
-                    ? t('quiz.unansweredConfirm', `${unanswered} soru cevaplanmadı. Testi bitirmek istediğinizden emin misiniz?`)
-                    : `${unanswered} soru cevaplanmadı. Testi bitirmek istediğinizden emin misiniz?`;
-                
-                const confirmed = await Utils.confirm(confirmMsg);
-                if (!confirmed) return;
-            }
-
-            this.stopTimer();
-            const results = this.calculateResults();
-
-            if (window.StorageManager) {
-                StorageManager.saveTestResult(results);
-                StorageManager.clearQuizState();
-            }
-
-            localStorage.removeItem('testify_generated_test');
-            this.showResults(results);
-            
-        } catch (error) {
-            console.error('Quiz bitirme hatası:', error);
-            Utils.showToast('Test bitirilemedi', 'error');
-        }
-    },
-
-    /**
-     * Sonuçları hesaplar
-     */
-    calculateResults() {
-        let correct = 0;
-        let wrong = 0;
-
-        this.state.questions.forEach((question, index) => {
-            const userAnswer = this.state.answers[index];
-            
-            if (userAnswer !== null) {
-                const selectedOption = question.o[userAnswer];
-                if (selectedOption === question.a) {
-                    correct++;
-                } else {
-                    wrong++;
-                }
-            }
-        });
-
-        const unanswered = this.state.questions.length - (correct + wrong);
-        const successRate = this.state.questions.length > 0 
-            ? Math.round((correct / this.state.questions.length) * 100) 
-            : 0;
-
-        return {
-            mode: this.state.currentMode,
-            totalQuestions: this.state.questions.length,
-            correctAnswers: correct,
-            wrongAnswers: wrong,
-            unanswered: unanswered,
-            successRate: successRate,
-            time: this.state.elapsedSeconds,
-            timestamp: Date.now(),
-            testTitle: this.state.testTitle
-        };
-    },
-
-    /**
-     * Sonuçları gösterir
-     */
-    showResults(results) {
-        try {
-            const quizPage = document.getElementById('quizPage');
-            const resultsPage = document.getElementById('resultsPage');
-            
-            if (!quizPage || !resultsPage) {
-                throw new Error('Sonuç sayfası bulunamadı');
-            }
-
-            quizPage.classList.remove('active');
-            resultsPage.classList.add('active');
-
-            const finalScore = document.getElementById('finalScore');
-            const correctAnswers = document.getElementById('correctAnswers');
-            const wrongAnswers = document.getElementById('wrongAnswers');
-            const successPercent = document.getElementById('successPercent');
-            const totalTimeResult = document.getElementById('totalTimeResult');
-
-            if (finalScore) finalScore.textContent = `${results.correctAnswers}/${results.totalQuestions}`;
-            if (correctAnswers) correctAnswers.textContent = results.correctAnswers;
-            if (wrongAnswers) wrongAnswers.textContent = results.wrongAnswers;
-            if (successPercent) successPercent.textContent = results.successRate + '%';
-            if (totalTimeResult) totalTimeResult.textContent = Utils.formatTime(results.time);
-
-            const resultsIcon = document.querySelector('.results-icon');
-            if (resultsIcon) {
-                if (results.successRate >= 90) resultsIcon.textContent = '🏆';
-                else if (results.successRate >= 75) resultsIcon.textContent = '🎉';
-                else if (results.successRate >= 60) resultsIcon.textContent = '👏';
-                else if (results.successRate >= 40) resultsIcon.textContent = '💪';
-                else resultsIcon.textContent = '📚';
-            }
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } catch (error) {
-            console.error('Sonuç gösterme hatası:', error);
-            Utils.showToast('Sonuçlar gösterilemedi', 'error');
-        }
-    },
-
-    /**
-     * Cevapları inceler
-     */
-    reviewAnswers() {
-        try {
-            this.state.isReviewing = true;
-            this.state.currentIndex = 0;
-
-            const resultsPage = document.getElementById('resultsPage');
-            const quizPage = document.getElementById('quizPage');
-            
-            if (!resultsPage || !quizPage) {
-                throw new Error('Quiz sayfası bulunamadı');
-            }
-
-            resultsPage.classList.remove('active');
-            quizPage.classList.add('active');
-
-            this.displayQuestion();
-
+            // Navigation buttons
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
             const submitBtn = document.getElementById('submitBtn');
+            const reviewBtn = document.getElementById('reviewBtn');
+            const newQuizBtn = document.getElementById('newQuizBtn');
+            const exitQuizBtn = document.getElementById('exitQuizBtn');
 
-            if (prevBtn) prevBtn.style.display = 'inline-flex';
-            if (nextBtn) nextBtn.style.display = 'inline-flex';
-            if (submitBtn) submitBtn.style.display = 'none';
-
-            this.showExitButton();
-
-            const reviewMsg = window.t 
-                ? t('quiz.reviewMode', 'İnceleme modu - Açıklamaları okuyabilirsiniz')
-                : 'İnceleme modu - Açıklamaları okuyabilirsiniz';
-            Utils.showToast(reviewMsg, 'info');
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } catch (error) {
-            console.error('İnceleme modu hatası:', error);
-            Utils.showToast('İnceleme modu başlatılamadı', 'error');
-        }
-    },
-
-    /**
-     * Yeni quiz başlatır
-     */
-    newQuiz() {
-        try {
-            this.cleanupPreviousQuiz(); // ✅ Temizlik
-            
-            const resultsPage = document.getElementById('resultsPage');
-            const quizPage = document.getElementById('quizPage');
-            const testSelection = document.getElementById('testSelection');
-            
-            if (resultsPage) resultsPage.classList.remove('active');
-            if (quizPage) quizPage.classList.remove('active');
-            if (testSelection) testSelection.classList.add('active');
-
-            // State'i sıfırla
-            this.state = {
-                currentMode: null,
-                questions: [],
-                currentIndex: 0,
-                answers: [],
-                startTime: null,
-                timerInterval: null,
-                elapsedSeconds: 0,
-                isReviewing: false,
-                testTitle: null,
-                testDescription: null,
-                eventListenersAttached: this.state.eventListenersAttached
-            };
-
-            localStorage.removeItem('testify_generated_test');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } catch (error) {
-            console.error('Yeni quiz başlatma hatası:', error);
-            Utils.showToast('Yeni test başlatılamadı', 'error');
-        }
-    },
-
-    /**
-     * Quiz'den çıkar
-     */
-    async exitQuiz() {
-        if (this.state.isReviewing) {
-            this.newQuiz();
-            return;
-        }
-
-        const confirmMsg = window.t 
-            ? t('quiz.exitConfirm', 'Testi bırakmak istediğine emin misin?\n\nİlerleme kaydedilmeyecek!')
-            : 'Testi bırakmak istediğine emin misin?\n\nİlerleme kaydedilmeyecek!';
-        
-        const confirmed = await Utils.confirm(confirmMsg);
-        if (!confirmed) return;
-
-        try {
-            const answeredCount = this.state.answers.filter(a => a !== null).length;
-            const totalCount = this.state.questions.length;
-
-            this.cleanupPreviousQuiz(); // ✅ Temizlik
-
-            if (window.StorageManager) {
-                StorageManager.clearQuizState();
-            }
-
-            const quizPage = document.getElementById('quizPage');
-            const resultsPage = document.getElementById('resultsPage');
-            const testSelection = document.getElementById('testSelection');
-            
-            if (quizPage) quizPage.classList.remove('active');
-            if (resultsPage) resultsPage.classList.remove('active');
-            if (testSelection) testSelection.classList.add('active');
-
-            this.state = {
-                currentMode: null,
-                questions: [],
-                currentIndex: 0,
-                answers: [],
-                startTime: null,
-                timerInterval: null,
-                elapsedSeconds: 0,
-                isReviewing: false,
-                testTitle: null,
-                testDescription: null,
-                eventListenersAttached: this.state.eventListenersAttached
-            };
-
-            if (answeredCount > 0) {
-                Utils.showToast(
-                    `📋 Test bırakıldı (${answeredCount}/${totalCount} soru cevaplanmıştı)`,
-                    'info',
-                    4000
-                );
-            } else {
-                Utils.showToast('Test iptal edildi', 'info');
-            }
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        } catch (error) {
-            console.error('Quiz çıkış hatası:', error);
-            Utils.showToast('Çıkış yapılamadı', 'error');
-        }
-    },
-
-    /**
-     * ✅ YENİ: Event listener'ları kur (sadece bir kez)
-     */
-    setupEventListeners() {
-        if (this.state.eventListenersAttached) {
-            console.log('⚠️ Event listener\'lar zaten ekli');
-            return;
-        }
-
-        console.log('🔧 Quiz event listener\'lar kuruluyor...');
-        
-        // Test kartları
-        const testOptions = document.querySelector('.test-options');
-        if (testOptions) {
-            const modes = ['practice', 'exam', 'ai', 'custom'];
-            const cards = testOptions.querySelectorAll('.test-option-card');
-            
-            cards.forEach((card, index) => {
-                const mode = modes[index];
-                
-                card.addEventListener('click', (e) => {
+            if (prevBtn) {
+                prevBtn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    e.stopPropagation();
-                    this.startQuiz(mode);
+                    this.previousQuestion();
                 });
-                
-                card.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        this.startQuiz(mode);
-                    }
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.nextQuestion();
                 });
-            });
-        }
-
-        // Navigation buttons
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const submitBtn = document.getElementById('submitBtn');
-        const reviewBtn = document.getElementById('reviewBtn');
-        const newQuizBtn = document.getElementById('newQuizBtn');
-        const exitQuizBtn = document.getElementById('exitQuizBtn');
-
-        if (prevBtn) {
-            prevBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.previousQuestion();
-            });
-        }
-
-        if (nextBtn) {
-            nextBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.nextQuestion();
-            });
-        }
-
-        if (submitBtn) {
-            submitBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.finishQuiz();
-            });
-        }
-
-        if (reviewBtn) {
-            reviewBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.reviewAnswers();
-            });
-        }
-
-        if (newQuizBtn) {
-            newQuizBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.newQuiz();
-            });
-        }
-
-        if (exitQuizBtn) {
-            exitQuizBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.exitQuiz();
-            });
-        }
-
-        this.state.eventListenersAttached = true;
-        console.log('✅ Quiz event listener\'lar kuruldu');
-    }
-};
-
-// ✅ Sadece bir kez event listener kur
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        QuizManager.setupEventListeners();
-    });
-} else {
-    QuizManager.setupEventListeners();
-}
-
-// ✅ Sayfa kapanırken temizlik yap
-window.addEventListener('beforeunload', () => {
-    QuizManager.stopTimer();
-});
-
-// Export
-window.QuizManager = QuizManager;
-
-/**
- * FLOATING TESTFY CHAT WIDGET
- */
-const ChatWidget = {
-    initialized: false,
-    init() {
-        if (this.initialized) return;
-        this.initialized = true;
-
-        const widget = document.getElementById('chatWidget');
-        const toggleBtn = document.getElementById('chatToggleBtn');
-        const closeBtn = document.getElementById('chatCloseBtn');
-        const minimizeBtn = document.getElementById('chatMinimizeBtn');
-
-        if (!widget || !toggleBtn) {
-            console.warn('Chat widget öğeleri bulunamadı');
-            return;
-        }
-
-        const openWidget = () => {
-            widget.classList.add('chat-widget--open');
-            widget.classList.remove('chat-widget--minimized');
-            widget.setAttribute('aria-hidden', 'false');
-            toggleBtn.classList.add('chat-toggle-btn--hidden');
-
-            const input = document.getElementById('aiInput');
-            if (input) {
-                setTimeout(() => input.focus(), 50);
             }
-        };
 
-        const closeWidget = () => {
-            widget.classList.remove('chat-widget--open', 'chat-widget--minimized');
-            widget.setAttribute('aria-hidden', 'true');
-            toggleBtn.classList.remove('chat-toggle-btn--hidden');
-        };
-
-        const toggleMinimize = () => {
-            if (!widget.classList.contains('chat-widget--open')) return;
-            widget.classList.toggle('chat-widget--minimized');
-        };
-
-        toggleBtn.addEventListener('click', openWidget);
-        if (closeBtn) closeBtn.addEventListener('click', closeWidget);
-        if (minimizeBtn) minimizeBtn.addEventListener('click', toggleMinimize);
-
-        // Escape ile kapat
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' && widget.classList.contains('chat-widget--open')) {
-                closeWidget();
+            if (submitBtn) {
+                submitBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.finishQuiz();
+                });
             }
+
+            if (reviewBtn) {
+                reviewBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.reviewAnswers();
+                });
+            }
+
+            if (newQuizBtn) {
+                newQuizBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.newQuiz();
+                });
+            }
+
+            if (exitQuizBtn) {
+                exitQuizBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    this.exitQuiz();
+                });
+            }
+
+            this.state.eventListenersAttached = true;
+            console.log('✅ Quiz event listener\'lar kuruldu');
+        }
+    };
+
+    // ✅ Sadece bir kez event listener kur
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            QuizManager.setupEventListeners();
         });
-
-        console.log('✅ ChatWidget hazır');
+    } else {
+        QuizManager.setupEventListeners();
     }
-};
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        ChatWidget.init();
+    // ✅ Sayfa kapanırken temizlik yap
+    window.addEventListener('beforeunload', () => {
+        QuizManager.stopTimer();
     });
-} else {
-    ChatWidget.init();
-}
+
+    // Export
+    window.QuizManager = QuizManager;
+
+    /**
+     * FLOATING TESTFY CHAT WIDGET
+     */
+    const ChatWidget = {
+        initialized: false,
+        init() {
+            if (this.initialized) return;
+            this.initialized = true;
+
+            const widget = document.getElementById('chatWidget');
+            const toggleBtn = document.getElementById('chatToggleBtn');
+            const closeBtn = document.getElementById('chatCloseBtn');
+            const minimizeBtn = document.getElementById('chatMinimizeBtn');
+
+            if (!widget || !toggleBtn) {
+                console.warn('Chat widget öğeleri bulunamadı');
+                return;
+            }
+
+            const openWidget = () => {
+                widget.classList.add('chat-widget--open');
+                widget.classList.remove('chat-widget--minimized');
+                widget.setAttribute('aria-hidden', 'false');
+                toggleBtn.classList.add('chat-toggle-btn--hidden');
+
+                const input = document.getElementById('aiInput');
+                if (input) {
+                    setTimeout(() => input.focus(), 50);
+                }
+            };
+
+            const closeWidget = () => {
+                widget.classList.remove('chat-widget--open', 'chat-widget--minimized');
+                widget.setAttribute('aria-hidden', 'true');
+                toggleBtn.classList.remove('chat-toggle-btn--hidden');
+            };
+
+            const toggleMinimize = () => {
+                if (!widget.classList.contains('chat-widget--open')) return;
+                widget.classList.toggle('chat-widget--minimized');
+            };
+
+            toggleBtn.addEventListener('click', openWidget);
+            if (closeBtn) closeBtn.addEventListener('click', closeWidget);
+            if (minimizeBtn) minimizeBtn.addEventListener('click', toggleMinimize);
+
+            // Escape ile kapat
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && widget.classList.contains('chat-widget--open')) {
+                    closeWidget();
+                }
+            });
+
+            console.log('✅ ChatWidget hazır');
+        }
+    };
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            ChatWidget.init();
+        });
+    } else {
+        ChatWidget.init();
+    }
     </script>
 </body>
 </html>
-
