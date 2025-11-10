@@ -2474,12 +2474,9 @@
 
     /**
  * FLOATING TESTFY CHAT WIDGET
- * - Pencere sürüklenebilir
- * - Sayfa açılışında otomatik açık
  */
 const ChatWidget = {
     initialized: false,
-
     init() {
         if (this.initialized) return;
         this.initialized = true;
@@ -2495,13 +2492,11 @@ const ChatWidget = {
             return;
         }
 
-        /* --- Aç / Kapat / Küçült --- */
-
+        // Aç / kapa
         const openWidget = () => {
             widget.classList.add('chat-widget--open');
             widget.classList.remove('chat-widget--minimized');
             widget.setAttribute('aria-hidden', 'false');
-            toggleBtn.classList.add('chat-toggle-btn--hidden');
 
             const input = document.getElementById('aiInput');
             if (input) {
@@ -2512,7 +2507,6 @@ const ChatWidget = {
         const closeWidget = () => {
             widget.classList.remove('chat-widget--open', 'chat-widget--minimized');
             widget.setAttribute('aria-hidden', 'true');
-            toggleBtn.classList.remove('chat-toggle-btn--hidden');
         };
 
         const toggleMinimize = () => {
@@ -2520,7 +2514,16 @@ const ChatWidget = {
             widget.classList.toggle('chat-widget--minimized');
         };
 
-        toggleBtn.addEventListener('click', openWidget);
+        const toggleWidget = () => {
+            if (widget.classList.contains('chat-widget--open')) {
+                closeWidget();
+            } else {
+                openWidget();
+            }
+        };
+
+        // Butonlar
+        toggleBtn.addEventListener('click', toggleWidget);
         if (closeBtn) closeBtn.addEventListener('click', closeWidget);
         if (minimizeBtn) minimizeBtn.addEventListener('click', toggleMinimize);
 
@@ -2531,80 +2534,72 @@ const ChatWidget = {
             }
         });
 
-        /* --- SÜRÜKLEME LOJİĞİ --- */
-
+        // === SÜRÜKLEME ===
         let isDragging = false;
         let offsetX = 0;
         let offsetY = 0;
+
+        const startDrag = (event) => {
+            const e = event.touches ? event.touches[0] : event;
+            if (!e) return;
+
+            isDragging = true;
+
+            const rect = widget.getBoundingClientRect();
+            offsetX = e.clientX - rect.left;
+            offsetY = e.clientY - rect.top;
+
+            // Sağ / alt sabitlemeleri bırak, sol / üstten konumla
+            widget.style.left = rect.left + 'px';
+            widget.style.top = rect.top + 'px';
+            widget.style.right = 'auto';
+            widget.style.bottom = 'auto';
+
+            document.body.style.userSelect = 'none';
+        };
 
         const onDrag = (event) => {
             if (!isDragging) return;
 
             const e = event.touches ? event.touches[0] : event;
+            if (!e) return;
+
+            let x = e.clientX - offsetX;
+            let y = e.clientY - offsetY;
+
+            const maxX = window.innerWidth - widget.offsetWidth;
+            const maxY = window.innerHeight - widget.offsetHeight;
+
+            x = Math.max(0, Math.min(maxX, x));
+            y = Math.max(0, Math.min(maxY, y));
+
+            widget.style.left = x + 'px';
+            widget.style.top = y + 'px';
+
             event.preventDefault();
-
-            let left = e.clientX - offsetX;
-            let top = e.clientY - offsetY;
-
-            const maxLeft = window.innerWidth - widget.offsetWidth - 8;
-            const maxTop = window.innerHeight - widget.offsetHeight - 8;
-
-            left = Math.max(8, Math.min(maxLeft, left));
-            top = Math.max(8, Math.min(maxTop, top));
-
-            widget.style.left = `${left}px`;
-            widget.style.top = `${top}px`;
         };
 
-        const endDrag = () => {
+        const stopDrag = () => {
             if (!isDragging) return;
             isDragging = false;
-
-            document.removeEventListener('mousemove', onDrag);
-            document.removeEventListener('mouseup', endDrag);
-            document.removeEventListener('touchmove', onDrag);
-            document.removeEventListener('touchend', endDrag);
-
-            // Animasyonlar geri gelsin
-            widget.style.transition = '';
-        };
-
-        const startDrag = (event) => {
-            // X ve - butonlarının üstünden sürükleme başlatma
-            if (event.target.closest('.chat-header-actions')) return;
-
-            const isLeftClick = event.button === 0 || event.button === undefined;
-            if (!isLeftClick && !event.touches) return;
-
-            const e = event.touches ? event.touches[0] : event;
-            event.preventDefault();
-
-            const rect = widget.getBoundingClientRect();
-            isDragging = true;
-
-            offsetX = e.clientX - rect.left;
-            offsetY = e.clientY - rect.top;
-
-            // Sağ-alttan sabitlemeyi bırak, sol-üstten konumlayalım
-            widget.style.transition = 'none';
-            widget.style.right = 'auto';
-            widget.style.bottom = 'auto';
-
-            document.addEventListener('mousemove', onDrag);
-            document.addEventListener('mouseup', endDrag);
-            document.addEventListener('touchmove', onDrag, { passive: false });
-            document.addEventListener('touchend', endDrag);
+            document.body.style.userSelect = '';
         };
 
         if (header) {
+            header.style.cursor = 'move'; // Başlıktan sürükle
             header.addEventListener('mousedown', startDrag);
             header.addEventListener('touchstart', startDrag, { passive: false });
         }
 
-        console.log('✅ ChatWidget hazır (sürüklenebilir)');
+        document.addEventListener('mousemove', onDrag);
+        document.addEventListener('touchmove', onDrag, { passive: false });
+        document.addEventListener('mouseup', stopDrag);
+        document.addEventListener('touchend', stopDrag);
 
-        /* --- SAYFA AÇILIŞINDA OTOMATİK AÇ --- */
+        // 🔥 Sayfa açıldığında otomatik açık gelsin
         openWidget();
+
+        console.log('✅ ChatWidget hazır');
     }
 };
 
