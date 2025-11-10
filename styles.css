@@ -2820,6 +2820,7 @@ a:hover {
     justify-content:space-between;
     background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(30,64,175,0.95));
     color:#f9fafb;
+    cursor:move; /* 🟢 Sürükleme için */
 }
 .chat-title{
     display:flex;
