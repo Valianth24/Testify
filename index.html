@@ -1144,19 +1144,36 @@ const App = {
     },
 
     /**
-     * Performans metni
+     * Performans metni (TR/EN)
      */
     getPerformanceText(successRate) {
-        if (successRate >= 90) {
-            return '🌟 Mükemmel! Harika bir performans gösteriyorsun. Böyle devam et!';
-        } else if (successRate >= 75) {
-            return '👏 Çok iyi! Başarılı bir performans. Biraz daha çalışarak daha da iyileştirebilirsin.';
-        } else if (successRate >= 60) {
-            return '💪 İyi gidiyorsun! Biraz daha pratik yaparsan hedeflerine ulaşabilirsin.';
-        } else if (successRate >= 40) {
-            return '📚 Daha fazla çalışma gerekiyor. Düzenli pratik yaparak gelişebilirsin.';
+        const lang =
+            window.LanguageManager && LanguageManager.currentLang === 'en' ? 'en' : 'tr';
+
+        if (lang === 'en') {
+            if (successRate >= 90) {
+                return '🌟 Excellent! Your performance is great. Keep it up!';
+            } else if (successRate >= 75) {
+                return '👏 Very good! Strong performance. With a bit more study you can improve even further.';
+            } else if (successRate >= 60) {
+                return '💪 You are doing well! With some more practice you can reach your goals.';
+            } else if (successRate >= 40) {
+                return '📚 You need to study more. Regular practice will help you improve.';
+            } else {
+                return '🎯 It is recommended to review the basics. Keep going step by step!';
+            }
         } else {
-            return '🎯 Temel konuları tekrar etmen önerilir. Yavaş yavaş ilerlemeye devam et!';
+            if (successRate >= 90) {
+                return '🌟 Mükemmel! Harika bir performans gösteriyorsun. Böyle devam et!';
+            } else if (successRate >= 75) {
+                return '👏 Çok iyi! Başarılı bir performans. Biraz daha çalışarak daha da iyileştirebilirsin.';
+            } else if (successRate >= 60) {
+                return '💪 İyi gidiyorsun! Biraz daha pratik yaparsan hedeflerine ulaşabilirsin.';
+            } else if (successRate >= 40) {
+                return '📚 Daha fazla çalışma gerekiyor. Düzenli pratik yaparak gelişebilirsin.';
+            } else {
+                return '🎯 Temel konuları tekrar etmen önerilir. Yavaş yavaş ilerlemeye devam et!';
+            }
         }
     },
 
