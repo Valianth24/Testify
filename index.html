@@ -2473,69 +2473,145 @@
     window.QuizManager = QuizManager;
 
     /**
-     * FLOATING TESTFY CHAT WIDGET
-     */
-    const ChatWidget = {
-        initialized: false,
-        init() {
-            if (this.initialized) return;
-            this.initialized = true;
+ * FLOATING TESTFY CHAT WIDGET
+ * - Pencere sürüklenebilir
+ * - Sayfa açılışında otomatik açık
+ */
+const ChatWidget = {
+    initialized: false,
 
-            const widget = document.getElementById('chatWidget');
-            const toggleBtn = document.getElementById('chatToggleBtn');
-            const closeBtn = document.getElementById('chatCloseBtn');
-            const minimizeBtn = document.getElementById('chatMinimizeBtn');
+    init() {
+        if (this.initialized) return;
+        this.initialized = true;
 
-            if (!widget || !toggleBtn) {
-                console.warn('Chat widget öğeleri bulunamadı');
-                return;
-            }
+        const widget = document.getElementById('chatWidget');
+        const toggleBtn = document.getElementById('chatToggleBtn');
+        const closeBtn = document.getElementById('chatCloseBtn');
+        const minimizeBtn = document.getElementById('chatMinimizeBtn');
+        const header = widget ? widget.querySelector('.chat-header') : null;
 
-            const openWidget = () => {
-                widget.classList.add('chat-widget--open');
-                widget.classList.remove('chat-widget--minimized');
-                widget.setAttribute('aria-hidden', 'false');
-                toggleBtn.classList.add('chat-toggle-btn--hidden');
-
-                const input = document.getElementById('aiInput');
-                if (input) {
-                    setTimeout(() => input.focus(), 50);
-                }
-            };
-
-            const closeWidget = () => {
-                widget.classList.remove('chat-widget--open', 'chat-widget--minimized');
-                widget.setAttribute('aria-hidden', 'true');
-                toggleBtn.classList.remove('chat-toggle-btn--hidden');
-            };
-
-            const toggleMinimize = () => {
-                if (!widget.classList.contains('chat-widget--open')) return;
-                widget.classList.toggle('chat-widget--minimized');
-            };
-
-            toggleBtn.addEventListener('click', openWidget);
-            if (closeBtn) closeBtn.addEventListener('click', closeWidget);
-            if (minimizeBtn) minimizeBtn.addEventListener('click', toggleMinimize);
-
-            // Escape ile kapat
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape' && widget.classList.contains('chat-widget--open')) {
-                    closeWidget();
-                }
-            });
-
-            console.log('✅ ChatWidget hazır');
+        if (!widget || !toggleBtn) {
+            console.warn('Chat widget öğeleri bulunamadı');
+            return;
         }
-    };
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            ChatWidget.init();
+        /* --- Aç / Kapat / Küçült --- */
+
+        const openWidget = () => {
+            widget.classList.add('chat-widget--open');
+            widget.classList.remove('chat-widget--minimized');
+            widget.setAttribute('aria-hidden', 'false');
+            toggleBtn.classList.add('chat-toggle-btn--hidden');
+
+            const input = document.getElementById('aiInput');
+            if (input) {
+                setTimeout(() => input.focus(), 50);
+            }
+        };
+
+        const closeWidget = () => {
+            widget.classList.remove('chat-widget--open', 'chat-widget--minimized');
+            widget.setAttribute('aria-hidden', 'true');
+            toggleBtn.classList.remove('chat-toggle-btn--hidden');
+        };
+
+        const toggleMinimize = () => {
+            if (!widget.classList.contains('chat-widget--open')) return;
+            widget.classList.toggle('chat-widget--minimized');
+        };
+
+        toggleBtn.addEventListener('click', openWidget);
+        if (closeBtn) closeBtn.addEventListener('click', closeWidget);
+        if (minimizeBtn) minimizeBtn.addEventListener('click', toggleMinimize);
+
+        // Escape ile kapat
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && widget.classList.contains('chat-widget--open')) {
+                closeWidget();
+            }
         });
-    } else {
-        ChatWidget.init();
+
+        /* --- SÜRÜKLEME LOJİĞİ --- */
+
+        let isDragging = false;
+        let offsetX = 0;
+        let offsetY = 0;
+
+        const onDrag = (event) => {
+            if (!isDragging) return;
+
+            const e = event.touches ? event.touches[0] : event;
+            event.preventDefault();
+
+            let left = e.clientX - offsetX;
+            let top = e.clientY - offsetY;
+
+            const maxLeft = window.innerWidth - widget.offsetWidth - 8;
+            const maxTop = window.innerHeight - widget.offsetHeight - 8;
+
+            left = Math.max(8, Math.min(maxLeft, left));
+            top = Math.max(8, Math.min(maxTop, top));
+
+            widget.style.left = `${left}px`;
+            widget.style.top = `${top}px`;
+        };
+
+        const endDrag = () => {
+            if (!isDragging) return;
+            isDragging = false;
+
+            document.removeEventListener('mousemove', onDrag);
+            document.removeEventListener('mouseup', endDrag);
+            document.removeEventListener('touchmove', onDrag);
+            document.removeEventListener('touchend', endDrag);
+
+            // Animasyonlar geri gelsin
+            widget.style.transition = '';
+        };
+
+        const startDrag = (event) => {
+            // X ve - butonlarının üstünden sürükleme başlatma
+            if (event.target.closest('.chat-header-actions')) return;
+
+            const isLeftClick = event.button === 0 || event.button === undefined;
+            if (!isLeftClick && !event.touches) return;
+
+            const e = event.touches ? event.touches[0] : event;
+            event.preventDefault();
+
+            const rect = widget.getBoundingClientRect();
+            isDragging = true;
+
+            offsetX = e.clientX - rect.left;
+            offsetY = e.clientY - rect.top;
+
+            // Sağ-alttan sabitlemeyi bırak, sol-üstten konumlayalım
+            widget.style.transition = 'none';
+            widget.style.right = 'auto';
+            widget.style.bottom = 'auto';
+
+            document.addEventListener('mousemove', onDrag);
+            document.addEventListener('mouseup', endDrag);
+            document.addEventListener('touchmove', onDrag, { passive: false });
+            document.addEventListener('touchend', endDrag);
+        };
+
+        if (header) {
+            header.addEventListener('mousedown', startDrag);
+            header.addEventListener('touchstart', startDrag, { passive: false });
+        }
+
+        console.log('✅ ChatWidget hazır (sürüklenebilir)');
+
+        /* --- SAYFA AÇILIŞINDA OTOMATİK AÇ --- */
+        openWidget();
     }
-    </script>
-</body>
-</html>
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        ChatWidget.init();
+    });
+} else {
+    ChatWidget.init();
+}
