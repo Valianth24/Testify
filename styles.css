@@ -2806,6 +2806,15 @@ a:hover {
     transform:translateY(0) scale(1);
 }
 
+/* ✅ Drag sırasında animasyon kapansın ve el imleci olsun */
+.chat-widget.chat-widget--dragging{
+    transition:none !important;
+}
+.chat-widget.chat-widget--dragging .chat-header{
+    cursor:grabbing;
+    cursor:-webkit-grabbing;
+}
+
 /* ✅ Küçültülmüş hâl */
 .chat-widget.chat-widget--minimized .chat-body,
 .chat-widget.chat-widget--minimized .chat-footer{
@@ -2820,7 +2829,7 @@ a:hover {
     justify-content:space-between;
     background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(30,64,175,0.95));
     color:#f9fafb;
-    cursor:move; /* 🟢 Sürükleme için */
+    /* cursor: move; KALDIRILDI – artı imleç olmasın */
 }
 .chat-title{
     display:flex;
@@ -2877,6 +2886,7 @@ a:hover {
     flex:1;
     max-height:40vh;
     overflow-y:auto;
+    scroll-behavior:smooth;
 }
 
 /* Mobil */
