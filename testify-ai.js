@@ -414,7 +414,7 @@ KURALLAR:
                 `• Daha açık bir konu belirt\n` +
                 `• Soru sayısını belirt (10-20 arası)\n` +
                 `• Birkaç saniye bekleyip tekrar dene\n` +
-                `• **"demo test"** yazarak API olmadan dene\n\n` +
+                `• **\"demo test\"** yazarak API olmadan dene\n\n` +
                 `**Örnek doğru format:**\n` +
                 `"Linux temel komutları hakkında 15 soruluk test oluştur"\n\n` +
                 `Tekrar dener misin? 🔄`,
@@ -816,5 +816,152 @@ window.addEventListener('load', () => {
             TestifyAI.sendMessage(e);
         };
         console.log('✅ Yedek çözüm kuruldu');
+    }
+});
+
+/* =========================================================
+   TESTIFY FLOATING CHAT WIDGET – AÇ/KAPA + KÜÇÜLT + SÜRÜKLE
+   (CSS tarafında .chat-widget-wrapper, .chat-widget, 
+    .chat-toggle-btn, .chat-header, .chat-body, .chat-footer 
+    sınıfları zaten tanımlı)
+   ========================================================= */
+
+document.addEventListener('DOMContentLoaded', () => {
+    const widget    = document.querySelector('.chat-widget');
+    const wrapper   = document.querySelector('.chat-widget-wrapper');
+    const toggleBtn = document.querySelector('.chat-toggle-btn');
+
+    if (!widget || !wrapper || !toggleBtn) {
+        // Sayfada widget yoksa sessizce çık
+        return;
+    }
+
+    const header        = widget.querySelector('.chat-header');
+    const headerButtons = widget.querySelectorAll('.chat-header-btn');
+    const chatBody      = widget.querySelector('.chat-body');
+    const chatFooter    = widget.querySelector('.chat-footer');
+
+    const minimizeBtn = headerButtons[0] || null;
+    const closeBtn    = headerButtons[1] || null;
+
+    // ---------- Aç / Kapat / Küçült ----------
+
+    function openWidget() {
+        widget.classList.add('chat-widget--open');
+        widget.classList.remove('chat-widget--minimized');
+        toggleBtn.classList.add('chat-toggle-btn--hidden');
+    }
+
+    function closeWidget() {
+        widget.classList.remove('chat-widget--open', 'chat-widget--minimized');
+        toggleBtn.classList.remove('chat-toggle-btn--hidden');
+    }
+
+    function toggleMinimize() {
+        if (!widget.classList.contains('chat-widget--open')) {
+            openWidget();
+            return;
+        }
+        widget.classList.toggle('chat-widget--minimized');
+    }
+
+    toggleBtn.addEventListener('click', openWidget);
+
+    if (minimizeBtn) {
+        minimizeBtn.addEventListener('click', toggleMinimize);
+    }
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeWidget);
+    }
+
+    // ---------- Sürükleme (drag) ----------
+
+    if (header) {
+        let isDragging = false;
+        let offsetX = 0;
+        let offsetY = 0;
+
+        const startDrag = (clientX, clientY) => {
+            isDragging = true;
+
+            const rect = widget.getBoundingClientRect();
+            offsetX = clientX - rect.left;
+            offsetY = clientY - rect.top;
+
+            widget.classList.add('chat-widget--dragging');
+
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', stopDrag);
+            document.addEventListener('touchmove', onTouchMove, { passive: false });
+            document.addEventListener('touchend', stopDrag);
+        };
+
+        const onMouseDown = (e) => {
+            if (e.button !== 0) return; // sadece sol tık
+            startDrag(e.clientX, e.clientY);
+        };
+
+        const onTouchStart = (e) => {
+            const touch = e.touches[0];
+            if (!touch) return;
+            startDrag(touch.clientX, touch.clientY);
+        };
+
+        const onMouseMove = (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            updatePosition(e.clientX, e.clientY);
+        };
+
+        const onTouchMove = (e) => {
+            if (!isDragging) return;
+            const touch = e.touches[0];
+            if (!touch) return;
+            e.preventDefault();
+            updatePosition(touch.clientX, touch.clientY);
+        };
+
+        const stopDrag = () => {
+            if (!isDragging) return;
+            isDragging = false;
+
+            widget.classList.remove('chat-widget--dragging');
+
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', stopDrag);
+            document.removeEventListener('touchmove', onTouchMove);
+            document.removeEventListener('touchend', stopDrag);
+        };
+
+        const updatePosition = (clientX, clientY) => {
+            const vw = window.innerWidth;
+            const vh = window.innerHeight;
+            const rect = widget.getBoundingClientRect();
+
+            let left = clientX - offsetX;
+            let top  = clientY - offsetY;
+
+            const padding = 8;
+            const maxLeft = vw - rect.width - padding;
+            const maxTop  = vh - rect.height - padding;
+
+            if (left < padding) left = padding;
+            if (top  < padding) top  = padding;
+            if (left > maxLeft) left = maxLeft;
+            if (top  > maxTop)  top  = maxTop;
+
+            widget.style.left   = `${left}px`;
+            widget.style.top    = `${top}px`;
+            widget.style.right  = 'auto';
+            widget.style.bottom = 'auto';
+        };
+
+        header.addEventListener('mousedown', onMouseDown);
+        header.addEventListener('touchstart', onTouchStart, { passive: true });
+    }
+
+    // Chat gövdesi mouse ile doğal kayacak.
+    if (chatBody) {
+        chatBody.style.scrollBehavior = 'smooth';
     }
 });
