@@ -72,10 +72,12 @@
             <div class="header-top">
                 <a href="/" class="logo" aria-label="Testify Ana Sayfa">
                     <span role="img" aria-label="Eğitim ikonu">🎓</span>
-                    <span>Testify</span>
+                    <span data-i18n="app.name">Testify</span>
                 </a>
                 
                 <div class="header-actions">
+                    <!-- Language Selector - Otomatik oluşturulacak -->
+                    
                     <!-- Theme Toggle -->
                     <button 
                         class="theme-toggle" 
@@ -91,11 +93,11 @@
                     <div class="user-stats" role="status" aria-live="polite">
                         <div class="stat-badge" title="Günlük seri">
                             <span role="img" aria-label="Ateş ikonu">🔥</span>
-                            <span id="streak" aria-label="Seri günler">0 Gün</span>
+                            <span id="streak" aria-label="Seri günler">0 <span data-i18n="header.streak">Gün</span></span>
                         </div>
                         <div class="stat-badge" title="Toplam puan">
                             <span role="img" aria-label="Yıldız ikonu">⭐</span>
-                            <span id="totalPoints" aria-label="Toplam XP">0 XP</span>
+                            <span id="totalPoints" aria-label="Toplam XP">0 <span data-i18n="header.points">XP</span></span>
                         </div>
                         <div class="stat-badge" title="Sıralama">
                             <span role="img" aria-label="Kupa ikonu">🏆</span>
@@ -109,28 +111,28 @@
             <!-- Navigation Tabs -->
             <nav class="nav-tabs" role="navigation" aria-label="Ana navigasyon">
                 <button class="nav-tab active" data-tab="dashboard" role="tab" aria-selected="true" aria-controls="dashboard">
-                    <span role="img" aria-hidden="true">📊</span> Dashboard
+                    <span role="img" aria-hidden="true">📊</span> <span data-i18n="nav.dashboard">Dashboard</span>
                 </button>
                 <button class="nav-tab" data-tab="test" role="tab" aria-selected="false" aria-controls="test">
-                    <span role="img" aria-hidden="true">📝</span> Test Çöz
+                    <span role="img" aria-hidden="true">📝</span> <span data-i18n="nav.test">Test Çöz</span>
                 </button>
                 <button class="nav-tab" data-tab="create" role="tab" aria-selected="false" aria-controls="create">
-                    <span role="img" aria-hidden="true">➕</span> Test Oluştur
+                    <span role="img" aria-hidden="true">➕</span> <span data-i18n="nav.create">Test Oluştur</span>
                 </button>
                 <button class="nav-tab" data-tab="library" role="tab" aria-selected="false" aria-controls="library">
-                    <span role="img" aria-hidden="true">📚</span> Kütüphanem
+                    <span role="img" aria-hidden="true">📚</span> <span data-i18n="nav.library">Kütüphanem</span>
                 </button>
                 <button class="nav-tab" data-tab="notes" role="tab" aria-selected="false" aria-controls="notes">
-                    <span role="img" aria-hidden="true">📝</span> Notlarım
+                    <span role="img" aria-hidden="true">📝</span> <span data-i18n="nav.notes">Notlarım</span>
                 </button>
                 <button class="nav-tab" data-tab="leaderboard" role="tab" aria-selected="false" aria-controls="leaderboard">
-                    <span role="img" aria-hidden="true">🏆</span> Liderlik
+                    <span role="img" aria-hidden="true">🏆</span> <span data-i18n="nav.leaderboard">Liderlik</span>
                 </button>
                 <button class="nav-tab" data-tab="analysis" role="tab" aria-selected="false" aria-controls="analysis">
-                    <span role="img" aria-hidden="true">📈</span> Analizler
+                    <span role="img" aria-hidden="true">📈</span> <span data-i18n="nav.analysis">Analizler</span>
                 </button>
                 <button class="nav-tab" data-tab="settings" role="tab" aria-selected="false" aria-controls="settings">
-                    <span role="img" aria-hidden="true">⚙️</span> Ayarlar
+                    <span role="img" aria-hidden="true">⚙️</span> <span data-i18n="nav.settings">Ayarlar</span>
                 </button>
             </nav>
         </div>
@@ -150,11 +152,11 @@
             <div class="ai-header">
                 <h2 class="ai-title">
                     <span role="img" aria-label="Robot ikonu">🤖</span>
-                    <span>Testify AI</span>
+                    <span data-i18n="ai.title">Testify AI</span>
                 </h2>
                 <div class="ai-status" role="status" aria-live="polite">
                     <span class="status-dot" aria-hidden="true"></span>
-                    <span>Çevrimiçi</span>
+                    <span data-i18n="ai.status">Çevrimiçi</span>
                 </div>
             </div>
             
@@ -169,6 +171,7 @@
                         type="text" 
                         class="ai-input" 
                         id="aiInput" 
+                        data-i18n-placeholder="ai.placeholder"
                         placeholder="Testify AI'ya sor..." 
                         maxlength="500"
                         aria-label="Mesaj giriş alanı"
@@ -177,7 +180,8 @@
                         type="button" 
                         class="ai-send-btn" 
                         id="aiSendBtn"
-                        aria-label="Mesaj gönder">→</button>
+                        aria-label="Mesaj gönder"
+                        data-i18n="ai.send">→</button>
                 </div>
             </div>
         </aside>
@@ -186,38 +190,38 @@
         <main class="main-content" id="main-content" role="main">
             <!-- Dashboard Tab -->
             <section class="tab-content active" id="dashboard" role="tabpanel" aria-labelledby="tab-dashboard">
-                <h1>Dashboard</h1>
+                <h1 data-i18n="dashboard.title">Dashboard</h1>
                 
                 <div class="stats-grid" role="region" aria-label="İstatistikler">
                     <article class="stat-card">
                         <div class="stat-icon" aria-hidden="true">📝</div>
                         <div class="stat-value" id="totalTests" aria-label="Çözülen test sayısı">0</div>
-                        <div class="stat-label">Çözülen Test</div>
+                        <div class="stat-label" data-i18n="dashboard.tests">Çözülen Test</div>
                     </article>
                     <article class="stat-card">
                         <div class="stat-icon" aria-hidden="true">✅</div>
                         <div class="stat-value" id="successRate" aria-label="Başarı oranı">0%</div>
-                        <div class="stat-label">Başarı Oranı</div>
+                        <div class="stat-label" data-i18n="dashboard.success">Başarı Oranı</div>
                     </article>
                     <article class="stat-card">
                         <div class="stat-icon" aria-hidden="true">🎯</div>
                         <div class="stat-value" id="totalQuestions" aria-label="Toplam soru sayısı">0</div>
-                        <div class="stat-label">Toplam Soru</div>
+                        <div class="stat-label" data-i18n="dashboard.questions">Toplam Soru</div>
                     </article>
                     <article class="stat-card">
                         <div class="stat-icon" aria-hidden="true">⏱️</div>
                         <div class="stat-value" id="avgTime" aria-label="Ortalama süre">0s</div>
-                        <div class="stat-label">Ort. Süre</div>
+                        <div class="stat-label" data-i18n="dashboard.avgTime">Ort. Süre</div>
                     </article>
                 </div>
 
                 <!-- Recent Activity -->
                 <section class="recent-activity" aria-labelledby="recent-activity-title">
-                    <h2 id="recent-activity-title">Son Aktiviteler</h2>
+                    <h2 id="recent-activity-title" data-i18n="dashboard.activity">Son Aktiviteler</h2>
                     <div id="activityList" class="activity-list">
                         <div class="empty-state">
                             <div class="empty-state-icon" aria-hidden="true">📊</div>
-                            <p>Henüz aktivite yok. Test çözerek başla!</p>
+                            <p data-i18n="dashboard.empty">Henüz aktivite yok. Test çözerek başla!</p>
                         </div>
                     </div>
                 </section>
@@ -235,51 +239,51 @@
                 <!-- Test Selection Page -->
                 <div class="test-page active" id="testSelection">
                     <div class="test-selection">
-                        <h1>Test Seç</h1>
+                        <h1 data-i18n="test.title">Test Seç</h1>
                         <div class="test-options" role="group" aria-label="Test modu seçenekleri">
                             <article class="test-option-card" tabindex="0" role="button" aria-label="Pratik modu">
                                 <div class="test-option-icon" aria-hidden="true">📖</div>
-                                <h3 class="test-option-title">Pratik Modu</h3>
-                                <p class="test-option-desc">Zaman baskısı olmadan pratik yap</p>
+                                <h3 class="test-option-title" data-i18n="test.practice">Pratik Modu</h3>
+                                <p class="test-option-desc" data-i18n="test.practiceDesc">Zaman baskısı olmadan pratik yap</p>
                             </article>
                             <article class="test-option-card" tabindex="0" role="button" aria-label="Sınav modu">
                                 <div class="test-option-icon" aria-hidden="true">⏱️</div>
-                                <h3 class="test-option-title">Sınav Modu</h3>
-                                <p class="test-option-desc">Gerçek sınav deneyimi</p>
+                                <h3 class="test-option-title" data-i18n="test.exam">Sınav Modu</h3>
+                                <p class="test-option-desc" data-i18n="test.examDesc">Gerçek sınav deneyimi</p>
                             </article>
                             <article class="test-option-card" tabindex="0" role="button" aria-label="AI test">
                                 <div class="test-option-icon" aria-hidden="true">🤖</div>
-                                <h3 class="test-option-title">AI Test</h3>
-                                <p class="test-option-desc">AI tarafından oluşturulan sorular</p>
+                                <h3 class="test-option-title" data-i18n="test.ai">AI Test</h3>
+                                <p class="test-option-desc" data-i18n="test.aiDesc">AI tarafından oluşturulan sorular</p>
                             </article>
                             <article class="test-option-card" tabindex="0" role="button" aria-label="Özel test">
                                 <div class="test-option-icon" aria-hidden="true">⚙️</div>
-                                <h3 class="test-option-title">Özel Test</h3>
-                                <p class="test-option-desc">Kendi kriterlerine göre</p>
+                                <h3 class="test-option-title" data-i18n="test.custom">Özel Test</h3>
+                                <p class="test-option-desc" data-i18n="test.customDesc">Kendi kriterlerine göre</p>
                             </article>
                         </div>
                     </div>
                 </div>
 
-                <!-- Quiz Page - ✅ EXIT BUTTON EKLENDİ -->
+                <!-- Quiz Page -->
                 <div class="test-page" id="quizPage" aria-live="polite">
                     <div class="quiz-container">
                         <!-- HEADER - EXIT BUTONU İLE -->
                         <div class="quiz-header">
                             <div class="quiz-info">
-                                <span>Soru <span id="currentQuestion">1</span> / <span id="totalQuestionsQuiz">10</span></span>
+                                <span><span data-i18n="quiz.question">Soru</span> <span id="currentQuestion">1</span> <span data-i18n="quiz.of">/</span> <span id="totalQuestionsQuiz">10</span></span>
                             </div>
                             <div class="quiz-info">
                                 <span role="img" aria-label="Süre">⏱️</span> 
                                 <time id="quizTimer">00:00</time>
                             </div>
-                            <!-- ✅ YENİ: ÇIKIŞ BUTONU -->
+                            <!-- EXIT BUTTON -->
                             <button 
                                 class="btn-exit-quiz" 
                                 id="exitQuizBtn"
                                 aria-label="Testi bırak ve çık"
-                                title="Testi bırak">
-                                ❌ Çıkış
+                                data-i18n-title="quiz.exit">
+                                ❌ <span data-i18n="quiz.exit">Çıkış</span>
                             </button>
                         </div>
 
@@ -299,12 +303,12 @@
 
                         <nav class="quiz-actions" aria-label="Test navigasyonu">
                             <button class="btn btn-secondary" id="prevBtn" aria-label="Önceki soru" style="display:none">
-                                ← Önceki
+                                ← <span data-i18n="quiz.prev">Önceki</span>
                             </button>
                             <button class="btn btn-primary" id="nextBtn" aria-label="Sonraki soru">
-                                Sonraki →
+                                <span data-i18n="quiz.next">Sonraki</span> →
                             </button>
-                            <button class="btn btn-primary" id="submitBtn" style="display:none" aria-label="Testi bitir">
+                            <button class="btn btn-primary" id="submitBtn" style="display:none" aria-label="Testi bitir" data-i18n="quiz.finish">
                                 Testi Bitir
                             </button>
                         </nav>
@@ -315,33 +319,33 @@
                 <div class="test-page" id="resultsPage">
                     <article class="results-container">
                         <div class="results-icon" aria-hidden="true">🏆</div>
-                        <h1 class="results-title">Test Tamamlandı!</h1>
+                        <h1 class="results-title" data-i18n="results.title">Test Tamamlandı!</h1>
                         <div class="results-score" id="finalScore" role="status" aria-live="polite">8/10</div>
                         
                         <div class="results-stats" role="region" aria-label="Test sonuçları">
                             <div class="result-stat">
                                 <div class="result-value success-color" id="correctAnswers">8</div>
-                                <div class="result-label">Doğru</div>
+                                <div class="result-label" data-i18n="results.correct">Doğru</div>
                             </div>
                             <div class="result-stat">
                                 <div class="result-value danger-color" id="wrongAnswers">2</div>
-                                <div class="result-label">Yanlış</div>
+                                <div class="result-label" data-i18n="results.wrong">Yanlış</div>
                             </div>
                             <div class="result-stat">
                                 <div class="result-value primary-color" id="successPercent">80%</div>
-                                <div class="result-label">Başarı</div>
+                                <div class="result-label" data-i18n="results.success">Başarı</div>
                             </div>
                             <div class="result-stat">
                                 <time class="result-value" id="totalTimeResult">00:00</time>
-                                <div class="result-label">Süre</div>
+                                <div class="result-label" data-i18n="results.time">Süre</div>
                             </div>
                         </div>
 
                         <nav class="quiz-actions" aria-label="Sonuç sayfası aksiyonları">
-                            <button class="btn btn-secondary" id="reviewBtn" aria-label="Cevapları incele">
+                            <button class="btn btn-secondary" id="reviewBtn" aria-label="Cevapları incele" data-i18n="results.review">
                                 Cevapları Gör
                             </button>
-                            <button class="btn btn-primary" id="newQuizBtn" aria-label="Yeni test başlat">
+                            <button class="btn btn-primary" id="newQuizBtn" aria-label="Yeni test başlat" data-i18n="results.newTest">
                                 Yeni Test
                             </button>
                         </nav>
@@ -351,15 +355,16 @@
 
             <!-- Create Test Tab -->
             <section class="tab-content" id="create" role="tabpanel" aria-labelledby="tab-create">
-                <h1>Test Oluştur</h1>
+                <h1 data-i18n="create.title">Test Oluştur</h1>
                 
                 <form class="create-test-form" id="createTestForm" aria-label="Test oluşturma formu">
                     <div class="form-group">
-                        <label for="testTitle">Test Başlığı <span class="required">*</span></label>
+                        <label for="testTitle"><span data-i18n="create.testTitle">Test Başlığı</span> <span class="required">*</span></label>
                         <input 
                             type="text" 
                             id="testTitle" 
                             name="testTitle"
+                            data-i18n-placeholder="create.testTitlePlaceholder"
                             placeholder="Örn: Matematik Final Sınavı" 
                             required
                             maxlength="100"
@@ -368,19 +373,19 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="testCategory">Kategori <span class="required">*</span></label>
+                        <label for="testCategory"><span data-i18n="create.category">Kategori</span> <span class="required">*</span></label>
                         <select id="testCategory" name="testCategory" required aria-required="true">
-                            <option value="">Seçiniz...</option>
-                            <option value="matematik">Matematik</option>
-                            <option value="fen">Fen Bilimleri</option>
-                            <option value="turkce">Türkçe</option>
-                            <option value="sosyal">Sosyal Bilgiler</option>
-                            <option value="ingilizce">İngilizce</option>
+                            <option value="" data-i18n="create.selectCategory">Seçiniz...</option>
+                            <option value="matematik" data-i18n="category.matematik">Matematik</option>
+                            <option value="fen" data-i18n="category.fen">Fen Bilimleri</option>
+                            <option value="turkce" data-i18n="category.turkce">Türkçe</option>
+                            <option value="sosyal" data-i18n="category.sosyal">Sosyal Bilgiler</option>
+                            <option value="ingilizce" data-i18n="category.ingilizce">İngilizce</option>
                         </select>
                     </div>
                     
                     <div class="form-group">
-                        <label for="fileUpload">Dosya Yükle</label>
+                        <label for="fileUpload" data-i18n="create.upload">Dosya Yükle</label>
                         <div class="file-upload-area" id="fileUploadArea">
                             <input 
                                 type="file" 
@@ -390,15 +395,15 @@
                                 aria-label="Dosya seç">
                             <div class="file-upload-content">
                                 <div class="file-icon" aria-hidden="true">📁</div>
-                                <p>PDF, DOCX veya TXT dosyası yükle</p>
-                                <p class="file-hint">veya sürükle bırak</p>
+                                <p data-i18n="create.uploadDesc">PDF, DOCX veya TXT dosyası yükle</p>
+                                <p class="file-hint" data-i18n="create.uploadHint">veya sürükle bırak</p>
                             </div>
                         </div>
                         <div id="fileInfo" class="file-info" role="status"></div>
                     </div>
                     
                     <button type="submit" class="btn btn-primary btn-large">
-                        <span role="img" aria-hidden="true">🤖</span> Testify AI ile Oluştur
+                        <span role="img" aria-hidden="true">🤖</span> <span data-i18n="create.submit">Testify AI ile Oluştur</span>
                     </button>
                 </form>
             </section>
@@ -406,16 +411,16 @@
             <!-- Library Tab -->
             <section class="tab-content" id="library" role="tabpanel" aria-labelledby="tab-library">
                 <div class="library-header">
-                    <h1>📚 Kütüphanem</h1>
-                    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-xl);">
+                    <h1>📚 <span data-i18n="library.title">Kütüphanem</span></h1>
+                    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-xl);" data-i18n="library.desc">
                         AI ile oluşturduğun testler burada saklanır (24 saat)
                     </p>
                 </div>
                 <div id="libraryList" class="library-list">
                     <div class="empty-state">
                         <div class="empty-state-icon" aria-hidden="true">📚</div>
-                        <p>Henüz test oluşturmadın</p>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;">
+                        <p data-i18n="library.empty">Henüz test oluşturmadın</p>
+                        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-i18n="library.emptyDesc">
                             AI'dan "test oluştur" diyerek başla!
                         </p>
                     </div>
@@ -425,15 +430,15 @@
             <!-- Notes Tab -->
             <section class="tab-content" id="notes" role="tabpanel" aria-labelledby="tab-notes">
                 <div class="notes-header">
-                    <h1>Notlarım</h1>
+                    <h1 data-i18n="notes.title">Notlarım</h1>
                     <button class="btn btn-primary" id="addNoteBtn" aria-label="Yeni not ekle">
-                        <span aria-hidden="true">+</span> Yeni Not
+                        <span aria-hidden="true">+</span> <span data-i18n="notes.add">Yeni Not</span>
                     </button>
                 </div>
                 <div id="notesList" class="notes-list">
                     <div class="empty-state">
                         <div class="empty-state-icon" aria-hidden="true">📝</div>
-                        <p>Henüz not eklemedin</p>
+                        <p data-i18n="notes.empty">Henüz not eklemedin</p>
                     </div>
                 </div>
             </section>
@@ -442,24 +447,24 @@
             <section class="tab-content" id="leaderboard" role="tabpanel" aria-labelledby="tab-leaderboard">
                 <article class="leaderboard-container">
                     <header class="leaderboard-header">
-                        <h1>🏆 Liderlik Tablosu</h1>
-                        <p>Haftalık Sıralama</p>
+                        <h1>🏆 <span data-i18n="leaderboard.title">Liderlik Tablosu</span></h1>
+                        <p data-i18n="leaderboard.period">Haftalık Sıralama</p>
                     </header>
                     
                     <div class="table-responsive">
                         <table class="leaderboard-table" role="table" aria-label="Liderlik tablosu">
                             <thead>
                                 <tr>
-                                    <th scope="col">Sıra</th>
-                                    <th scope="col">Kullanıcı</th>
-                                    <th scope="col">XP</th>
-                                    <th scope="col">Test</th>
-                                    <th scope="col">Başarı</th>
+                                    <th scope="col" data-i18n="leaderboard.rank">Sıra</th>
+                                    <th scope="col" data-i18n="leaderboard.user">Kullanıcı</th>
+                                    <th scope="col" data-i18n="leaderboard.xp">XP</th>
+                                    <th scope="col" data-i18n="leaderboard.tests">Test</th>
+                                    <th scope="col" data-i18n="leaderboard.success">Başarı</th>
                                 </tr>
                             </thead>
                             <tbody id="leaderboardBody">
                                 <tr>
-                                    <td colspan="5" class="empty-cell">
+                                    <td colspan="5" class="empty-cell" data-i18n="leaderboard.empty">
                                         Henüz veri bulunmuyor
                                     </td>
                                 </tr>
@@ -478,22 +483,22 @@
 
             <!-- Analysis Tab -->
             <section class="tab-content" id="analysis" role="tabpanel" aria-labelledby="tab-analysis">
-                <h1>Performans Analizi</h1>
+                <h1 data-i18n="analysis.title">Performans Analizi</h1>
                 <div id="analysisContent">
                     <div class="empty-state">
                         <div class="empty-state-icon" aria-hidden="true">📈</div>
-                        <p>Analiz için daha fazla test çöz</p>
+                        <p data-i18n="analysis.empty">Analiz için daha fazla test çöz</p>
                     </div>
                 </div>
             </section>
 
             <!-- Settings Tab -->
             <section class="tab-content" id="settings" role="tabpanel" aria-labelledby="tab-settings">
-                <h1>Ayarlar</h1>
+                <h1 data-i18n="settings.title">Ayarlar</h1>
                 
                 <form class="settings-form" id="settingsForm" aria-label="Ayarlar formu">
                     <div class="form-group">
-                        <label for="username">Kullanıcı Adı <span class="required">*</span></label>
+                        <label for="username"><span data-i18n="settings.username">Kullanıcı Adı</span> <span class="required">*</span></label>
                         <input 
                             type="text" 
                             id="username" 
@@ -507,7 +512,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="email">E-posta <span class="required">*</span></label>
+                        <label for="email"><span data-i18n="settings.email">E-posta</span> <span class="required">*</span></label>
                         <input 
                             type="email" 
                             id="email" 
@@ -519,22 +524,22 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="notifications">Bildirimler</label>
+                        <label for="notifications" data-i18n="settings.notifications">Bildirimler</label>
                         <div class="checkbox-group">
                             <label class="checkbox-label">
                                 <input type="checkbox" id="emailNotif" name="emailNotif" checked>
-                                <span>E-posta bildirimleri</span>
+                                <span data-i18n="settings.emailNotif">E-posta bildirimleri</span>
                             </label>
                             <label class="checkbox-label">
                                 <input type="checkbox" id="pushNotif" name="pushNotif">
-                                <span>Push bildirimleri</span>
+                                <span data-i18n="settings.pushNotif">Push bildirimleri</span>
                             </label>
                         </div>
                     </div>
                     
                     <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">Kaydet</button>
-                        <button type="button" class="btn btn-secondary" id="resetBtn">Sıfırla</button>
+                        <button type="submit" class="btn btn-primary" data-i18n="settings.save">Kaydet</button>
+                        <button type="button" class="btn btn-secondary" id="resetBtn" data-i18n="settings.reset">Sıfırla</button>
                     </div>
                 </form>
             </section>
@@ -551,7 +556,7 @@
     <!-- Loading Overlay -->
     <div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
         <div class="loading-spinner" role="status">
-            <span class="sr-only">Yükleniyor...</span>
+            <span class="sr-only" data-i18n="msg.loading">Yükleniyor...</span>
         </div>
     </div>
 
@@ -563,6 +568,7 @@
     <script src="config.js"></script>
     <script src="storage.js"></script>
     <script src="sorular.js"></script>
+    <script src="language.js"></script>
     <script src="testify-ai.js"></script>
     <script src="library.js"></script>
     <script src="quiz.js"></script>
