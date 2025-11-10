@@ -62,8 +62,26 @@
     }
     </script>
 
-    <!-- Floating Testfy Assistant Styles -->
+    <!-- Floating Testfy Assistant Styles (YENİ) -->
     <style>
+        /* AI mesaj içi formatlama */
+        .message-content strong {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .message-content code {
+            background: var(--bg-tertiary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        [data-theme="dark"] .message-content code {
+            background: var(--bg-secondary);
+            color: var(--primary-light);
+        }
+
+        /* === Testfy Floating Chat Widget === */
         .chat-widget-wrapper{
             position:fixed;
             right:1.5rem;
@@ -114,12 +132,12 @@
         .chat-toggle-text{
             letter-spacing:0.02em;
         }
+
         .chat-widget{
             position:fixed;
             right:1.5rem;
             bottom:5rem;
-            width:360px;
-            max-width:calc(100vw - 2rem);
+            width:min(420px,100vw - 2rem);
             max-height:70vh;
             display:flex;
             flex-direction:column;
@@ -130,17 +148,19 @@
             border:1px solid rgba(148,163,184,0.6);
             overflow:hidden;
             opacity:0;
+            visibility:hidden;
             pointer-events:none;
             transform:translateY(12px) scale(0.98);
-            transition:opacity .18s ease,transform .18s ease;
+            transition:opacity .2s ease,transform .2s ease,visibility .2s ease;
         }
-        .chat-widget--open{
+        .chat-widget.chat-widget--open{
             opacity:1;
+            visibility:visible;
             pointer-events:auto;
             transform:translateY(0) scale(1);
         }
-        .chat-widget--minimized .chat-body,
-        .chat-widget--minimized .chat-footer{
+        .chat-widget.chat-widget--minimized .chat-body,
+        .chat-widget.chat-widget--minimized .chat-footer{
             display:none;
         }
         .chat-header{
@@ -150,6 +170,7 @@
             justify-content:space-between;
             background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(30,64,175,0.95));
             color:#f9fafb;
+            cursor:move;
         }
         .chat-title{
             display:flex;
@@ -201,7 +222,9 @@
             background:var(--bg-tertiary,rgba(15,23,42,0.9));
         }
         .ai-chat{
+            flex:1;
             max-height:40vh;
+            overflow-y:auto;
         }
         @media (max-width:768px){
             .chat-widget-wrapper{
@@ -752,6 +775,13 @@
      */
 
     'use strict';
+
+    // i18n fallback: language.js yüklenmese bile t() hata vermesin
+    if (typeof window.t !== 'function') {
+        window.t = function (_key, fallback) {
+            return fallback;
+        };
+    }
 
     const App = {
         /**
@@ -2473,140 +2503,147 @@
     window.QuizManager = QuizManager;
 
     /**
- * FLOATING TESTFY CHAT WIDGET
- */
-const ChatWidget = {
-    initialized: false,
-    init() {
-        if (this.initialized) return;
-        this.initialized = true;
+     * FLOATING TESTFY CHAT WIDGET (YENİ)
+     * - Sayfa açıldığında açık
+     * - Başlıktan sürüklenebilir
+     * - Alttaki "Testfy" butonuna tıklayınca aç / kapa
+     */
+    const ChatWidget = {
+        initialized: false,
 
-        const widget = document.getElementById('chatWidget');
-        const toggleBtn = document.getElementById('chatToggleBtn');
-        const closeBtn = document.getElementById('chatCloseBtn');
-        const minimizeBtn = document.getElementById('chatMinimizeBtn');
-        const header = widget ? widget.querySelector('.chat-header') : null;
+        init() {
+            if (this.initialized) return;
+            this.initialized = true;
 
-        if (!widget || !toggleBtn) {
-            console.warn('Chat widget öğeleri bulunamadı');
-            return;
+            const widget      = document.getElementById('chatWidget');
+            const toggleBtn   = document.getElementById('chatToggleBtn');
+            const closeBtn    = document.getElementById('chatCloseBtn');
+            const minimizeBtn = document.getElementById('chatMinimizeBtn');
+            const header      = widget ? widget.querySelector('.chat-header') : null;
+
+            if (!widget || !toggleBtn) {
+                console.warn('Chat widget öğeleri bulunamadı');
+                return;
+            }
+
+            // --- Aç / Kapa / Minimize ---
+            const openWidget = () => {
+                widget.classList.add('chat-widget--open');
+                widget.classList.remove('chat-widget--minimized');
+                widget.setAttribute('aria-hidden', 'false');
+
+                const input = document.getElementById('aiInput');
+                if (input) {
+                    setTimeout(() => input.focus(), 50);
+                }
+            };
+
+            const closeWidget = () => {
+                widget.classList.remove('chat-widget--open', 'chat-widget--minimized');
+                widget.setAttribute('aria-hidden', 'true');
+            };
+
+            const toggleMinimize = () => {
+                if (!widget.classList.contains('chat-widget--open')) return;
+                widget.classList.toggle('chat-widget--minimized');
+            };
+
+            const toggleWidget = () => {
+                if (widget.classList.contains('chat-widget--open')) {
+                    closeWidget();
+                } else {
+                    openWidget();
+                }
+            };
+
+            // Butonlar
+            toggleBtn.addEventListener('click', toggleWidget);
+            if (closeBtn)    closeBtn.addEventListener('click', closeWidget);
+            if (minimizeBtn) minimizeBtn.addEventListener('click', toggleMinimize);
+
+            // ESC ile kapat
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && widget.classList.contains('chat-widget--open')) {
+                    closeWidget();
+                }
+            });
+
+            // --- SÜRÜKLEME ---
+            let isDragging = false;
+            let offsetX = 0;
+            let offsetY = 0;
+
+            const startDrag = (event) => {
+                const e = event.touches ? event.touches[0] : event;
+                if (!e) return;
+
+                isDragging = true;
+
+                const rect = widget.getBoundingClientRect();
+                offsetX = e.clientX - rect.left;
+                offsetY = e.clientY - rect.top;
+
+                // Sağ / alt sabitlemeyi bırak, sol / üstten konumla
+                widget.style.left   = rect.left + 'px';
+                widget.style.top    = rect.top + 'px';
+                widget.style.right  = 'auto';
+                widget.style.bottom = 'auto';
+
+                document.body.style.userSelect = 'none';
+            };
+
+            const onDrag = (event) => {
+                if (!isDragging) return;
+
+                const e = event.touches ? event.touches[0] : event;
+                if (!e) return;
+
+                let x = e.clientX - offsetX;
+                let y = e.clientY - offsetY;
+
+                const maxX = window.innerWidth  - widget.offsetWidth;
+                const maxY = window.innerHeight - widget.offsetHeight;
+
+                x = Math.max(0, maxX > 0 ? Math.min(maxX, x) : 0);
+                y = Math.max(0, maxY > 0 ? Math.min(maxY, y) : 0);
+
+                widget.style.left = x + 'px';
+                widget.style.top  = y + 'px';
+
+                event.preventDefault();
+            };
+
+            const stopDrag = () => {
+                if (!isDragging) return;
+                isDragging = false;
+                document.body.style.userSelect = '';
+            };
+
+            if (header) {
+                header.style.cursor = 'move';
+                header.addEventListener('mousedown', startDrag);
+                header.addEventListener('touchstart', startDrag, { passive: false });
+            }
+
+            document.addEventListener('mousemove', onDrag);
+            document.addEventListener('touchmove', onDrag, { passive: false });
+            document.addEventListener('mouseup', stopDrag);
+            document.addEventListener('touchend', stopDrag);
+
+            // Sayfa açıldığında otomatik açık gelsin
+            openWidget();
+
+            console.log('✅ ChatWidget hazır');
         }
+    };
 
-        // Aç / kapa
-        const openWidget = () => {
-            widget.classList.add('chat-widget--open');
-            widget.classList.remove('chat-widget--minimized');
-            widget.setAttribute('aria-hidden', 'false');
-
-            const input = document.getElementById('aiInput');
-            if (input) {
-                setTimeout(() => input.focus(), 50);
-            }
-        };
-
-        const closeWidget = () => {
-            widget.classList.remove('chat-widget--open', 'chat-widget--minimized');
-            widget.setAttribute('aria-hidden', 'true');
-        };
-
-        const toggleMinimize = () => {
-            if (!widget.classList.contains('chat-widget--open')) return;
-            widget.classList.toggle('chat-widget--minimized');
-        };
-
-        const toggleWidget = () => {
-            if (widget.classList.contains('chat-widget--open')) {
-                closeWidget();
-            } else {
-                openWidget();
-            }
-        };
-
-        // Butonlar
-        toggleBtn.addEventListener('click', toggleWidget);
-        if (closeBtn) closeBtn.addEventListener('click', closeWidget);
-        if (minimizeBtn) minimizeBtn.addEventListener('click', toggleMinimize);
-
-        // Escape ile kapat
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' && widget.classList.contains('chat-widget--open')) {
-                closeWidget();
-            }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            ChatWidget.init();
         });
-
-        // === SÜRÜKLEME ===
-        let isDragging = false;
-        let offsetX = 0;
-        let offsetY = 0;
-
-        const startDrag = (event) => {
-            const e = event.touches ? event.touches[0] : event;
-            if (!e) return;
-
-            isDragging = true;
-
-            const rect = widget.getBoundingClientRect();
-            offsetX = e.clientX - rect.left;
-            offsetY = e.clientY - rect.top;
-
-            // Sağ / alt sabitlemeleri bırak, sol / üstten konumla
-            widget.style.left = rect.left + 'px';
-            widget.style.top = rect.top + 'px';
-            widget.style.right = 'auto';
-            widget.style.bottom = 'auto';
-
-            document.body.style.userSelect = 'none';
-        };
-
-        const onDrag = (event) => {
-            if (!isDragging) return;
-
-            const e = event.touches ? event.touches[0] : event;
-            if (!e) return;
-
-            let x = e.clientX - offsetX;
-            let y = e.clientY - offsetY;
-
-            const maxX = window.innerWidth - widget.offsetWidth;
-            const maxY = window.innerHeight - widget.offsetHeight;
-
-            x = Math.max(0, Math.min(maxX, x));
-            y = Math.max(0, Math.min(maxY, y));
-
-            widget.style.left = x + 'px';
-            widget.style.top = y + 'px';
-
-            event.preventDefault();
-        };
-
-        const stopDrag = () => {
-            if (!isDragging) return;
-            isDragging = false;
-            document.body.style.userSelect = '';
-        };
-
-        if (header) {
-            header.style.cursor = 'move'; // Başlıktan sürükle
-            header.addEventListener('mousedown', startDrag);
-            header.addEventListener('touchstart', startDrag, { passive: false });
-        }
-
-        document.addEventListener('mousemove', onDrag);
-        document.addEventListener('touchmove', onDrag, { passive: false });
-        document.addEventListener('mouseup', stopDrag);
-        document.addEventListener('touchend', stopDrag);
-
-        // 🔥 Sayfa açıldığında otomatik açık gelsin
-        openWidget();
-
-        console.log('✅ ChatWidget hazır');
-    }
-};
-
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
+    } else {
         ChatWidget.init();
-    });
-} else {
-    ChatWidget.init();
-}
+    }
+    </script>
+</body>
+</html>
