@@ -12,8 +12,9 @@ const Utils = {
      * @returns {string} - Temizlenmiş metin
      */
     sanitizeHTML(text) {
+        if (text === null || text === undefined) return '';
         const div = document.createElement('div');
-        div.textContent = text;
+        div.textContent = String(text);
         return div.innerHTML;
     },
 
@@ -62,15 +63,20 @@ const Utils = {
     },
 
     /**
-     * Tarihi formatlar
+     * Tarihi formatlar (dil desteği ile)
      * @param {Date|string|number} date - Tarih
      * @returns {string} - Formatlanmış tarih
      */
     formatDate(date) {
         try {
             const d = new Date(date);
-            if (isNaN(d.getTime())) return 'Geçersiz tarih';
-            
+            const lang =
+                window.LanguageManager && LanguageManager.currentLang === 'en' ? 'en' : 'tr';
+
+            if (isNaN(d.getTime())) {
+                return lang === 'en' ? 'Invalid date' : 'Geçersiz tarih';
+            }
+
             const now = new Date();
             const diff = now - d;
             const seconds = Math.floor(diff / 1000);
@@ -78,19 +84,36 @@ const Utils = {
             const hours = Math.floor(minutes / 60);
             const days = Math.floor(hours / 24);
 
-            if (seconds < 60) return 'Az önce';
-            if (minutes < 60) return `${minutes} dakika önce`;
-            if (hours < 24) return `${hours} saat önce`;
-            if (days < 7) return `${days} gün önce`;
-            
-            return d.toLocaleDateString('tr-TR', {
+            if (seconds < 60) {
+                return lang === 'en' ? 'Just now' : 'Az önce';
+            }
+            if (minutes < 60) {
+                return lang === 'en'
+                    ? `${minutes} minute(s) ago`
+                    : `${minutes} dakika önce`;
+            }
+            if (hours < 24) {
+                return lang === 'en'
+                    ? `${hours} hour(s) ago`
+                    : `${hours} saat önce`;
+            }
+            if (days < 7) {
+                return lang === 'en'
+                    ? `${days} day(s) ago`
+                    : `${days} gün önce`;
+            }
+
+            const locale = lang === 'en' ? 'en-US' : 'tr-TR';
+            return d.toLocaleDateString(locale, {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
             });
         } catch (error) {
             console.error('Tarih formatlama hatası:', error);
-            return 'Geçersiz tarih';
+            const lang =
+                window.LanguageManager && LanguageManager.currentLang === 'en' ? 'en' : 'tr';
+            return lang === 'en' ? 'Invalid date' : 'Geçersiz tarih';
         }
     },
 
@@ -132,11 +155,11 @@ const Utils = {
      */
     throttle(func, limit = 300) {
         let inThrottle;
-        return function(...args) {
+        return function (...args) {
             if (!inThrottle) {
                 func.apply(this, args);
                 inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
+                setTimeout(() => (inThrottle = false), limit);
             }
         };
     },
@@ -161,7 +184,8 @@ const Utils = {
      * @returns {string} - Rastgele ID
      */
     generateId(length = 16) {
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const chars =
+            'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let result = '';
         for (let i = 0; i < length; i++) {
             result += chars.charAt(Math.floor(Math.random() * chars.length));
@@ -212,8 +236,13 @@ const Utils = {
         } catch (error) {
             console.error(`Storage yazma hatası (${key}):`, error);
             // Storage dolu olabilir
-            if (error.name === 'QuotaExceededError') {
-                this.showToast('Depolama alanı dolu!', 'error');
+            if (error && error.name === 'QuotaExceededError') {
+                const msg =
+                    window.LanguageManager &&
+                    LanguageManager.currentLang === 'en'
+                        ? 'Storage is full!'
+                        : 'Depolama alanı dolu!';
+                this.showToast(msg, 'error');
             }
             return false;
         }
@@ -238,12 +267,17 @@ const Utils = {
      * @param {number} duration - Süre (ms)
      */
     showToast(message, type = 'info', duration = 3000) {
-        const container = document.getElementById('toastContainer');
-        if (!container) return;
+        let container = document.getElementById('toastContainer');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'toastContainer';
+            container.className = 'toast-container';
+            document.body.appendChild(container);
+        }
 
         const toast = document.createElement('div');
         toast.className = `toast ${type}`;
-        
+
         const icons = {
             success: '✅',
             error: '❌',
@@ -251,22 +285,29 @@ const Utils = {
             info: 'ℹ️'
         };
 
+        const closeLabel =
+            typeof window !== 'undefined' && typeof window.t === 'function'
+                ? t('common.close', 'Kapat')
+                : 'Kapat';
+
         toast.innerHTML = `
             <span class="toast-icon" aria-hidden="true">${icons[type] || icons.info}</span>
             <div class="toast-content">
                 <p class="toast-message">${this.sanitizeHTML(message)}</p>
             </div>
-            <button class="toast-close" aria-label="Kapat">×</button>
+            <button class="toast-close" aria-label="${closeLabel}">×</button>
         `;
 
         container.appendChild(toast);
 
         // Close button
         const closeBtn = toast.querySelector('.toast-close');
-        closeBtn.addEventListener('click', () => {
-            toast.style.animation = 'slideOutRight 0.3s ease-out';
-            setTimeout(() => toast.remove(), 300);
-        });
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                toast.style.animation = 'slideOutRight 0.3s ease-out';
+                setTimeout(() => toast.remove(), 300);
+            });
+        }
 
         // Auto remove
         setTimeout(() => {
@@ -284,7 +325,7 @@ const Utils = {
     toggleLoading(show) {
         const overlay = document.getElementById('loadingOverlay');
         if (!overlay) return;
-        
+
         if (show) {
             overlay.classList.add('active');
             overlay.setAttribute('aria-hidden', 'false');
@@ -301,8 +342,6 @@ const Utils = {
      */
     async confirm(message) {
         return new Promise((resolve) => {
-            // Modern tarayıcılarda confirm() kullanılabilir
-            // Gelecekte custom modal eklenebilir
             const result = window.confirm(message);
             resolve(result);
         });
@@ -315,7 +354,11 @@ const Utils = {
      */
     isElementVisible(element) {
         if (!element) return false;
-        return !!(element.offsetWidth || element.offsetHeight || element.getClientRects().length);
+        return !!(
+            element.offsetWidth ||
+            element.offsetHeight ||
+            element.getClientRects().length
+        );
     },
 
     /**
@@ -324,13 +367,13 @@ const Utils = {
      * @param {number} offset - Offset (px)
      */
     scrollTo(target, offset = 0) {
-        const element = typeof target === 'string' 
-            ? document.querySelector(target) 
-            : target;
-        
+        const element =
+            typeof target === 'string' ? document.querySelector(target) : target;
+
         if (!element) return;
-        
-        const top = element.getBoundingClientRect().top + window.pageYOffset - offset;
+
+        const top =
+            element.getBoundingClientRect().top + window.pageYOffset - offset;
         window.scrollTo({
             top,
             behavior: 'smooth'
@@ -347,7 +390,9 @@ const Utils = {
         const k = 1024;
         const sizes = ['Bytes', 'KB', 'MB', 'GB'];
         const i = Math.floor(Math.log(bytes) / Math.log(k));
-        return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        return (
+            Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i]
+        );
     },
 
     /**
@@ -368,7 +413,7 @@ const Utils = {
      */
     async copyToClipboard(text) {
         try {
-            if (navigator.clipboard) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
                 await navigator.clipboard.writeText(text);
                 return true;
             } else {
@@ -387,6 +432,95 @@ const Utils = {
             console.error('Kopyalama hatası:', error);
             return false;
         }
+    },
+
+    /**
+     * Form input doğrulama
+     * @param {HTMLInputElement} input - Input elemanı
+     * @param {string} type - 'required' | 'email' | 'username'
+     * @returns {boolean}
+     */
+    validateInput(input, type = 'required') {
+        if (!input) return false;
+
+        const value = (input.value || '').trim();
+        const lang =
+            window.LanguageManager && LanguageManager.currentLang === 'en' ? 'en' : 'tr';
+
+        const msg = (tr, en) => (lang === 'en' ? en : tr);
+
+        let isValid = true;
+        let errorMessage = '';
+
+        if (type === 'email') {
+            if (!value) {
+                isValid = false;
+                errorMessage = msg('E-posta zorunlu', 'Email is required');
+            } else if (!this.validateEmail(value)) {
+                isValid = false;
+                errorMessage = msg(
+                    'Geçerli bir e-posta girin',
+                    'Please enter a valid email'
+                );
+            }
+        } else if (type === 'username') {
+            if (!value) {
+                isValid = false;
+                errorMessage = msg('Kullanıcı adı zorunlu', 'Username is required');
+            } else if (!this.validateUsername(value)) {
+                isValid = false;
+                errorMessage = msg(
+                    '3-20 karakter, sadece harf, rakam ve alt çizgi kullanabilirsiniz',
+                    'Username must be 3-20 characters and can contain letters, numbers and underscore'
+                );
+            }
+        } else if (type === 'required') {
+            if (!value) {
+                isValid = false;
+                errorMessage = msg('Bu alan zorunlu', 'This field is required');
+            }
+        }
+
+        // Hata elemanını bul
+        let errorEl =
+            document.getElementById(input.id + 'Error') ||
+            (input.closest('.form-group')
+                ? input.closest('.form-group').querySelector('.error-message')
+                : null);
+
+        if (errorEl) {
+            errorEl.textContent = errorMessage || '';
+        }
+
+        if (!isValid) {
+            input.classList.add('input-error');
+        } else {
+            input.classList.remove('input-error');
+        }
+
+        return isValid;
+    },
+
+    /**
+     * Genel hata yakalama helper'ı
+     * @param {Error} error
+     * @param {string} context
+     */
+    handleError(error, context = '') {
+        console.error('Hata:', context, error);
+
+        const lang =
+            window.LanguageManager && LanguageManager.currentLang === 'en' ? 'en' : 'tr';
+        const defaultMsg =
+            lang === 'en'
+                ? 'An unexpected error occurred.'
+                : 'Beklenmeyen bir hata oluştu.';
+
+        try {
+            this.showToast(defaultMsg, 'error');
+        } catch (e) {
+            console.error('Toast gösterilemedi:', e);
+        }
     }
 };
 
@@ -401,6 +535,16 @@ style.textContent = `
         to {
             opacity: 0;
             transform: translateX(100%);
+        }
+    }
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
     }
 `;
