@@ -660,7 +660,7 @@
         </div>
     </header>
 
-    <!-- Top Ad (AdManager: ad-top) -->
+    <!-- Top Ad (global) -->
     <div id="ad-top" class="ad-banner ad-container">
         📢 Reklam Alanı - Üst Banner (728x90)
     </div>
@@ -695,7 +695,7 @@
                         </div>
                     </div>
 
-                    <!-- Ad Between Content (AdManager: ad-dashboard) -->
+                    <!-- Ad Between Content (dashboard slot) -->
                     <div id="ad-dashboard" class="ad-banner ad-container" style="margin: 2rem 0;">
                         📢 Reklam Alanı - İçerik Arası (728x90)
                     </div>
@@ -709,8 +709,8 @@
                     </div>
                 </div>
 
-                <!-- Sidebar Ad -->
-                <aside class="ad-sidebar">
+                <!-- Sidebar Ad (slot 1) -->
+                <aside id="ad-sidebar-1" class="ad-sidebar ad-container">
                     📢 Reklam Alanı<br>Sidebar (300x600)
                 </aside>
             </div>
@@ -802,7 +802,8 @@
                     </div>
                 </div>
 
-                <aside class="ad-sidebar">
+                <!-- Sidebar Ad (slot 2) -->
+                <aside id="ad-sidebar-2" class="ad-sidebar ad-container">
                     📢 Reklam Alanı<br>Quiz Sidebar (300x600)
                 </aside>
             </div>
@@ -906,7 +907,7 @@
                         </button>
                     </div>
 
-                    <!-- Ad - Leaderboard (AdManager: ad-leaderboard) -->
+                    <!-- Leaderboard slot -->
                     <div id="ad-leaderboard" class="ad-banner ad-container" style="margin: 2rem 0;">
                         📢 Reklam Alanı - Liderlik (728x90)
                     </div>
@@ -988,7 +989,7 @@
                     </div>
 
                     <!-- Ad After Results -->
-                    <div class="ad-banner" style="margin: 2rem 0%;">
+                    <div class="ad-banner" style="margin: 2rem 0;">
                         📢 Reklam Alanı - Sonuç (728x90)
                     </div>
                 </div>
@@ -1064,7 +1065,7 @@
         </div>
     </div>
 
-    <!-- Bottom Ad (AdManager: ad-bottom) -->
+    <!-- Bottom Ad (global) -->
     <div id="ad-bottom" class="ad-banner ad-container">
         📢 Reklam Alanı - Alt Banner (728x90)
     </div>
@@ -1096,7 +1097,7 @@
         </div>
     </div>
 
-    <!-- Ad Manager script -->
+    <!-- Harici AdManager -->
     <script src="ad-manager.js"></script>
 
     <script>
@@ -1127,8 +1128,10 @@
                 // Update URL without reload
                 history.pushState({ page }, '', `#${page}`);
 
-                // Track page view + AdManager
+                // Track page view for ads
                 console.log('📊 Page View:', page);
+
+                // AdManager'a SPA sekme değişimini bildir
                 if (window.AdManager && typeof AdManager.onTabChanged === 'function') {
                     AdManager.onTabChanged(page);
                 }
@@ -1151,17 +1154,12 @@
             document.getElementById('loadingScreen').classList.add('hidden');
         }
 
-        // Hide loading on page load + init AdManager
+        // Hide loading on page load + AdManager init
         window.addEventListener('load', () => {
             setTimeout(hideLoading, 500);
 
-            if (window.AdManager) {
-                if (typeof AdManager.init === 'function') {
-                    AdManager.init();
-                }
-                if (typeof AdManager.onTabChanged === 'function') {
-                    AdManager.onTabChanged(currentPage);
-                }
+            if (window.AdManager && typeof AdManager.init === 'function') {
+                AdManager.init();
             }
         });
 
