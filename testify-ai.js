@@ -1011,3 +1011,119 @@ document.addEventListener('DOMContentLoaded', () => {
         chatBody.style.overscrollBehavior = 'contain';
     }
 });
+
+/* ================================================
+   TEST OLUŞTUR MENÜSÜ → TESTIFY AI ENTEGRASYONU
+   (TestifyAI koduna dokunmadan ek katman)
+   ================================================ */
+
+(function () {
+    'use strict';
+
+    function buildPromptFromForm() {
+        const topic      = (document.getElementById('testTopic')?.value || '').trim();
+        const count      = document.getElementById('questionCount')?.value || '15';
+        const diff       = document.getElementById('difficulty')?.value || 'mixed';
+        const examType   = document.getElementById('examType')?.value || 'genel';
+        const extra      = (document.getElementById('testNotes')?.value || '').trim();
+        const lang       = document.getElementById('language')?.value || 'tr';
+
+        let diffText;
+        if (diff === 'easy')      diffText = 'kolay';
+        else if (diff === 'medium') diffText = 'orta seviyede';
+        else if (diff === 'hard')   diffText = 'zor';
+        else                       diffText = 'karışık zorlukta';
+
+        let examText = examType.toUpperCase();
+        if (examType === 'genel') examText = 'genel';
+
+        let prompt;
+
+        if (lang === 'tr') {
+            prompt =
+                `${topic} konusunda, ${diffText}, ` +
+                `${count} soruluk, ${examText} tarzında çoktan seçmeli bir test hazırla. ` +
+                `Her soruda 4 şık olsun, doğru cevap şıklardan biri olsun ve her soru için detaylı açıklama yaz.`;
+            if (extra) {
+                prompt += ` Ek isteğim: ${extra}.`;
+            }
+        } else {
+            // İngilizce istenirse
+            let diffEn;
+            if (diff === 'easy')      diffEn = 'easy';
+            else if (diff === 'medium') diffEn = 'medium level';
+            else if (diff === 'hard')   diffEn = 'hard';
+            else                       diffEn = 'mixed difficulty';
+
+            prompt =
+                `Create a ${count}-question multiple choice test in English about ${topic}, ` +
+                `${diffEn} difficulty, in the style of ${examText} exam. ` +
+                `Each question must have 4 options, the correct answer must be one of the options, and include a detailed explanation.`;
+            if (extra) {
+                prompt += ` Extra instructions: ${extra}.`;
+            }
+        }
+
+        return prompt;
+    }
+
+    function attachCreateTestHandler() {
+        const form = document.getElementById('createTestForm');
+        if (!form) return;
+
+        form.addEventListener('submit', async function (e) {
+            // App.handleCreateTest'i devre dışı bırakmak için:
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+
+            const topicInput = document.getElementById('testTopic') || form.testTitle;
+            const topicValue = topicInput ? topicInput.value.trim() : '';
+
+            if (!topicValue) {
+                if (window.Utils && typeof Utils.showToast === 'function') {
+                    Utils.showToast('Lütfen test konusu / açıklaması gir.', 'error');
+                }
+                topicInput && topicInput.focus();
+                return;
+            }
+
+            if (!window.TestifyAI || typeof TestifyAI.generateTestFromAI !== 'function') {
+                console.error('TestifyAI bulunamadı veya hazır değil');
+                if (window.Utils && typeof Utils.showToast === 'function') {
+                    Utils.showToast('AI test oluşturucu yüklenemedi.', 'error');
+                }
+                return;
+            }
+
+            const prompt = buildPromptFromForm();
+
+            if (window.Utils && typeof Utils.showToast === 'function') {
+                Utils.showToast(
+                    '🤖 Test AI ile oluşturuluyor. Sağ alttaki Testfy sohbet penceresini takip et.',
+                    'info',
+                    4000
+                );
+            }
+
+            try {
+                await TestifyAI.generateTestFromAI(prompt);
+                // İstersen formu temizle:
+                // form.reset();
+            } catch (err) {
+                console.error('AI test oluşturma hatası (menü):', err);
+                if (window.Utils && typeof Utils.handleError === 'function') {
+                    Utils.handleError(err, 'CreateTestMenu');
+                } else if (window.Utils && typeof Utils.showToast === 'function') {
+                    Utils.showToast('Test oluşturulurken bir hata oluştu.', 'error');
+                }
+            }
+        }, true); // capture:true → önce bu çalışsın
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', attachCreateTestHandler);
+    } else {
+        attachCreateTestHandler();
+    }
+})();
