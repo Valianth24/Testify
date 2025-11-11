@@ -1,2970 +1,1314 @@
 <!DOCTYPE html>
 <html lang="tr" data-theme="light">
 <head>
-    <!-- Meta Tags - SEO Optimization -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Testify - Yapay Zeka Destekli Eğitim Platformu</title>
     
-    <!-- SEO Meta Tags -->
-    <title>Testify - Yapay Zeka Destekli Akıllı Eğitim Platformu | Online Test Çözme</title>
-    <meta name="description" content="Testify ile yapay zeka destekli test çözün, performansınızı analiz edin ve sınava hazırlanın. Ücretsiz online test platformu.">
-    <meta name="keywords" content="online test, sınav hazırlık, yapay zeka test, eğitim platformu, test çözme, YKS, LGS, KPSS">
-    <meta name="author" content="Testify Team">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://testify.com">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://testify.com">
-    <meta property="og:title" content="Testify - Akıllı Eğitim Platformu">
-    <meta property="og:description" content="Yapay zeka destekli test çözme platformu. Performansını analiz et, hedefine ulaş!">
-    <meta property="og:image" content="https://testify.com/og-image.jpg">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://testify.com">
-    <meta property="twitter:title" content="Testify - Akıllı Eğitim Platformu">
-    <meta property="twitter:description" content="Yapay zeka destekli test çözme platformu">
-    <meta property="twitter:image" content="https://testify.com/twitter-image.jpg">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    
-    <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
-    
-    <!-- Font - Preload for Performance -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Google AdSense (AdManager üzerinden yüklenecek) -->
-    
-    <!-- External CSS -->
-    <link rel="stylesheet" href="styles.css">
-
-    <script src="ad-manager.js"></script>
-    
-    <!-- jsPDF for PDF export -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    
-    <!-- Schema.org Markup -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "EducationalOrganization",
-      "name": "Testify",
-      "description": "Yapay zeka destekli online test ve eğitim platformu",
-      "url": "https://testify.com"
-    }
-    </script>
-
-    <!-- Floating Testfy Assistant Styles (YENİ) -->
     <style>
-        /* AI mesaj içi formatlama */
-        .message-content strong {
+        /* === VARIABLES === */
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --primary-light: #a78bfa;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --bg: #ffffff;
+            --bg-secondary: #f3f4f6;
+            --bg-tertiary: #f9fafb;
+            --bg-hover: rgba(99, 102, 241, 0.05);
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --text-tertiary: #9ca3af;
+            --border: #e5e7eb;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+        }
+
+        [data-theme="dark"] {
+            --primary: #818cf8;
+            --primary-dark: #6366f1;
+            --bg: #0a0a0a;
+            --bg-secondary: #1a1a1a;
+            --bg-tertiary: #2a2a2a;
+            --bg-hover: rgba(129, 140, 248, 0.15);
+            --text-primary: #f5f5f5;
+            --text-secondary: #d4d4d8;
+            --text-tertiary: #a1a1aa;
+            --border: #3a3a3a;
+            --card-bg: #1a1a1a;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.95);
+            --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.97);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            transition: all var(--transition);
+        }
+
+        /* === HEADER === */
+        .header {
+            background: var(--card-bg);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
             color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            padding: 0.75rem 1.25rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: var(--radius-lg);
+            font-weight: 500;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: var(--bg-hover);
+            color: var(--primary);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            width: 60px;
+            height: 30px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .theme-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        [data-theme="dark"] .theme-slider {
+            left: 33px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* === ADS === */
+        .ad-banner {
+            background: var(--bg-secondary);
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 1.5rem auto;
+            text-align: center;
+            color: var(--text-tertiary);
+            max-width: 1400px;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ad-sidebar {
+            background: var(--bg-secondary);
+            border: 2px dashed var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            text-align: center;
+            color: var(--text-tertiary);
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: sticky;
+            top: 100px;
+        }
+
+        /* === LAYOUT === */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+        }
+
+        .main-content {
+            background: var(--card-bg);
+            border-radius: var(--radius-xl);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        /* === DASHBOARD === */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            transition: all var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* === CARDS === */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-xl);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* === BUTTONS === */
+        .btn {
+            padding: 0.875rem 1.75rem;
+            border-radius: var(--radius-lg);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-tertiary);
+        }
+
+        /* === LOADING === */
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--bg-tertiary);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* === PAGE TRANSITIONS === */
+        .page {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* === EMPTY STATE === */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* === MOBILE === */
+        @media (max-width: 1024px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .ad-sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .header-content {
+                padding: 1rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* === TESTFY CHAT === */
+        .chat-widget {
+            position: fixed;
+            right: 1.5rem;
+            bottom: 1.5rem;
+            width: 380px;
+            max-height: 600px;
+            background: var(--card-bg);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: all var(--transition);
+            z-index: 999;
+        }
+
+        .chat-widget.open {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        .chat-toggle {
+            position: fixed;
+            right: 1.5rem;
+            bottom: 1.5rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all var(--transition);
+            z-index: 998;
+        }
+
+        .chat-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-header {
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            background: var(--bg-secondary);
+        }
+
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            background: var(--bg);
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+
+        .chat-send {
+            padding: 0.75rem 1.25rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
             font-weight: 600;
         }
-        .message-content code {
-            background: var(--bg-tertiary);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
+
+        .message {
+            margin-bottom: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: var(--radius-lg);
+            background: var(--card-bg);
+            animation: slideIn 0.3s;
         }
-        [data-theme="dark"] .message-content code {
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* === QUIZ STYLES === */
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .question-card {
             background: var(--bg-secondary);
-            color: var(--primary-light);
+            padding: 2rem;
+            border-radius: var(--radius-xl);
+            margin-bottom: 2rem;
         }
 
-        /* === Testfy Floating Chat Widget === */
-        .chat-widget-wrapper{
-            position:fixed;
-            right:1.5rem;
-            bottom:1.5rem;
-            z-index:999;
-            display:flex;
-            flex-direction:column;
-            align-items:flex-end;
-            gap:0.75rem;
-        }
-        .chat-toggle-btn{
-            display:flex;
-            align-items:center;
-            gap:0.5rem;
-            border:none;
-            border-radius:999px;
-            padding:0.55rem 1.1rem;
-            font-family:inherit;
-            font-size:0.95rem;
-            font-weight:600;
-            background:var(--primary,#4f46e5);
-            color:#fff;
-            box-shadow:0 10px 25px rgba(15,23,42,0.35);
-            cursor:pointer;
-            transition:transform .16s ease,box-shadow .16s ease,opacity .16s ease;
-        }
-        .chat-toggle-btn:hover{
-            transform:translateY(-1px);
-            box-shadow:0 12px 30px rgba(15,23,42,0.4);
-        }
-        .chat-toggle-btn:focus-visible{
-            outline:2px solid var(--primary,#4f46e5);
-            outline-offset:2px;
-        }
-        .chat-toggle-btn--hidden{
-            display:none;
-        }
-        .chat-toggle-initial{
-            width:2rem;
-            height:2rem;
-            border-radius:999px;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-weight:700;
-            background:rgba(15,23,42,0.15);
-        }
-        .chat-toggle-text{
-            letter-spacing:0.02em;
+        .question-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
         }
 
-        .chat-widget{
-            position:fixed;
-            right:1.5rem;
-            bottom:5rem;
-            width:min(420px,100vw - 2rem);
-            max-height:70vh;
-            display:flex;
-            flex-direction:column;
-            background:var(--bg-primary,#0f172a);
-            color:var(--text-primary,#e5e7eb);
-            border-radius:1rem;
-            box-shadow:0 18px 45px rgba(15,23,42,0.55);
-            border:1px solid rgba(148,163,184,0.6);
-            overflow:hidden;
-            opacity:0;
-            visibility:hidden;
-            pointer-events:none;
-            transform:translateY(12px) scale(0.98);
-            transition:opacity .2s ease,transform .2s ease,visibility .2s ease;
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
-        .chat-widget.chat-widget--open{
-            opacity:1;
-            visibility:visible;
-            pointer-events:auto;
-            transform:translateY(0) scale(1);
+
+        .option {
+            padding: 1rem 1.5rem;
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
-        .chat-widget.chat-widget--minimized .chat-body,
-        .chat-widget.chat-widget--minimized .chat-footer{
-            display:none;
+
+        .option:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
         }
-        .chat-header{
-            padding:0.85rem 1rem;
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(30,64,175,0.95));
-            color:#f9fafb;
-            cursor:move;
+
+        .option-letter {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
         }
-        .chat-title{
-            display:flex;
-            flex-direction:column;
-            gap:0.15rem;
+
+        .option.selected {
+            border-color: var(--primary);
+            background: var(--bg-hover);
         }
-        .chat-title-main{
-            font-weight:600;
-            font-size:0.95rem;
+
+        .option.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.1);
         }
-        .chat-status{
-            display:flex;
-            align-items:center;
-            gap:0.35rem;
-            font-size:0.78rem;
-            opacity:0.9;
+
+        .option.incorrect {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.1);
         }
-        .chat-header-actions{
-            display:flex;
-            align-items:center;
-            gap:0.25rem;
+
+        .quiz-progress {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: 2rem;
         }
-        .chat-header-btn{
-            width:1.9rem;
-            height:1.9rem;
-            border-radius:999px;
-            border:none;
-            background:rgba(15,23,42,0.25);
-            color:inherit;
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            font-size:0.9rem;
-            cursor:pointer;
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            transition: width 0.3s;
         }
-        .chat-header-btn:hover{
-            background:rgba(15,23,42,0.4);
-        }
-        .chat-body{
-            padding:0.75rem 0.9rem;
-            background:var(--bg-secondary,#020617);
-        }
-        .chat-footer{
-            padding:0.7rem 0.9rem 0.8rem;
-            background:var(--bg-secondary,#020617);
-            border-top:1px solid rgba(15,23,42,0.7);
-        }
-        .chat-footer .ai-input-group{
-            background:var(--bg-tertiary,rgba(15,23,42,0.9));
-        }
-        .ai-chat{
-            flex:1;
-            max-height:40vh;
-            overflow-y:auto;
-        }
-        @media (max-width:768px){
-            .chat-widget-wrapper{
-                right:1rem;
-                bottom:1rem;
-            }
-            .chat-widget{
-                right:0.5rem;
-                left:0.5rem;
-                bottom:0.75rem;
-                width:auto;
-                max-width:none;
-                max-height:80vh;
-                border-radius:1rem;
-            }
+
+        .quiz-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
         }
     </style>
 </head>
 <body>
-    <!-- Skip to Main Content (Accessibility) -->
-    <a href="#main-content" class="skip-link">Ana içeriğe geç</a>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="spinner"></div>
+    </div>
 
     <!-- Header -->
-    <header class="header" role="banner">
+    <header class="header">
         <div class="header-content">
-            <div class="header-top">
-                <a href="/" class="logo" aria-label="Testify Ana Sayfa">
-                    <span role="img" aria-label="Eğitim ikonu">🎓</span>
-                    <span data-i18n="app.name">Testify</span>
-                </a>
-                
-                <div class="header-actions">
-                    <!-- Language Selector - Otomatik oluşturulacak -->
-                    
-                    <!-- Theme Toggle -->
-                    <button 
-                        class="theme-toggle" 
-                        onclick="themeManager.toggle()"
-                        aria-label="Tema değiştir"
-                        aria-pressed="false"
-                        title="Karanlık/Aydınlık mod">
-                        <span class="theme-toggle-slider">
-                            <span id="themeIcon" aria-hidden="true">☀️</span>
-                        </span>
-                    </button>
-                    
-                    <div class="user-stats" role="status" aria-live="polite">
-                        <div class="stat-badge" title="Günlük seri">
-                            <span role="img" aria-label="Ateş ikonu">🔥</span>
-                            <span id="streak" aria-label="Seri günler">0 <span data-i18n="header.streak">Gün</span></span>
-                        </div>
-                        <div class="stat-badge" title="Toplam puan">
-                            <span role="img" aria-label="Yıldız ikonu">⭐</span>
-                            <span id="totalPoints" aria-label="Toplam XP">0 <span data-i18n="header.points">XP</span></span>
-                        </div>
-                        <div class="stat-badge" title="Sıralama">
-                            <span role="img" aria-label="Kupa ikonu">🏆</span>
-                            <span id="rank" aria-label="Sıralama">#--</span>
-                        </div>
-                    </div>
-                    <button class="user-avatar" id="userAvatar" aria-label="Kullanıcı menüsü" title="Profil">U</button>
-                </div>
-            </div>
+            <a href="#" class="logo" onclick="navigateTo('dashboard')">
+                🎓 <span>Testify</span>
+            </a>
             
-            <!-- Navigation Tabs -->
-            <nav class="nav-tabs" role="tablist" aria-label="Ana navigasyon">
-                <button id="tab-dashboard" class="nav-tab active" data-tab="dashboard" role="tab" aria-selected="true" aria-controls="dashboard">
-                    <span role="img" aria-hidden="true">📊</span> <span data-i18n="nav.dashboard">Dashboard</span>
-                </button>
-                <button id="tab-test" class="nav-tab" data-tab="test" role="tab" aria-selected="false" aria-controls="test">
-                    <span role="img" aria-hidden="true">📝</span> <span data-i18n="nav.test">Test Çöz</span>
-                </button>
-                <button id="tab-create" class="nav-tab" data-tab="create" role="tab" aria-selected="false" aria-controls="create">
-                    <span role="img" aria-hidden="true">➕</span> <span data-i18n="nav.create">Test Oluştur</span>
-                </button>
-                <button id="tab-library" class="nav-tab" data-tab="library" role="tab" aria-selected="false" aria-controls="library">
-                    <span role="img" aria-hidden="true">📚</span> <span data-i18n="nav.library">Kütüphanem</span>
-                </button>
-                <button id="tab-notes" class="nav-tab" data-tab="notes" role="tab" aria-selected="false" aria-controls="notes">
-                    <span role="img" aria-hidden="true">📝</span> <span data-i18n="nav.notes">Notlarım</span>
-                </button>
-                <button id="tab-leaderboard" class="nav-tab" data-tab="leaderboard" role="tab" aria-selected="false" aria-controls="leaderboard">
-                    <span role="img" aria-hidden="true">🏆</span> <span data-i18n="nav.leaderboard">Liderlik</span>
-                </button>
-                <button id="tab-analysis" class="nav-tab" data-tab="analysis" role="tab" aria-selected="false" aria-controls="analysis">
-                    <span role="img" aria-hidden="true">📈</span> <span data-i18n="nav.analysis">Analizler</span>
-                </button>
-                <button id="tab-settings" class="nav-tab" data-tab="settings" role="tab" aria-selected="false" aria-controls="settings">
-                    <span role="img" aria-hidden="true">⚙️</span> <span data-i18n="nav.settings">Ayarlar</span>
-                </button>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-link" onclick="navigateTo('dashboard')">📊 Dashboard</a></li>
+                    <li><a href="#" class="nav-link" onclick="navigateTo('test-select')">📝 Test Çöz</a></li>
+                    <li><a href="#" class="nav-link" onclick="navigateTo('create')">➕ Oluştur</a></li>
+                    <li><a href="#" class="nav-link" onclick="navigateTo('library')">📚 Kütüphane</a></li>
+                    <li><a href="#" class="nav-link" onclick="navigateTo('notes')">📝 Notlar</a></li>
+                    <li><a href="#" class="nav-link" onclick="navigateTo('leaderboard')">🏆 Liderlik</a></li>
+                    <li><a href="#" class="nav-link" onclick="navigateTo('analysis')">📈 Analiz</a></li>
+                </ul>
             </nav>
+
+            <div class="header-actions">
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <div class="theme-slider" id="themeIcon">☀️</div>
+                </button>
+                <div class="user-avatar">U</div>
+            </div>
         </div>
     </header>
 
-    <!-- Top Ad Banner -->
-    <aside class="ad-banner" aria-label="Reklam" role="complementary">
-        <div id="ad-top" class="ad-container">
-            <span>📢 Reklam Alanı (728x90)</span>
-        </div>
-    </aside>
-
-    <!-- Main Container -->
-    <div class="main-container">
-        <!-- Main Content Area -->
-        <main class="main-content" id="main-content" role="main">
-            <!-- Dashboard Tab -->
-            <section class="tab-content active" id="dashboard" role="tabpanel" aria-labelledby="tab-dashboard">
-                <h1 data-i18n="dashboard.title">Dashboard</h1>
-                
-                <div class="stats-grid" role="region" aria-label="İstatistikler">
-                    <article class="stat-card">
-                        <div class="stat-icon" aria-hidden="true">📝</div>
-                        <div class="stat-value" id="totalTests" aria-label="Çözülen test sayısı">0</div>
-                        <div class="stat-label" data-i18n="dashboard.tests">Çözülen Test</div>
-                    </article>
-                    <article class="stat-card">
-                        <div class="stat-icon" aria-hidden="true">✅</div>
-                        <div class="stat-value" id="successRate" aria-label="Başarı oranı">0%</div>
-                        <div class="stat-label" data-i18n="dashboard.success">Başarı Oranı</div>
-                    </article>
-                    <article class="stat-card">
-                        <div class="stat-icon" aria-hidden="true">🎯</div>
-                        <div class="stat-value" id="totalQuestions" aria-label="Toplam soru sayısı">0</div>
-                        <div class="stat-label" data-i18n="dashboard.questions">Toplam Soru</div>
-                    </article>
-                    <article class="stat-card">
-                        <div class="stat-icon" aria-hidden="true">⏱️</div>
-                        <div class="stat-value" id="avgTime" aria-label="Ortalama süre">0s</div>
-                        <div class="stat-label" data-i18n="dashboard.avgTime">Ort. Süre</div>
-                    </article>
-                </div>
-
-                <!-- Recent Activity -->
-                <section class="recent-activity" aria-labelledby="recent-activity-title">
-                    <h2 id="recent-activity-title" data-i18n="dashboard.activity">Son Aktiviteler</h2>
-                    <div id="activityList" class="activity-list">
-                        <div class="empty-state">
-                            <div class="empty-state-icon" aria-hidden="true">📊</div>
-                            <p data-i18n="dashboard.empty">Henüz aktivite yok. Test çözerek başla!</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Side Ad -->
-                <aside class="ad-banner" aria-label="Reklam">
-                    <div id="ad-dashboard" class="ad-container">
-                        <span>📢 Reklam Alanı (300x250)</span>
-                    </div>
-                </aside>
-            </section>
-
-            <!-- Test Tab -->
-            <section class="tab-content" id="test" role="tabpanel" aria-labelledby="tab-test">
-                <!-- Test Selection Page -->
-                <div class="test-page active" id="testSelection">
-                    <div class="test-selection">
-                        <h1 data-i18n="test.title">Test Seç</h1>
-                        <div class="test-options" role="group" aria-label="Test modu seçenekleri">
-                            <article class="test-option-card" tabindex="0" role="button" aria-label="Pratik modu">
-                                <div class="test-option-icon" aria-hidden="true">📖</div>
-                                <h3 class="test-option-title" data-i18n="test.practice">Pratik Modu</h3>
-                                <p class="test-option-desc" data-i18n="test.practiceDesc">Zaman baskısı olmadan pratik yap</p>
-                            </article>
-                            <article class="test-option-card" tabindex="0" role="button" aria-label="Sınav modu">
-                                <div class="test-option-icon" aria-hidden="true">⏱️</div>
-                                <h3 class="test-option-title" data-i18n="test.exam">Sınav Modu</h3>
-                                <p class="test-option-desc" data-i18n="test.examDesc">Gerçek sınav deneyimi</p>
-                            </article>
-                            <article class="test-option-card" tabindex="0" role="button" aria-label="AI test">
-                                <div class="test-option-icon" aria-hidden="true">🤖</div>
-                                <h3 class="test-option-title" data-i18n="test.ai">AI Test</h3>
-                                <p class="test-option-desc" data-i18n="test.aiDesc">AI tarafından oluşturulan sorular</p>
-                            </article>
-                            <article class="test-option-card" tabindex="0" role="button" aria-label="Özel test">
-                                <div class="test-option-icon" aria-hidden="true">⚙️</div>
-                                <h3 class="test-option-title" data-i18n="test.custom">Özel Test</h3>
-                                <p class="test-option-desc" data-i18n="test.customDesc">Kendi kriterlerine göre</p>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Quiz Page -->
-                <div class="test-page" id="quizPage" aria-live="polite">
-                    <div class="quiz-container">
-                        <!-- HEADER - EXIT BUTONU İLE -->
-                        <div class="quiz-header">
-                            <div class="quiz-info">
-                                <span><span data-i18n="quiz.question">Soru</span> <span id="currentQuestion">1</span> <span data-i18n="quiz.of">/</span> <span id="totalQuestionsQuiz">10</span></span>
-                            </div>
-                            <div class="quiz-info">
-                                <span role="img" aria-label="Süre">⏱️</span> 
-                                <time id="quizTimer">00:00</time>
-                            </div>
-                            <!-- EXIT BUTTON -->
-                            <button 
-                                class="btn-exit-quiz" 
-                                id="exitQuizBtn"
-                                aria-label="Testi bırak ve çık"
-                                data-i18n-title="quiz.exit">
-                                ❌ <span data-i18n="quiz.exit">Çıkış</span>
-                            </button>
-                        </div>
-
-                        <div class="quiz-progress-bar" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-                            <div class="quiz-progress-fill" id="progressFill"></div>
-                        </div>
-
-                        <article class="question-card">
-                            <h2 class="question-text" id="questionText">
-                                İşletim sisteminin temel görevlerinden biri nedir?
-                            </h2>
-
-                            <fieldset class="options-list" id="optionsList" aria-label="Cevap seçenekleri">
-                                <legend class="sr-only">Cevabınızı seçin</legend>
-                            </fieldset>
-                        </article>
-
-                        <nav class="quiz-actions" aria-label="Test navigasyonu">
-                            <button class="btn btn-secondary" id="prevBtn" aria-label="Önceki soru" style="display:none">
-                                ← <span data-i18n="quiz.prev">Önceki</span>
-                            </button>
-                            <button class="btn btn-primary" id="nextBtn" aria-label="Sonraki soru">
-                                <span data-i18n="quiz.next">Sonraki</span> →
-                            </button>
-                            <button class="btn btn-primary" id="submitBtn" style="display:none" aria-label="Testi bitir" data-i18n="quiz.finish">
-                                Testi Bitir
-                            </button>
-                        </nav>
-                    </div>
-                </div>
-
-                <!-- Results Page -->
-                <div class="test-page" id="resultsPage">
-                    <article class="results-container">
-                        <div class="results-icon" aria-hidden="true">🏆</div>
-                        <h1 class="results-title" data-i18n="results.title">Test Tamamlandı!</h1>
-                        <div class="results-score" id="finalScore" role="status" aria-live="polite">8/10</div>
-                        
-                        <div class="results-stats" role="region" aria-label="Test sonuçları">
-                            <div class="result-stat">
-                                <div class="result-value success-color" id="correctAnswers">8</div>
-                                <div class="result-label" data-i18n="results.correct">Doğru</div>
-                            </div>
-                            <div class="result-stat">
-                                <div class="result-value danger-color" id="wrongAnswers">2</div>
-                                <div class="result-label" data-i18n="results.wrong">Yanlış</div>
-                            </div>
-                            <div class="result-stat">
-                                <div class="result-value primary-color" id="successPercent">80%</div>
-                                <div class="result-label" data-i18n="results.success">Başarı</div>
-                            </div>
-                            <div class="result-stat">
-                                <time class="result-value" id="totalTimeResult">00:00</time>
-                                <div class="result-label" data-i18n="results.time">Süre</div>
-                            </div>
-                        </div>
-
-                        <nav class="quiz-actions" aria-label="Sonuç sayfası aksiyonları">
-                            <button class="btn btn-secondary" id="reviewBtn" aria-label="Cevapları incele" data-i18n="results.review">
-                                Cevapları Gör
-                            </button>
-                            <button class="btn btn-primary" id="newQuizBtn" aria-label="Yeni test başlat" data-i18n="results.newTest">
-                                Yeni Test
-                            </button>
-                        </nav>
-                    </article>
-                </div>
-            </section>
-
-            <!-- Create Test Tab -->
-            <section class="tab-content" id="create" role="tabpanel" aria-labelledby="tab-create">
-                <h1 data-i18n="create.title">Test Oluştur</h1>
-                
-                <form class="create-test-form" id="createTestForm" aria-label="Test oluşturma formu">
-                    <div class="form-group">
-                        <label for="testTitle"><span data-i18n="create.testTitle">Test Başlığı</span> <span class="required">*</span></label>
-                        <input 
-                            type="text" 
-                            id="testTitle" 
-                            name="testTitle"
-                            data-i18n-placeholder="create.testTitlePlaceholder"
-                            placeholder="Örn: Matematik Final Sınavı" 
-                            required
-                            maxlength="100"
-                            aria-required="true">
-                        <span class="error-message" id="testTitleError" role="alert"></span>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="testCategory"><span data-i18n="create.category">Kategori</span> <span class="required">*</span></label>
-                        <select id="testCategory" name="testCategory" required aria-required="true">
-                            <option value="" data-i18n="create.selectCategory">Seçiniz...</option>
-                            <option value="matematik" data-i18n="category.matematik">Matematik</option>
-                            <option value="fen" data-i18n="category.fen">Fen Bilimleri</option>
-                            <option value="turkce" data-i18n="category.turkce">Türkçe</option>
-                            <option value="sosyal" data-i18n="category.sosyal">Sosyal Bilgiler</option>
-                            <option value="ingilizce" data-i18n="category.ingilizce">İngilizce</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="fileUpload" data-i18n="create.upload">Dosya Yükle</label>
-                        <div class="file-upload-area" id="fileUploadArea">
-                            <input 
-                                type="file" 
-                                id="fileUpload" 
-                                name="fileUpload"
-                                accept=".pdf,.docx,.txt"
-                                aria-label="Dosya seç">
-                            <div class="file-upload-content">
-                                <div class="file-icon" aria-hidden="true">📁</div>
-                                <p data-i18n="create.uploadDesc">PDF, DOCX veya TXT dosyası yükle</p>
-                                <p class="file-hint" data-i18n="create.uploadHint">veya sürükle bırak</p>
-                            </div>
-                        </div>
-                        <div id="fileInfo" class="file-info" role="status"></div>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary btn-large">
-                        <span role="img" aria-hidden="true">🤖</span> <span data-i18n="create.submit">Testfy ile Oluştur</span>
-                    </button>
-                </form>
-            </section>
-
-            <!-- Library Tab -->
-            <section class="tab-content" id="library" role="tabpanel" aria-labelledby="tab-library">
-                <div class="library-header">
-                    <h1>📚 <span data-i18n="library.title">Kütüphanem</span></h1>
-                    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-xl);" data-i18n="library.desc">
-                        AI ile oluşturduğun testler burada saklanır (24 saat)
-                    </p>
-                </div>
-                <div id="libraryList" class="library-list">
-                    <div class="empty-state">
-                        <div class="empty-state-icon" aria-hidden="true">📚</div>
-                        <p data-i18n="library.empty">Henüz test oluşturmadın</p>
-                        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px;" data-i18n="library.emptyDesc">
-                            AI'dan "test oluştur" diyerek başla!
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Notes Tab -->
-            <section class="tab-content" id="notes" role="tabpanel" aria-labelledby="tab-notes">
-                <div class="notes-header">
-                    <h1 data-i18n="notes.title">Notlarım</h1>
-                    <button class="btn btn-primary" id="addNoteBtn" aria-label="Yeni not ekle">
-                        <span aria-hidden="true">+</span> <span data-i18n="notes.add">Yeni Not</span>
-                    </button>
-                </div>
-                <div id="notesList" class="notes-list">
-                    <div class="empty-state">
-                        <div class="empty-state-icon" aria-hidden="true">📝</div>
-                        <p data-i18n="notes.empty">Henüz not eklemedin</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Leaderboard Tab -->
-            <section class="tab-content" id="leaderboard" role="tabpanel" aria-labelledby="tab-leaderboard">
-                <article class="leaderboard-container">
-                    <header class="leaderboard-header">
-                        <h1>🏆 <span data-i18n="leaderboard.title">Liderlik Tablosu</span></h1>
-                        <p data-i18n="leaderboard.period">Haftalık Sıralama</p>
-                    </header>
-                    
-                    <div class="table-responsive">
-                        <table class="leaderboard-table" role="table" aria-label="Liderlik tablosu">
-                            <thead>
-                                <tr>
-                                    <th scope="col" data-i18n="leaderboard.rank">Sıra</th>
-                                    <th scope="col" data-i18n="leaderboard.user">Kullanıcı</th>
-                                    <th scope="col" data-i18n="leaderboard.xp">XP</th>
-                                    <th scope="col" data-i18n="leaderboard.tests">Test</th>
-                                    <th scope="col" data-i18n="leaderboard.success">Başarı</th>
-                                </tr>
-                            </thead>
-                            <tbody id="leaderboardBody">
-                                <tr>
-                                    <td colspan="5" class="empty-cell" data-i18n="leaderboard.empty">
-                                        Henüz veri bulunmuyor
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </article>
-
-                <!-- Ad Banner -->
-                <aside class="ad-banner" aria-label="Reklam">
-                    <div id="ad-leaderboard" class="ad-container">
-                        <span>📢 Reklam Alanı (728x90)</span>
-                    </div>
-                </aside>
-            </section>
-
-            <!-- Analysis Tab -->
-            <section class="tab-content" id="analysis" role="tabpanel" aria-labelledby="tab-analysis">
-                <h1 data-i18n="analysis.title">Performans Analizi</h1>
-                <div id="analysisContent">
-                    <div class="empty-state">
-                        <div class="empty-state-icon" aria-hidden="true">📈</div>
-                        <p data-i18n="analysis.empty">Analiz için daha fazla test çöz</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Settings Tab -->
-            <section class="tab-content" id="settings" role="tabpanel" aria-labelledby="tab-settings">
-                <h1 data-i18n="settings.title">Ayarlar</h1>
-                
-                <form class="settings-form" id="settingsForm" aria-label="Ayarlar formu">
-                    <div class="form-group">
-                        <label for="username"><span data-i18n="settings.username">Kullanıcı Adı</span> <span class="required">*</span></label>
-                        <input 
-                            type="text" 
-                            id="username" 
-                            name="username"
-                            value="user123"
-                            required
-                            minlength="3"
-                            maxlength="20"
-                            aria-required="true">
-                        <span class="error-message" id="usernameError" role="alert"></span>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email"><span data-i18n="settings.email">E-posta</span> <span class="required">*</span></label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email"
-                            value="user@example.com"
-                            required
-                            aria-required="true">
-                        <span class="error-message" id="emailError" role="alert"></span>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="notifications" data-i18n="settings.notifications">Bildirimler</label>
-                        <div class="checkbox-group">
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="emailNotif" name="emailNotif" checked>
-                                <span data-i18n="settings.emailNotif">E-posta bildirimleri</span>
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" id="pushNotif" name="pushNotif">
-                                <span data-i18n="settings.pushNotif">Push bildirimleri</span>
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary" data-i18n="settings.save">Kaydet</button>
-                        <button type="button" class="btn btn-secondary" id="resetBtn" data-i18n="settings.reset">Sıfırla</button>
-                    </div>
-                </form>
-            </section>
-        </main>
+    <!-- Top Ad (AdManager: ad-top) -->
+    <div id="ad-top" class="ad-banner ad-container">
+        📢 Reklam Alanı - Üst Banner (728x90)
     </div>
 
-    <!-- Bottom Ad Banner -->
-    <aside class="ad-banner" aria-label="Reklam" role="complementary">
-        <div id="ad-bottom" class="ad-container">
-            <span>📢 Reklam Alanı (728x90)</span>
-        </div>
-    </aside>
-
-    <!-- Floating Testfy Assistant -->
-    <div class="chat-widget-wrapper" aria-live="polite">
-        <button id="chatToggleBtn" class="chat-toggle-btn" type="button" aria-label="Testfy asistanını aç">
-            <span class="chat-toggle-initial">T</span>
-            <span class="chat-toggle-text">Testfy</span>
-        </button>
-
-        <section class="chat-widget" id="chatWidget" role="complementary" aria-label="Testfy asistanı" aria-hidden="true">
-            <header class="chat-header">
-                <div class="chat-title">
-                    <span class="chat-title-main">Testfy</span>
-                    <div class="chat-status">
-                        <span class="status-dot" aria-hidden="true"></span>
-                        <span data-i18n="ai.status">Çevrimiçi</span>
-                    </div>
-                </div>
-                <div class="chat-header-actions">
-                    <button type="button" class="chat-header-btn" id="chatMinimizeBtn" aria-label="Pencereyi küçült">−</button>
-                    <button type="button" class="chat-header-btn" id="chatCloseBtn" aria-label="Pencereyi kapat">✕</button>
-                </div>
-            </header>
-
-            <div class="chat-body">
-                <div class="ai-chat" id="aiChat" role="log" aria-live="polite" aria-atomic="false">
-                    <!-- Mesajlar buraya eklenecek -->
-                </div>
-            </div>
-
-            <footer class="chat-footer">
-                <div class="ai-input-container">
-                    <div class="ai-input-group">
-                        <label for="aiInput" class="sr-only">Testfy asistanına mesajınız</label>
-                        <input 
-                            type="text" 
-                            class="ai-input" 
-                            id="aiInput" 
-                            data-i18n-placeholder="ai.placeholder"
-                            placeholder="Testfy asistanına sor..." 
-                            maxlength="500"
-                            aria-label="Mesaj giriş alanı"
-                            autocomplete="off" />
-                        <button 
-                            type="button" 
-                            class="ai-send-btn" 
-                            id="aiSendBtn"
-                            aria-label="Mesaj gönder"
-                            data-i18n="ai.send">→</button>
-                    </div>
-                </div>
-            </footer>
-        </section>
-    </div>
-
-    <!-- Loading Overlay -->
-    <div class="loading-overlay" id="loadingOverlay" aria-hidden="true">
-        <div class="loading-spinner" role="status">
-            <span class="sr-only" data-i18n="msg.loading">Yükleniyor...</span>
-        </div>
-    </div>
-
-    <!-- Toast Notification -->
-    <div class="toast-container" id="toastContainer" role="status" aria-live="polite" aria-atomic="true"></div>
-
-    <!-- External JavaScript -->
-    <script src="utils.js"></script>
-    <script src="config.js"></script>
-    <script src="storage.js"></script>
-    <script src="sorular.js"></script>
-    <script src="language.js"></script>
-    <script src="testify-ai.js"></script>
-    <script src="library.js"></script>
-
-    <!-- Birleştirilmiş APP + QUIZ + CHAT JS -->
-    <script>
-    /**
-     * TESTIFY MAIN APPLICATION - TAM HATASIZ
-     * Tüm özellikler çalışır hale getiren ana uygulama
-     */
-
-    'use strict';
-
-    // i18n fallback: language.js yüklenmese bile t() hata vermesin
-    if (typeof window.t !== 'function') {
-        window.t = function (_key, fallback) {
-            return fallback;
-        };
-    }
-
-    /**
-     * TESTIFY AD MANAGER – TEK MERKEZ
-     * - index.html yapısını bozmadan tüm reklam kontrolü burada
-     * - AdSense scriptini yükler
-     * - ad-container içlerine <ins class="adsbygoogle"> yerleştirir
-     * - Sekme değişimlerinde (SPA) sayfa görüntülemelerini loglar
-     * - Fazla agresif / policy bozan auto-refresh YOK
-     */
-    const AdManager = {
-        // 🔹 BURAYI KENDİ ADSENSE HESABINA GÖRE DÜZENLE
-        adsenseClient: 'ca-pub-1234567890123456', // Örn: ca-pub-1234567890123456
-
-        // index.html’deki reklam kutuların ID -> slot eşleşmesi
-        // ad-container kullanan yerler:
-        //  - <div id="ad-top" class="ad-container">
-        //  - <div id="ad-dashboard" class="ad-container">
-        //  - <div id="ad-leaderboard" class="ad-container">
-        //  - <div id="ad-bottom" class="ad-container">
-        slots: {
-            'ad-top': {
-                slot: 'CHANGE_ME_TOP',        // data-ad-slot
-                format: 'auto',
-                fullWidth: true,
-                style: 'display:block'
-            },
-            'ad-dashboard': {
-                slot: 'CHANGE_ME_DASHBOARD',
-                format: 'auto',
-                fullWidth: true,
-                style: 'display:block'
-            },
-            'ad-leaderboard': {
-                slot: 'CHANGE_ME_LEADERBOARD',
-                format: 'auto',
-                fullWidth: true,
-                style: 'display:block'
-            },
-            'ad-bottom': {
-                slot: 'CHANGE_ME_BOTTOM',
-                format: 'auto',
-                fullWidth: true,
-                style: 'display:block'
-            }
-        },
-
-        observer: null,
-
-        init() {
-            try {
-                console.log('📢 AdManager init');
-                this.injectAdsenseScript();
-                this.mountAllSlots();
-                this.setupImpressionObserver();
-            } catch (e) {
-                console.error('AdManager.init hatası:', e);
-            }
-        },
-
-        // AdSense script’ini head’e ekler (zaten varsa tekrar eklemez)
-        injectAdsenseScript() {
-            try {
-                const already = document.querySelector(
-                    'script[src*="pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"]'
-                );
-                if (already) return;
-
-                if (!this.isClientConfigured()) {
-                    console.warn('AdManager: adsenseClient ayarlı değil, placeholder gösterilecek.');
-                    return;
-                }
-
-                const s = document.createElement('script');
-                s.async = true;
-                s.crossOrigin = 'anonymous';
-                s.src =
-                    'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' +
-                    encodeURIComponent(this.adsenseClient);
-                document.head.appendChild(s);
-            } catch (e) {
-                console.warn('AdSense script eklenemedi:', e);
-            }
-        },
-
-        isClientConfigured() {
-            return (
-                this.adsenseClient &&
-                this.adsenseClient.startsWith('ca-pub-') &&
-                !this.adsenseClient.includes('CHANGE_ME')
-            );
-        },
-
-        isSlotConfigured(slotCfg) {
-            return (
-                slotCfg &&
-                slotCfg.slot &&
-                !String(slotCfg.slot).includes('CHANGE_ME')
-            );
-        },
-
-        // Tüm tanımlı slotları DOM’da bulup <ins> ekler
-        mountAllSlots() {
-            if (!this.isClientConfigured()) {
-                // ID’ler doldurulana kadar hiçbir şey silme, site bozulmasın
-                return;
-            }
-
-            Object.entries(this.slots).forEach(([id, cfg]) => {
-                const host = document.getElementById(id);
-                if (!host) return;
-                if (!this.isSlotConfigured(cfg)) return;
-
-                // Daha önce initialize edilmişse tekrar kurcalama
-                if (host.dataset.adInitialized === '1') return;
-
-                // Placeholder yazısını sakla
-                if (!host.dataset.initialHtml) {
-                    host.dataset.initialHtml = host.innerHTML;
-                }
-
-                // Eski placeholder’ı boşalt, ins ekle
-                host.innerHTML = '';
-
-                const ins = document.createElement('ins');
-                ins.className = 'adsbygoogle';
-                ins.style.cssText = cfg.style || 'display:block';
-                ins.setAttribute('data-ad-client', this.adsenseClient);
-                ins.setAttribute('data-ad-slot', cfg.slot);
-
-                if (cfg.format) {
-                    ins.setAttribute('data-ad-format', cfg.format);
-                }
-                if (cfg.fullWidth) {
-                    ins.setAttribute('data-full-width-responsive', 'true');
-                }
-
-                host.appendChild(ins);
-                host.dataset.adInitialized = '1';
-
-                // AdSense’e slotu çalıştır
-                this.safePush();
-            });
-        },
-
-        safePush() {
-            try {
-                (window.adsbygoogle = window.adsbygoogle || []).push({});
-            } catch (e) {
-                // AdSense henüz yüklenmemiş olabilir, sorun değil
-            }
-        },
-
-        // Reklam görünürlük takibi (impression log)
-        setupImpressionObserver() {
-            try {
-                if (!('IntersectionObserver' in window)) return;
-
-                const targets = document.querySelectorAll(
-                    '.ad-container, .adsbygoogle, .ad-banner, .ad-sidebar'
-                );
-                if (!targets.length) return;
-
-                if (this.observer && this.observer.disconnect) {
-                    this.observer.disconnect();
-                }
-
-                this.observer = new IntersectionObserver(
-                    (entries) => {
-                        entries.forEach((entry) => {
-                            if (entry.isIntersecting && !entry.target.dataset.impressionLogged) {
-                                entry.target.dataset.impressionLogged = '1';
-                                console.log(
-                                    '📊 Ad Impression:',
-                                    entry.target.id || entry.target.className || entry.target
-                                );
-                                // Burada istersen analytics’e hit gönderebilirsin
-                            }
-                        });
-                    },
-                    { threshold: 0.5 }
-                );
-
-                targets.forEach((el) => this.observer.observe(el));
-            } catch (e) {
-                console.warn('Impression observer hatası:', e);
-            }
-        },
-
-        // Gerektiğinde tekrar slot mount etmeye yarar (SPA tab değişiminde vs.)
-        refreshAds(contextName) {
-            try {
-                console.log('🔁 AdManager.refreshAds, context:', contextName || '-');
-                // Şu an için agresif refresh yapmıyoruz; sadece yeni eklenen slot varsa mount olsun
-                this.mountAllSlots();
-                this.setupImpressionObserver();
-            } catch (e) {
-                console.warn('refreshAds hatası:', e);
-            }
-        },
-
-        // App.switchTab içinde çağrılıyor – burada sadece log + hafif refresh yap
-        onTabChanged(tabName) {
-            console.log('📊 Page View (SPA):', tabName);
-            this.refreshAds(tabName);
-        }
-    };
-
-    const App = {
-        /**
-         * Uygulamayı başlatır
-         */
-        init() {
-            console.log('🎓 Testify başlatılıyor...');
-            
-            try {
-                // Storage'ı kontrol et
-                this.checkStorage();
-                
-                // Kullanıcı verilerini yükle
-                this.loadUserData();
-                
-                // Tema yükle
-                this.loadTheme();
-                
-                // Event listener'ları ekle
-                this.attachEventListeners();
-                
-                // Dashboard'ı güncelle
-                this.updateDashboard();
-                
-                // Leaderboard'ı güncelle
-                this.updateLeaderboard();
-                
-                console.log('✅ Testify hazır!');
-            } catch (error) {
-                console.error('❌ Başlatma hatası:', error);
-                Utils.handleError(error, 'App.init');
-            }
-        },
-
-        /**
-         * Storage kontrolü
-         */
-        checkStorage() {
-            try {
-                const test = '__storage_test__';
-                localStorage.setItem(test, test);
-                localStorage.removeItem(test);
-            } catch (e) {
-                Utils.showToast('LocalStorage kullanılamıyor! Veriler kaydedilmeyecek.', 'warning');
-                console.error('Storage hatası:', e);
-            }
-        },
-
-        /**
-         * Kullanıcı verilerini yükler
-         */
-        loadUserData() {
-            try {
-                const userData = StorageManager.getUserData();
-                
-                // Header'daki bilgileri güncelle
-                const userAvatar = document.getElementById('userAvatar');
-                const streak = document.getElementById('streak');
-                const totalPoints = document.getElementById('totalPoints');
-                const rank = document.getElementById('rank');
-                
-                if (userAvatar) {
-                    const username = userData.username || 'U';
-                    userAvatar.textContent = username.charAt(0).toUpperCase();
-                }
-                
-                if (streak) {
-                    const streakText = window.t ? t('header.streak', 'Gün') : 'Gün';
-                    const streakSpan = streak.querySelector('span[data-i18n="header.streak"]');
-                    if (streakSpan) {
-                        streak.innerHTML = `${userData.stats.streak} <span data-i18n="header.streak">${streakText}</span>`;
-                    } else {
-                        streak.textContent = userData.stats.streak + ' ' + streakText;
-                    }
-                }
-                
-                if (totalPoints) {
-                    const xpText = window.t ? t('header.points', 'XP') : 'XP';
-                    const xpSpan = totalPoints.querySelector('span[data-i18n="header.points"]');
-                    if (xpSpan) {
-                        totalPoints.innerHTML = `${userData.stats.xp} <span data-i18n="header.points">${xpText}</span>`;
-                    } else {
-                        totalPoints.textContent = userData.stats.xp + ' ' + xpText;
-                    }
-                }
-                
-                if (rank) {
-                    rank.textContent = userData.stats.rank ? '#' + userData.stats.rank : '#--';
-                }
-            } catch (error) {
-                console.error('Kullanıcı verisi yükleme hatası:', error);
-                Utils.handleError(error, 'loadUserData');
-            }
-        },
-
-        /**
-         * Tema yöneticisi
-         */
-        themeManager: {
-            toggle() {
-                const html = document.documentElement;
-                const currentTheme = html.getAttribute('data-theme');
-                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-                
-                html.setAttribute('data-theme', newTheme);
-                
-                const themeIcon = document.getElementById('themeIcon');
-                if (themeIcon) {
-                    themeIcon.textContent = newTheme === 'light' ? '☀️' : '🌙';
-                }
-                
-                const themeBtn = document.querySelector('.theme-toggle');
-                if (themeBtn) {
-                    themeBtn.setAttribute('aria-pressed', newTheme === 'dark');
-                }
-                
-                Utils.setToStorage(Config.STORAGE_KEYS.THEME, newTheme);
-            }
-        },
-
-        /**
-         * Temayı yükler
-         */
-        loadTheme() {
-            const savedTheme = Utils.getFromStorage(Config.STORAGE_KEYS.THEME, 'light');
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            
-            const themeIcon = document.getElementById('themeIcon');
-            if (themeIcon) {
-                themeIcon.textContent = savedTheme === 'light' ? '☀️' : '🌙';
-            }
-            
-            const themeBtn = document.querySelector('.theme-toggle');
-            if (themeBtn) {
-                themeBtn.setAttribute('aria-pressed', savedTheme === 'dark');
-            }
-        },
-
-        /**
-         * Sekme geçişlerinde kullanılan loading overlay
-         */
-        showLoadingOverlay() {
-            try {
-                const overlay = document.getElementById('loadingOverlay');
-                if (overlay) {
-                    overlay.style.display = 'flex';
-                    overlay.setAttribute('aria-hidden', 'false');
-                }
-            } catch (error) {
-                console.error('Loading overlay gösterilemedi:', error);
-            }
-        },
-
-        hideLoadingOverlay() {
-            try {
-                const overlay = document.getElementById('loadingOverlay');
-                if (overlay) {
-                    overlay.style.display = 'none';
-                    overlay.setAttribute('aria-hidden', 'true');
-                }
-            } catch (error) {
-                console.error('Loading overlay gizlenemedi:', error);
-            }
-        },
-
-        /**
-         * URL hash'ine göre ilk açılacak sekmeyi ayarlar
-         */
-        handleInitialTabFromHash() {
-            try {
-                const hash = window.location.hash ? window.location.hash.replace('#', '') : '';
-                const defaultTab = 'dashboard';
-                const targetTab = hash && document.getElementById(hash) ? hash : defaultTab;
-
-                if (targetTab !== defaultTab) {
-                    this.switchTab(targetTab, { skipHistory: true });
-                } else {
-                    // Varsayılan sekme için URL'i senkronla
-                    if (window.history && window.history.replaceState) {
-                        window.history.replaceState({ tab: defaultTab }, '', '#' + defaultTab);
-                    } else {
-                        window.location.hash = '#' + defaultTab;
-                    }
-                }
-            } catch (error) {
-                console.error('İlk sekme ayarlama hatası:', error);
-            }
-        },
-
-        /**
-         * Tab navigasyonu - Library kontrolü + sayfa/advert yenileme
-         */
-        switchTab(tabName, options = {}) {
-            try {
-                // Kısa bir loading efekti göster
-                this.showLoadingOverlay();
-
-                // Tab butonlarını güncelle
-                document.querySelectorAll('.nav-tab').forEach(tab => {
-                    const isActive = tab.dataset.tab === tabName;
-                    tab.classList.toggle('active', isActive);
-                    tab.setAttribute('aria-selected', isActive);
-                });
-
-                // Tab içeriklerini güncelle
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.toggle('active', content.id === tabName);
-                });
-
-                // Tab'a özel yüklemeler
-                switch(tabName) {
-                    case 'library':
-                        if (window.LibraryManager && typeof LibraryManager.loadLibrary === 'function') {
-                            LibraryManager.loadLibrary();
-                        } else {
-                            console.warn('⚠️ LibraryManager henüz yüklenmedi');
-                            setTimeout(() => {
-                                if (window.LibraryManager) {
-                                    LibraryManager.loadLibrary();
-                                } else {
-                                    console.error('❌ LibraryManager yüklenemedi');
-                                }
-                            }, 100);
-                        }
-                        break;
-                    case 'leaderboard':
-                        this.updateLeaderboard();
-                        break;
-                    case 'notes':
-                        this.updateNotes();
-                        break;
-                    case 'analysis':
-                        this.updateAnalysis();
-                        break;
-                    case 'dashboard':
-                        this.updateDashboard();
-                        break;
-                }
-
-                // URL & history güncelle (SPA sayfa geçişi)
-                if (!options.skipHistory) {
-                    if (window.history && window.history.pushState) {
-                        window.history.pushState({ tab: tabName }, '', '#' + tabName);
-                    } else {
-                        window.location.hash = '#' + tabName;
-                    }
-                }
-
-                // Reklamları yenile ve sayfa görüntüleme logla
-                if (window.AdManager && typeof AdManager.onTabChanged === 'function') {
-                    AdManager.onTabChanged(tabName);
-                }
-
-                // Kısa bir gecikmeden sonra loading'i kapat ve en üste kaydır
-                setTimeout(() => {
-                    this.hideLoadingOverlay();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }, 200);
-            } catch (error) {
-                console.error('Tab değiştirme hatası:', error);
-                Utils.handleError(error, 'switchTab');
-                this.hideLoadingOverlay();
-            }
-        },
-
-        /**
-         * Dashboard'ı günceller
-         */
-        updateDashboard() {
-            try {
-                const userData = StorageManager.getUserData();
-                const stats = userData.stats;
-
-                const totalTests = document.getElementById('totalTests');
-                const totalQuestions = document.getElementById('totalQuestions');
-                const successRate = document.getElementById('successRate');
-                const avgTime = document.getElementById('avgTime');
-
-                if (totalTests) totalTests.textContent = stats.totalTests;
-                if (totalQuestions) totalQuestions.textContent = stats.totalQuestions;
-                
-                if (successRate) {
-                    const rate = stats.totalQuestions > 0 
-                        ? Math.round((stats.correctAnswers / stats.totalQuestions) * 100)
-                        : 0;
-                    successRate.textContent = rate + '%';
-                }
-                
-                if (avgTime) {
-                    const avg = stats.totalTests > 0 
-                        ? Math.round(stats.totalTime / stats.totalTests)
-                        : 0;
-                    avgTime.textContent = avg + 's';
-                }
-
-                // Son aktiviteleri göster
-                this.updateActivityList();
-            } catch (error) {
-                console.error('Dashboard güncelleme hatası:', error);
-                Utils.handleError(error, 'updateDashboard');
-            }
-        },
-
-        /**
-         * Aktivite listesini günceller
-         */
-        updateActivityList() {
-            try {
-                const activities = StorageManager.getActivities(5);
-                const activityList = document.getElementById('activityList');
-                
-                if (!activityList) return;
-
-                if (activities.length === 0) {
-                    const emptyText = window.t 
-                        ? t('dashboard.empty', 'Henüz aktivite yok. Test çözerek başla!')
-                        : 'Henüz aktivite yok. Test çözerek başla!';
+    <!-- DASHBOARD PAGE -->
+    <div class="page active" id="dashboard">
+        <div class="container">
+            <div class="grid-layout">
+                <div class="main-content">
+                    <h1>📊 Dashboard</h1>
                     
-                    activityList.innerHTML = `
-                        <div class="empty-state">
-                            <div class="empty-state-icon">📊</div>
-                            <p>${emptyText}</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                activityList.innerHTML = activities.map(activity => `
-                    <div class="activity-item" style="padding: 15px; background: var(--bg-secondary); border-radius: 8px; margin-bottom: 10px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <strong>${this.getActivityTitle(activity)}</strong>
-                                <p style="margin: 5px 0 0; color: var(--text-secondary); font-size: 0.9rem;">
-                                    ${this.getActivityDescription(activity)}
-                                </p>
-                            </div>
-                            <small style="color: var(--text-tertiary);">
-                                ${Utils.formatDate(activity.timestamp)}
-                            </small>
-                        </div>
-                    </div>
-                `).join('');
-            } catch (error) {
-                console.error('Aktivite listesi hatası:', error);
-            }
-        },
-
-        /**
-         * Aktivite başlığı
-         */
-        getActivityTitle(activity) {
-            const titles = {
-                'test_completed': '✅ ' + (window.t ? t('activity.testCompleted', 'Test Tamamlandı') : 'Test Tamamlandı'),
-                'test_saved': '💾 ' + (window.t ? t('activity.testSaved', 'Test Kaydedildi') : 'Test Kaydedildi'),
-                'test_exported': '📥 ' + (window.t ? t('activity.testExported', 'Test İndirildi') : 'Test İndirildi'),
-                'note_created': '📝 ' + (window.t ? t('activity.noteCreated', 'Not Oluşturuldu') : 'Not Oluşturuldu'),
-                'level_up': '🎉 ' + (window.t ? t('activity.levelUp', 'Level Atlandı') : 'Level Atlandı')
-            };
-            return titles[activity.type] || 'Aktivite';
-        },
-
-        /**
-         * Aktivite açıklaması
-         */
-        getActivityDescription(activity) {
-            switch(activity.type) {
-                case 'test_completed':
-                    return `${activity.data.correctAnswers}/${activity.data.totalQuestions} doğru - %${activity.data.successRate} başarı`;
-                case 'test_saved':
-                    return `${activity.data.title} - ${activity.data.questionCount} soru`;
-                case 'test_exported':
-                    return `${activity.data.title} - ${activity.data.format.toUpperCase()}`;
-                case 'note_created':
-                    return activity.data.title || 'Yeni not';
-                case 'level_up':
-                    return `Level ${activity.data.level}!`;
-                default:
-                    return '';
-            }
-        },
-
-        /**
-         * Leaderboard'ı günceller
-         */
-        updateLeaderboard() {
-            try {
-                const leaderboard = StorageManager.getLeaderboard(100);
-                const tbody = document.getElementById('leaderboardBody');
-                
-                if (!tbody) return;
-
-                if (leaderboard.length === 0) {
-                    const emptyText = window.t 
-                        ? t('leaderboard.empty', 'Henüz veri bulunmuyor')
-                        : 'Henüz veri bulunmuyor';
-                    
-                    tbody.innerHTML = `
-                        <tr>
-                            <td colspan="5" class="empty-cell">${emptyText}</td>
-                        </tr>
-                    `;
-                    return;
-                }
-
-                tbody.innerHTML = leaderboard.map(user => `
-                    <tr>
-                        <td>
-                            <span class="rank-badge ${this.getRankClass(user.rank)}">${user.rank}</span>
-                        </td>
-                        <td>
-                            <div class="user-info">
-                                <div class="user-avatar-small">${user.username.charAt(0).toUpperCase()}</div>
-                                <span>${Utils.sanitizeHTML(user.username)}</span>
-                            </div>
-                        </td>
-                        <td><strong>${user.xp} XP</strong></td>
-                        <td>${user.totalTests}</td>
-                        <td><span style="color: var(--success);">${user.successRate}%</span></td>
-                    </tr>
-                `).join('');
-            } catch (error) {
-                console.error('Leaderboard güncelleme hatası:', error);
-                Utils.handleError(error, 'updateLeaderboard');
-            }
-        },
-
-        /**
-         * Rank class
-         */
-        getRankClass(rank) {
-            if (rank === 1) return 'rank-1';
-            if (rank === 2) return 'rank-2';
-            if (rank === 3) return 'rank-3';
-            return 'rank-default';
-        },
-
-        /**
-         * Notları günceller
-         */
-        updateNotes() {
-            try {
-                const notes = StorageManager.getNotes();
-                const notesList = document.getElementById('notesList');
-                
-                if (!notesList) return;
-
-                if (notes.length === 0) {
-                    const emptyText = window.t 
-                        ? t('notes.empty', 'Henüz not eklemedin')
-                        : 'Henüz not eklemedin';
-                    
-                    notesList.innerHTML = `
-                        <div class="empty-state">
-                            <div class="empty-state-icon">📚</div>
-                            <p>${emptyText}</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                notesList.innerHTML = notes.map(note => {
-                    const editText = window.t ? t('notes.edit', 'Düzenle') : 'Düzenle';
-                    const deleteText = window.t ? t('notes.delete', 'Sil') : 'Sil';
-                    
-                    return `
-                        <div class="note-card">
-                            <h3 class="note-title">${Utils.sanitizeHTML(note.title || 'Başlıksız Not')}</h3>
-                            <p class="note-content">${Utils.sanitizeHTML(note.content || '')}</p>
-                            <div class="note-meta">
-                                <span>${Utils.formatDate(note.createdAt)}</span>
-                                <div>
-                                    <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.85rem;" onclick="App.editNote('${note.id}')">
-                                        ${editText}
-                                    </button>
-                                    <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.85rem;" onclick="App.deleteNote('${note.id}')">
-                                        ${deleteText}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-            } catch (error) {
-                console.error('Notlar güncelleme hatası:', error);
-                Utils.handleError(error, 'updateNotes');
-            }
-        },
-
-        /**
-         * Not ekler
-         */
-        async addNote() {
-            try {
-                const titlePrompt = window.t ? t('notes.titlePrompt', 'Not Başlığı:') : 'Not Başlığı:';
-                const contentPrompt = window.t ? t('notes.contentPrompt', 'Not İçeriği:') : 'Not İçeriği:';
-                
-                const title = prompt(titlePrompt);
-                if (!title) return;
-
-                const content = prompt(contentPrompt);
-                if (!content) return;
-
-                const note = {
-                    title: title,
-                    content: content
-                };
-
-                if (StorageManager.saveNote(note)) {
-                    this.updateNotes();
-                }
-            } catch (error) {
-                console.error('Not ekleme hatası:', error);
-                Utils.handleError(error, 'addNote');
-            }
-        },
-
-        /**
-         * Not düzenler
-         */
-        async editNote(noteId) {
-            try {
-                const notes = StorageManager.getNotes();
-                const note = notes.find(n => n.id === noteId);
-                
-                if (!note) return;
-
-                const titlePrompt = window.t ? t('notes.titlePrompt', 'Not Başlığı:') : 'Not Başlığı:';
-                const contentPrompt = window.t ? t('notes.contentPrompt', 'Not İçeriği:') : 'Not İçeriği:';
-                
-                const title = prompt(titlePrompt, note.title);
-                if (title === null) return;
-
-                const content = prompt(contentPrompt, note.content);
-                if (content === null) return;
-
-                note.title = title;
-                note.content = content;
-
-                if (StorageManager.saveNote(note)) {
-                    this.updateNotes();
-                }
-            } catch (error) {
-                console.error('Not düzenleme hatası:', error);
-                Utils.handleError(error, 'editNote');
-            }
-        },
-
-        /**
-         * Not siler
-         */
-        async deleteNote(noteId) {
-            try {
-                const confirmMsg = window.t 
-                    ? t('notes.deleteConfirm', 'Bu notu silmek istediğinizden emin misiniz?')
-                    : 'Bu notu silmek istediğinizden emin misiniz?';
-                
-                const confirmed = await Utils.confirm(confirmMsg);
-                
-                if (confirmed && StorageManager.deleteNote(noteId)) {
-                    this.updateNotes();
-                }
-            } catch (error) {
-                console.error('Not silme hatası:', error);
-                Utils.handleError(error, 'deleteNote');
-            }
-        },
-
-        /**
-         * Analiz sayfasını günceller
-         */
-        updateAnalysis() {
-            try {
-                const userData = StorageManager.getUserData();
-                const stats = userData.stats;
-                const analysisContent = document.getElementById('analysisContent');
-                
-                if (!analysisContent) return;
-
-                if (stats.totalTests === 0) {
-                    const emptyText = window.t 
-                        ? t('analysis.empty', 'Analiz için daha fazla test çöz')
-                        : 'Analiz için daha fazla test çöz';
-                    
-                    analysisContent.innerHTML = `
-                        <div class="empty-state">
-                            <div class="empty-state-icon">📈</div>
-                            <p>${emptyText}</p>
-                        </div>
-                    `;
-                    return;
-                }
-
-                const successRate = Math.round((stats.correctAnswers / stats.totalQuestions) * 100);
-                const avgTime = Math.round(stats.totalTime / stats.totalTests);
-
-                const avgSuccessText = window.t ? t('analysis.avgSuccess', 'Ortalama Başarı') : 'Ortalama Başarı';
-                const avgTimeText = window.t ? t('analysis.avgTime', 'Ortalama Süre') : 'Ortalama Süre';
-                const totalCorrectText = window.t ? t('analysis.totalCorrect', 'Toplam Doğru') : 'Toplam Doğru';
-                const totalWrongText = window.t ? t('analysis.totalWrong', 'Toplam Yanlış') : 'Toplam Yanlış';
-                const evaluationText = window.t ? t('analysis.evaluation', 'Performans Değerlendirmesi') : 'Performans Değerlendirmesi';
-
-                analysisContent.innerHTML = `
                     <div class="stats-grid">
                         <div class="stat-card">
-                            <div class="stat-icon">📊</div>
-                            <div class="stat-value">${successRate}%</div>
-                            <div class="stat-label">${avgSuccessText}</div>
+                            <div class="stat-icon">📝</div>
+                            <div class="stat-value">0</div>
+                            <div class="stat-label">Çözülen Test</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon">⏱️</div>
-                            <div class="stat-value">${Utils.formatTime(avgTime)}</div>
-                            <div class="stat-label">${avgTimeText}</div>
+                            <div class="stat-icon">✅</div>
+                            <div class="stat-value">0%</div>
+                            <div class="stat-label">Başarı Oranı</div>
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon">🎯</div>
-                            <div class="stat-value">${stats.correctAnswers}</div>
-                            <div class="stat-label">${totalCorrectText}</div>
+                            <div class="stat-value">0</div>
+                            <div class="stat-label">Toplam Soru</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-icon">❌</div>
-                            <div class="stat-value">${stats.wrongAnswers}</div>
-                            <div class="stat-label">${totalWrongText}</div>
+                            <div class="stat-icon">⏱️</div>
+                            <div class="stat-value">0s</div>
+                            <div class="stat-label">Ort. Süre</div>
                         </div>
                     </div>
-                    <div style="margin-top: 30px; padding: 20px; background: var(--bg-secondary); border-radius: 10px;">
-                        <h3>${evaluationText}</h3>
-                        <p style="margin-top: 10px; line-height: 1.6;">
-                            ${this.getPerformanceText(successRate)}
-                        </p>
+
+                    <!-- Ad Between Content (AdManager: ad-dashboard) -->
+                    <div id="ad-dashboard" class="ad-banner ad-container" style="margin: 2rem 0;">
+                        📢 Reklam Alanı - İçerik Arası (728x90)
                     </div>
-                `;
-            } catch (error) {
-                console.error('Analiz güncelleme hatası:', error);
-                Utils.handleError(error, 'updateAnalysis');
-            }
-        },
 
-        /**
-         * Performans metni (TR/EN)
-         */
-        getPerformanceText(successRate) {
-            const lang =
-                window.LanguageManager && LanguageManager.currentLang === 'en' ? 'en' : 'tr';
+                    <div class="empty-state">
+                        <div class="empty-icon">📊</div>
+                        <p>Henüz aktivite yok. Test çözerek başla!</p>
+                        <button class="btn btn-primary" onclick="navigateTo('test-select')" style="margin-top: 1rem;">
+                            Test Çözmeye Başla
+                        </button>
+                    </div>
+                </div>
 
-            if (lang === 'en') {
-                if (successRate >= 90) {
-                    return '🌟 Excellent! Your performance is great. Keep it up!';
-                } else if (successRate >= 75) {
-                    return '👏 Very good! Strong performance. With a bit more study you can improve even further.';
-                } else if (successRate >= 60) {
-                    return '💪 You are doing well! With some more practice you can reach your goals.';
-                } else if (successRate >= 40) {
-                    return '📚 You need to study more. Regular practice will help you improve.';
-                } else {
-                    return '🎯 It is recommended to review the basics. Keep going step by step!';
-                }
-            } else {
-                if (successRate >= 90) {
-                    return '🌟 Mükemmel! Harika bir performans gösteriyorsun. Böyle devam et!';
-                } else if (successRate >= 75) {
-                    return '👏 Çok iyi! Başarılı bir performans. Biraz daha çalışarak daha da iyileştirebilirsin.';
-                } else if (successRate >= 60) {
-                    return '💪 İyi gidiyorsun! Biraz daha pratik yaparsan hedeflerine ulaşabilirsin.';
-                } else if (successRate >= 40) {
-                    return '📚 Daha fazla çalışma gerekiyor. Düzenli pratik yaparak gelişebilirsin.';
-                } else {
-                    return '🎯 Temel konuları tekrar etmen önerilir. Yavaş yavaş ilerlemeye devam et!';
-                }
-            }
-        },
+                <!-- Sidebar Ad -->
+                <aside class="ad-sidebar">
+                    📢 Reklam Alanı<br>Sidebar (300x600)
+                </aside>
+            </div>
+        </div>
+    </div>
 
-        /**
-         * Ayarları kaydeder - Validation ile
-         */
-        saveSettings(event) {
-            event.preventDefault();
+    <!-- TEST SELECTION PAGE -->
+    <div class="page" id="test-select">
+        <div class="container">
+            <div class="grid-layout">
+                <div class="main-content">
+                    <h1>📝 Test Seç</h1>
+                    
+                    <div class="card-grid">
+                        <div class="card" onclick="navigateTo('quiz')">
+                            <div class="card-icon">📖</div>
+                            <div class="card-title">Pratik Modu</div>
+                            <div class="card-desc">Zaman baskısı olmadan pratik yap</div>
+                        </div>
+                        <div class="card" onclick="navigateTo('quiz')">
+                            <div class="card-icon">⏱️</div>
+                            <div class="card-title">Sınav Modu</div>
+                            <div class="card-desc">Gerçek sınav deneyimi</div>
+                        </div>
+                        <div class="card" onclick="navigateTo('quiz')">
+                            <div class="card-icon">🤖</div>
+                            <div class="card-title">AI Test</div>
+                            <div class="card-desc">AI tarafından oluşturulan sorular</div>
+                        </div>
+                        <div class="card" onclick="navigateTo('quiz')">
+                            <div class="card-icon">⚙️</div>
+                            <div class="card-title">Özel Test</div>
+                            <div class="card-desc">Kendi kriterlerine göre</div>
+                        </div>
+                    </div>
 
-            try {
-                const form = event.target;
-                const usernameInput = form.username;
-                const emailInput = form.email;
+                    <!-- Ad Between Cards -->
+                    <div class="ad-banner" style="margin: 2rem 0;">
+                        📢 Reklam Alanı - Test Seçimi (728x90)
+                    </div>
+                </div>
 
-                // Validation
-                const isUsernameValid = Utils.validateInput(usernameInput, 'username');
-                const isEmailValid = Utils.validateInput(emailInput, 'email');
+                <aside class="ad-sidebar">
+                    📢 Reklam Alanı<br>Sidebar (300x600)
+                </aside>
+            </div>
+        </div>
+    </div>
 
-                if (!isUsernameValid || !isEmailValid) {
-                    return;
-                }
+    <!-- QUIZ PAGE -->
+    <div class="page" id="quiz">
+        <div class="container">
+            <div class="grid-layout">
+                <div class="main-content">
+                    <div class="quiz-container">
+                        <div class="quiz-progress">
+                            <div class="progress-fill" style="width: 10%"></div>
+                        </div>
 
-                const username = usernameInput.value.trim();
-                const email = emailInput.value.trim();
+                        <div class="question-card">
+                            <div class="question-text">
+                                İşletim sisteminin temel görevlerinden biri nedir?
+                            </div>
 
-                // Kaydet
-                const settings = {
-                    username: username,
-                    email: email,
-                    notifications: {
-                        email: form.emailNotif.checked,
-                        push: form.pushNotif.checked
-                    }
-                };
-
-                const userData = StorageManager.getUserData();
-                userData.username = username;
-                userData.email = email;
-                userData.settings.notifications = settings.notifications;
-
-                if (StorageManager.updateUserData(userData)) {
-                    const successMsg = window.t ? t('msg.saved', 'Başarıyla kaydedildi!') : 'Başarıyla kaydedildi!';
-                    Utils.showToast(successMsg, 'success');
-                    this.loadUserData();
-                } else {
-                    const errorMsg = window.t ? t('msg.error', 'Bir hata oluştu!') : 'Bir hata oluştu!';
-                    Utils.showToast(errorMsg, 'error');
-                }
-            } catch (error) {
-                console.error('Ayar kaydetme hatası:', error);
-                Utils.handleError(error, 'saveSettings');
-            }
-        },
-
-        /**
-         * Ayarları sıfırlar
-         */
-        async resetSettings() {
-            try {
-                const confirmMsg = window.t 
-                    ? t('settings.resetConfirm', 'Ayarlar varsayılan değerlere dönecek. Emin misiniz?')
-                    : 'Ayarlar varsayılan değerlere dönecek. Emin misiniz?';
-                
-                const confirmed = await Utils.confirm(confirmMsg);
-                
-                if (!confirmed) return;
-
-                const userData = StorageManager.getUserData();
-                document.getElementById('username').value = userData.username;
-                document.getElementById('email').value = userData.email || '';
-                document.getElementById('emailNotif').checked = true;
-                document.getElementById('pushNotif').checked = false;
-
-                const infoMsg = window.t ? t('msg.reset', 'Ayarlar sıfırlandı') : 'Ayarlar sıfırlandı';
-                Utils.showToast(infoMsg, 'info');
-            } catch (error) {
-                console.error('Ayar sıfırlama hatası:', error);
-                Utils.handleError(error, 'resetSettings');
-            }
-        },
-
-        /**
-         * Dosya yükleme - Validation ile
-         */
-        handleFileUpload(event) {
-            try {
-                const file = event.target.files[0];
-                if (!file) return;
-
-                // Dosya boyutu kontrolü
-                if (file.size > Config.FILE_UPLOAD.MAX_SIZE) {
-                    const errorMsg = window.t ? t('error.fileSize', 'Dosya boyutu çok büyük') : 'Dosya boyutu çok büyük';
-                    Utils.showToast(errorMsg, 'error');
-                    return;
-                }
-
-                // Dosya türü kontrolü
-                const ext = file.name.split('.').pop().toLowerCase();
-                if (!Config.FILE_UPLOAD.ALLOWED_TYPES.includes(ext)) {
-                    const errorMsg = window.t ? t('error.fileType', 'Desteklenmeyen dosya türü') : 'Desteklenmeyen dosya türü';
-                    Utils.showToast(errorMsg, 'error');
-                    return;
-                }
-
-                // Dosya bilgisini göster
-                const fileInfo = document.getElementById('fileInfo');
-                if (fileInfo) {
-                    fileInfo.innerHTML = `
-                        <div style="display: flex; align-items: center; gap: 10px;">
-                            <span>📄</span>
-                            <div>
-                                <div><strong>${Utils.sanitizeHTML(file.name)}</strong></div>
-                                <small style="color: var(--text-secondary);">${Utils.formatFileSize(file.size)}</small>
+                            <div class="options">
+                                <div class="option">
+                                    <div class="option-letter">A</div>
+                                    <span>Donanım kaynaklarını yönetmek</span>
+                                </div>
+                                <div class="option">
+                                    <div class="option-letter">B</div>
+                                    <span>Web sayfası oluşturmak</span>
+                                </div>
+                                <div class="option">
+                                    <div class="option-letter">C</div>
+                                    <span>Video düzenlemek</span>
+                                </div>
+                                <div class="option">
+                                    <div class="option-letter">D</div>
+                                    <span>Oyun oynamak</span>
+                                </div>
                             </div>
                         </div>
-                    `;
+
+                        <div class="quiz-nav">
+                            <button class="btn btn-secondary">← Önceki</button>
+                            <button class="btn btn-primary">Sonraki →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="ad-sidebar">
+                    📢 Reklam Alanı<br>Quiz Sidebar (300x600)
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <!-- CREATE PAGE -->
+    <div class="page" id="create">
+        <div class="container">
+            <div class="grid-layout">
+                <div class="main-content">
+                    <h1>➕ Test Oluştur</h1>
+                    
+                    <div class="empty-state">
+                        <div class="empty-icon">🤖</div>
+                        <p>AI ile test oluşturmak için Testfy asistanını kullan</p>
+                        <button class="btn btn-primary" onclick="openChat()" style="margin-top: 1rem;">
+                            Testfy'yi Aç
+                        </button>
+                    </div>
+
+                    <div class="ad-banner" style="margin: 2rem 0;">
+                        📢 Reklam Alanı - Oluşturma (728x90)
+                    </div>
+                </div>
+
+                <aside class="ad-sidebar">
+                    📢 Reklam Alanı<br>Sidebar (300x600)
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIBRARY PAGE -->
+    <div class="page" id="library">
+        <div class="container">
+            <div class="grid-layout">
+                <div class="main-content">
+                    <h1>📚 Kütüphanem</h1>
+                    
+                    <div class="empty-state">
+                        <div class="empty-icon">📚</div>
+                        <p>Henüz test oluşturmadın</p>
+                        <button class="btn btn-primary" onclick="navigateTo('create')" style="margin-top: 1rem;">
+                            Test Oluştur
+                        </button>
+                    </div>
+
+                    <div class="ad-banner" style="margin: 2rem 0;">
+                        📢 Reklam Alanı - Kütüphane (728x90)
+                    </div>
+                </div>
+
+                <aside class="ad-sidebar">
+                    📢 Reklam Alanı<br>Sidebar (300x600)
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTES PAGE -->
+    <div class="page" id="notes">
+        <div class="container">
+            <div class="grid-layout">
+                <div class="main-content">
+                    <h1>📝 Notlarım</h1>
+                    
+                    <div class="empty-state">
+                        <div class="empty-icon">📝</div>
+                        <p>Henüz not eklemedin</p>
+                        <button class="btn btn-primary" style="margin-top: 1rem;">
+                            ➕ Yeni Not
+                        </button>
+                    </div>
+
+                    <div class="ad-banner" style="margin: 2rem 0;">
+                        📢 Reklam Alanı - Notlar (728x90)
+                    </div>
+                </div>
+
+                <aside class="ad-sidebar">
+                    📢 Reklam Alanı<br>Sidebar (300x600)
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <!-- LEADERBOARD PAGE -->
+    <div class="page" id="leaderboard">
+        <div class="container">
+            <div class="grid-layout">
+                <div class="main-content">
+                    <h1>🏆 Liderlik Tablosu</h1>
+                    
+                    <div class="empty-state">
+                        <div class="empty-icon">🏆</div>
+                        <p>Henüz veri bulunmuyor</p>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Test çözerek sıralamaya katıl!</p>
+                        <button class="btn btn-primary" onclick="navigateTo('test-select')" style="margin-top: 1rem;">
+                            Test Çöz
+                        </button>
+                    </div>
+
+                    <!-- Ad - Leaderboard (AdManager: ad-leaderboard) -->
+                    <div id="ad-leaderboard" class="ad-banner ad-container" style="margin: 2rem 0;">
+                        📢 Reklam Alanı - Liderlik (728x90)
+                    </div>
+                </div>
+
+                <aside class="ad-sidebar">
+                    📢 Reklam Alanı<br>Sidebar (300x600)
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <!-- ANALYSIS PAGE -->
+    <div class="page" id="analysis">
+        <div class="container">
+            <div class="grid-layout">
+                <div class="main-content">
+                    <h1>📈 Performans Analizi</h1>
+                    
+                    <div class="empty-state">
+                        <div class="empty-icon">📈</div>
+                        <p>Analiz için daha fazla test çöz</p>
+                        <button class="btn btn-primary" onclick="navigateTo('test-select')" style="margin-top: 1rem;">
+                            Test Çözmeye Başla
+                        </button>
+                    </div>
+
+                    <div class="ad-banner" style="margin: 2rem 0;">
+                        📢 Reklam Alanı - Analiz (728x90)
+                    </div>
+                </div>
+
+                <aside class="ad-sidebar">
+                    📢 Reklam Alanı<br>Sidebar (300x600)
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESULTS PAGE -->
+    <div class="page" id="results">
+        <div class="container">
+            <div class="grid-layout">
+                <div class="main-content">
+                    <div style="text-align: center; padding: 3rem;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">🏆</div>
+                        <h1>Test Tamamlandı!</h1>
+                        <div style="font-size: 3rem; font-weight: 700; color: var(--primary); margin: 1rem 0;">
+                            8/10
+                        </div>
+
+                        <div class="stats-grid" style="max-width: 600px; margin: 2rem auto;">
+                            <div class="stat-card">
+                                <div class="stat-value" style="color: var(--success);">8</div>
+                                <div class="stat-label">Doğru</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" style="color: var(--danger);">2</div>
+                                <div class="stat-label">Yanlış</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value" style="color: var(--primary);">80%</div>
+                                <div class="stat-label">Başarı</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-value">05:23</div>
+                                <div class="stat-label">Süre</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                            <button class="btn btn-secondary" onclick="navigateTo('review')">
+                                Cevapları İncele
+                            </button>
+                            <button class="btn btn-primary" onclick="navigateTo('test-select')">
+                                Yeni Test
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Ad After Results -->
+                    <div class="ad-banner" style="margin: 2rem 0%;">
+                        📢 Reklam Alanı - Sonuç (728x90)
+                    </div>
+                </div>
+
+                <aside class="ad-sidebar">
+                    📢 Reklam Alanı<br>Sidebar (300x600)
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <!-- REVIEW PAGE -->
+    <div class="page" id="review">
+        <div class="container">
+            <div class="grid-layout">
+                <div class="main-content">
+                    <h1>📋 Cevapları İncele</h1>
+                    
+                    <div class="quiz-container">
+                        <div class="question-card">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+                                <span style="font-weight: 600;">Soru 1/10</span>
+                                <span style="color: var(--success); font-weight: 600;">✓ Doğru</span>
+                            </div>
+
+                            <div class="question-text">
+                                İşletim sisteminin temel görevlerinden biri nedir?
+                            </div>
+
+                            <div class="options">
+                                <div class="option correct">
+                                    <div class="option-letter">A</div>
+                                    <span>Donanım kaynaklarını yönetmek</span>
+                                </div>
+                                <div class="option">
+                                    <div class="option-letter">B</div>
+                                    <span>Web sayfası oluşturmak</span>
+                                </div>
+                                <div class="option">
+                                    <div class="option-letter">C</div>
+                                    <span>Video düzenlemek</span>
+                                </div>
+                                <div class="option">
+                                    <div class="option-letter">D</div>
+                                    <span>Oyun oynamak</span>
+                                </div>
+                            </div>
+
+                            <div style="margin-top: 1.5rem; padding: 1rem; background: var(--bg-hover); border-radius: var(--radius-lg); border-left: 4px solid var(--info);">
+                                <strong style="color: var(--info);">💡 Açıklama:</strong>
+                                <p style="margin-top: 0.5rem; color: var(--text-secondary);">
+                                    İşletim sistemi, donanım ve yazılım arasında köprü görevi görür ve sistem kaynaklarını yönetir.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="quiz-nav">
+                            <button class="btn btn-secondary">← Önceki</button>
+                            <button class="btn btn-primary">Sonraki →</button>
+                        </div>
+                    </div>
+
+                    <!-- Ad in Review -->
+                    <div class="ad-banner" style="margin: 2rem 0;">
+                        📢 Reklam Alanı - İnceleme (728x90)
+                    </div>
+                </div>
+
+                <aside class="ad-sidebar">
+                    📢 Reklam Alanı<br>Sidebar (300x600)
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Ad (AdManager: ad-bottom) -->
+    <div id="ad-bottom" class="ad-banner ad-container">
+        📢 Reklam Alanı - Alt Banner (728x90)
+    </div>
+
+    <!-- Testfy Chat Widget -->
+    <button class="chat-toggle" onclick="toggleChat()">
+        🤖
+    </button>
+
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">
+            <div>
+                <strong>Testfy</strong>
+                <div style="font-size: 0.8rem; opacity: 0.9;">AI Asistan</div>
+            </div>
+            <button onclick="toggleChat()" style="background: transparent; border: none; color: white; font-size: 1.5rem; cursor: pointer;">×</button>
+        </div>
+        
+        <div class="chat-body" id="chatBody">
+            <div class="message">
+                <strong style="color: var(--primary);">Testfy</strong>
+                <p style="margin: 0.5rem 0 0;">Merhaba! Size nasıl yardımcı olabilirim? Test oluşturmak, soru çözmek veya analiz yapmak için buradayım! 🚀</p>
+            </div>
+        </div>
+
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Mesajınızı yazın..." onkeypress="if(event.key==='Enter')sendMessage()">
+            <button class="chat-send" onclick="sendMessage()">→</button>
+        </div>
+    </div>
+
+    <!-- Ad Manager script -->
+    <script src="ad-manager.js"></script>
+
+    <script>
+        // === NAVIGATION SYSTEM ===
+        let currentPage = 'dashboard';
+
+        function navigateTo(page) {
+            // Show loading
+            showLoading();
+
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(p => {
+                p.classList.remove('active');
+            });
+
+            // Update nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Show new page after loading
+            setTimeout(() => {
+                document.getElementById(page).classList.add('active');
+                currentPage = page;
+                hideLoading();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // Update URL without reload
+                history.pushState({ page }, '', `#${page}`);
+
+                // Track page view + AdManager
+                console.log('📊 Page View:', page);
+                if (window.AdManager && typeof AdManager.onTabChanged === 'function') {
+                    AdManager.onTabChanged(page);
                 }
-
-                const successMsg = window.t ? t('msg.fileUploaded', 'Dosya yüklendi!') : 'Dosya yüklendi!';
-                Utils.showToast(successMsg, 'success');
-            } catch (error) {
-                console.error('Dosya yükleme hatası:', error);
-                Utils.handleError(error, 'handleFileUpload');
-            }
-        },
-
-        /**
-         * Test oluşturma formu - Validation ile
-         */
-        handleCreateTest(event) {
-            event.preventDefault();
-
-            try {
-                const form = event.target;
-                const titleInput = form.testTitle;
-                const categorySelect = form.testCategory;
-
-                // Validation
-                const isTitleValid = Utils.validateInput(titleInput, 'required');
-                
-                if (!isTitleValid) {
-                    return;
-                }
-
-                const title = titleInput.value.trim();
-                const category = categorySelect.value;
-
-                if (!category) {
-                    const errorMsg = window.t ? t('error.categoryRequired', 'Kategori seçmelisiniz!') : 'Kategori seçmelisiniz!';
-                    Utils.showToast(errorMsg, 'error');
-                    return;
-                }
-
-                const infoMsg = window.t ? t('msg.featureComingSoon', 'Test oluşturma özelliği yakında eklenecek!') : 'Test oluşturma özelliği yakında eklenecek!';
-                Utils.showToast(infoMsg, 'info');
-                
-                // Form sıfırla
-                form.reset();
-                const fileInfo = document.getElementById('fileInfo');
-                if (fileInfo) {
-                    fileInfo.innerHTML = '';
-                }
-            } catch (error) {
-                console.error('Test oluşturma hatası:', error);
-                Utils.handleError(error, 'handleCreateTest');
-            }
-        },
-
-        /**
-         * Event listener'ları ekler
-         */
-        attachEventListeners() {
-            try {
-                // Tab navigasyonu
-                document.querySelectorAll('.nav-tab').forEach(tab => {
-                    tab.addEventListener('click', () => this.switchTab(tab.dataset.tab));
-                });
-
-                // Ayarlar formu
-                const settingsForm = document.getElementById('settingsForm');
-                if (settingsForm) {
-                    settingsForm.addEventListener('submit', (e) => this.saveSettings(e));
-                }
-
-                // Ayarları sıfırla
-                const resetBtn = document.getElementById('resetBtn');
-                if (resetBtn) {
-                    resetBtn.addEventListener('click', () => this.resetSettings());
-                }
-
-                // Dosya yükleme
-                const fileUpload = document.getElementById('fileUpload');
-                if (fileUpload) {
-                    fileUpload.addEventListener('change', (e) => this.handleFileUpload(e));
-                }
-
-                // Test oluşturma formu
-                const createForm = document.getElementById('createTestForm');
-                if (createForm) {
-                    createForm.addEventListener('submit', (e) => this.handleCreateTest(e));
-                }
-
-                // Not ekleme butonu
-                const addNoteBtn = document.getElementById('addNoteBtn');
-                if (addNoteBtn) {
-                    addNoteBtn.addEventListener('click', () => this.addNote());
-                }
-
-                // Tema değiştir
-                window.themeManager = this.themeManager;
-
-                console.log('✅ Event listener\'lar eklendi');
-            } catch (error) {
-                console.error('Event listener hatası:', error);
-                Utils.handleError(error, 'attachEventListeners');
-            }
+            }, 300);
         }
-    };
 
-    // Uygulamayı başlat
-    document.addEventListener('DOMContentLoaded', () => {
-        AdManager.init();
-        App.init();
-        App.handleInitialTabFromHash();
-    });
-
-    // Export
-    window.App = App;
-
-    // Tarayıcı geri/ileri butonları ile sekme senkronizasyonu
-    window.addEventListener('popstate', (event) => {
-        try {
-            const stateTab = event.state && event.state.tab;
-            const hashTab = window.location.hash ? window.location.hash.replace('#', '') : null;
-            const targetTab = stateTab || hashTab || 'dashboard';
-
-            if (document.getElementById(targetTab)) {
-                App.switchTab(targetTab, { skipHistory: true });
+        // Handle browser back/forward
+        window.addEventListener('popstate', (e) => {
+            if (e.state && e.state.page) {
+                navigateTo(e.state.page);
             }
-        } catch (error) {
-            console.error('popstate navigation error:', error);
-        }
-    });
-
-    // Eski örnekteki gibi kullanmak istersen: SPA içinde sekme değiştirme helper'ı
-    window.navigateTo = function(tabName) {
-        if (!tabName) return;
-        if (!document.getElementById(tabName)) return;
-        App.switchTab(tabName);
-    };
-
-    // Basit oturum takibi (isteğe bağlı log)
-    (function() {
-        const sessionStart = Date.now();
-        window.addEventListener('beforeunload', () => {
-            const duration = Math.round((Date.now() - sessionStart) / 1000);
-            console.log('📊 Oturum süresi:', duration, 'sn');
         });
 
+        // === LOADING SCREEN ===
+        function showLoading() {
+            document.getElementById('loadingScreen').classList.remove('hidden');
+        }
+
+        function hideLoading() {
+            document.getElementById('loadingScreen').classList.add('hidden');
+        }
+
+        // Hide loading on page load + init AdManager
+        window.addEventListener('load', () => {
+            setTimeout(hideLoading, 500);
+
+            if (window.AdManager) {
+                if (typeof AdManager.init === 'function') {
+                    AdManager.init();
+                }
+                if (typeof AdManager.onTabChanged === 'function') {
+                    AdManager.onTabChanged(currentPage);
+                }
+            }
+        });
+
+        // === THEME TOGGLE ===
+        let isDark = false;
+
+        function toggleTheme() {
+            isDark = !isDark;
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            document.getElementById('themeIcon').textContent = isDark ? '🌙' : '☀️';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            toggleTheme();
+        }
+
+        // === CHAT WIDGET ===
+        function toggleChat() {
+            const widget = document.getElementById('chatWidget');
+            widget.classList.toggle('open');
+        }
+
+        function openChat() {
+            document.getElementById('chatWidget').classList.add('open');
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            const chatBody = document.getElementById('chatBody');
+            
+            // User message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'message';
+            userMsg.style.background = 'var(--primary)';
+            userMsg.style.color = 'white';
+            userMsg.style.marginLeft = 'auto';
+            userMsg.style.maxWidth = '80%';
+            userMsg.innerHTML = `<p style="margin: 0;">${message}</p>`;
+            chatBody.appendChild(userMsg);
+
+            input.value = '';
+
+            // Simulate AI response
+            setTimeout(() => {
+                const aiMsg = document.createElement('div');
+                aiMsg.className = 'message';
+                aiMsg.innerHTML = `
+                    <strong style="color: var(--primary);">Testfy</strong>
+                    <p style="margin: 0.5rem 0 0;">Anlıyorum! Size yardımcı olmak için buradayım. Hangi konuda test oluşturmak istersiniz? 📚</p>
+                `;
+                chatBody.appendChild(aiMsg);
+                chatBody.scrollTop = chatBody.scrollHeight;
+            }, 1000);
+
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        // === QUIZ FUNCTIONALITY ===
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove previous selections
+                this.closest('.options').querySelectorAll('.option').forEach(o => {
+                    o.classList.remove('selected');
+                });
+                
+                // Select this option
+                this.classList.add('selected');
+                
+                // Auto advance after selection (optional)
+                setTimeout(() => {
+                    console.log('Answer selected');
+                }, 300);
+            });
+        });
+
+        // === ANALYTICS ===
+        function trackEvent(category, action, label) {
+            console.log('📊 Event:', category, action, label);
+            // Send to analytics service
+        }
+
+        // Track button clicks
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                trackEvent('Button', 'Click', e.target.textContent);
+            });
+        });
+
+        // === PAGE VISIBILITY ===
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
-                console.log('📊 Kullanıcı sayfadan ayrıldı');
+                console.log('📊 User left page');
             } else {
-                console.log('📊 Kullanıcı sayfaya geri döndü');
+                console.log('📊 User returned to page');
             }
         });
-    })();
 
-    /**
-     * TESTIFY QUIZ MANAGER - HATASIZ FINAL
-     * Tüm memory leak, event listener ve bug'lar düzeltildi
-     */
-
-    'use strict';
-
-    const QuizManager = {
-        // Quiz durumu
-        state: {
-            currentMode: null,
-            questions: [],
-            currentIndex: 0,
-            answers: [],
-            startTime: null,
-            timerInterval: null,
-            elapsedSeconds: 0,
-            isReviewing: false,
-            testTitle: null,
-            testDescription: null,
-            eventListenersAttached: false // Duplicate önleme
-        },
-
-        /**
-         * AI TARAFINDAN OLUŞTURULAN TESTİ YÜKLE
-         */
-        loadAIGeneratedTest() {
-            try {
-                const aiTest = localStorage.getItem('testify_generated_test');
-                if (!aiTest) {
-                    console.log('ℹ️ AI testi bulunamadı');
-                    return null;
-                }
-                
-                const testData = JSON.parse(aiTest);
-                
-                // Süresi dolmuş mu kontrol et (24 saat)
-                if (testData.expiresAt && Date.now() > testData.expiresAt) {
-                    console.log('⏰ AI testi süresi dolmuş');
-                    localStorage.removeItem('testify_generated_test');
-                    return null;
-                }
-                
-                console.log('✅ AI testi yüklendi:', testData.title);
-                console.log('📊 Soru sayısı:', testData.questions.length);
-                return testData;
-                
-            } catch (error) {
-                console.error('❌ AI test yükleme hatası:', error);
-                return null;
-            }
-        },
-
-        /**
-         * Quiz'i başlatır - TAM HATASIZ
-         */
-        startQuiz(mode) {
-            console.log('🎯 Quiz başlatılıyor, mod:', mode);
-            
-            // Önceki timer'ı temizle
-            this.cleanupPreviousQuiz();
-            
-            try {
-                // Önce AI testi var mı kontrol et
-                const aiTest = this.loadAIGeneratedTest();
-                
-                if (aiTest && aiTest.questions && aiTest.questions.length > 0) {
-                    console.log('🤖 AI testi kullanılıyor');
-                    
-                    // AI testini kullan
-                    this.state = {
-                        currentMode: 'ai',
-                        questions: aiTest.questions,
-                        currentIndex: 0,
-                        answers: [],
-                        startTime: Date.now(),
-                        timerInterval: null,
-                        elapsedSeconds: 0,
-                        isReviewing: false,
-                        testTitle: aiTest.title,
-                        testDescription: aiTest.description,
-                        eventListenersAttached: this.state.eventListenersAttached
-                    };
-                    
-                    this.state.answers = new Array(aiTest.questions.length).fill(null);
-                    
-                    Utils.showToast(`🤖 AI Testi: ${aiTest.title} - ${aiTest.questions.length} soru`, 'info', 4000);
-                    
-                } else {
-                    console.log('📚 Varsayılan sorular kullanılıyor');
-                    
-                    // Soru bankası kontrolü
-                    if (!window.questionBank || !Array.isArray(window.questionBank)) {
-                        Utils.showToast('Soru bankası yüklenemedi!', 'error');
-                        console.error('questionBank bulunamadı!');
-                        return;
-                    }
-
-                    if (window.questionBank.length === 0) {
-                        Utils.showToast('Soru bankası boş!', 'error');
-                        return;
-                    }
-
-                    // Tüm soruları karıştır ve al
-                    const allQuestions = [...window.questionBank];
-                    
-                    this.state = {
-                        currentMode: mode,
-                        questions: Utils.shuffleArray(allQuestions),
-                        currentIndex: 0,
-                        answers: [],
-                        startTime: Date.now(),
-                        timerInterval: null,
-                        elapsedSeconds: 0,
-                        isReviewing: false,
-                        testTitle: null,
-                        testDescription: null,
-                        eventListenersAttached: this.state.eventListenersAttached
-                    };
-                    
-                    this.state.answers = new Array(this.state.questions.length).fill(null);
-                }
-
-                console.log(`✅ ${this.state.questions.length} soru yüklendi`);
-
-                // Sayfaları değiştir
-                const testSelection = document.getElementById('testSelection');
-                const quizPage = document.getElementById('quizPage');
-                
-                if (!testSelection || !quizPage) {
-                    throw new Error('Quiz sayfaları bulunamadı');
-                }
-
-                testSelection.classList.remove('active');
-                quizPage.classList.add('active');
-
-                // Exit butonunu göster
-                this.showExitButton();
-
-                // Timer'ı başlat
-                this.startTimer();
-
-                // İlk soruyu göster
-                this.displayQuestion();
-
-                // Quiz durumunu kaydet
-                this.saveState();
-
-                const questionCount = this.state.questions.length;
-                Utils.showToast(`Test başladı! ${questionCount} soru - Bol şans!`, 'success');
-                
-            } catch (error) {
-                console.error('❌ Quiz başlatma hatası:', error);
-                Utils.showToast('Test başlatılamadı: ' + error.message, 'error');
-            }
-        },
-
-        /**
-         * Önceki quiz'i temizle
-         */
-        cleanupPreviousQuiz() {
-            // Timer'ı durdur
-            if (this.state.timerInterval) {
-                clearInterval(this.state.timerInterval);
-                this.state.timerInterval = null;
-                console.log('🧹 Önceki timer temizlendi');
-            }
-            
-            // Eski seçenekleri temizle
-            const optionsList = document.getElementById('optionsList');
-            if (optionsList) {
-                optionsList.innerHTML = '';
-            }
-        },
-
-        /**
-         * Exit butonunu göster/gizle
-         */
-        showExitButton() {
-            const exitBtn = document.getElementById('exitQuizBtn');
-            if (exitBtn) {
-                exitBtn.style.display = this.state.isReviewing ? 'none' : 'inline-flex';
-            }
-        },
-
-        /**
-         * Quiz durumunu kaydeder
-         */
-        saveState() {
-            try {
-                if (window.StorageManager) {
-                    StorageManager.saveQuizState({
-                        currentMode: this.state.currentMode,
-                        currentIndex: this.state.currentIndex,
-                        answers: this.state.answers,
-                        startTime: this.state.startTime,
-                        elapsedSeconds: this.state.elapsedSeconds,
-                        questionCount: this.state.questions.length
-                    });
-                }
-            } catch (error) {
-                console.warn('Quiz durumu kaydedilemedi:', error);
-            }
-        },
-
-        /**
-         * Timer'ı başlatır
-         */
-        startTimer() {
-            // Önceki timer'ı temizle
-            if (this.state.timerInterval) {
-                clearInterval(this.state.timerInterval);
-            }
-
-            this.state.timerInterval = setInterval(() => {
-                this.state.elapsedSeconds++;
-                this.updateTimerDisplay();
-                
-                // Her 10 saniyede bir state'i kaydet
-                if (this.state.elapsedSeconds % 10 === 0) {
-                    this.saveState();
-                }
-            }, 1000);
-        },
-
-        /**
-         * Timer'ı durdurur
-         */
-        stopTimer() {
-            if (this.state.timerInterval) {
-                clearInterval(this.state.timerInterval);
-                this.state.timerInterval = null;
-                console.log('⏹️ Timer durduruldu');
-            }
-        },
-
-        /**
-         * Timer'ı günceller
-         */
-        updateTimerDisplay() {
-            const timerEl = document.getElementById('quizTimer');
-            if (timerEl) {
-                timerEl.textContent = Utils.formatTime(this.state.elapsedSeconds);
-            }
-        },
-
-        /**
-         * Soruyu gösterir
-         */
-        displayQuestion() {
-            try {
-                const question = this.state.questions[this.state.currentIndex];
-                if (!question) {
-                    throw new Error('Soru bulunamadı');
-                }
-
-                // Soru numarası ve toplam
-                const currentQuestionEl = document.getElementById('currentQuestion');
-                const totalQuestionsEl = document.getElementById('totalQuestionsQuiz');
-                
-                if (currentQuestionEl) {
-                    currentQuestionEl.textContent = this.state.currentIndex + 1;
-                }
-                if (totalQuestionsEl) {
-                    totalQuestionsEl.textContent = this.state.questions.length;
-                }
-
-                // Progress bar
-                const progress = ((this.state.currentIndex + 1) / this.state.questions.length) * 100;
-                const progressFill = document.getElementById('progressFill');
-                if (progressFill) {
-                    progressFill.style.width = progress + '%';
-                    const progressBar = progressFill.parentElement;
-                    if (progressBar) {
-                        progressBar.setAttribute('aria-valuenow', Math.round(progress));
-                    }
-                }
-
-                // Soru metni
-                const questionTextEl = document.getElementById('questionText');
-                if (questionTextEl) {
-                    questionTextEl.textContent = question.q;
-                }
-
-                // Seçenekleri göster
-                this.displayOptions(question);
-
-                // Butonları güncelle
-                this.updateButtons();
-            } catch (error) {
-                console.error('Soru gösterme hatası:', error);
-                Utils.showToast('Soru gösterilemedi', 'error');
-            }
-        },
-
-        /**
-         * Seçenekleri gösterir
-         */
-        displayOptions(question) {
-            const optionsList = document.getElementById('optionsList');
-            if (!optionsList) return;
-
-            // Eski event listener'ları temizle
-            optionsList.innerHTML = '';
-
-            const letters = ['A', 'B', 'C', 'D', 'E'];
-
-            question.o.forEach((option, index) => {
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'option-item';
-                optionDiv.setAttribute('role', 'radio');
-                optionDiv.setAttribute('aria-checked', 'false');
-                optionDiv.setAttribute('tabindex', '0');
-                
-                // Seçilmiş mi kontrol et
-                const isSelected = this.state.answers[this.state.currentIndex] === index;
-                if (isSelected) {
-                    optionDiv.classList.add('selected');
-                    optionDiv.setAttribute('aria-checked', 'true');
-                }
-
-                // Review modundaysa doğru/yanlış göster
-                if (this.state.isReviewing) {
-                    optionDiv.classList.add('disabled');
-                    const correctAnswer = question.a;
-                    const isCorrect = option === correctAnswer;
-                    const isUserAnswer = isSelected;
-                    
-                    if (isCorrect) {
-                        optionDiv.classList.add('correct');
-                    }
-                    
-                    if (isUserAnswer && !isCorrect) {
-                        optionDiv.classList.add('incorrect');
-                    }
-                }
-
-                optionDiv.innerHTML = `
-                    <span class="option-letter">${letters[index]}</span>
-                    <span>${Utils.sanitizeHTML(option)}</span>
-                `;
-
-                // Event listener
-                if (!this.state.isReviewing) {
-                    const clickHandler = () => this.selectOption(index);
-                    const keyHandler = (e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            this.selectOption(index);
-                        }
-                    };
-                    
-                    optionDiv.addEventListener('click', clickHandler);
-                    optionDiv.addEventListener('keypress', keyHandler);
-                }
-
-                optionsList.appendChild(optionDiv);
-            });
-
-            // Review modunda açıklama göster
-            if (this.state.isReviewing && question.explanation) {
-                const explanationDiv = document.createElement('div');
-                explanationDiv.className = 'question-explanation';
-                explanationDiv.innerHTML = `
-                    <div class="explanation-header">
-                        <span class="explanation-icon">💡</span>
-                        <strong>${window.t ? t('quiz.explanation', 'Açıklama') : 'Açıklama'}:</strong>
-                    </div>
-                    <p>${Utils.sanitizeHTML(question.explanation)}</p>
-                `;
-                optionsList.appendChild(explanationDiv);
-            }
-        },
-
-        /**
-         * Seçenek seçer
-         */
-        selectOption(index) {
-            if (this.state.isReviewing) return;
-
-            try {
-                const question = this.state.questions[this.state.currentIndex];
-                const selectedOption = question.o[index];
-                const correctAnswer = question.a;
-                const isCorrect = selectedOption === correctAnswer;
-
-                // Cevabı kaydet
-                this.state.answers[this.state.currentIndex] = index;
-
-                // Tüm seçenekleri disable et
-                document.querySelectorAll('.option-item').forEach((item, idx) => {
-                    item.classList.add('disabled');
-                    item.style.pointerEvents = 'none';
-                    
-                    // Doğru cevabı yeşil yap
-                    if (question.o[idx] === correctAnswer) {
-                        item.classList.add('correct');
-                    }
-                    
-                    // Yanlış seçimi kırmızı yap
-                    if (idx === index && !isCorrect) {
-                        item.classList.add('incorrect');
-                    }
-                    
-                    if (idx === index) {
-                        item.classList.add('selected');
-                        item.setAttribute('aria-checked', 'true');
-                    } else {
-                        item.classList.remove('selected');
-                        item.setAttribute('aria-checked', 'false');
-                    }
-                });
-
-                // Açıklamayı göster
-                this.showExplanation(question, isCorrect);
-
-                // State'i kaydet
-                this.saveState();
-            } catch (error) {
-                console.error('Seçenek seçme hatası:', error);
-            }
-        },
-
-        /**
-         * Açıklamayı gösterir
-         */
-        showExplanation(question, isCorrect) {
-            // Eski açıklamayı kaldır
-            const oldExplanation = document.querySelector('.question-explanation');
-            if (oldExplanation) {
-                oldExplanation.remove();
-            }
-
-            // Açıklama yoksa çık
-            if (!question.explanation) return;
-
-            const optionsList = document.getElementById('optionsList');
-            if (!optionsList) return;
-
-            const explanationDiv = document.createElement('div');
-            explanationDiv.className = 'question-explanation';
-            explanationDiv.style.cssText = 'margin-top: 20px; padding: 15px; background: var(--bg-tertiary); border-left: 4px solid var(--info); border-radius: 8px; animation: slideIn 0.3s ease-out;';
-            
-            const statusIcon = isCorrect ? '✅' : '❌';
-            const statusText = isCorrect ? (window.t ? t('quiz.correct', 'Doğru!') : 'Doğru!') : (window.t ? t('quiz.wrong', 'Yanlış!') : 'Yanlış!');
-            const statusColor = isCorrect ? 'var(--success)' : 'var(--danger)';
-            
-            explanationDiv.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                    <span style="font-size: 1.2rem;">${statusIcon}</span>
-                    <strong style="color: ${statusColor}; font-size: 1.1rem;">${statusText}</strong>
-                </div>
-                <div style="display: flex; align-items: flex-start; gap: 8px; margin-top: 10px;">
-                    <span style="font-size: 1.2rem;">💡</span>
-                    <div>
-                        <strong style="color: var(--info);">${window.t ? t('quiz.explanation', 'Açıklama') : 'Açıklama'}:</strong>
-                        <p style="color: var(--text-secondary); line-height: 1.6; margin: 5px 0 0;">${Utils.sanitizeHTML(question.explanation)}</p>
-                    </div>
-                </div>
-            `;
-            
-            optionsList.appendChild(explanationDiv);
-        },
-
-        /**
-         * Butonları günceller
-         */
-        updateButtons() {
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const submitBtn = document.getElementById('submitBtn');
-
-            const isFirstQuestion = this.state.currentIndex === 0;
-            const isLastQuestion = this.state.currentIndex === this.state.questions.length - 1;
-
-            // ÖNCEKİ BUTONU
-            if (prevBtn) {
-                prevBtn.disabled = isFirstQuestion;
-                
-                if (!isFirstQuestion || this.state.isReviewing) {
-                    prevBtn.style.display = 'inline-flex';
-                    prevBtn.style.opacity = isFirstQuestion ? '0.5' : '1';
-                } else {
-                    prevBtn.style.display = 'none';
-                }
-            }
-
-            // SONRAKİ BUTONU
-            if (nextBtn) {
-                if (this.state.isReviewing) {
-                    nextBtn.style.display = isLastQuestion ? 'none' : 'inline-flex';
-                    const nextText = window.t ? t('quiz.next', 'Sonraki') : 'Sonraki';
-                    nextBtn.innerHTML = `${nextText} →`;
-                } else {
-                    nextBtn.style.display = isLastQuestion ? 'none' : 'inline-flex';
-                }
-            }
-            
-            // BİTİR BUTONU
-            if (submitBtn) {
-                submitBtn.style.display = isLastQuestion && !this.state.isReviewing ? 'inline-flex' : 'none';
-            }
-
-            // Exit butonunu güncelle
-            this.showExitButton();
-        },
-
-        /**
-         * Sonraki soruya geçer
-         */
-        nextQuestion() {
-            if (this.state.currentIndex < this.state.questions.length - 1) {
-                this.state.currentIndex++;
-                this.displayQuestion();
-                this.saveState();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        },
-
-        /**
-         * Önceki soruya gider
-         */
-        previousQuestion() {
-            if (this.state.currentIndex > 0) {
-                this.state.currentIndex--;
-                this.displayQuestion();
-                this.saveState();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        },
-
-        /**
-         * Testi bitirir
-         */
-        async finishQuiz() {
-            try {
-                const unanswered = this.state.answers.filter(a => a === null).length;
-                
-                if (unanswered > 0) {
-                    const confirmMsg = window.t 
-                        ? t('quiz.unansweredConfirm', `${unanswered} soru cevaplanmadı. Testi bitirmek istediğinizden emin misiniz?`)
-                        : `${unanswered} soru cevaplanmadı. Testi bitirmek istediğinizden emin misiniz?`;
-                    
-                    const confirmed = await Utils.confirm(confirmMsg);
-                    if (!confirmed) return;
-                }
-
-                this.stopTimer();
-                const results = this.calculateResults();
-
-                if (window.StorageManager) {
-                    StorageManager.saveTestResult(results);
-                    StorageManager.clearQuizState();
-                }
-
-                localStorage.removeItem('testify_generated_test');
-                this.showResults(results);
-                
-            } catch (error) {
-                console.error('Quiz bitirme hatası:', error);
-                Utils.showToast('Test bitirilemedi', 'error');
-            }
-        },
-
-        /**
-         * Sonuçları hesaplar
-         */
-        calculateResults() {
-            let correct = 0;
-            let wrong = 0;
-
-            this.state.questions.forEach((question, index) => {
-                const userAnswer = this.state.answers[index];
-                
-                if (userAnswer !== null) {
-                    const selectedOption = question.o[userAnswer];
-                    if (selectedOption === question.a) {
-                        correct++;
-                    } else {
-                        wrong++;
-                    }
-                }
-            });
-
-            const unanswered = this.state.questions.length - (correct + wrong);
-            const successRate = this.state.questions.length > 0 
-                ? Math.round((correct / this.state.questions.length) * 100) 
-                : 0;
-
-            return {
-                mode: this.state.currentMode,
-                totalQuestions: this.state.questions.length,
-                correctAnswers: correct,
-                wrongAnswers: wrong,
-                unanswered: unanswered,
-                successRate: successRate,
-                time: this.state.elapsedSeconds,
-                timestamp: Date.now(),
-                testTitle: this.state.testTitle
-            };
-        },
-
-        /**
-         * Sonuçları gösterir
-         */
-        showResults(results) {
-            try {
-                const quizPage = document.getElementById('quizPage');
-                const resultsPage = document.getElementById('resultsPage');
-                
-                if (!quizPage || !resultsPage) {
-                    throw new Error('Sonuç sayfası bulunamadı');
-                }
-
-                quizPage.classList.remove('active');
-                resultsPage.classList.add('active');
-
-                const finalScore = document.getElementById('finalScore');
-                const correctAnswers = document.getElementById('correctAnswers');
-                const wrongAnswers = document.getElementById('wrongAnswers');
-                const successPercent = document.getElementById('successPercent');
-                const totalTimeResult = document.getElementById('totalTimeResult');
-
-                if (finalScore) finalScore.textContent = `${results.correctAnswers}/${results.totalQuestions}`;
-                if (correctAnswers) correctAnswers.textContent = results.correctAnswers;
-                if (wrongAnswers) wrongAnswers.textContent = results.wrongAnswers;
-                if (successPercent) successPercent.textContent = results.successRate + '%';
-                if (totalTimeResult) totalTimeResult.textContent = Utils.formatTime(results.time);
-
-                const resultsIcon = document.querySelector('.results-icon');
-                if (resultsIcon) {
-                    if (results.successRate >= 90) resultsIcon.textContent = '🏆';
-                    else if (results.successRate >= 75) resultsIcon.textContent = '🎉';
-                    else if (results.successRate >= 60) resultsIcon.textContent = '👏';
-                    else if (results.successRate >= 40) resultsIcon.textContent = '💪';
-                    else resultsIcon.textContent = '📚';
-                }
-
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } catch (error) {
-                console.error('Sonuç gösterme hatası:', error);
-                Utils.showToast('Sonuçlar gösterilemedi', 'error');
-            }
-        },
-
-        /**
-         * Cevapları inceler
-         */
-        reviewAnswers() {
-            try {
-                this.state.isReviewing = true;
-                this.state.currentIndex = 0;
-
-                const resultsPage = document.getElementById('resultsPage');
-                const quizPage = document.getElementById('quizPage');
-                
-                if (!resultsPage || !quizPage) {
-                    throw new Error('Quiz sayfası bulunamadı');
-                }
-
-                resultsPage.classList.remove('active');
-                quizPage.classList.add('active');
-
-                this.displayQuestion();
-
-                const prevBtn = document.getElementById('prevBtn');
-                const nextBtn = document.getElementById('nextBtn');
-                const submitBtn = document.getElementById('submitBtn');
-
-                if (prevBtn) prevBtn.style.display = 'inline-flex';
-                if (nextBtn) nextBtn.style.display = 'inline-flex';
-                if (submitBtn) submitBtn.style.display = 'none';
-
-                this.showExitButton();
-
-                const reviewMsg = window.t 
-                    ? t('quiz.reviewMode', 'İnceleme modu - Açıklamaları okuyabilirsiniz')
-                    : 'İnceleme modu - Açıklamaları okuyabilirsiniz';
-                Utils.showToast(reviewMsg, 'info');
-                
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } catch (error) {
-                console.error('İnceleme modu hatası:', error);
-                Utils.showToast('İnceleme modu başlatılamadı', 'error');
-            }
-        },
-
-        /**
-         * Yeni quiz başlatır
-         */
-        newQuiz() {
-            try {
-                this.cleanupPreviousQuiz();
-                
-                const resultsPage = document.getElementById('resultsPage');
-                const quizPage = document.getElementById('quizPage');
-                const testSelection = document.getElementById('testSelection');
-                
-                if (resultsPage) resultsPage.classList.remove('active');
-                if (quizPage) quizPage.classList.remove('active');
-                if (testSelection) testSelection.classList.add('active');
-
-                // State'i sıfırla
-                this.state = {
-                    currentMode: null,
-                    questions: [],
-                    currentIndex: 0,
-                    answers: [],
-                    startTime: null,
-                    timerInterval: null,
-                    elapsedSeconds: 0,
-                    isReviewing: false,
-                    testTitle: null,
-                    testDescription: null,
-                    eventListenersAttached: this.state.eventListenersAttached
-                };
-
-                localStorage.removeItem('testify_generated_test');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } catch (error) {
-                console.error('Yeni quiz başlatma hatası:', error);
-                Utils.showToast('Yeni test başlatılamadı', 'error');
-            }
-        },
-
-        /**
-         * Quiz'den çıkar
-         */
-        async exitQuiz() {
-            if (this.state.isReviewing) {
-                this.newQuiz();
-                return;
-            }
-
-            const confirmMsg = window.t 
-                ? t('quiz.exitConfirm', 'Testi bırakmak istediğine emin misin?\n\nİlerleme kaydedilmeyecek!')
-                : 'Testi bırakmak istediğine emin misin?\n\nİlerleme kaydedilmeyecek!';
-            
-            const confirmed = await Utils.confirm(confirmMsg);
-            if (!confirmed) return;
-
-            try {
-                const answeredCount = this.state.answers.filter(a => a !== null).length;
-                const totalCount = this.state.questions.length;
-
-                this.cleanupPreviousQuiz();
-
-                if (window.StorageManager) {
-                    StorageManager.clearQuizState();
-                }
-
-                const quizPage = document.getElementById('quizPage');
-                const resultsPage = document.getElementById('resultsPage');
-                const testSelection = document.getElementById('testSelection');
-                
-                if (quizPage) quizPage.classList.remove('active');
-                if (resultsPage) resultsPage.classList.remove('active');
-                if (testSelection) testSelection.classList.add('active');
-
-                this.state = {
-                    currentMode: null,
-                    questions: [],
-                    currentIndex: 0,
-                    answers: [],
-                    startTime: null,
-                    timerInterval: null,
-                    elapsedSeconds: 0,
-                    isReviewing: false,
-                    testTitle: null,
-                    testDescription: null,
-                    eventListenersAttached: this.state.eventListenersAttached
-                };
-
-                if (answeredCount > 0) {
-                    Utils.showToast(
-                        `📋 Test bırakıldı (${answeredCount}/${totalCount} soru cevaplanmıştı)`,
-                        'info',
-                        4000
-                    );
-                } else {
-                    Utils.showToast('Test iptal edildi', 'info');
-                }
-
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            } catch (error) {
-                console.error('Quiz çıkış hatası:', error);
-                Utils.showToast('Çıkış yapılamadı', 'error');
-            }
-        },
-
-        /**
-         * Event listener'ları kur (sadece bir kez)
-         */
-        setupEventListeners() {
-            if (this.state.eventListenersAttached) {
-                console.log('⚠️ Event listener\'lar zaten ekli');
-                return;
-            }
-
-            console.log('🔧 Quiz event listener\'lar kuruluyor...');
-            
-            // Test kartları
-            const testOptions = document.querySelector('.test-options');
-            if (testOptions) {
-                const modes = ['practice', 'exam', 'ai', 'custom'];
-                const cards = testOptions.querySelectorAll('.test-option-card');
-                
-                cards.forEach((card, index) => {
-                    const mode = modes[index];
-                    
-                    card.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        this.startQuiz(mode);
-                    });
-                    
-                    card.addEventListener('keypress', (e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            this.startQuiz(mode);
-                        }
-                    });
-                });
-            }
-
-            // Navigation buttons
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const submitBtn = document.getElementById('submitBtn');
-            const reviewBtn = document.getElementById('reviewBtn');
-            const newQuizBtn = document.getElementById('newQuizBtn');
-            const exitQuizBtn = document.getElementById('exitQuizBtn');
-
-            if (prevBtn) {
-                prevBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.previousQuestion();
-                });
-            }
-
-            if (nextBtn) {
-                nextBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.nextQuestion();
-                });
-            }
-
-            if (submitBtn) {
-                submitBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.finishQuiz();
-                });
-            }
-
-            if (reviewBtn) {
-                reviewBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.reviewAnswers();
-                });
-            }
-
-            if (newQuizBtn) {
-                newQuizBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.newQuiz();
-                });
-            }
-
-            if (exitQuizBtn) {
-                exitQuizBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    this.exitQuiz();
-                });
-            }
-
-            this.state.eventListenersAttached = true;
-            console.log('✅ Quiz event listener\'lar kuruldu');
+        // === SESSION TRACKING ===
+        const sessionStart = Date.now();
+
+        window.addEventListener('beforeunload', () => {
+            const sessionDuration = Math.round((Date.now() - sessionStart) / 1000);
+            console.log('📊 Session Duration:', sessionDuration, 'seconds');
+            // Send to analytics
+        });
+
+        // === MOBILE MENU ===
+        function toggleMobileMenu() {
+            const menu = document.querySelector('.nav-menu');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
         }
-    };
 
-    // Event listener kur
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            QuizManager.setupEventListeners();
-        });
-    } else {
-        QuizManager.setupEventListeners();
-    }
-
-    // Sayfa kapanırken temizlik yap
-    window.addEventListener('beforeunload', () => {
-        QuizManager.stopTimer();
-    });
-
-    // Export
-    window.QuizManager = QuizManager;
-
-    /**
-     * FLOATING TESTFY CHAT WIDGET (YENİ)
-     * - Sayfa açıldığında açık
-     * - Başlıktan sürüklenebilir
-     * - Alttaki "Testfy" butonuna tıklayınca aç / kapa
-     */
-    const ChatWidget = {
-        initialized: false,
-
-        init() {
-            if (this.initialized) return;
-            this.initialized = true;
-
-            const widget      = document.getElementById('chatWidget');
-            const toggleBtn   = document.getElementById('chatToggleBtn');
-            const closeBtn    = document.getElementById('chatCloseBtn');
-            const minimizeBtn = document.getElementById('chatMinimizeBtn');
-            const header      = widget ? widget.querySelector('.chat-header') : null;
-
-            if (!widget || !toggleBtn) {
-                console.warn('Chat widget öğeleri bulunamadı');
-                return;
-            }
-
-            // --- Aç / Kapa / Minimize ---
-            const openWidget = () => {
-                widget.classList.add('chat-widget--open');
-                widget.classList.remove('chat-widget--minimized');
-                widget.setAttribute('aria-hidden', 'false');
-
-                const input = document.getElementById('aiInput');
-                if (input) {
-                    setTimeout(() => input.focus(), 50);
+        // === AUTO NAVIGATION PROMPTS ===
+        function showNavigationPrompt() {
+            setTimeout(() => {
+                if (currentPage === 'dashboard') {
+                    const shouldNavigate = confirm('Test çözmeye başlamak ister misin?');
+                    if (shouldNavigate) {
+                        navigateTo('test-select');
+                    }
                 }
-            };
-
-            const closeWidget = () => {
-                widget.classList.remove('chat-widget--open', 'chat-widget--minimized');
-                widget.setAttribute('aria-hidden', 'true');
-            };
-
-            const toggleMinimize = () => {
-                if (!widget.classList.contains('chat-widget--open')) return;
-                widget.classList.toggle('chat-widget--minimized');
-            };
-
-            const toggleWidget = () => {
-                if (widget.classList.contains('chat-widget--open')) {
-                    closeWidget();
-                } else {
-                    openWidget();
-                }
-            };
-
-            // Butonlar
-            toggleBtn.addEventListener('click', toggleWidget);
-            if (closeBtn)    closeBtn.addEventListener('click', closeWidget);
-            if (minimizeBtn) minimizeBtn.addEventListener('click', toggleMinimize);
-
-            // ESC ile kapat
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape' && widget.classList.contains('chat-widget--open')) {
-                    closeWidget();
-                }
-            });
-
-            // --- SÜRÜKLEME ---
-            let isDragging = false;
-            let offsetX = 0;
-            let offsetY = 0;
-
-            const startDrag = (event) => {
-                const e = event.touches ? event.touches[0] : event;
-                if (!e) return;
-
-                isDragging = true;
-
-                const rect = widget.getBoundingClientRect();
-                offsetX = e.clientX - rect.left;
-                offsetY = e.clientY - rect.top;
-
-                // Sağ / alt sabitlemeyi bırak, sol / üstten konumla
-                widget.style.left   = rect.left + 'px';
-                widget.style.top    = rect.top + 'px';
-                widget.style.right  = 'auto';
-                widget.style.bottom = 'auto';
-
-                document.body.style.userSelect = 'none';
-            };
-
-            const onDrag = (event) => {
-                if (!isDragging) return;
-
-                const e = event.touches ? event.touches[0] : event;
-                if (!e) return;
-
-                let x = e.clientX - offsetX;
-                let y = e.clientY - offsetY;
-
-                const maxX = window.innerWidth  - widget.offsetWidth;
-                const maxY = window.innerHeight - widget.offsetHeight;
-
-                x = Math.max(0, maxX > 0 ? Math.min(maxX, x) : 0);
-                y = Math.max(0, maxY > 0 ? Math.min(maxY, y) : 0);
-
-                widget.style.left = x + 'px';
-                widget.style.top  = y + 'px';
-
-                event.preventDefault();
-            };
-
-            const stopDrag = () => {
-                if (!isDragging) return;
-                isDragging = false;
-                document.body.style.userSelect = '';
-            };
-
-            if (header) {
-                header.style.cursor = 'move';
-                header.addEventListener('mousedown', startDrag);
-                header.addEventListener('touchstart', startDrag, { passive: false });
-            }
-
-            document.addEventListener('mousemove', onDrag);
-            document.addEventListener('touchmove', onDrag, { passive: false });
-            document.addEventListener('mouseup', stopDrag);
-            document.addEventListener('touchend', stopDrag);
-
-            // Sayfa açıldığında otomatik açık gelsin
-            openWidget();
-
-            console.log('✅ ChatWidget hazır');
+            }, 5000);
         }
-    };
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            ChatWidget.init();
+        // Initialize
+        showNavigationPrompt();
+
+        // === PROGRESSIVE WEB APP ===
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(() => {
+                console.log('Service worker registration failed');
+            });
+        }
+
+        // === PERFORMANCE MONITORING ===
+        window.addEventListener('load', () => {
+            const timing = performance.timing;
+            const loadTime = timing.loadEventEnd - timing.navigationStart;
+            console.log('⚡ Page Load Time:', loadTime, 'ms');
         });
-    } else {
-        ChatWidget.init();
-    }
     </script>
 </body>
 </html>
