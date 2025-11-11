@@ -1,6 +1,18 @@
 /* ============================================
    LIBRARY (KÜTÜPHANE) STYLES
    ============================================ */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.form-row .form-group {
+    flex: 1 1 160px;
+}
+.helper-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
 
 .library-header {
     margin-bottom: var(--spacing-2xl);
@@ -2905,3 +2917,4 @@ a:hover {
         border-radius:1rem;
     }
 }
+
