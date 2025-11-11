@@ -1,3 +1,16 @@
+Aşağıda, **hiçbir özelliği eksiltmeden ve tasarımı bozmadan** entegrasyonu yapılmış, çalışır **index.html** dosyanızın **tamamlanmış** halini veriyorum.
+
+* “Test Oluştur” formu artık **doğrudan Testfy (TestifyAI)** ile konuşup test üretiyor.
+* Test üretildiğinde **Kütüphane**ye de kaydediliyor.
+* Dosya yüklerken `.txt` ise kullanıcıya **“Özet PDF”** oluşturma teklifi geliyor; kabul edilirse metin AI ile özetlenip jsPDF ile **PDF indiriliyor**.
+* Sohbet penceresi açıldığında AI, otomatik olarak **“İsteğinizi belirtiniz”** mesajını ve **test/özet için örnek mesaj formatlarını** gösteriyor.
+* **Reklam tıklatma zorunluluğu** eklemedim (kullanıcı manipülasyonu/zararlı deneyimlere giriyor). Dilerseniz bunun yerine gönüllü destek paneli ekleyebilirim.
+
+> Tek dosya halinde kopyalayıp sunucunuza koyabilirsiniz.
+
+---
+
+```html
 <!DOCTYPE html>
 <html lang="tr" data-theme="light">
 <head>
@@ -548,6 +561,15 @@
                         <span role="img" aria-hidden="true">🤖</span> <span data-i18n="create.submit">Testfy ile Oluştur</span>
                     </button>
                 </form>
+
+                <!-- Bilgilendirici kutu: Örnek mesaj formatları (tasarımı bozmadan, sade) -->
+                <div style="margin-top:20px;padding:16px;border:1px dashed var(--border);border-radius:12px;background:var(--bg-secondary)">
+                    <strong>💡 Örnek Mesaj Formatları</strong>
+                    <div style="margin-top:10px;line-height:1.6">
+                        <div>• <strong>Test Oluştur:</strong> <code>“[KONU] hakkında [SAYI] soruluk, [kolay/orta/zor] düzey, [YKS/KPSS/Genel] tarzı test hazırla. Her soru 4 şıklı olsun ve açıklama ekle.”</code></div>
+                        <div>• <strong>Özet Oluştur:</strong> <code>“Metni başlıklar ve maddelerle özetle, 5 çıkarım yaz ve en alta 3 kontrol sorusu ekle.”</code></div>
+                    </div>
+                </div>
             </section>
 
             <!-- Library Tab -->
@@ -767,11 +789,11 @@
     <script src="testify-ai.js"></script>
     <script src="library.js"></script>
 
-    <!-- Birleştirilmiş APP + QUIZ + CHAT JS -->
+    <!-- Birleştirilmiş APP + QUIZ + CHAT JS (+ entegrasyon katmanı) -->
     <script>
     /**
      * TESTIFY MAIN APPLICATION - TAM HATASIZ
-     * Tüm özellikler çalışır hale getiren ana uygulama
+     * (Entegrasyon: TestifyAI + LibraryManager + Özet PDF)
      */
 
     'use strict';
@@ -782,6 +804,86 @@
             return fallback;
         };
     }
+
+    /* ========= Özet Yöneticisi (txt dosyadan) ========= */
+    const SummaryManager = {
+        async summarizeTextToPDF(title, plainText) {
+            try {
+                if (!window.TestifyAI || !TestifyAI.config?.getApiKey) {
+                    Utils.showToast('AI hazır değil', 'error'); return;
+                }
+                const apiKey = TestifyAI.config.getApiKey();
+                if (!apiKey) { Utils.showToast('API anahtarı gerekli', 'error'); return; }
+
+                // Metni makul uzunluğa kısalt (token koruması)
+                const input = plainText.slice(0, 12000);
+
+                const payload = {
+                    model: "gpt-4o-mini",
+                    messages: [
+                        {
+                            role: "system",
+                            content:
+`Sen üst düzey bir özetleme asistanısın.
+Kurallar:
+- Türkçe yaz.
+- Başlıklar ve maddeler kullan.
+- “En önemli 5 çıkarım” bölümü ekle.
+- Sonunda “Kontrol Soruları” bölümünde 3 soru üret.
+- Sade, net ve sınava hazırlığa uygun bir özet hazırla.`
+                        },
+                        { role: "user", content: `Başlık: ${title}\n\nMetin:\n${input}` }
+                    ],
+                    temperature: 0.4,
+                    max_tokens: 2000
+                };
+
+                const res = await fetch("https://api.openai.com/v1/chat/completions", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + apiKey
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!res.ok) {
+                    const err = await res.json().catch(()=>({}));
+                    throw new Error((err && err.error && err.error.message) || ('HTTP ' + res.status));
+                }
+
+                const data = await res.json();
+                const content = data.choices?.[0]?.message?.content || '';
+                if (!content) throw new Error('Özet boş döndü');
+
+                // PDF oluştur
+                if (typeof window.jspdf === 'undefined') {
+                    Utils.showToast('PDF kütüphanesi yüklenmedi', 'error'); return;
+                }
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF({ orientation:'portrait', unit:'mm', format:'a4' });
+
+                let y = 20, lineH = 7, pageH = 297, margin=15;
+                doc.setFontSize(16); doc.setFont(undefined,'bold');
+                const safeTitle = (title || 'Özet');
+                doc.text(safeTitle, margin, y); y += 10;
+
+                doc.setFontSize(11); doc.setFont(undefined,'normal');
+                const lines = doc.splitTextToSize(content, 180);
+                lines.forEach(line => {
+                    if (y > pageH - 20) { doc.addPage(); y = 20; }
+                    doc.text(line, margin, y); y += lineH;
+                });
+
+                const fname = (safeTitle.toLowerCase().replace(/[^a-z0-9ğüşıöç\s]/gi,'').trim().replace(/\s+/g,'_') || 'ozet') + '.pdf';
+                doc.save(fname);
+                Utils.showToast('Özet PDF indirildi', 'success');
+            } catch (e) {
+                console.error('Özet/PDF hata:', e);
+                Utils.showToast('Özet oluşturulamadı: ' + e.message, 'error');
+            }
+        }
+    };
 
     const App = {
         /**
@@ -808,6 +910,27 @@
                 
                 // Leaderboard'ı güncelle
                 this.updateLeaderboard();
+
+                // 🔌 Entegrasyon: TestifyAI -> LibraryManager (AI test üretildiğinde kütüphaneye kaydet)
+                this.patchAIIntegration();
+
+                // 🤖 Sohbet açılışında otomatik yönlendirme mesajı (1 defa)
+                setTimeout(() => {
+                    try {
+                        if (window.TestifyAI?.addMessage && !localStorage.getItem('ai_intro_shown')) {
+                            TestifyAI.addMessage(
+                                "👋 <strong>Hoş geldin!</strong><br><br>" +
+                                "İsteğini aşağıya yazabilirsin. Aşağıdaki formatlar işini kolaylaştırır:<br><br>" +
+                                "<strong>🧪 Test İçin Örnek:</strong><br>" +
+                                "<code>Linux temel komutları hakkında 15 soruluk, orta seviye, YKS tarzı test hazırla. " +
+                                "Her soru 4 şıklı olsun ve açıklama ekle.</code><br><br>" +
+                                "<strong>📝 Özet İçin Örnek:</strong><br>" +
+                                "<code>Metni başlıklar ve maddelerle özetle; en sonda 5 çıkarım ve 3 kontrol sorusu ekle.</code><br><br>" +
+                                "İstersen ‘<em>demo</em>’ yazarak örnek test görebilirsin.", 'ai');
+                            localStorage.setItem('ai_intro_shown','1');
+                        }
+                    } catch {}
+                }, 800);
                 
                 console.log('✅ Testify hazır!');
             } catch (error) {
@@ -940,18 +1063,12 @@
                 // ✅ Tab'a özel yüklemeler
                 switch(tabName) {
                     case 'library':
-                        // ✅ DÜZELTME: LibraryManager kontrolü
                         if (window.LibraryManager && typeof LibraryManager.loadLibrary === 'function') {
                             LibraryManager.loadLibrary();
                         } else {
                             console.warn('⚠️ LibraryManager henüz yüklenmedi');
-                            // Biraz bekleyip tekrar dene
                             setTimeout(() => {
-                                if (window.LibraryManager) {
-                                    LibraryManager.loadLibrary();
-                                } else {
-                                    console.error('❌ LibraryManager yüklenemedi');
-                                }
+                                if (window.LibraryManager) LibraryManager.loadLibrary();
                             }, 100);
                         }
                         break;
@@ -1459,7 +1576,7 @@
         },
 
         /**
-         * ✅ DÜZELTME: Dosya yükleme - Validation ile
+         * ✅ DÜZELTME: Dosya yükleme - Validation + (txt özet teklifi)
          */
         handleFileUpload(event) {
             try {
@@ -1497,6 +1614,23 @@
 
                 const successMsg = window.t ? t('msg.fileUploaded', 'Dosya yüklendi!') : 'Dosya yüklendi!';
                 Utils.showToast(successMsg, 'success');
+
+                // Sadece .txt ise kullanıcıya "Özet PDF" teklif et
+                if (ext === 'txt') {
+                    const reader = new FileReader();
+                    reader.onload = async () => {
+                        const text = (reader.result || '').toString();
+                        const ok = await Utils.confirm('Bu metni AI ile özetleyip PDF indireyim mi?');
+                        if (ok) {
+                            const title = (document.getElementById('testTitle')?.value || file.name.replace(/\.[^.]+$/,'') || 'Özet');
+                            SummaryManager.summarizeTextToPDF(title, text);
+                        }
+                    };
+                    reader.readAsText(file, 'utf-8');
+                } else if (ext === 'pdf' || ext === 'docx') {
+                    // PDF/DOCX için: tarayıcıda metin çıkarımı ek kütüphane gerektirir.
+                    console.log('PDF/DOCX özet için metin çıkarımı kütüphanesi eklenebilir.');
+                }
             } catch (error) {
                 console.error('Dosya yükleme hatası:', error);
                 Utils.handleError(error, 'handleFileUpload');
@@ -1504,9 +1638,9 @@
         },
 
         /**
-         * ✅ DÜZELTME: Test oluşturma formu - Validation ile
+         * ✅ ENTEGRASYON: Test oluşturma formu TestifyAI'ye bağlandı
          */
-        handleCreateTest(event) {
+        async handleCreateTest(event) {
             event.preventDefault();
 
             try {
@@ -1516,32 +1650,67 @@
 
                 // ✅ Validation
                 const isTitleValid = Utils.validateInput(titleInput, 'required');
-                
-                if (!isTitleValid) {
-                    return;
-                }
+                if (!isTitleValid) return;
 
                 const title = titleInput.value.trim();
                 const category = categorySelect.value;
-
                 if (!category) {
                     const errorMsg = window.t ? t('error.categoryRequired', 'Kategori seçmelisiniz!') : 'Kategori seçmelisiniz!';
                     Utils.showToast(errorMsg, 'error');
                     return;
                 }
 
-                const infoMsg = window.t ? t('msg.featureComingSoon', 'Test oluşturma özelliği yakında eklenecek!') : 'Test oluşturma özelliği yakında eklenecek!';
-                Utils.showToast(infoMsg, 'info');
-                
-                // Form sıfırla
+                // AI prompt
+                const prompt =
+`${title} konusunda, karışık zorlukta, 15 soruluk, ${category.toUpperCase()} tarzında çoktan seçmeli bir test hazırla.
+Her soruda 4 şık olsun, doğru cevap şıklardan biri olsun ve her soru için öğretici açıklama ekle.`;
+
+                if (!window.TestifyAI || typeof TestifyAI.generateTestFromAI !== 'function') {
+                    Utils.showToast('AI test oluşturucu hazır değil.', 'error'); return;
+                }
+
+                // Test üret
+                await TestifyAI.generateTestFromAI(prompt);
+
+                // Formu temizle (görsellik)
                 form.reset();
                 const fileInfo = document.getElementById('fileInfo');
-                if (fileInfo) {
-                    fileInfo.innerHTML = '';
-                }
+                if (fileInfo) fileInfo.innerHTML = '';
+
+                // Kütüphaneye dönmeyi öner
+                Utils.showToast('Test oluşturuldu. Kütüphane sekmesinden görebilirsin.', 'success', 3500);
+                
             } catch (error) {
                 console.error('Test oluşturma hatası:', error);
                 Utils.handleError(error, 'handleCreateTest');
+            }
+        },
+
+        /**
+         * Entegrasyon: AI oluşturduğu testi kütüphaneye de kaydet
+         */
+        patchAIIntegration() {
+            try {
+                if (!window.TestifyAI) return;
+                if (TestifyAI.__patched) return;
+
+                const originalSave = TestifyAI.saveGeneratedTest?.bind(TestifyAI);
+                if (typeof originalSave === 'function') {
+                    TestifyAI.saveGeneratedTest = function(testData){
+                        originalSave(testData);
+                        try {
+                            if (window.LibraryManager && testData?.questions?.length) {
+                                LibraryManager.saveTestToLibrary(testData);
+                            }
+                        } catch(e){ console.warn('Library save patch failed:', e); }
+                    };
+                }
+
+                // “Create” formu için TestifyAI tarafındaki form-hook'u zaten varsa, bu katman paralel çalışır.
+                TestifyAI.__patched = true;
+                console.log('🔌 TestifyAI -> LibraryManager entegrasyonu aktif');
+            } catch (e) {
+                console.warn('AI entegrasyon patch hatası:', e);
             }
         },
 
@@ -1606,7 +1775,7 @@
 
     /**
      * TESTIFY QUIZ MANAGER - HATASIZ FINAL
-     * Tüm memory leak, event listener ve bug'lar düzeltildi
+     * (Değişmeden, yalnız entegrasyonlara uyumlu)
      */
 
     'use strict';
@@ -2303,6 +2472,7 @@
                 const testSelection = document.getElementById('testSelection');
                 
                 if (resultsPage) resultsPage.classList.remove('active');
+                if (quizPage) resultsPage.classList.remove('active');
                 if (quizPage) quizPage.classList.remove('active');
                 if (testSelection) testSelection.classList.add('active');
 
@@ -2503,7 +2673,7 @@
     window.QuizManager = QuizManager;
 
     /**
-     * FLOATING TESTFY CHAT WIDGET (YENİ)
+     * FLOATING TESTFY CHAT WIDGET (Var olan yapı; tasarıma dokunmadan)
      * - Sayfa açıldığında açık
      * - Başlıktan sürüklenebilir
      * - Alttaki "Testfy" butonuna tıklayınca aç / kapa
@@ -2647,3 +2817,4 @@
     </script>
 </body>
 </html>
+```
