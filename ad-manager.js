@@ -13,13 +13,7 @@
     const AdManager = {
         // 🔹 BURAYI KENDİ ADSENSE HESABINA GÖRE DÜZENLE
         adsenseClient: 'ca-pub-CHANGE_ME', // Örn: ca-pub-1234567890123456
-
-        // index.html’deki reklam kutuların ID -> slot eşleşmesi
-        // ad-container kullanan yerler:
-        //  - <div id="ad-top" class="ad-container">
-        //  - <div id="ad-dashboard" class="ad-container">
-        //  - <div id="ad-leaderboard" class="ad-container">
-        //  - <div id="ad-bottom" class="ad-container">
+        
         slots: {
             'ad-top': {
                 slot: 'CHANGE_ME_TOP',        // data-ad-slot
