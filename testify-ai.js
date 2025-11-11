@@ -828,90 +828,94 @@ document.addEventListener('DOMContentLoaded', () => {
     const wrapper   = document.querySelector('.chat-widget-wrapper');
     const toggleBtn = document.querySelector('.chat-toggle-btn');
 
-    if (!widget || !wrapper || !toggleBtn) {
-        return;
-    }
+    if (!widget || !toggleBtn) return;
 
     const header        = widget.querySelector('.chat-header');
     const headerButtons = widget.querySelectorAll('.chat-header-btn');
     const chatBody      = widget.querySelector('.chat-body');
-    const chatFooter    = widget.querySelector('.chat-footer');
     const pageHeader    = document.querySelector('.header');
 
     const minimizeBtn = headerButtons[0] || null;
     const closeBtn    = headerButtons[1] || null;
 
-    // Eski inline onclick'leri temizle (varsa)
+    // Üstte kalsın
+    widget.style.zIndex = '9999';
+    if (wrapper) wrapper.style.zIndex = '9998';
+
+    // Eski onclick & listener’ları mümkün olduğunca devre dışı bırak
     toggleBtn.onclick = null;
     if (minimizeBtn) minimizeBtn.onclick = null;
     if (closeBtn)    closeBtn.onclick    = null;
 
     const ensureDisplayFlex = () => {
-        if (widget.style.display !== 'flex') {
+        // Eğer başka script display:none yaptıysa geri al
+        if (getComputedStyle(widget).display === 'none') {
             widget.style.display = 'flex';
         }
     };
 
-    function openWidget() {
+    const openWidget = () => {
         ensureDisplayFlex();
         widget.classList.add('chat-widget--open');
         widget.classList.remove('chat-widget--minimized');
-    }
+    };
 
-    function closeWidget() {
+    const closeWidget = () => {
         widget.classList.remove('chat-widget--open', 'chat-widget--minimized');
-        // display:flex kalıyor; görünürlüğü CSS yönetiyor
-    }
+        // display'i ellemiyoruz; görünürlüğü CSS kontrol ediyor
+    };
 
-    function toggleWidgetVisibility() {
-        if (widget.classList.contains('chat-widget--open')) {
-            closeWidget();
-        } else {
-            openWidget();
-        }
-    }
+    const getSafeTop = () => {
+        if (!pageHeader) return 8;
+        const rect = pageHeader.getBoundingClientRect();
+        // header sticky olduğu için her zaman viewport’ta
+        return rect.bottom + 8; // header’ın hemen altı
+    };
 
-    function toggleMinimize(e) {
+    const toggleWidgetVisibility = (e) => {
         if (e) {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
         }
-        if (!widget.classList.contains('chat-widget--open')) {
+
+        if (widget.classList.contains('chat-widget--open')) {
+            closeWidget();
+        } else {
             openWidget();
-            return;
         }
-        widget.classList.toggle('chat-widget--minimized');
-    }
+    };
 
-    // Sağ alttaki "Testify" butonu
-    toggleBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-        toggleWidgetVisibility();
-    });
+    // Sağ alttaki "Testify" butonu – capture fazı ile diğer handler'ları iptal
+    toggleBtn.addEventListener('click', toggleWidgetVisibility, true);
 
+    // Küçült butonu
     if (minimizeBtn) {
-        minimizeBtn.addEventListener('click', toggleMinimize);
+        minimizeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+
+            ensureDisplayFlex();
+            if (!widget.classList.contains('chat-widget--open')) {
+                openWidget();
+                return;
+            }
+            widget.classList.toggle('chat-widget--minimized');
+        }, true);
     }
 
+    // Çarpı (tam kapat)
     if (closeBtn) {
         closeBtn.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
             e.stopImmediatePropagation();
             closeWidget();
-        });
+        }, true);
     }
 
-    const getSafeTop = () => {
-        if (!pageHeader) return 8;
-        const rect = pageHeader.getBoundingClientRect();
-        return rect.bottom + 8; // header'ın hemen altı
-    };
-
-    // ---- Sürükleme ----
+    // ==== SÜRÜKLEME ====
     if (header) {
         let isDragging = false;
         let offsetX = 0;
@@ -936,41 +940,15 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const onMouseDown = (e) => {
-            if (e.button !== 0) return; // sadece sol tık
+            if (e.button !== 0) return;
+            e.preventDefault();
             startDrag(e.clientX, e.clientY);
         };
 
         const onTouchStart = (e) => {
-            const touch = e.touches[0];
-            if (!touch) return;
-            startDrag(touch.clientX, touch.clientY);
-        };
-
-        const onMouseMove = (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-            updatePosition(e.clientX, e.clientY);
-        };
-
-        const onTouchMove = (e) => {
-            if (!isDragging) return;
-            const touch = e.touches[0];
-            if (!touch) return;
-            e.preventDefault();
-            updatePosition(touch.clientX, touch.clientY);
-        };
-
-        const stopDrag = () => {
-            if (!isDragging) return;
-            isDragging = false;
-            header.style.cursor = 'grab';
-
-            widget.classList.remove('chat-widget--dragging');
-
-            document.removeEventListener('mousemove', onMouseMove);
-            document.removeEventListener('mouseup', stopDrag);
-            document.removeEventListener('touchmove', onTouchMove);
-            document.removeEventListener('touchend', stopDrag);
+            const t = e.touches[0];
+            if (!t) return;
+            startDrag(t.clientX, t.clientY);
         };
 
         const updatePosition = (clientX, clientY) => {
@@ -982,15 +960,14 @@ document.addEventListener('DOMContentLoaded', () => {
             let top  = clientY - offsetY;
 
             const padding = 8;
-            const minTop = getSafeTop();
-            const maxLeft = vw - rect.width - padding;
+            const minTop  = getSafeTop();
+            const maxLeft = vw - rect.width  - padding;
             const maxTop  = vh - rect.height - padding;
 
             if (left < padding) left = padding;
             if (left > maxLeft) left = maxLeft;
-
-            if (top < minTop) top = minTop;
-            if (top > maxTop) top = maxTop;
+            if (top  < minTop)  top  = minTop;
+            if (top  > maxTop)  top  = maxTop;
 
             widget.style.left   = `${left}px`;
             widget.style.top    = `${top}px`;
@@ -998,11 +975,37 @@ document.addEventListener('DOMContentLoaded', () => {
             widget.style.bottom = 'auto';
         };
 
+        const onMouseMove = (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            updatePosition(e.clientX, e.clientY);
+        };
+
+        const onTouchMove = (e) => {
+            if (!isDragging) return;
+            const t = e.touches[0];
+            if (!t) return;
+            e.preventDefault();
+            updatePosition(t.clientX, t.clientY);
+        };
+
+        const stopDrag = () => {
+            if (!isDragging) return;
+            isDragging = false;
+            header.style.cursor = 'grab';
+            widget.classList.remove('chat-widget--dragging');
+
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', stopDrag);
+            document.removeEventListener('touchmove', onTouchMove);
+            document.removeEventListener('touchend', stopDrag);
+        };
+
         header.addEventListener('mousedown', onMouseDown);
         header.addEventListener('touchstart', onTouchStart, { passive: true });
     }
 
-    // Chat içi kaydırma daha doğal olsun
+    // Chat içi kaydırma ayarı
     if (chatBody) {
         chatBody.style.scrollBehavior = 'smooth';
         chatBody.style.overscrollBehavior = 'contain';
