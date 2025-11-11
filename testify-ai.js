@@ -821,9 +821,6 @@ window.addEventListener('load', () => {
 
 /* =========================================================
    TESTIFY FLOATING CHAT WIDGET – AÇ/KAPA + KÜÇÜLT + SÜRÜKLE
-   (CSS tarafında .chat-widget-wrapper, .chat-widget, 
-    .chat-toggle-btn, .chat-header, .chat-body, .chat-footer 
-    sınıfları zaten tanımlı)
    ========================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -832,7 +829,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleBtn = document.querySelector('.chat-toggle-btn');
 
     if (!widget || !wrapper || !toggleBtn) {
-        // Sayfada widget yoksa sessizce çık
         return;
     }
 
@@ -840,30 +836,47 @@ document.addEventListener('DOMContentLoaded', () => {
     const headerButtons = widget.querySelectorAll('.chat-header-btn');
     const chatBody      = widget.querySelector('.chat-body');
     const chatFooter    = widget.querySelector('.chat-footer');
+    const pageHeader    = document.querySelector('.header');
 
     const minimizeBtn = headerButtons[0] || null;
     const closeBtn    = headerButtons[1] || null;
 
-    // ---------- Aç / Kapat / Küçült ----------
+    // Eski inline onclick'leri temizle (varsa)
+    toggleBtn.onclick = null;
+    if (minimizeBtn) minimizeBtn.onclick = null;
+    if (closeBtn)    closeBtn.onclick    = null;
+
+    const ensureDisplayFlex = () => {
+        if (widget.style.display !== 'flex') {
+            widget.style.display = 'flex';
+        }
+    };
 
     function openWidget() {
+        ensureDisplayFlex();
         widget.classList.add('chat-widget--open');
         widget.classList.remove('chat-widget--minimized');
     }
 
     function closeWidget() {
         widget.classList.remove('chat-widget--open', 'chat-widget--minimized');
+        // display:flex kalıyor; görünürlüğü CSS yönetiyor
     }
 
     function toggleWidgetVisibility() {
         if (widget.classList.contains('chat-widget--open')) {
-            closeWidget();      // açıkken tıkla → tamamen kapan
+            closeWidget();
         } else {
-            openWidget();       // kapalıyken tıkla → aç
+            openWidget();
         }
     }
 
-    function toggleMinimize() {
+    function toggleMinimize(e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+        }
         if (!widget.classList.contains('chat-widget--open')) {
             openWidget();
             return;
@@ -872,23 +885,38 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Sağ alttaki "Testify" butonu
-    toggleBtn.addEventListener('click', toggleWidgetVisibility);
+    toggleBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        toggleWidgetVisibility();
+    });
 
     if (minimizeBtn) {
         minimizeBtn.addEventListener('click', toggleMinimize);
     }
+
     if (closeBtn) {
-        closeBtn.addEventListener('click', closeWidget);
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            closeWidget();
+        });
     }
 
-    // ---------- Sürükleme (drag) ----------
+    const getSafeTop = () => {
+        if (!pageHeader) return 8;
+        const rect = pageHeader.getBoundingClientRect();
+        return rect.bottom + 8; // header'ın hemen altı
+    };
 
+    // ---- Sürükleme ----
     if (header) {
         let isDragging = false;
         let offsetX = 0;
         let offsetY = 0;
 
-        // move yerine el imleci
         header.style.cursor = 'grab';
 
         const startDrag = (clientX, clientY) => {
@@ -954,13 +982,15 @@ document.addEventListener('DOMContentLoaded', () => {
             let top  = clientY - offsetY;
 
             const padding = 8;
+            const minTop = getSafeTop();
             const maxLeft = vw - rect.width - padding;
             const maxTop  = vh - rect.height - padding;
 
             if (left < padding) left = padding;
-            if (top  < padding) top  = padding;
             if (left > maxLeft) left = maxLeft;
-            if (top  > maxTop)  top  = maxTop;
+
+            if (top < minTop) top = minTop;
+            if (top > maxTop) top = maxTop;
 
             widget.style.left   = `${left}px`;
             widget.style.top    = `${top}px`;
@@ -972,8 +1002,9 @@ document.addEventListener('DOMContentLoaded', () => {
         header.addEventListener('touchstart', onTouchStart, { passive: true });
     }
 
-    // Chat içi scroll davranışı
+    // Chat içi kaydırma daha doğal olsun
     if (chatBody) {
         chatBody.style.scrollBehavior = 'smooth';
+        chatBody.style.overscrollBehavior = 'contain';
     }
 });
