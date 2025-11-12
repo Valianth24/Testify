@@ -51,9 +51,9 @@
     <!-- jsPDF for PDF export -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-    <script src="js/testify-core.js"></script>   <!-- window.TestifyAI burada tanımlanmalı -->
-    <script src="js/testify-ai.js"></script>     <!-- BU dosya: v10 FINAL override -->
-    
+    <script src="js/testify-core.js"></script>   <!-- Eski çekirdek (gerekirse) -->
+    <script src="js/testify-ai.js"></script>     <!-- Yeni TestifyAI v7.3 FINAL -->
+
     <!-- Schema.org Markup -->
     <script type="application/ld+json">
     {
@@ -64,8 +64,6 @@
       "url": "https://testify.com"
     }
     </script>
-    
-
 
     <!-- Floating Testfy Assistant Styles (YENİ) -->
     <style>
@@ -741,7 +739,6 @@
     <script src="storage.js"></script>
     <script src="sorular.js"></script>
     <script src="language.js"></script>
-    <script src="testify-ai.js"></script>
     <script src="library.js"></script>
     <!-- AdSense Manager JS (yeni sistem) -->
     <script src="adsense-manager.js"></script>
@@ -1554,6 +1551,8 @@
 
         /**
          * ✅ DÜZELTME: Test oluşturma formu - Validation ile
+         * (Bu fonksiyon artık "yakında" mesajı veriyor, asıl AI entegrasyonu
+         * js/testify-ai.js içindeki IIFE ile capture-phase'de formu override ediyor.)
          */
         handleCreateTest(event) {
             event.preventDefault();
