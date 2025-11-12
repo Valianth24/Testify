@@ -1,4 +1,17 @@
-
+bana bu ikisini direkt tamamlanmış halde veirir misin en ufak bozulma olmadan  /**
+ * ═══════════════════════════════════════════════════════════════════════
+ * TESTIFY AI v11.0 ULTIMATE TEACHER
+ * Sıfırdan Eğiten Öğretim Sistemi - Research-Based Educational AI
+ * ═══════════════════════════════════════════════════════════════════════
+ * 
+ * FELSEFİ TEMEL:
+ * "Bir test sadece değerlendirme aracı değil, öğrenme yolculuğunun ta kendisidir."
+ * - Benjamin Bloom
+ * 
+ * KALİTE HEDEFİ: 10/10 - Dünya çapında akademik standart
+ * METOD: Multi-layered cognitive scaffolding + Socratic questioning
+ * MODEL: GPT-5 Nano + Advanced prompt engineering techniques
+ */
 
 'use strict';
 
