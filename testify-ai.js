@@ -1,4 +1,4 @@
-sana atacağım kodlarımı önce inceler misin detaylıca ve ezberle geliştirmeler yacapağız İNŞALLAH öğren/**
+/**
  * ═══════════════════════════════════════════════════════════════════════
  * TESTIFY AI v11.0 ULTIMATE TEACHER
  * Sıfırdan Eğiten Öğretim Sistemi - Research-Based Educational AI
