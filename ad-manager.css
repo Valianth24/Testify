@@ -1,0 +1,29 @@
+
+.ad-banner {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+    text-align: center;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.ad-banner:first-of-type,
+.ad-banner:last-of-type {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ad-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
