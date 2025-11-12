@@ -51,9 +51,14 @@
     <!-- jsPDF for PDF export -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-    <script src="js/testify-core.js"></script>   <!-- Eski çekirdek (gerekirse) -->
-    <script src="js/testify-ai.js"></script>     <!-- Yeni TestifyAI v7.3 FINAL -->
-
+    <script src="js/testify-core.js"></script>   <!-- window.TestifyAI burada tanımlanmalı -->
+    <script>
+        // Eski init kontrolünü devre dışı bırakmak için placeholder.
+        // Gerçek TestifyAI nesnesini body sonundaki scriptte atayacağız.
+        window.TestifyAI = window.TestifyAI || { __placeholder: true };
+    </script>
+    <script src="js/testify-ai.js"></script>     <!-- BU dosya: v10 FINAL override -->
+    
     <!-- Schema.org Markup -->
     <script type="application/ld+json">
     {
@@ -64,6 +69,7 @@
       "url": "https://testify.com"
     }
     </script>
+    
 
     <!-- Floating Testfy Assistant Styles (YENİ) -->
     <style>
@@ -532,6 +538,14 @@
                         </div>
                         <div id="fileInfo" class="file-info" role="status"></div>
                     </div>
+
+                    <!-- TestifyAI entegrasyonu için gizli alanlar -->
+                    <input type="hidden" id="testTopic">
+                    <input type="hidden" id="questionCount" value="15">
+                    <input type="hidden" id="difficulty" value="mixed">
+                    <input type="hidden" id="examType" value="genel">
+                    <input type="hidden" id="testNotes">
+                    <input type="hidden" id="language" value="tr">
                     
                     <button type="submit" class="btn btn-primary btn-large">
                         <span role="img" aria-hidden="true">🤖</span> <span data-i18n="create.submit">Testfy ile Oluştur</span>
@@ -677,7 +691,7 @@
             <span class="chat-toggle-text">Testfy</span>
         </button>
 
-        <section class="chat-widget" id="chatWidget" role="complementary" aria-label="Testfy asistanı" aria-hidden="true">
+        <section class="chat-widget chat-widget--open" id="chatWidget" role="complementary" aria-label="Testfy asistanı" aria-hidden="false">
             <header class="chat-header">
                 <div class="chat-title">
                     <span class="chat-title-main">Testfy</span>
@@ -743,7 +757,7 @@
     <!-- AdSense Manager JS (yeni sistem) -->
     <script src="adsense-manager.js"></script>
 
-    <!-- Birleştirilmiş APP + QUIZ + CHAT JS -->
+    <!-- Birleştirilmiş APP + QUIZ JS -->
     <script>
     /**
      * TESTIFY MAIN APPLICATION - TAM HATASIZ
@@ -1541,55 +1555,18 @@
                     `;
                 }
 
+                // AI için ek notlara dosya bilgisini geçir
+                const notesInput = document.getElementById('testNotes');
+                if (notesInput) {
+                    const baseText = notesInput.value ? notesInput.value + ' ' : '';
+                    notesInput.value = `${baseText}Bu test için yüklenen dosya: ${file.name} (${Utils.formatFileSize(file.size)}).`;
+                }
+
                 const successMsg = window.t ? t('msg.fileUploaded', 'Dosya yüklendi!') : 'Dosya yüklendi!';
                 Utils.showToast(successMsg, 'success');
             } catch (error) {
                 console.error('Dosya yükleme hatası:', error);
                 Utils.handleError(error, 'handleFileUpload');
-            }
-        },
-
-        /**
-         * ✅ DÜZELTME: Test oluşturma formu - Validation ile
-         * (Bu fonksiyon artık "yakında" mesajı veriyor, asıl AI entegrasyonu
-         * js/testify-ai.js içindeki IIFE ile capture-phase'de formu override ediyor.)
-         */
-        handleCreateTest(event) {
-            event.preventDefault();
-
-            try {
-                const form = event.target;
-                const titleInput = form.testTitle;
-                const categorySelect = form.testCategory;
-
-                // ✅ Validation
-                const isTitleValid = Utils.validateInput(titleInput, 'required');
-                
-                if (!isTitleValid) {
-                    return;
-                }
-
-                const title = titleInput.value.trim();
-                const category = categorySelect.value;
-
-                if (!category) {
-                    const errorMsg = window.t ? t('error.categoryRequired', 'Kategori seçmelisiniz!') : 'Kategori seçmelisiniz!';
-                    Utils.showToast(errorMsg, 'error');
-                    return;
-                }
-
-                const infoMsg = window.t ? t('msg.featureComingSoon', 'Test oluşturma özelliği yakında eklenecek!') : 'Test oluşturma özelliği yakında eklenecek!';
-                Utils.showToast(infoMsg, 'info');
-                
-                // Form sıfırla
-                form.reset();
-                const fileInfo = document.getElementById('fileInfo');
-                if (fileInfo) {
-                    fileInfo.innerHTML = '';
-                }
-            } catch (error) {
-                console.error('Test oluşturma hatası:', error);
-                Utils.handleError(error, 'handleCreateTest');
             }
         },
 
@@ -1621,11 +1598,20 @@
                     fileUpload.addEventListener('change', (e) => this.handleFileUpload(e));
                 }
 
-                // Test oluşturma formu
-                const createForm = document.getElementById('createTestForm');
-                if (createForm) {
-                    createForm.addEventListener('submit', (e) => this.handleCreateTest(e));
+                // Test başlığını AI konu alanına senkronize et
+                const testTitleInput = document.getElementById('testTitle');
+                if (testTitleInput) {
+                    testTitleInput.addEventListener('input', () => {
+                        const topicInput = document.getElementById('testTopic');
+                        if (topicInput) {
+                            topicInput.value = testTitleInput.value;
+                        }
+                    });
                 }
+
+                // Test oluşturma formu submit'i js/testify-ai.js içindeki
+                // TestifyAI entegrasyonu tarafından yönetilecek.
+                // Burada ekstra submit handler eklemiyoruz.
 
                 // Not ekleme butonu
                 const addNoteBtn = document.getElementById('addNoteBtn');
@@ -1648,6 +1634,17 @@
     document.addEventListener('DOMContentLoaded', () => {
         App.init();
         App.handleInitialTabFromHash();
+
+        // TestifyAI'yi başlat (v10 override)
+        try {
+            if (typeof TestifyAI !== 'undefined' && TestifyAI && typeof TestifyAI.init === 'function') {
+                TestifyAI.init();
+                window.TestifyAI = TestifyAI;
+                window.aiChat = TestifyAI;
+            }
+        } catch (e) {
+            console.error('TestifyAI init hatası (HTML):', e);
+        }
     });
 
     // Export
@@ -2589,149 +2586,6 @@
 
     // Export
     window.QuizManager = QuizManager;
-
-    /**
-     * FLOATING TESTFY CHAT WIDGET (YENİ)
-     * - Sayfa açıldığında açık
-     * - Başlıktan sürüklenebilir
-     * - Alttaki "Testfy" butonuna tıklayınca aç / kapa
-     */
-    const ChatWidget = {
-        initialized: false,
-
-        init() {
-            if (this.initialized) return;
-            this.initialized = true;
-
-            const widget      = document.getElementById('chatWidget');
-            const toggleBtn   = document.getElementById('chatToggleBtn');
-            const closeBtn    = document.getElementById('chatCloseBtn');
-            const minimizeBtn = document.getElementById('chatMinimizeBtn');
-            const header      = widget ? widget.querySelector('.chat-header') : null;
-
-            if (!widget || !toggleBtn) {
-                console.warn('Chat widget öğeleri bulunamadı');
-                return;
-            }
-
-            // --- Aç / Kapa / Minimize ---
-            const openWidget = () => {
-                widget.classList.add('chat-widget--open');
-                widget.classList.remove('chat-widget--minimized');
-                widget.setAttribute('aria-hidden', 'false');
-
-                const input = document.getElementById('aiInput');
-                if (input) {
-                    setTimeout(() => input.focus(), 50);
-                }
-            };
-
-            const closeWidget = () => {
-                widget.classList.remove('chat-widget--open', 'chat-widget--minimized');
-                widget.setAttribute('aria-hidden', 'true');
-            };
-
-            const toggleMinimize = () => {
-                if (!widget.classList.contains('chat-widget--open')) return;
-                widget.classList.toggle('chat-widget--minimized');
-            };
-
-            const toggleWidget = () => {
-                if (widget.classList.contains('chat-widget--open')) {
-                    closeWidget();
-                } else {
-                    openWidget();
-                }
-            };
-
-            // Butonlar
-            toggleBtn.addEventListener('click', toggleWidget);
-            if (closeBtn)    closeBtn.addEventListener('click', closeWidget);
-            if (minimizeBtn) minimizeBtn.addEventListener('click', toggleMinimize);
-
-            // ESC ile kapat
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape' && widget.classList.contains('chat-widget--open')) {
-                    closeWidget();
-                }
-            });
-
-            // --- SÜRÜKLEME ---
-            let isDragging = false;
-            let offsetX = 0;
-            let offsetY = 0;
-
-            const startDrag = (event) => {
-                const e = event.touches ? event.touches[0] : event;
-                if (!e) return;
-
-                isDragging = true;
-
-                const rect = widget.getBoundingClientRect();
-                offsetX = e.clientX - rect.left;
-                offsetY = e.clientY - rect.top;
-
-                // Sağ / alt sabitlemeyi bırak, sol / üstten konumla
-                widget.style.left   = rect.left + 'px';
-                widget.style.top    = rect.top + 'px';
-                widget.style.right  = 'auto';
-                widget.style.bottom = 'auto';
-
-                document.body.style.userSelect = 'none';
-            };
-
-            const onDrag = (event) => {
-                if (!isDragging) return;
-
-                const e = event.touches ? event.touches[0] : event;
-                if (!e) return;
-
-                let x = e.clientX - offsetX;
-                let y = e.clientY - offsetY;
-
-                const maxX = window.innerWidth  - widget.offsetWidth;
-                const maxY = window.innerHeight - widget.offsetHeight;
-
-                x = Math.max(0, maxX > 0 ? Math.min(maxX, x) : 0);
-                y = Math.max(0, maxY > 0 ? Math.min(maxY, y) : 0);
-
-                widget.style.left = x + 'px';
-                widget.style.top  = y + 'px';
-
-                event.preventDefault();
-            };
-
-            const stopDrag = () => {
-                if (!isDragging) return;
-                isDragging = false;
-                document.body.style.userSelect = '';
-            };
-
-            if (header) {
-                header.style.cursor = 'move';
-                header.addEventListener('mousedown', startDrag);
-                header.addEventListener('touchstart', startDrag, { passive: false });
-            }
-
-            document.addEventListener('mousemove', onDrag);
-            document.addEventListener('touchmove', onDrag, { passive: false });
-            document.addEventListener('mouseup', stopDrag);
-            document.addEventListener('touchend', stopDrag);
-
-            // Sayfa açıldığında otomatik açık gelsin
-            openWidget();
-
-            console.log('✅ ChatWidget hazır');
-        }
-    };
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            ChatWidget.init();
-        });
-    } else {
-        ChatWidget.init();
-    }
     </script>
 </body>
 </html>
