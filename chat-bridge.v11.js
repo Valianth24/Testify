@@ -1,24 +1,3 @@
-/*
- * ═══════════════════════════════════════════════════════════════════════════
- * TESTIFY CHAT BRIDGE v11.1 PROFESSIONAL
- * ═══════════════════════════════════════════════════════════════════════════
- * 
- * "Education is not the filling of a pail, but the lighting of a fire."
- * - William Butler Yeats
- * 
- * TESTIFY VISION:
- * Dünya standartlarında, AI destekli eğitim içeriği ile her öğrenciye
- * kişiselleştirilmiş öğrenme deneyimi sunmak.
- * 
- * PHILOSOPHY:
- * - Öğrenme merkezli yaklaşım
- * - 10/10 kalite standardı
- * - Araştırma bazlı pedagoji
- * - Profesyonel hizmet anlayışı
- * 
- * API: Testify tarafından sağlanır - Kullanıcı yapılandırması gerektirmez
- * ═══════════════════════════════════════════════════════════════════════════
- */
 
 (function (window, document) {
   'use strict';
