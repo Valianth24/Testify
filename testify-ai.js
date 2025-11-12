@@ -156,7 +156,7 @@ const TestifyAI_UltimateTeacher = {
             
             if (timeSinceLastRequest < this.minInterval) {
                 const waitTime = this.minInterval - timeSinceLastRequest;
-                console.log(`⏳ Rate limiting: ${waitTime}ms bekleniyor...`);
+                console.log(`Bekleme süresi: ${waitTime} ms`);
                 await new Promise(resolve => setTimeout(resolve, waitTime));
             }
             
@@ -403,8 +403,8 @@ BEGIN CREATION - Return only valid JSON.
         const currentTimeout = timeouts[retryCount] || timeouts[timeouts.length - 1];
 
         try {
-            console.log(`🌐 Testify API isteği (deneme ${retryCount + 1}/${maxRetries + 1})`);
-            console.log(`⏱️ Zaman aşımı: ${currentTimeout / 1000}s`);
+            console.log(`Testify API isteği (deneme ${retryCount + 1}/${maxRetries + 1})`);
+            console.log(`Zaman aşımı: ${currentTimeout / 1000} s`);
 
             await this.requestManager.waitIfNeeded();
 
@@ -441,7 +441,7 @@ BEGIN CREATION - Return only valid JSON.
                 if (response.status === 429 || response.status === 500 || response.status === 503) {
                     if (retryCount < maxRetries) {
                         const waitTime = Math.pow(2, retryCount) * 2000;
-                        console.log(`⏳ Sunucu meşgul. ${waitTime/1000}s bekleniyor...`);
+                        console.log(`Sunucu meşgul. ${waitTime/1000} saniye bekleniyor.`);
                         await new Promise(resolve => setTimeout(resolve, waitTime));
                         return this.callOpenAIWithRetry(systemPrompt, userPrompt, retryCount + 1);
                     }
@@ -455,14 +455,14 @@ BEGIN CREATION - Return only valid JSON.
         } catch (error) {
             if (error.name === 'AbortError') {
                 if (retryCount < maxRetries) {
-                    console.log(`⏱️ Zaman aşımı. Tekrar deneniyor...`);
+                    console.log(`Zaman aşımı. Tekrar deneniyor...`);
                     return this.callOpenAIWithRetry(systemPrompt, userPrompt, retryCount + 1);
                 }
                 throw new Error(`İstek zaman aşımına uğradı. Lütfen daha az soru sayısı deneyin.`);
             }
 
             if (retryCount < maxRetries && error.message.includes('network')) {
-                console.log(`🔄 Ağ hatası. Tekrar deneniyor...`);
+                console.log(`Ağ hatası. Tekrar deneniyor...`);
                 await new Promise(resolve => setTimeout(resolve, 2000));
                 return this.callOpenAIWithRetry(systemPrompt, userPrompt, retryCount + 1);
             }
@@ -477,20 +477,20 @@ BEGIN CREATION - Return only valid JSON.
      * ═══════════════════════════════════════════════════════════════════
      */
     async generateUltimateTest(userRequest, options = {}) {
-        console.log('═'.repeat(80));
-        console.log('🎓 TESTIFY ULTIMATE TEACHER v11.1 PROFESSIONAL');
+        console.log('================================================================================');
+        console.log('TESTIFY ULTIMATE TEACHER v11.1 PROFESSIONAL');
         console.log('Powered by Testify Platform - Professional AI Service');
-        console.log('Model: GPT-4o (OpenAI\'s Most Advanced)');
-        console.log('═'.repeat(80));
+        console.log("Model: GPT-4o (OpenAI'ın en gelişmiş modeli)");
+        console.log('================================================================================');
 
         try {
             const params = window.TestifyAI_Final.parseRequest(userRequest, options);
 
-            console.log(`\n📚 Konu: ${params.subject}`);
-            console.log(`🎯 Sınav: ${params.examInfo.name}`);
-            console.log(`💪 Zorluk: ${params.difficulty}`);
-            console.log(`📊 Soru Sayısı: ${params.questionCount}`);
-            console.log(`🧠 Bloom Seviyeleri: ${params.examInfo.bloomPreference.join(' → ')}`);
+            console.log(`Konu: ${params.subject}`);
+            console.log(`Sınav: ${params.examInfo.name}`);
+            console.log(`Zorluk: ${params.difficulty}`);
+            console.log(`Soru Sayısı: ${params.questionCount}`);
+            console.log(`Bloom Seviyeleri: ${params.examInfo.bloomPreference.join(' → ')}`);
 
             const { systemPrompt, userPrompt } = this.buildMasterTeacherPrompt(params);
 
@@ -498,9 +498,9 @@ BEGIN CREATION - Return only valid JSON.
             const userTokens = this.estimateTokens(userPrompt);
             const totalInputTokens = systemTokens + userTokens;
 
-            console.log(`\n📏 Prompt: ~${totalInputTokens} token`);
-            console.log(`⚙️ Prompt Engineering: Constitutional AI + CoT + ToT`);
-            console.log(`\n🤖 Testify API çağrısı başlatılıyor...`);
+            console.log(`Prompt uzunluğu (tahmini): ~${totalInputTokens} token`);
+            console.log(`Prompt tekniği: Constitutional AI, CoT ve ToT`);
+            console.log(`API çağrısı başlatılıyor...`);
 
             const startTime = Date.now();
             const data = await this.callOpenAIWithRetry(systemPrompt, userPrompt);
@@ -508,9 +508,9 @@ BEGIN CREATION - Return only valid JSON.
 
             const usage = data.usage || {};
 
-            console.log(`\n✅ İçerik oluşturuldu!`);
-            console.log(`⏱️ Süre: ${duration}s`);
-            console.log(`📊 Tokenler: ${usage.total_tokens || 'N/A'}`);
+            console.log(`İçerik oluşturuldu.`);
+            console.log(`Süre: ${duration} s`);
+            console.log(`Toplam token: ${usage.total_tokens || 'N/A'}`);
 
             let content = data.choices[0].message.content
                 .replace(/```json\n?/g, '')
@@ -528,18 +528,18 @@ BEGIN CREATION - Return only valid JSON.
             testData.metadata.timestamp = new Date().toISOString();
             testData.metadata.qualityScore = '10/10 - Professional Academic Standard';
 
-            console.log(`\n${'═'.repeat(80)}`);
-            console.log('🏆 PROFESYONEL EĞİTİM İÇERİĞİ OLUŞTURULDU!');
-            console.log(`${'═'.repeat(80)}\n`);
+            console.log('================================================================================');
+            console.log('PROFESYONEL EĞİTİM İÇERİĞİ OLUŞTURULDU');
+            console.log('================================================================================');
 
             return testData;
 
         } catch (error) {
-            console.error(`\n${'═'.repeat(80)}`);
-            console.error('❌ İÇERİK OLUŞTURMA HATASI');
-            console.error(`${'═'.repeat(80)}`);
+            console.error('================================================================================');
+            console.error('İÇERİK OLUŞTURMA HATASI');
+            console.error('================================================================================');
             console.error(`Hata: ${error.message}`);
-            console.error(`${'═'.repeat(80)}\n`);
+            console.error('================================================================================');
             throw error;
         }
     },
@@ -563,25 +563,24 @@ window.TestifyAI_UltimateTeacher = TestifyAI_UltimateTeacher;
  * ═══════════════════════════════════════════════════════════════════════
  */
 if (window.TestifyAI) {
-    console.log('\n' + '═'.repeat(80));
-    console.log('🎓 TESTIFY ULTIMATE TEACHER v11.1 PROFESSIONAL');
-    console.log('═'.repeat(80));
-    console.log('\n📚 Testify Platform - Professional AI Service');
-    console.log('🤖 Model: GPT-4o');
-    console.log('🎯 Quality: 10/10 - World-class standard\n');
+    console.log('================================================================================');
+    console.log('TESTIFY ULTIMATE TEACHER v11.1 PROFESSIONAL');
+    console.log('================================================================================');
+    console.log('Testify Platform - Professional AI Service');
+    console.log('Model: GPT-4o');
+    console.log('Kalite: 10/10 - Dünya standartlarında');
 
     if (!window.TestifyAI._v11_ultimate_backup) {
         window.TestifyAI._v11_ultimate_backup = window.TestifyAI.generateTestFromAI;
-        console.log('✓ Sistem entegre edildi\n');
+        console.log('Sistem entegre edildi');
     }
 
     window.TestifyAI.generateTestFromAI = async function(userRequest) {
         if (this.isGenerating) {
             if (this.addMessage) {
                 this.addMessage(
-                    "⏳ **Profesyonel içerik hazırlanıyor...**\n\n" +
-                    "Testify'ın Master Teacher AI sistemi şu anda çalışıyor.\n" +
-                    "Lütfen bekleyin, dünya standartlarında eğitim içeriği oluşturuluyor.",
+                    "Profesyonel içerik hazırlanıyor. Testify Master Teacher sistemi şu anda çalışıyor. " +
+                    "Lütfen bekleyin; dünya standartlarında eğitim içeriği oluşturuluyor.",
                     'ai'
                 );
             }
@@ -593,8 +592,7 @@ if (window.TestifyAI) {
 
         if (this.showTypingIndicator) this.showTypingIndicator();
 
-        console.log('\n🎓 Professional AI Teacher aktif!');
-        console.log('🏆 Yüksek kaliteli eğitim içeriği oluşturuluyor...\n');
+        console.log('Professional AI Teacher aktif. Yüksek kaliteli eğitim içeriği oluşturuluyor.');
 
         try {
             const testData = await TestifyAI_UltimateTeacher.integrateWithLegacy(userRequest);
@@ -606,72 +604,64 @@ if (window.TestifyAI) {
 
             if (this.addMessage) {
                 this.addMessage(
-                    `## ✨ Profesyonel Eğitim İçeriği Hazır!\n\n` +
-                    `### 🎓 ${testData.title}\n\n` +
+                    "Profesyonel eğitim içeriği hazır.\n\n" +
+                    `Başlık: ${testData.title}\n\n` +
                     `${testData.description}\n\n` +
-                    `${'━'.repeat(60)}\n\n` +
-                    `**📊 İçerik Özellikleri**\n\n` +
-                    `• **Sınav:** ${meta.examName || 'Kapsamlı Test'}\n` +
-                    `• **Konu:** ${meta.subject || 'Belirtilmedi'}\n` +
-                    `• **Soru Sayısı:** ${questionCount}\n` +
-                    `• **Zorluk:** ${meta.difficulty || 'Karışık'}\n` +
-                    `• **Kalite:** ${meta.qualityScore}\n\n` +
-                    `**🔬 Pedagojik Framework**\n\n` +
-                    `✓ Bloom Taksonomisi\n` +
-                    `✓ Bilişsel Yük Teorisi\n` +
-                    `✓ Yakınsal Gelişim Alanı\n` +
-                    `✓ Bilinçli Pratik İlkeleri\n\n` +
-                    `**⚙️ Teknik Detaylar**\n\n` +
-                    `• Model: ${meta.model}\n` +
-                    `• Provider: ${meta.provider}\n` +
-                    `• Süre: ${meta.generationTime || 'N/A'}\n` +
-                    `• Tokenler: ${meta.tokens || 'N/A'}\n\n` +
-                    `${'━'.repeat(60)}\n\n` +
-                    `### 💡 Önemli Hatırlatma\n\n` +
-                    `Bu içerik Testify'ın **profesyonel AI öğretmen sistemi** tarafından oluşturuldu.\n\n` +
-                    `**Her soru** bir öğretim anı\n` +
-                    `**Her açıklama** 500-900 kelime derinlikte\n` +
-                    `**Her hata** bir öğrenme fırsatı\n\n` +
-                    `### 🎯 Şimdi Ne Yapmalısın?\n\n` +
-                    `1. **"📝 Test Çöz"** sekmesine git\n` +
-                    `2. Testi dikkatlice çöz\n` +
-                    `3. **Açıklamaları mutlaka oku** (en değerli kısım!)\n` +
-                    `4. Yanlış cevaplardan öğren\n` +
-                    `5. Uzman düşünme stratejilerini içselleştir\n\n` +
-                    `🌟 **Başarılar!** Testify ile dünya standartlarında eğitim.`,
+                    "İçerik Özellikleri\n" +
+                    `- Sınav: ${meta.examName || 'Kapsamlı Test'}\n` +
+                    `- Konu: ${meta.subject || 'Belirtilmedi'}\n` +
+                    `- Soru sayısı: ${questionCount}\n` +
+                    `- Zorluk: ${meta.difficulty || 'Karışık'}\n` +
+                    `- Kalite: ${meta.qualityScore}\n\n` +
+                    "Pedagojik Çerçeve\n" +
+                    "- Bloom Taksonomisi\n" +
+                    "- Bilişsel Yük Teorisi\n" +
+                    "- Yakınsal Gelişim Alanı\n" +
+                    "- Bilinçli Pratik İlkeleri\n\n" +
+                    "Teknik Bilgi\n" +
+                    `- Model: ${meta.model}\n` +
+                    `- Sağlayıcı: ${meta.provider}\n` +
+                    `- Oluşturma süresi: ${meta.generationTime || 'N/A'}\n` +
+                    `- Token: ${meta.tokens || 'N/A'}\n\n` +
+                    "Önemli Hatırlatma\n" +
+                    "Bu içerik Testify'ın profesyonel yapay zeka öğretmen sistemi tarafından üretilmiştir. " +
+                    "Her soru bir öğrenme fırsatıdır; açıklamalar ayrıntılıdır ve kavrayışı derinleştirmeyi hedefler.\n\n" +
+                    "İzlenecek Adımlar\n" +
+                    "- Test Çöz sekmesine gidin.\n" +
+                    "- Testi dikkatlice çözün ve açıklamaları okuyun.\n" +
+                    "- Hatalardan öğrenin ve bir sonraki denemede uygulayın.\n",
                     'ai'
                 );
             }
 
             if (this.highlightTestTab) this.highlightTestTab();
 
-            console.log('\n' + '═'.repeat(80));
-            console.log('✅ PROFESYONEL EĞİTİM İÇERİĞİ TESTİN SERVİSİNDE');
-            console.log('═'.repeat(80) + '\n');
+            console.log('Profesyonel eğitim içeriği kullanıcıya sunuldu.');
 
             return testData;
 
         } catch (error) {
-            console.error('\n❌ Hata:', error);
+            console.error('Hata:', error);
 
             if (this.hideTypingIndicator) this.hideTypingIndicator();
 
-            let userMessage = `## ❌ İçerik Oluşturulamadı\n\n**Hata:** ${error.message}\n\n`;
+            let userMessage = "İçerik oluşturulamadı.\n\n" +
+                `Hata: ${error.message}\n\n`;
 
             if (error.message.includes('Zaman aşımı')) {
-                userMessage += `**Çözüm:**\n` +
-                    `• Daha az soru sayısı deneyin\n` +
-                    `• Konuyu daha spesifik yapın\n` +
-                    `• Sistem otomatik tekrar deneyecek`;
+                userMessage += "Çözüm:\n" +
+                    "- Daha az soru sayısı deneyin.\n" +
+                    "- Konuyu daha spesifik ifade edin.\n" +
+                    "- Sistem otomatik olarak yeniden deneyecektir.";
             } else if (error.message.includes('429') || error.message.includes('rate limit')) {
-                userMessage += `**Çözüm:**\n` +
-                    `• 1-2 dakika bekleyin\n` +
-                    `• Sistem yoğunluğu azalınca tekrar deneyin`;
+                userMessage += "Çözüm:\n" +
+                    "- Birkaç dakika bekledikten sonra tekrar deneyin.\n" +
+                    "- Yoğunluk azaldığında işlem tamamlanacaktır.";
             } else {
-                userMessage += `**Çözüm:**\n` +
-                    `• Lütfen tekrar deneyin\n` +
-                    `• Farklı parametreler deneyin\n` +
-                    `• Sorun devam ederse destek alın`;
+                userMessage += "Çözüm:\n" +
+                    "- Lütfen tekrar deneyin.\n" +
+                    "- Farklı parametreler ile deneyin.\n" +
+                    "- Sorun devam ederse destek ekibiyle iletişime geçin.";
             }
 
             if (this.addMessage) {
@@ -679,11 +669,11 @@ if (window.TestifyAI) {
             }
 
             if (this._v11_ultimate_backup) {
-                console.log('🔄 Yedek sistem deneniyor...');
+                console.log('Yedek sistem devreye alınıyor...');
                 try {
                     return await this._v11_ultimate_backup.call(this, userRequest);
                 } catch (fallbackError) {
-                    console.error('❌ Yedek sistem de başarısız:', fallbackError);
+                    console.error('Yedek sistem başarısız:', fallbackError);
                 }
             }
 
@@ -692,8 +682,8 @@ if (window.TestifyAI) {
         }
     };
 
-    console.log('✓ Professional Teacher System aktif\n');
-    console.log('━'.repeat(80));
-    console.log('✨ Testify - Profesyonel eğitim içeriği servisi hazır!');
-    console.log('━'.repeat(80) + '\n');
+    console.log('Professional Teacher System aktif');
+    console.log('-------------------------------------------------------------------------------');
+    console.log('Testify - Profesyonel eğitim içeriği servisi hazır.');
+    console.log('-------------------------------------------------------------------------------');
 }
