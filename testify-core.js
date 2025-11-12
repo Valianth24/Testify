@@ -1,19 +1,4 @@
-/**
- * ═══════════════════════════════════════════════════════════════════════
- * TESTIFY AI v11.1 ULTIMATE TEACHER - PROFESSIONAL EDITION
- * Sıfırdan Eğiten Öğretim Sistemi - Research-Based Educational AI
- * ═══════════════════════════════════════════════════════════════════════
- * 
- * "Bir test sadece değerlendirme aracı değil, öğrenme yolculuğunun ta kendisidir."
- * - Benjamin Bloom
- * 
- * KALİTE HEDEFİ: 10/10 - Dünya çapında akademik standart
- * METOD: Multi-layered cognitive scaffolding + Socratic questioning
- * MODEL: GPT-4o (OpenAI's Most Advanced Model - 2024)
- * API: Testify tarafından sağlanır - Kullanıcıdan API key istenmez
- * 
- * ═══════════════════════════════════════════════════════════════════════
- */
+
 
 'use strict';
 
