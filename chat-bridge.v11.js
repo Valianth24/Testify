@@ -1,7 +1,4 @@
-/*
- * CHAT BRIDGE v11
- * Floating chat widget ile TestifyAI çekirdeği arasında köprü
- */
+
 (function (window, document) {
   'use strict';
 
