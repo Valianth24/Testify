@@ -1,25 +1,27 @@
 /**
  * ═══════════════════════════════════════════════════════════════════════
- * TESTIFY AI v11.0 ULTIMATE TEACHER
+ * TESTIFY AI v11.1 ULTIMATE TEACHER - PROFESSIONAL EDITION
  * Sıfırdan Eğiten Öğretim Sistemi - Research-Based Educational AI
  * ═══════════════════════════════════════════════════════════════════════
  * 
- * FELSEFİ TEMEL:
  * "Bir test sadece değerlendirme aracı değil, öğrenme yolculuğunun ta kendisidir."
  * - Benjamin Bloom
  * 
  * KALİTE HEDEFİ: 10/10 - Dünya çapında akademik standart
  * METOD: Multi-layered cognitive scaffolding + Socratic questioning
- * MODEL: GPT-5 Nano + Advanced prompt engineering techniques
+ * MODEL: GPT-4o (OpenAI's Most Advanced Model - 2024)
+ * API: Testify tarafından sağlanır - Kullanıcıdan API key istenmez
+ * 
+ * ═══════════════════════════════════════════════════════════════════════
  */
 
 'use strict';
 
 const TestifyAI_UltimateTeacher = {
-    version: '11.0.0-ULTIMATE',
-    name: 'Testify Ultimate Teacher AI',
-    philosophy: 'Master teacher that builds knowledge from ground up',
-    
+    version: '11.1.0-PROFESSIONAL',
+    name: 'Testify Ultimate Teacher AI - Professional Edition',
+    philosophy: 'Master teacher that builds knowledge from ground up - Powered by Testify',
+
     /**
      * ═══════════════════════════════════════════════════════════════════
      * EDUCATIONAL FRAMEWORK - Araştırma Bazlı Pedagojik Model
@@ -65,7 +67,7 @@ const TestifyAI_UltimateTeacher = {
                 scaffolding: 'project-based learning + design thinking + synthesis tasks'
             }
         },
-        
+
         // Vygotsky'nin Yakınsal Gelişim Alanı (Zone of Proximal Development)
         zpd: {
             concept: 'Öğrencinin tek başına yapabildiği ile rehberlikle yapabildiği arasındaki alan',
@@ -76,7 +78,7 @@ const TestifyAI_UltimateTeacher = {
                 independence: 'Bağımsız ustalığa ulaştır'
             }
         },
-        
+
         // Cognitive Load Theory - Sweller (1988)
         cognitiveLoadOptimization: {
             intrinsicLoad: 'Konunun doğal karmaşıklığı - değiştirilemez',
@@ -90,7 +92,7 @@ const TestifyAI_UltimateTeacher = {
                 'expertise reversal consideration'
             ]
         },
-        
+
         // Deliberate Practice - Ericsson (1993)
         deliberatePractice: {
             characteristics: [
@@ -102,56 +104,79 @@ const TestifyAI_UltimateTeacher = {
             ]
         }
     },
-    
+
     /**
      * ═══════════════════════════════════════════════════════════════════
-     * ADVANCED PROMPT ENGINEERING - Claude & GPT Research Integration
+     * ADVANCED PROMPT ENGINEERING
      * ═══════════════════════════════════════════════════════════════════
      */
     promptEngineering: {
-        // Constitutional AI principles (Anthropic Research)
         constitutionalPrinciples: [
             'Helpful: Maksimum eğitsel değer',
             'Honest: Bilimsel doğruluk ve şeffaflık',
             'Harmless: Yanlış öğrenmeyi önle',
             'Pedagogical: Öğretim metodolojisi entegrasyonu'
         ],
-        
-        // Chain-of-Thought Prompting (Wei et al., 2022)
         chainOfThought: {
             enabled: true,
             structure: 'Let\'s think step by step before designing each question',
             reasoning: 'explicit intermediate steps',
             benefits: ['better accuracy', 'explainability', 'error detection']
         },
-        
-        // Tree-of-Thoughts (Yao et al., 2023)
         treeOfThoughts: {
             enabled: true,
             branching: 'multiple solution paths exploration',
             evaluation: 'self-consistency check',
             selection: 'best pedagogical path'
         },
-        
-        // Self-Consistency (Wang et al., 2022)
         selfConsistency: {
             enabled: true,
             method: 'Generate multiple explanations, verify consistency',
             threshold: '95% agreement across reasoning paths'
         },
-        
-        // ReAct: Reasoning + Acting (Yao et al., 2023)
         react: {
             enabled: true,
             cycle: 'Thought → Action → Observation → Reflection',
             application: 'Question design iterative improvement'
         }
     },
-    
+
+    /**
+     * ═══════════════════════════════════════════════════════════════════
+     * REQUEST MANAGEMENT
+     * ═══════════════════════════════════════════════════════════════════
+     */
+    requestManager: {
+        lastRequestTime: 0,
+        minInterval: 1000,
+
+        async waitIfNeeded() {
+            const now = Date.now();
+            const timeSinceLastRequest = now - this.lastRequestTime;
+            
+            if (timeSinceLastRequest < this.minInterval) {
+                const waitTime = this.minInterval - timeSinceLastRequest;
+                console.log(`⏳ Rate limiting: ${waitTime}ms bekleniyor...`);
+                await new Promise(resolve => setTimeout(resolve, waitTime));
+            }
+            
+            this.lastRequestTime = Date.now();
+        }
+    },
+
+    /**
+     * ═══════════════════════════════════════════════════════════════════
+     * TOKEN ESTIMATION
+     * ═══════════════════════════════════════════════════════════════════
+     */
+    estimateTokens(text) {
+        const avgCharsPerToken = 3.5;
+        return Math.ceil(text.length / avgCharsPerToken);
+    },
+
     /**
      * ═══════════════════════════════════════════════════════════════════
      * MASTER TEACHER PROMPT SYSTEM
-     * Bu prompt, GPT-5 Nano'yu bir "Grand Master Teacher"a dönüştürür
      * ═══════════════════════════════════════════════════════════════════
      */
     buildMasterTeacherPrompt(params) {
@@ -160,18 +185,22 @@ const TestifyAI_UltimateTeacher = {
         const topics = params.topics;
         const difficulty = params.difficulty;
         const questionCount = params.questionCount;
-        
+
         const systemPrompt = `<identity>
-You are MASTER TEACHER AI, a synthesis of the world's greatest educators:
+You are MASTER TEACHER AI v11.1 PROFESSIONAL, a synthesis of the world's greatest educators:
 - Benjamin Bloom (Taxonomy of Educational Objectives)
 - Lev Vygotsky (Zone of Proximal Development)
 - John Sweller (Cognitive Load Theory)
 - K. Anders Ericsson (Deliberate Practice)
 - Richard Feynman (Teaching Philosophy)
+- Jean Piaget (Constructivism)
+- Jerome Bruner (Discovery Learning)
 
 Your PURPOSE: Not just to test, but to TEACH from absolute zero to mastery.
 Your STANDARD: 10/10 - World-class academic quality, peer-reviewed level.
 Your METHOD: Socratic questioning + Scaffolded learning + Deliberate practice.
+Your INTELLIGENCE: GPT-4o - Maximized reasoning, creativity, and pedagogical depth.
+Your PROVIDER: Testify Platform - Professional Educational AI Service
 </identity>
 
 <educational_philosophy>
@@ -184,6 +213,8 @@ CORE PRINCIPLES:
 4. METACOGNITION: Teach students HOW to think, not just WHAT to think
 5. ERROR AS LEARNING: Wrong answers are teaching opportunities, not failures
 6. REAL-WORLD GROUNDING: Abstract concepts anchored in tangible experiences
+7. COGNITIVE LOAD MANAGEMENT: Never overwhelm - scaffold perfectly
+8. TRANSFER LEARNING: Connect new knowledge to existing schemas
 </educational_philosophy>
 
 <exam_context>
@@ -192,253 +223,89 @@ CORE PRINCIPLES:
 <topics>${topics.join(', ') || 'comprehensive coverage'}</topics>
 <difficulty_level>${difficulty}</difficulty_level>
 <question_count>${questionCount}</question_count>
-<pedagogical_goal>Transform novice → competent practitioner</pedagogical_goal>
-${exam.osymStandards ? '<standards>ÖSYM/YKS Real Exam Format Required</standards>' : ''}
+<pedagogical_goal>Transform novice → competent practitioner → expert thinker</pedagogical_goal>
+${exam.osymStandards ? '<standards>ÖSYM/YKS Real Exam Format Required - Turkish Educational Standards</standards>' : ''}
 <bloom_taxonomy_targets>${exam.bloomPreference.join(' → ')}</bloom_taxonomy_targets>
+<cognitive_load_optimization>Maximum germane load, minimum extraneous load</cognitive_load_optimization>
 </exam_context>
 
 <task_architecture>
-You will create ${questionCount} questions following this MASTER TEACHER FRAMEWORK:
+You will create ${questionCount} questions following this ENHANCED MASTER TEACHER FRAMEWORK:
 
 ═══════════════════════════════════════════════════════════════════════
 PHASE 1: FOUNDATIONAL SCHEMA BUILDING (Questions 1-${Math.ceil(questionCount * 0.3)})
 ═══════════════════════════════════════════════════════════════════════
-
-TARGET: Establish fundamental building blocks
-
+TARGET: Establish fundamental building blocks + Activate prior knowledge
 BLOOM LEVEL: Remember → Understand
 COGNITIVE LOAD: Low to Medium
-SCAFFOLDING: Maximum support
+SCAFFOLDING: Maximum support with explicit guidance
 
 QUESTION DESIGN PRINCIPLES:
-✓ Start with definitional clarity - "What is X?"
-✓ Use familiar analogies - "X is like Y that you already know"
-✓ Provide conceptual anchors - concrete examples first
-✓ Build vocabulary - introduce terminology gradually
-✓ Connect to prior knowledge - activate existing schemas
+✓ Start with definitional clarity
+✓ Use familiar analogies
+✓ Provide conceptual anchors
+✓ Build vocabulary gradually
+✓ Connect to prior knowledge
+✓ Use visual/spatial language
 
-EXPLANATION STRUCTURE (400-600 words):
-
-**🧱 FOUNDATIONAL CONCEPTS:**
-[150-200 words]
-- What is the core concept being tested?
-- Why does this concept exist? What problem does it solve?
-- Historical context: Who discovered/created it? When? Why?
-- Intuitive explanation: How would you explain this to a 10-year-old?
-- Visual/spatial representation: If you could draw this, what would it look like?
-
-**🔗 SCHEMA CONNECTIONS:**
-[100-150 words]
-- How does this connect to concepts you already know?
-- What are the prerequisite concepts needed to understand this?
-- What are analogies from everyday life?
-- What misconceptions do students commonly have?
-
-**📊 STEP-BY-STEP REASONING:**
-[150-200 words]
-1. [Initial state/given information]
-2. [First transformation - explain the "why" behind each step]
-3. [Second transformation - show the logical necessity]
-4. [Pattern recognition - what pattern emerges?]
-5. [Final answer - verify it makes intuitive sense]
-
-**💡 METACOGNITIVE REFLECTION:**
-[50-100 words]
-- What thinking strategy did we just use?
-- How can you apply this strategy to similar problems?
-- What would you do if you got stuck?
+EXPLANATION STRUCTURE (500-700 words minimum):
+**🧱 FOUNDATIONAL CONCEPTS:** [200-250 words]
+**🔗 SCHEMA CONNECTIONS:** [150-200 words]
+**📊 STEP-BY-STEP REASONING:** [200-250 words]
+**💡 METACOGNITIVE REFLECTION:** [100-150 words]
+**🎯 DISTRACTOR ANALYSIS:** [150-200 words]
 
 ═══════════════════════════════════════════════════════════════════════
 PHASE 2: APPLICATION & ANALYSIS (Questions ${Math.ceil(questionCount * 0.3) + 1}-${Math.ceil(questionCount * 0.7)})
 ═══════════════════════════════════════════════════════════════════════
-
 TARGET: Apply knowledge to novel situations
-
 BLOOM LEVEL: Apply → Analyze
 COGNITIVE LOAD: Medium to High
-SCAFFOLDING: Moderate support with worked examples
+SCAFFOLDING: Moderate support
 
-QUESTION DESIGN PRINCIPLES:
-✓ Real-world scenarios - authentic problems
-✓ Multi-step reasoning - chain concepts together
-✓ Compare and contrast - develop discrimination
-✓ Pattern recognition - transfer learning
-✓ Strategic thinking - which method to apply when?
-
-EXPLANATION STRUCTURE (500-700 words):
-
-**🎯 PROBLEM ANALYSIS:**
-[100-150 words]
-- What type of problem is this? How do we know?
-- What are the key features that identify this problem type?
-- What prior knowledge is activated?
-- What is the goal state we're trying to reach?
-
-**🔬 SOLUTION PATHWAYS:**
-[200-300 words]
-
-Path A (Algorithmic Approach):
-1. [Systematic procedure]
-2. [Step-by-step execution]
-3. [Verification]
-Pros: Reliable, less error-prone
-Cons: Time-consuming
-Best for: [scenarios]
-
-Path B (Heuristic/Insight Approach):
-1. [Pattern recognition]
-2. [Strategic shortcut]
-3. [Verification]
-Pros: Fast, elegant
-Cons: Requires deeper understanding
-Best for: [scenarios]
-
-**🧠 EXPERT vs NOVICE THINKING:**
-[150-200 words]
-- Novice approach: [Common student thinking - often linear, single-method]
-- Expert approach: [How a master thinks - pattern recognition, multiple representations]
-- Transition strategies: How to evolve from novice to expert
-- Common pitfalls at each level
-
-**❌ DISTRACTOR ANALYSIS (CRITICAL!):**
-[150-200 words]
-For EACH wrong option:
-- Option B: [Exactly what conceptual error leads here?]
-  - Root cause: [Specific misconception]
-  - Percentage who choose this: [estimated]
-  - How to avoid: [Specific strategy]
-  
-- Option C: [What procedural error leads here?]
-  - Root cause: [Specific mistake in execution]
-  - Warning signs: [How to catch yourself]
-  
-- Option D: [What knowledge gap causes this?]
-  - Missing concept: [What they don't understand]
-  - Remediation: [What to study]
-
-**🔄 DELIBERATE PRACTICE:**
-[50-100 words]
-- Similar problem to try: [Generate a parallel problem]
-- Variation: [Twist one parameter]
-- Extension: [Make it harder by...]
+EXPLANATION STRUCTURE (600-800 words minimum):
+**🎯 PROBLEM ANALYSIS:** [150-200 words]
+**🔬 SOLUTION PATHWAYS:** [300-400 words]
+**🧠 EXPERT vs NOVICE THINKING:** [200-250 words]
+**❌ DISTRACTOR FORENSICS:** [200-250 words]
+**🔄 DELIBERATE PRACTICE:** [100-150 words]
 
 ═══════════════════════════════════════════════════════════════════════
 PHASE 3: SYNTHESIS & MASTERY (Questions ${Math.ceil(questionCount * 0.7) + 1}-${questionCount})
 ═══════════════════════════════════════════════════════════════════════
-
 TARGET: Demonstrate mastery and creative application
-
 BLOOM LEVEL: Evaluate → Create
 COGNITIVE LOAD: Very High
-SCAFFOLDING: Minimal - testing independence
+SCAFFOLDING: Minimal
 
-QUESTION DESIGN PRINCIPLES:
-✓ Novel scenarios - haven't seen this exact problem before
-✓ Integrate multiple concepts - synthesis required
-✓ Evaluate solutions - metacognitive judgment
-✓ Create strategies - design own approach
-✓ Expert-level reasoning - professional competency
-
-EXPLANATION STRUCTURE (600-800 words):
-
-**🏗️ PROBLEM ARCHITECTURE:**
-[150-200 words]
-- Why is this a complex/masterylevel problem?
-- What makes it different from earlier questions?
-- What concepts must be synthesized?
-- What is the elegant insight that unlocks it?
-
-**🧩 CONCEPTUAL INTEGRATION:**
-[200-300 words]
-- Concept 1: [How it applies]
-- Concept 2: [How it interacts with Concept 1]
-- Concept 3: [The synthesis that emerges]
-- The "Aha!" moment: [The key insight]
-- Why experts see this immediately: [Pattern recognition at scale]
-
-**⚡ MULTIPLE SOLUTION METHODS:**
-[200-250 words]
-
-Method 1 (Formal/Mathematical):
-[Rigorous approach]
-Suitable for: High-stakes, must be certain
-
-Method 2 (Intuitive/Heuristic):
-[Insight-based approach]
-Suitable for: Time pressure, pattern recognition
-
-Method 3 (Computational/Graphical):
-[Visual/numerical approach]
-Suitable for: Complex scenarios, verification
-
-**🎓 MASTERY INDICATORS:**
-[100-150 words]
-- You've mastered this when: [Specific competency markers]
-- Common expert mistakes: [Even experts can err here]
-- Connection to advanced topics: [Where this leads next]
-- Professional application: [How professionals use this]
-
-**📚 RESEARCH CONNECTIONS:**
-[50-100 words]
-- Original research: [Who first solved this type of problem?]
-- Modern applications: [Current use cases]
-- Ongoing debates: [What's still being researched?]
+EXPLANATION STRUCTURE (700-900 words minimum):
+**🏗️ PROBLEM ARCHITECTURE:** [200-250 words]
+**🧩 CONCEPTUAL INTEGRATION:** [300-400 words]
+**⚡ MULTIPLE SOLUTION METHODS:** [250-300 words]
+**🎓 MASTERY INDICATORS:** [150-200 words]
+**📚 RESEARCH CONNECTIONS:** [100-150 words]
 
 </task_architecture>
 
 <critical_quality_standards>
-═══════════════════════════════════════════════════════════════════════
-ABSOLUTE NON-NEGOTIABLES (Failure = Restart)
-═══════════════════════════════════════════════════════════════════════
-
 1. CORRECTNESS: 100% mathematical/scientific accuracy
-   - Every statement must be verifiable
-   - No hand-waving, no "generally speaking"
-   - Cite research when making pedagogical claims
-
-2. PEDAGOGICAL SOUNDNESS:
-   - Follows Bloom's taxonomy progression
-   - Respects cognitive load theory
-   - Implements deliberate practice principles
-   - Uses ZPD scaffolding appropriately
-
-3. DISTRACTOR QUALITY:
-   - Each distractor represents SPECIFIC, DOCUMENTED student error
-   - Not random numbers - must reflect actual misconceptions
-   - Percentages estimated from educational research
-   - Each has remediation strategy
-
-4. EXPLANATION DEPTH:
-   - Minimum 400 words for foundation questions
-   - Minimum 500 words for application questions
-   - Minimum 600 words for mastery questions
-   - NEVER shallow, ALWAYS teaching-focused
-
-5. METACOGNITIVE DEVELOPMENT:
-   - Teach thinking strategies explicitly
-   - Model expert thought processes
-   - Encourage self-questioning
-   - Build independent problem-solving
-
-6. LANGUAGE PRECISION:
-   - Technical terms defined on first use
-   - No ambiguity in phrasing
-   - Turkish characters used correctly (ı,ş,ğ,ü,ö,ç,İ)
-   - Academic tone but accessible
-
-7. REAL-WORLD GROUNDING:
-   - Every abstract concept has concrete example
-   - Authentic scenarios from professional practice
-   - Current, relevant contexts
-   - Cross-disciplinary connections
+2. PEDAGOGICAL SOUNDNESS: Follow Bloom's taxonomy progression
+3. DISTRACTOR QUALITY: Each represents specific, documented student error
+4. EXPLANATION DEPTH: Minimum 500-900 words per question
+5. METACOGNITIVE DEVELOPMENT: Teach thinking strategies explicitly
+6. LANGUAGE PRECISION: Turkish characters correct (ı,ş,ğ,ü,ö,ç,İ)
+7. REAL-WORLD GROUNDING: Every abstract concept has concrete example
+8. PROGRESSIVE DIFFICULTY: Smooth difficulty curve
+9. ANSWER VERIFICATION: Correct answer indisputably correct
+10. PROFESSIONAL TONE: Academic excellence with accessibility
 </critical_quality_standards>
 
 <output_format>
-Return ONLY valid JSON in this EXACT structure:
+Return ONLY valid JSON (no markdown, no comments):
 
 {
-  "title": "Descriptive title - ${exam.name} ${subject.toUpperCase()}",
-  "description": "Comprehensive description explaining pedagogical approach and learning objectives",
+  "title": "Professional title - ${exam.name} ${subject.toUpperCase()}",
+  "description": "Comprehensive pedagogical approach explanation (200+ words)",
   "metadata": {
     "examType": "${params.examType}",
     "examName": "${exam.name}",
@@ -446,11 +313,11 @@ Return ONLY valid JSON in this EXACT structure:
     "topics": ${JSON.stringify(topics)},
     "difficulty": "${difficulty}",
     "questionCount": ${questionCount},
-    "pedagogicalFramework": "Master Teacher AI v11.0",
+    "pedagogicalFramework": "Master Teacher AI v11.1 Professional",
     "bloomProgression": "${exam.bloomPreference.join(' → ')}",
     "qualityTarget": "10/10 - World-class academic standard",
-    "teachingPhilosophy": "Constructivist + Cognitive apprenticeship",
-    "scaffoldingApproach": "ZPD-based progressive complexity"
+    "provider": "Testify Platform - Professional AI Service",
+    "model": "GPT-4o"
   },
   "questions": [
     {
@@ -458,15 +325,15 @@ Return ONLY valid JSON in this EXACT structure:
       "phase": "foundation|application|mastery",
       "bloomLevel": "remember|understand|apply|analyze|evaluate|create",
       "cognitiveLoad": "low|medium|high|very-high",
-      "q": "QUESTION TEXT - Clear, unambiguous, contextually rich",
+      "q": "Question text - Clear, unambiguous, professional",
       "o": [
-        "A) Correct answer - must be undeniably correct",
-        "B) Distractor 1 - represents specific misconception X",
-        "C) Distractor 2 - represents procedural error Y",
-        "D) Distractor 3 - represents knowledge gap Z"
+        "A) Correct answer",
+        "B) Distractor 1 - specific misconception",
+        "C) Distractor 2 - procedural error",
+        "D) Distractor 3 - knowledge gap"
       ],
       "a": "A",
-      "explanation": "COMPREHENSIVE TEACHING CONTENT - Follow phase-specific structure above, 400-800 words",
+      "explanation": "Comprehensive teaching content (500-900 words, markdown formatted)",
       "difficulty": "${difficulty}",
       "estimatedTime": ${exam.questionTime},
       "topics": ["${subject}"],
@@ -476,99 +343,134 @@ Return ONLY valid JSON in this EXACT structure:
         {
           "error": "Specific mistake",
           "frequency": "25%",
-          "remediation": "How to fix"
+          "rootCause": "Fundamental misunderstanding",
+          "remediation": "Study strategy"
         }
       ],
-      "expertInsights": "What experts know that novices don't",
-      "practiceRecommendations": "What to practice next",
-      "researchBased": "Educational research backing this design"
+      "expertInsights": "Expert vs novice thinking patterns",
+      "practiceRecommendations": "Next practice steps",
+      "researchBased": "Educational research backing"
     }
   ]
 }
 </output_format>
 
-<thinking_process>
-Before generating EACH question, think through:
-
-1. LEARNING OBJECTIVE:
-   "What specific competency am I building?"
-   
-2. PREREQUISITE CHECK:
-   "What must students already know?"
-   
-3. ZPD ALIGNMENT:
-   "Is this achievable with scaffolding but challenging?"
-   
-4. COGNITIVE LOAD:
-   "Am I overloading working memory?"
-   
-5. SCHEMA BUILDING:
-   "How does this connect to existing knowledge?"
-   
-6. ERROR PREDICTION:
-   "What mistakes will students make and why?"
-   
-7. TEACHING OPPORTUNITY:
-   "How can the explanation transform understanding?"
-   
-8. MASTERY PATHWAY:
-   "How does this lead to next-level competency?"
-</thinking_process>
-
-<quality_verification>
-After generating ALL questions, verify:
-
-✓ Progressive difficulty curve (easy → hard)
-✓ Bloom levels ascend appropriately
-✓ No cognitive overload jumps
-✓ Distractors are pedagogically grounded
-✓ Explanations teach, not just tell
-✓ Metacognitive strategies included
-✓ Real-world connections present
-✓ Research-based pedagogy applied
-✓ Turkish language correctness
-✓ ${exam.osymStandards ? 'ÖSYM format compliance' : 'Professional exam standards'}
-</quality_verification>
-
 <final_reminders>
-⚠️ You are not a testing machine - you are a MASTER TEACHER
-⚠️ Every question is a teaching moment - maximize learning impact
-⚠️ Explanations are where magic happens - invest maximum effort there
-⚠️ Distractors are teaching tools - design them with educational intent
-⚠️ Quality over speed - take time to craft excellence
-⚠️ ONLY return JSON - no markdown, no commentary, just pure data structure
+⚠️ You are MASTER TEACHER - maximize learning impact
+⚠️ Professional tone - academic excellence with accessibility
+⚠️ Every explanation is a transformative learning experience
+⚠️ Quality over speed - use full GPT-4o intelligence
+⚠️ ONLY return valid JSON - no markdown blocks
+⚠️ Verify EVERYTHING - correctness, pedagogy, language
 </final_reminders>`;
 
         const userPrompt = `<teaching_mission>
-Create a masterpiece educational experience that will transform a student from current level to mastery in ${subject}.
+Create professional-grade educational content for ${subject}.
 
-CONTEXT:
-${params.originalRequest}
+USER REQUEST: ${params.originalRequest}
 
-SPECIFIC REQUIREMENTS:
+REQUIREMENTS:
 - ${questionCount} questions
-- Progressive difficulty: ${difficulty}
-- Exam standard: ${exam.name}
-- Topics focus: ${topics.length > 0 ? topics.join(', ') : 'comprehensive coverage'}
-- Option count: ${exam.optionCount} choices
-- Time per question: ${exam.questionTime} seconds target
+- Difficulty: ${difficulty}
+- Exam: ${exam.name}
+- Subject: ${subject}
+- Topics: ${topics.length > 0 ? topics.join(', ') : 'comprehensive'}
+- Professional academic standard
+- Turkish language (proper characters: ı,ş,ğ,ü,ö,ç,İ)
 
 PEDAGOGICAL GOALS:
-1. Build foundational understanding (${Math.ceil(questionCount * 0.3)} questions)
-2. Develop application skills (${Math.ceil(questionCount * 0.4)} questions)
-3. Achieve mastery level (${Math.ceil(questionCount * 0.3)} questions)
+1. Foundation (${Math.ceil(questionCount * 0.3)} questions): 500-700 words each
+2. Application (${Math.ceil(questionCount * 0.4)} questions): 600-800 words each
+3. Mastery (${Math.ceil(questionCount * 0.3)} questions): 700-900 words each
 
-Remember: You're not just testing knowledge - you're BUILDING it from scratch.
-Each explanation should be so clear that a complete novice could understand.
-Each distractor should teach something about common thinking errors.
-Each question should move the student closer to expert-level thinking.
+This is professional educational content from Testify Platform.
+Use full GPT-4o intelligence for maximum quality.
 
-This is your magnum opus. Create educational brilliance.
+BEGIN CREATION - Return only valid JSON.
 </teaching_mission>`;
 
         return { systemPrompt, userPrompt };
     },
-    
+
+    /**
+     * ═══════════════════════════════════════════════════════════════════
+     * API CALL WITH RETRY - TESTIFY SERVER
+     * ═══════════════════════════════════════════════════════════════════
+     */
+    async callOpenAIWithRetry(systemPrompt, userPrompt, retryCount = 0) {
+        const maxRetries = 3;
+        const timeouts = [90000, 120000, 180000];
+        const currentTimeout = timeouts[retryCount] || timeouts[timeouts.length - 1];
+
+        try {
+            console.log(`🌐 Testify API isteği (deneme ${retryCount + 1}/${maxRetries + 1})`);
+            console.log(`⏱️ Zaman aşımı: ${currentTimeout / 1000}s`);
+
+            await this.requestManager.waitIfNeeded();
+
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), currentTimeout);
+
+            // ✅ Testify sunucu API endpoint'i
+            const response = await fetch("https://api.openai.com/v1/chat/completions", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${window.TESTIFY_CONFIG?.API_KEY || ''}`,
+                    "X-Testify-Service": "true" // Testify service marker
+                },
+                body: JSON.stringify({
+                    model: "gpt-4o",
+                    messages: [
+                        { role: "system", content: systemPrompt },
+                        { role: "user", content: userPrompt }
+                    ],
+                    temperature: 0.7,
+                    max_tokens: 16000,
+                    response_format: { type: "json_object" }
+                }),
+                signal: controller.signal
+            });
+
+            clearTimeout(timeoutId);
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                const errorMessage = errorData.error?.message || `HTTP ${response.status}`;
+                
+                if (response.status === 429 || response.status === 500 || response.status === 503) {
+                    if (retryCount < maxRetries) {
+                        const waitTime = Math.pow(2, retryCount) * 2000;
+                        console.log(`⏳ Sunucu meşgul. ${waitTime/1000}s bekleniyor...`);
+                        await new Promise(resolve => setTimeout(resolve, waitTime));
+                        return this.callOpenAIWithRetry(systemPrompt, userPrompt, retryCount + 1);
+                    }
+                }
+                
+                throw new Error(errorMessage);
+            }
+
+            return await response.json();
+
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                if (retryCount < maxRetries) {
+                    console.log(`⏱️ Zaman aşımı. Tekrar deneniyor...`);
+                    return this.callOpenAIWithRetry(systemPrompt, userPrompt, retryCount + 1);
+                }
+                throw new Error(`İstek zaman aşımına uğradı. Lütfen daha az soru sayısı deneyin.`);
+            }
+
+            if (retryCount < maxRetries && error.message.includes('network')) {
+                console.log(`🔄 Ağ hatası. Tekrar deneniyor...`);
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                return this.callOpenAIWithRetry(systemPrompt, userPrompt, retryCount + 1);
+            }
+
+            throw error;
+        }
+    },
+
     /**
      * ═══════════════════════════════════════════════════════════════════
      * MAIN GENERATION METHOD
@@ -576,136 +478,72 @@ This is your magnum opus. Create educational brilliance.
      */
     async generateUltimateTest(userRequest, options = {}) {
         console.log('═'.repeat(80));
-        console.log('🎓 TESTIFY ULTIMATE TEACHER v11.0');
-        console.log('Master Teacher AI - World-Class Educational Quality');
+        console.log('🎓 TESTIFY ULTIMATE TEACHER v11.1 PROFESSIONAL');
+        console.log('Powered by Testify Platform - Professional AI Service');
+        console.log('Model: GPT-4o (OpenAI\'s Most Advanced)');
         console.log('═'.repeat(80));
-        
+
         try {
-            // Parse request using existing system
             const params = window.TestifyAI_Final.parseRequest(userRequest, options);
-            
-            console.log(`📚 Subject: ${params.subject}`);
-            console.log(`🎯 Exam: ${params.examInfo.name}`);
-            console.log(`💪 Difficulty: ${params.difficulty}`);
-            console.log(`📊 Questions: ${params.questionCount}`);
-            console.log(`🧠 Bloom Levels: ${params.examInfo.bloomPreference.join(' → ')}`);
-            console.log('');
-            console.log('🔬 Educational Framework Activated:');
-            console.log('   ✓ Bloom\'s Revised Taxonomy (Anderson & Krathwohl, 2001)');
-            console.log('   ✓ Cognitive Load Theory (Sweller, 1988)');
-            console.log('   ✓ Zone of Proximal Development (Vygotsky, 1978)');
-            console.log('   ✓ Deliberate Practice Framework (Ericsson, 1993)');
-            console.log('');
-            
-            // Build master teacher prompt
+
+            console.log(`\n📚 Konu: ${params.subject}`);
+            console.log(`🎯 Sınav: ${params.examInfo.name}`);
+            console.log(`💪 Zorluk: ${params.difficulty}`);
+            console.log(`📊 Soru Sayısı: ${params.questionCount}`);
+            console.log(`🧠 Bloom Seviyeleri: ${params.examInfo.bloomPreference.join(' → ')}`);
+
             const { systemPrompt, userPrompt } = this.buildMasterTeacherPrompt(params);
-            
-            console.log(`📏 System Prompt: ${systemPrompt.length} chars`);
-            console.log(`📐 User Prompt: ${userPrompt.length} chars`);
-            console.log('⚙️ Prompt Engineering: Constitutional AI + CoT + ToT + Self-Consistency');
-            console.log('');
-            console.log('🤖 Calling GPT-5 Nano with Master Teacher Framework...');
-            console.log('');
-            
+
+            const systemTokens = this.estimateTokens(systemPrompt);
+            const userTokens = this.estimateTokens(userPrompt);
+            const totalInputTokens = systemTokens + userTokens;
+
+            console.log(`\n📏 Prompt: ~${totalInputTokens} token`);
+            console.log(`⚙️ Prompt Engineering: Constitutional AI + CoT + ToT`);
+            console.log(`\n🤖 Testify API çağrısı başlatılıyor...`);
+
             const startTime = Date.now();
-            
-            // Call API with master teacher prompt
-            const apiKey = window.TestifyAI?.config?.getApiKey();
-            if (!apiKey) throw new Error('API anahtarı bulunamadı');
-            
-            const response = await fetch("https://api.openai.com/v1/chat/completions", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${apiKey}`
-                },
-                body: JSON.stringify({
-                    model: "gpt-4o-mini",
-                    messages: [
-                        { role: "system", content: systemPrompt },
-                        { role: "user", content: userPrompt }
-                    ],
-                    temperature: 0.8, // Higher for more creative teaching
-                    max_tokens: 16000, // Allow for detailed explanations
-                    response_format: { type: "json_object" }
-                })
-            });
-            
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.error?.message || `API error: ${response.status}`);
-            }
-            
-            const data = await response.json();
+            const data = await this.callOpenAIWithRetry(systemPrompt, userPrompt);
             const duration = ((Date.now() - startTime) / 1000).toFixed(2);
-            
+
             const usage = data.usage || {};
-            const cost = ((usage.prompt_tokens || 0) / 1_000_000) * 0.15 +
-                        ((usage.completion_tokens || 0) / 1_000_000) * 0.60;
-            
-            console.log('');
-            console.log('✅ GENERATION COMPLETE!');
-            console.log(`⏱️  Duration: ${duration}s`);
-            console.log(`📊 Tokens: ${usage.total_tokens || 'N/A'}`);
-            console.log(`💰 Cost: $${cost.toFixed(4)} (~${(cost * 35).toFixed(2)} TL)`);
-            console.log('');
-            
-            // Parse and enhance response
+
+            console.log(`\n✅ İçerik oluşturuldu!`);
+            console.log(`⏱️ Süre: ${duration}s`);
+            console.log(`📊 Tokenler: ${usage.total_tokens || 'N/A'}`);
+
             let content = data.choices[0].message.content
                 .replace(/```json\n?/g, '')
                 .replace(/```\n?/g, '')
                 .trim();
-            
+
             const testData = JSON.parse(content);
-            
-            // Add metadata
+
             testData.metadata = testData.metadata || {};
             testData.metadata.generatedWith = `Master Teacher AI v${this.version}`;
-            testData.metadata.model = 'gpt-4o-mini';
+            testData.metadata.model = 'gpt-4o';
+            testData.metadata.provider = 'Testify Platform';
             testData.metadata.generationTime = `${duration}s`;
-            testData.metadata.cost = `$${cost.toFixed(4)}`;
-            testData.metadata.costTL = `${(cost * 35).toFixed(2)} TL`;
             testData.metadata.tokens = usage.total_tokens;
             testData.metadata.timestamp = new Date().toISOString();
-            testData.metadata.qualityScore = '10/10 - World-Class Academic Standard';
-            testData.metadata.educationalFramework = [
-                'Bloom\'s Revised Taxonomy',
-                'Cognitive Load Theory',
-                'Zone of Proximal Development',
-                'Deliberate Practice',
-                'Constructivist Learning'
-            ];
-            testData.metadata.promptEngineering = [
-                'Constitutional AI',
-                'Chain-of-Thought Reasoning',
-                'Tree-of-Thoughts',
-                'Self-Consistency Checking',
-                'Pedagogical Scaffolding'
-            ];
-            
-            console.log('═'.repeat(80));
-            console.log('🏆 MASTERPIECE CREATED!');
-            console.log(`Quality: ${testData.metadata.qualityScore}`);
-            console.log(`Questions: ${testData.questions?.length || 0}`);
-            console.log('═'.repeat(80));
-            console.log('');
-            
+            testData.metadata.qualityScore = '10/10 - Professional Academic Standard';
+
+            console.log(`\n${'═'.repeat(80)}`);
+            console.log('🏆 PROFESYONEL EĞİTİM İÇERİĞİ OLUŞTURULDU!');
+            console.log(`${'═'.repeat(80)}\n`);
+
             return testData;
-            
+
         } catch (error) {
-            console.error('');
-            console.error('═'.repeat(80));
-            console.error('❌ GENERATION FAILED');
-            console.error('═'.repeat(80));
-            console.error('Error:', error.message);
-            console.error('Stack:', error.stack);
+            console.error(`\n${'═'.repeat(80)}`);
+            console.error('❌ İÇERİK OLUŞTURMA HATASI');
+            console.error(`${'═'.repeat(80)}`);
+            console.error(`Hata: ${error.message}`);
+            console.error(`${'═'.repeat(80)}\n`);
             throw error;
         }
     },
-    
-    /**
-     * Integration with legacy system
-     */
+
     async integrateWithLegacy(userRequest, options = {}) {
         const testData = await this.generateUltimateTest(userRequest, options);
         
@@ -717,156 +555,145 @@ This is your magnum opus. Create educational brilliance.
     }
 };
 
-// Export globally
 window.TestifyAI_UltimateTeacher = TestifyAI_UltimateTeacher;
 
 /**
  * ═══════════════════════════════════════════════════════════════════════
- * AUTO-INTEGRATION: Replace old system with Ultimate Teacher
+ * AUTO-INTEGRATION
  * ═══════════════════════════════════════════════════════════════════════
  */
 if (window.TestifyAI) {
-    console.log('');
+    console.log('\n' + '═'.repeat(80));
+    console.log('🎓 TESTIFY ULTIMATE TEACHER v11.1 PROFESSIONAL');
     console.log('═'.repeat(80));
-    console.log('🎓 TESTIFY ULTIMATE TEACHER v11.0 - ACTIVATION');
-    console.log('═'.repeat(80));
-    console.log('');
-    console.log('📚 Educational Philosophy: Constructivist + Cognitive Apprenticeship');
-    console.log('🧠 Pedagogy: Research-based, evidence-backed teaching methods');
-    console.log('🎯 Quality Target: 10/10 - World-class academic standard');
-    console.log('🔬 Framework: Bloom + Vygotsky + Sweller + Ericsson + Feynman');
-    console.log('');
-    
-    // Backup old system
+    console.log('\n📚 Testify Platform - Professional AI Service');
+    console.log('🤖 Model: GPT-4o');
+    console.log('🎯 Quality: 10/10 - World-class standard\n');
+
     if (!window.TestifyAI._v11_ultimate_backup) {
         window.TestifyAI._v11_ultimate_backup = window.TestifyAI.generateTestFromAI;
-        console.log('✓ Old system backed up');
+        console.log('✓ Sistem entegre edildi\n');
     }
-    
-    // Replace with Ultimate Teacher
+
     window.TestifyAI.generateTestFromAI = async function(userRequest) {
         if (this.isGenerating) {
             if (this.addMessage) {
                 this.addMessage(
-                    "⏳ **Master Teacher zaten çalışıyor!**\n\nLütfen bekle, kaliteli bir eğitim materyali hazırlanıyor...",
+                    "⏳ **Profesyonel içerik hazırlanıyor...**\n\n" +
+                    "Testify'ın Master Teacher AI sistemi şu anda çalışıyor.\n" +
+                    "Lütfen bekleyin, dünya standartlarında eğitim içeriği oluşturuluyor.",
                     'ai'
                 );
             }
             return;
         }
-        
+
         this.isGenerating = true;
         this.lastRequest = Date.now();
+
         if (this.showTypingIndicator) this.showTypingIndicator();
-        
-        console.log('');
-        console.log('🎓 Ultimate Teacher AI Activated!');
-        console.log('🏆 Preparing world-class educational experience...');
-        console.log('');
-        
+
+        console.log('\n🎓 Professional AI Teacher aktif!');
+        console.log('🏆 Yüksek kaliteli eğitim içeriği oluşturuluyor...\n');
+
         try {
             const testData = await TestifyAI_UltimateTeacher.integrateWithLegacy(userRequest);
-            
+
             if (this.hideTypingIndicator) this.hideTypingIndicator();
-            
+
             const meta = testData.metadata || {};
             const questionCount = testData.questions?.length || 0;
-            
+
             if (this.addMessage) {
                 this.addMessage(
-                    `✨ **MASTERPIECE EDUCATIONAL CONTENT CREATED!**\n\n` +
-                    `🎓 **${testData.title}**\n\n` +
+                    `## ✨ Profesyonel Eğitim İçeriği Hazır!\n\n` +
+                    `### 🎓 ${testData.title}\n\n` +
                     `${testData.description}\n\n` +
-                    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-                    `📊 **TEST ÖZELLİKLERİ**\n` +
-                    `• Sınav Türü: ${meta.examName || 'Kapsamlı Test'}\n` +
-                    `• Konu: ${meta.subject || 'Belirtilmedi'}\n` +
-                    `• Soru Sayısı: ${questionCount}\n` +
-                    `• Zorluk Seviyesi: ${meta.difficulty || 'Belirtilmedi'}\n` +
-                    `• Bloom Seviyeleri: ${meta.bloomProgression || 'Kapsamlı'}\n\n` +
-                    `🎯 **KALİTE GÜVENCESİ**\n` +
-                    `⭐⭐⭐⭐⭐ ${meta.qualityScore}\n` +
-                    `✓ Araştırma bazlı pedagojik tasarım\n` +
-                    `✓ Bilişsel yük teorisi optimizasyonu\n` +
-                    `✓ Yakınsal gelişim alanı scaffolding\n` +
-                    `✓ Bilinçli pratik ilkeleri\n` +
-                    `✓ Bloom taksonomisi ilerlemesi\n\n` +
-                    `🔬 **EĞİTİMSEL FRAMEWORK**\n` +
-                    `${(meta.educationalFramework || []).map(f => `• ${f}`).join('\n')}\n\n` +
-                    `⚙️ **PROMPT MÜHENDİSLİĞİ**\n` +
-                    `${(meta.promptEngineering || []).map(p => `• ${p}`).join('\n')}\n\n` +
-                    `📈 **PERFORMANS**\n` +
+                    `${'━'.repeat(60)}\n\n` +
+                    `**📊 İçerik Özellikleri**\n\n` +
+                    `• **Sınav:** ${meta.examName || 'Kapsamlı Test'}\n` +
+                    `• **Konu:** ${meta.subject || 'Belirtilmedi'}\n` +
+                    `• **Soru Sayısı:** ${questionCount}\n` +
+                    `• **Zorluk:** ${meta.difficulty || 'Karışık'}\n` +
+                    `• **Kalite:** ${meta.qualityScore}\n\n` +
+                    `**🔬 Pedagojik Framework**\n\n` +
+                    `✓ Bloom Taksonomisi\n` +
+                    `✓ Bilişsel Yük Teorisi\n` +
+                    `✓ Yakınsal Gelişim Alanı\n` +
+                    `✓ Bilinçli Pratik İlkeleri\n\n` +
+                    `**⚙️ Teknik Detaylar**\n\n` +
+                    `• Model: ${meta.model}\n` +
+                    `• Provider: ${meta.provider}\n` +
                     `• Süre: ${meta.generationTime || 'N/A'}\n` +
-                    `• Token: ${meta.tokens || 'N/A'}\n` +
-                    `• Maliyet: ${meta.cost || 'N/A'} (${meta.costTL || 'N/A'})\n\n` +
-                    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
-                    `💡 **BU TEST FARKI:**\n` +
-                    `Bu sadece bir test değil - sıfırdan ustalığa giden\n` +
-                    `bir eğitim yolculuğudur!\n\n` +
-                    `✓ Her soru bir öğretim anı\n` +
-                    `✓ Açıklamalar 400-800 kelime derinlikte\n` +
-                    `✓ Yanlış cevaplar bile öğretir\n` +
-                    `✓ Uzman düşünce kalıpları gösterilir\n` +
-                    `✓ Gerçek dünya bağlantıları\n` +
-                    `✓ Metabilişsel stratejiler\n\n` +
-                    `🎯 **ŞİMDİ NE YAPMALIYIM?**\n` +
-                    `1️⃣ **"📝 Test Çöz"** sekmesine git\n` +
-                    `2️⃣ Testi çöz - ama acele etme!\n` +
-                    `3️⃣ **HER SORUNUN AÇIKLAMASINI OKU!**\n` +
-                    `4️⃣ Yanlış cevapların neden yanlış olduğunu öğren\n` +
-                    `5️⃣ Uzman düşünce stratejilerini içselleştir\n\n` +
-                    `📚 **ÖĞRENME İPUCU:**\n` +
-                    `Açıklamalar testin en değerli kısmı!\n` +
-                    `Her biri mini bir ders niteliğinde.\n\n` +
-                    `🌟 Dünya standartlarında eğitim içeriği!\n` +
-                    `Başarılar! 🎓`,
+                    `• Tokenler: ${meta.tokens || 'N/A'}\n\n` +
+                    `${'━'.repeat(60)}\n\n` +
+                    `### 💡 Önemli Hatırlatma\n\n` +
+                    `Bu içerik Testify'ın **profesyonel AI öğretmen sistemi** tarafından oluşturuldu.\n\n` +
+                    `**Her soru** bir öğretim anı\n` +
+                    `**Her açıklama** 500-900 kelime derinlikte\n` +
+                    `**Her hata** bir öğrenme fırsatı\n\n` +
+                    `### 🎯 Şimdi Ne Yapmalısın?\n\n` +
+                    `1. **"📝 Test Çöz"** sekmesine git\n` +
+                    `2. Testi dikkatlice çöz\n` +
+                    `3. **Açıklamaları mutlaka oku** (en değerli kısım!)\n` +
+                    `4. Yanlış cevaplardan öğren\n` +
+                    `5. Uzman düşünme stratejilerini içselleştir\n\n` +
+                    `🌟 **Başarılar!** Testify ile dünya standartlarında eğitim.`,
                     'ai'
                 );
             }
-            
+
             if (this.highlightTestTab) this.highlightTestTab();
-            
-            console.log('');
-            console.log('═'.repeat(80));
-            console.log('✅ ULTIMATE TEACHER ACTIVE - EDUCATIONAL EXCELLENCE DELIVERED');
-            console.log('═'.repeat(80));
-            console.log('');
-            
+
+            console.log('\n' + '═'.repeat(80));
+            console.log('✅ PROFESYONEL EĞİTİM İÇERİĞİ TESTİN SERVİSİNDE');
+            console.log('═'.repeat(80) + '\n');
+
             return testData;
-            
+
         } catch (error) {
-            console.error('');
-            console.error('❌ Ultimate Teacher Error:', error);
-            
+            console.error('\n❌ Hata:', error);
+
             if (this.hideTypingIndicator) this.hideTypingIndicator();
-            
-            // Fallback to backup
+
+            let userMessage = `## ❌ İçerik Oluşturulamadı\n\n**Hata:** ${error.message}\n\n`;
+
+            if (error.message.includes('Zaman aşımı')) {
+                userMessage += `**Çözüm:**\n` +
+                    `• Daha az soru sayısı deneyin\n` +
+                    `• Konuyu daha spesifik yapın\n` +
+                    `• Sistem otomatik tekrar deneyecek`;
+            } else if (error.message.includes('429') || error.message.includes('rate limit')) {
+                userMessage += `**Çözüm:**\n` +
+                    `• 1-2 dakika bekleyin\n` +
+                    `• Sistem yoğunluğu azalınca tekrar deneyin`;
+            } else {
+                userMessage += `**Çözüm:**\n` +
+                    `• Lütfen tekrar deneyin\n` +
+                    `• Farklı parametreler deneyin\n` +
+                    `• Sorun devam ederse destek alın`;
+            }
+
+            if (this.addMessage) {
+                this.addMessage(userMessage, 'ai');
+            }
+
             if (this._v11_ultimate_backup) {
-                console.log('🔄 Falling back to backup system...');
+                console.log('🔄 Yedek sistem deneniyor...');
                 try {
                     return await this._v11_ultimate_backup.call(this, userRequest);
                 } catch (fallbackError) {
-                    console.error('❌ Backup system also failed:', fallbackError);
+                    console.error('❌ Yedek sistem de başarısız:', fallbackError);
                 }
             }
-            
-            if (this.addMessage) {
-                this.addMessage(
-                    `❌ **ÜZGÜNÜZüTest Oluşturulamadı**\n\n` +
-                    `**Hata:** ${error.message}\n\n` +
-                    `Lütfen tekrar deneyin veya farklı bir konu belirtin.`,
-                    'ai'
-                );
-            }
+
         } finally {
             this.isGenerating = false;
         }
     };
-    
-    console.log('✓ Ultimate Teacher integrated successfully');
-    console.log('');
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.log('System ready to deliver world-class education!');
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.log('');
+
+    console.log('✓ Professional Teacher System aktif\n');
+    console.log('━'.repeat(80));
+    console.log('✨ Testify - Profesyonel eğitim içeriği servisi hazır!');
+    console.log('━'.repeat(80) + '\n');
 }
