@@ -6,7 +6,7 @@
 (function (window, document) {
   'use strict';
 
-  // Küçük yardımcılar
+  
   const t = window.t || function (key, fallback) { return fallback || key; };
   const log = (...args) => console.log('[TestifyCore]', ...args);
 
