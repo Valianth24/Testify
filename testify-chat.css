@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testify - AI Eğitim Platformu</title>
+    
+    <!-- Ana Site CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    
+    <!-- Testify Chat CSS (Ayrı dosya) -->
+    <link rel="stylesheet" href="css/testify-chat.css">
+</head>
+<body>
+    
+    <!-- Site içeriği -->
+    <main>
+        <!-- ... -->
+    </main>
+    
+    <!-- Testify Chat Widget -->
+    <div id="chatWidget">
+        <div class="chat-header">
+            <div class="chat-header-title">🎓 Testify AI</div>
+            <div class="chat-header-buttons">
+                <button id="chatMinimizeBtn" class="chat-header-btn" aria-label="Küçült">−</button>
+                <button id="chatCloseBtn" class="chat-header-btn" aria-label="Kapat">×</button>
+            </div>
+        </div>
+        <div id="aiChat"></div>
+        <div class="chat-input-area">
+            <input 
+                id="aiInput" 
+                type="text"
+                placeholder="Ne öğrenmek istersiniz?" 
+                aria-label="Mesaj yazın"
+                autocomplete="off"
+            />
+            <button id="aiSendBtn" aria-label="Gönder">➤</button>
+        </div>
+    </div>
+    
+    <button id="chatToggleBtn" aria-label="Sohbeti Aç">💬</button>
+    
+    <!-- Testify Config -->
+    <script>
+    window.TESTIFY_CONFIG = {
+        API_KEY: 'sk-proj-YOUR-KEY-HERE'
+    };
+    </script>
+    
+    <!-- Testify Scripts -->
+    <script src="js/testify-core-v11.js"></script>
+    <script src="js/testify-ultimate-teacher-v11.js"></script>
+    <script src="js/testify-chat-bridge-v11.js"></script>
+</body>
+</html>
