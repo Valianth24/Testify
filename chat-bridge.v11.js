@@ -1,154 +1,346 @@
 /*
  * ═══════════════════════════════════════════════════════════════════════════
- * TESTIFY CHAT BRIDGE v11.1 - Professional & Draggable
+ * TESTIFY CHAT BRIDGE v11.1 PROFESSIONAL
+ * ═══════════════════════════════════════════════════════════════════════════
+ * 
+ * "Education is not the filling of a pail, but the lighting of a fire."
+ * - William Butler Yeats
+ * 
+ * TESTIFY VISION:
+ * Dünya standartlarında, AI destekli eğitim içeriği ile her öğrenciye
+ * kişiselleştirilmiş öğrenme deneyimi sunmak.
+ * 
+ * PHILOSOPHY:
+ * - Öğrenme merkezli yaklaşım
+ * - 10/10 kalite standardı
+ * - Araştırma bazlı pedagoji
+ * - Profesyonel hizmet anlayışı
+ * 
+ * API: Testify tarafından sağlanır - Kullanıcı yapılandırması gerektirmez
  * ═══════════════════════════════════════════════════════════════════════════
  */
 
 (function (window, document) {
   'use strict';
 
-  const VERSION = '11.1.0';
+  const VERSION = '11.1.0-PROFESSIONAL';
+  const CHAT_HISTORY_KEY = 'testify_chat_history';
+  const MAX_HISTORY_ITEMS = 50;
+
   const $ = (sel) => document.querySelector(sel);
   const on = (el, evt, cb) => el && el.addEventListener(evt, cb);
 
   // ═══════════════════════════════════════════════════════════════════════
-  // MESSAGES
+  // WELCOME MESSAGE - PROFESSIONAL
   // ═══════════════════════════════════════════════════════════════════════
+  
+  const WELCOME_MESSAGE = `
+## 🎓 Testify'a Hoş Geldiniz
 
-  const WELCOME = `## 🎓 Testify'a Hoş Geldiniz
+**"Bir test sadece değerlendirme değil, öğrenme yolculuğunun ta kendisidir."**  
+*- Benjamin Bloom*
 
-**Profesyonel AI destekli eğitim platformu**
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+### 🌟 Testify Hakkında
 
-### 🚀 Nasıl Kullanılır?
+**Testify**, yapay zeka destekli, dünya standartlarında eğitim içeriği sunan profesyonel bir platformdur.
 
-Sadece ne istediğinizi yazın:
+✨ **Vizyonumuz**  
+AI teknolojisi ile eğitimde mükemmellik standardı oluşturmak
+
+💡 **Felsefemiz**  
+Her öğrenci, seviyesine uygun, kaliteli eğitim içeriğine erişebilmeli
+
+🎯 **Misyonumuz**  
+Öğrenme merkezli, bilimsel temelli, erişilebilir eğitim
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+### 🚀 Nasıl Çalışır?
+
+**Çok basit!** Sadece ne istediğinizi yazın:
 
 \`\`\`
-YKS Matematik 15 soru orta
+YKS Matematik 15 soru orta seviye
 KPSS tarih 20 soru
-Python programlama 10 soru
+Python programlama 10 soru kolay
+İngilizce grammar 15 soru
 \`\`\`
 
-### 📚 Komutlar
+Testify'ın **Master Teacher AI** sistemi:
+- GPT-4o ile güçlendirilmiş
+- Bloom Taksonomisi ile yapılandırılmış
+- 500-900 kelimelik detaylı açıklamalar
+- Profesyonel akademik standart
 
-- \`/yardim\` - Yardım
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+### 📚 Hızlı Komutlar
+
+- \`/yardim\` - Detaylı yardım
 - \`/örnekler\` - Örnek istekler
+- \`/sistem\` - Sistem durumu
 - \`/temizle\` - Sohbeti temizle
 
-**Kısayol:** Ctrl+K
+**Kısayol:** Ctrl+K - Komut menüsü
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Testify - AI ile öğrenin 🚀`;
+### 🎯 Önemli Not
 
-  const HELP = `## 📖 Yardım
+Testify, **profesyonel bir AI eğitim servisi**dir.  
+API ve altyapı tamamen Testify tarafından sağlanır.
 
-### Test İsteme
+Siz sadece öğrenmeye odaklanın! 🚀
 
-**Format:** \`[Sınav] [Konu] [Soru Sayısı] [Zorluk]\`
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Hazırsanız, hemen başlayın! Ne öğrenmek istersiniz?
+`;
+
+  const HELP_MESSAGE = `
+## 📖 Testify Kullanım Kılavuzu
+
+### ✍️ Test İsteme
+
+**Format:**  
+\`[Sınav Tipi] [Konu] [Soru Sayısı] [Zorluk]\`
 
 **Örnekler:**
+
+**YKS/LGS/KPSS Sınavları:**
 \`\`\`
 YKS Matematik 20 soru orta
 LGS Türkçe 10 soru kolay
-İşletim Sistemleri 15 soru
-Python temelleri 10 soru
+KPSS Tarih 15 soru zor
 \`\`\`
 
-### Komutlar
-
-\`/yardim\` - Bu mesaj
-\`/örnekler\` - Detaylı örnekler
-\`/temizle\` - Sohbeti temizle
-\`/arşiv\` - Oluşturulan testler
-
-### Kısayollar
-
-**Ctrl+K** - Komut menüsü
-**Ctrl+Enter** - Gönder
-**Esc** - Kapat
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-💡 **İpucu:** Spesifik olun, daha iyi sonuç alın!`;
-
-  const EXAMPLES = `## 📚 Örnek İstekler
-
-### YKS/LGS/KPSS
+**Üniversite Dersleri:**
 \`\`\`
-YKS TYT Matematik 40 soru
-LGS Fen Bilimleri 15 soru
-KPSS Tarih Osmanlı 20 soru
+İşletim Sistemleri 10 soru
+Veri Yapıları 15 soru orta
+Fizik 2 - Elektromanyetik 20 soru
 \`\`\`
 
-### Programlama
+**Programlama:**
 \`\`\`
-Python list comprehension 10 soru
-JavaScript async/await 15 soru
-React Hooks 10 soru
-\`\`\`
-
-### Üniversite
-\`\`\`
-Veri Yapıları linked list 10 soru
-İşletim Sistemleri 20 soru
-Fizik elektrik 15 soru
+Python temelleri 10 soru kolay
+JavaScript ES6 15 soru orta
+React Hooks 10 soru zor
 \`\`\`
 
-### Dil Sınavları
+**Dil Sınavları:**
 \`\`\`
-TOEFL Reading 15 soru
 İngilizce grammar 20 soru
+TOEFL reading 15 soru orta
 YÖKDİL vocabulary 10 soru
 \`\`\`
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Ne öğrenmek istersiniz?`;
+### ⚙️ Sistem Komutları
+
+\`/yardim\` - Bu yardım mesajı  
+\`/örnekler\` - Detaylı örnekler  
+\`/sistem\` - Sistem durumu  
+\`/temizle\` - Sohbeti temizle  
+\`/arşiv\` - Oluşturulan testler  
+\`/dışa-aktar\` - Sohbeti kaydet  
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+### ⌨️ Klavye Kısayolları
+
+**Ctrl+K** - Komut menüsü  
+**Ctrl+Enter** - Gönder  
+**Esc** - Kapat  
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+### 💡 Pro İpuçları
+
+1. **Spesifik olun**  
+   ✅ "YKS Matematik integral 15 soru orta"  
+   ❌ "Matematik soruları"
+
+2. **Zorluk belirtin**  
+   kolay, orta, zor, karışık
+
+3. **Açıklamaları okuyun**  
+   Her soru 500-900 kelimelik mini bir ders!
+
+4. **Yavaş öğrenin**  
+   Kalite için zaman ayırın.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Daha fazla soru? Sadece sorun! 😊
+`;
+
+  const EXAMPLES_MESSAGE = `
+## 📚 Örnek Test İstekleri
+
+### 🎯 YKS Sınavları
+
+**TYT:**
+\`\`\`
+YKS TYT Matematik 40 soru karışık
+YKS TYT Türkçe 20 soru orta
+YKS TYT Fen Bilimleri 15 soru
+\`\`\`
+
+**AYT:**
+\`\`\`
+YKS AYT Matematik 30 soru zor
+YKS AYT Fizik elektrik 20 soru
+YKS AYT Kimya organik 15 soru
+\`\`\`
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+### 🎓 LGS Sınavları
+
+\`\`\`
+LGS Matematik 20 soru orta
+LGS Fen Bilimleri 15 soru
+LGS Türkçe 10 soru kolay
+LGS İngilizce 15 soru
+\`\`\`
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+### 📋 KPSS Sınavları
+
+\`\`\`
+KPSS Tarih Osmanlı 20 soru orta
+KPSS Coğrafya Türkiye 15 soru
+KPSS Vatandaşlık 10 soru
+KPSS Matematik 20 soru kolay
+\`\`\`
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+### 💻 Bilgisayar & Programlama
+
+\`\`\`
+Veri Yapıları linked list 10 soru
+Algoritmalar sorting 15 soru
+İşletim Sistemleri 20 soru zor
+Python list comprehension 10 soru kolay
+JavaScript async/await 15 soru orta
+React Hooks 10 soru
+HTML5 semantic tags 10 soru kolay
+\`\`\`
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+### 🌍 Dil Sınavları
+
+\`\`\`
+TOEFL Reading 15 soru orta
+IELTS Writing 10 soru
+YÖKDİL vocabulary 20 soru zor
+İngilizce grammar tenses 15 soru
+\`\`\`
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+### 🔬 Fen Bilimleri
+
+\`\`\`
+Fizik Newton yasaları 15 soru orta
+Kimya periyodik tablo 10 soru kolay
+Biyoloji hücre 20 soru
+\`\`\`
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💡 **İpucu:** Ne kadar spesifik olursanız, o kadar iyi sonuç alırsınız!
+`;
 
   // ═══════════════════════════════════════════════════════════════════════
-  // CHAT HISTORY
+  // CHAT HISTORY MANAGEMENT
   // ═══════════════════════════════════════════════════════════════════════
 
-  const HISTORY_KEY = 'testify_chat';
-  const MAX_HISTORY = 50;
-
-  function saveHistory(role, content) {
+  function saveChatHistory(role, content) {
     try {
-      const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
-      history.push({ role, content, ts: Date.now() });
-      while (history.length > MAX_HISTORY) history.shift();
-      localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
-    } catch (e) {}
+      const history = JSON.parse(localStorage.getItem(CHAT_HISTORY_KEY) || '[]');
+      history.push({ role, content, timestamp: Date.now() });
+      while (history.length > MAX_HISTORY_ITEMS) history.shift();
+      localStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(history));
+    } catch (e) {
+      console.error('Chat history error:', e);
+    }
   }
 
-  function loadHistory() {
+  function loadChatHistory() {
     try {
-      return JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+      return JSON.parse(localStorage.getItem(CHAT_HISTORY_KEY) || '[]');
     } catch (e) {
       return [];
     }
   }
 
-  function clearHistory() {
-    localStorage.removeItem(HISTORY_KEY);
+  function clearChatHistory() {
+    try {
+      localStorage.removeItem(CHAT_HISTORY_KEY);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function exportChatHistory() {
+    try {
+      const history = loadChatHistory();
+      const text = history.map(msg => 
+        `[${new Date(msg.timestamp).toLocaleString()}] ${msg.role.toUpperCase()}: ${msg.content}`
+      ).join('\n\n');
+
+      const blob = new Blob([text], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `testify_chat_${Date.now()}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 
   // ═══════════════════════════════════════════════════════════════════════
   // MESSAGE HANDLING
   // ═══════════════════════════════════════════════════════════════════════
 
-  function send(text, role = 'user') {
+  function sendUserMessage(text) {
+    if (!text || !text.trim()) return;
+    
     const core = window.TestifyAI;
-    if (!core || !core.addMessage) return;
-    core.addMessage(text, role);
-    saveHistory(role, text);
+    if (!core || typeof core.addMessage !== 'function') {
+      console.error('TestifyAI core not found');
+      return;
+    }
+
+    core.addMessage(text, 'user');
+    saveChatHistory('user', text);
   }
 
-  function sendAI(text) {
-    send(text, 'ai');
+  function sendAIMessage(content, role = 'ai') {
+    const core = window.TestifyAI;
+    if (!core || typeof core.addMessage !== 'function') {
+      console.error('TestifyAI core not found');
+      return;
+    }
+
+    core.addMessage(content, role);
+    saveChatHistory(role, content);
   }
 
   // ═══════════════════════════════════════════════════════════════════════
@@ -159,43 +351,95 @@ Ne öğrenmek istersiniz?`;
     const core = window.TestifyAI;
     if (!core) return false;
 
-    const cmd = text.trim().toLowerCase();
+    const trimmed = text.trim();
 
-    if (cmd === '/yardim' || cmd === '/help') {
-      sendAI(HELP);
+    // /yardim, /help
+    if (/^\s*\/(yardim|help)\s*$/i.test(trimmed)) {
+      sendAIMessage(HELP_MESSAGE, 'ai');
       return true;
     }
 
-    if (cmd === '/örnekler') {
-      sendAI(EXAMPLES);
+    // /örnekler
+    if (/^\s*\/örnekler\s*$/i.test(trimmed)) {
+      sendAIMessage(EXAMPLES_MESSAGE, 'ai');
       return true;
     }
 
-    if (cmd === '/temizle') {
-      if (core.clearChat) core.clearChat();
-      clearHistory();
-      sendAI('🧹 Sohbet temizlendi.\n\nYeni bir başlangıç! Ne öğrenmek istersiniz?');
+    // /sistem
+    if (/^\s*\/sistem\s*$/i.test(trimmed)) {
+      if (typeof core.systemCheck === 'function') {
+        const health = core.systemCheck();
+        sendAIMessage(
+          `## 🔧 Sistem Durumu\n\n` +
+          `**Platform:** Testify Professional\n` +
+          `**Versiyon:** ${health.version}\n` +
+          `**Model:** ${health.model}\n` +
+          `**Servis:** AI Teacher (GPT-4o)\n` +
+          `**Dil:** ${health.language}\n` +
+          `**Arşiv:** ${health.archive} test\n\n` +
+          `✅ Sistem aktif ve hazır!`,
+          'ai'
+        );
+      }
       return true;
     }
 
-    if (cmd === '/arşiv') {
-      if (core.getArchive) {
+    // /temizle
+    if (/^\s*\/temizle\s*$/i.test(trimmed)) {
+      if (typeof core.clearChat === 'function') {
+        core.clearChat();
+        clearChatHistory();
+        sendAIMessage(
+          `## 🧹 Sohbet Temizlendi\n\n` +
+          `Yeni başlangıç için hazırız!\n\n` +
+          `Ne öğrenmek istersiniz?`,
+          'ai'
+        );
+      }
+      return true;
+    }
+
+    // /arşiv
+    if (/^\s*\/arşiv\s*$/i.test(trimmed)) {
+      if (typeof core.getArchive === 'function') {
         const archive = core.getArchive();
         if (archive.length === 0) {
-          sendAI('📚 Arşiv boş.\n\nİlk testinizi oluşturun!');
+          sendAIMessage(
+            `## 📚 Arşiv Boş\n\n` +
+            `Henüz test oluşturmadınız.\n\n` +
+            `Hemen başlayın! Örnek:\n\`\`\`\nYKS Matematik 10 soru\n\`\`\``,
+            'ai'
+          );
         } else {
           let msg = '## 📚 Test Arşivi\n\n';
-          archive.slice(0, 10).forEach((item, i) => {
-            msg += `**${i+1}.** ${item.title} (${item.questionCount} soru)\n`;
+          archive.slice(0, 10).forEach((item, idx) => {
+            const date = new Date(item.timestamp).toLocaleDateString('tr-TR');
+            msg += `**${idx + 1}.** ${item.title}\n`;
+            msg += `   ${item.questionCount} soru • ${item.difficulty} • ${date}\n\n`;
           });
-          sendAI(msg);
+          sendAIMessage(msg, 'ai');
         }
       }
       return true;
     }
 
-    if (text.startsWith('/')) {
-      sendAI(`❌ Bilinmeyen komut: \`${text}\`\n\nKomutlar için: \`/yardim\``);
+    // /dışa-aktar
+    if (/^\s*\/dışa-aktar\s*$/i.test(trimmed)) {
+      if (exportChatHistory()) {
+        sendAIMessage('✅ Sohbet başarıyla dışa aktarıldı!', 'ai');
+      } else {
+        sendAIMessage('❌ Dışa aktarma başarısız.', 'ai');
+      }
+      return true;
+    }
+
+    // Unknown command
+    if (trimmed.startsWith('/')) {
+      sendAIMessage(
+        `❌ **Bilinmeyen komut:** \`${trimmed}\`\n\n` +
+        `Kullanılabilir komutlar: \`/yardim\``,
+        'ai'
+      );
       return true;
     }
 
@@ -203,123 +447,85 @@ Ne öğrenmek istersiniz?`;
   }
 
   // ═══════════════════════════════════════════════════════════════════════
-  // AI ROUTING
+  // AI REQUEST ROUTING
   // ═══════════════════════════════════════════════════════════════════════
 
   function routeToAI(text) {
     const core = window.TestifyAI;
     
-    if (!core || !core.generateTestFromAI) {
-      sendAI('❌ Sistem hatası. Lütfen sayfayı yenileyin.');
+    if (!core || typeof core.generateTestFromAI !== 'function') {
+      sendAIMessage(
+        `## ❌ Sistem Hatası\n\n` +
+        `Master Teacher AI modülü yüklenemedi.\n\n` +
+        `Lütfen sayfayı yenileyin.`,
+        'ai'
+      );
       return;
     }
 
     if (core.isGenerating) {
-      sendAI('⏳ İşlem devam ediyor, lütfen bekleyin...');
+      sendAIMessage(
+        `## ⏳ İşlem Devam Ediyor\n\n` +
+        `Profesyonel içerik hazırlanıyor.\n` +
+        `Lütfen mevcut işlemin tamamlanmasını bekleyin.\n\n` +
+        `💡 **Not:** Kaliteli içerik için biraz zaman gerekir.`,
+        'ai'
+      );
       return;
     }
 
     try {
       core.generateTestFromAI(text);
     } catch (error) {
-      sendAI(`❌ Hata: ${error.message}\n\nLütfen tekrar deneyin.`);
+      console.error('AI routing error:', error);
+      sendAIMessage(
+        `## ❌ Beklenmeyen Hata\n\n` +
+        `**Hata:** ${error.message}\n\n` +
+        `Lütfen tekrar deneyin veya farklı parametreler kullanın.`,
+        'ai'
+      );
     }
   }
 
   // ═══════════════════════════════════════════════════════════════════════
-  // DRAGGABLE FUNCTIONALITY
+  // KEYBOARD SHORTCUTS
   // ═══════════════════════════════════════════════════════════════════════
 
-  function makeDraggable(widget) {
-    const header = widget.querySelector('.chat-header');
-    if (!header) return;
-
-    let isDragging = false;
-    let currentX, currentY, initialX, initialY;
-
-    // Cursor değiştir
-    header.style.cursor = 'move';
-
-    function dragStart(e) {
-      if (e.target.closest('button')) return; // Butonlara dokunma
-
-      const isTouchEvent = e.type === 'touchstart';
-      const clientX = isTouchEvent ? e.touches[0].clientX : e.clientX;
-      const clientY = isTouchEvent ? e.touches[0].clientY : e.clientY;
-
-      initialX = clientX - (parseInt(widget.style.left) || 0);
-      initialY = clientY - (parseInt(widget.style.top) || 0);
-
-      isDragging = true;
-      widget.style.transition = 'none';
-      widget.style.cursor = 'grabbing';
-      header.style.cursor = 'grabbing';
-    }
-
-    function drag(e) {
-      if (!isDragging) return;
-      e.preventDefault();
-
-      const isTouchEvent = e.type === 'touchmove';
-      const clientX = isTouchEvent ? e.touches[0].clientX : e.clientX;
-      const clientY = isTouchEvent ? e.touches[0].clientY : e.clientY;
-
-      currentX = clientX - initialX;
-      currentY = clientY - initialY;
-
-      // Ekran sınırları içinde tut
-      const maxX = window.innerWidth - widget.offsetWidth;
-      const maxY = window.innerHeight - widget.offsetHeight;
-
-      currentX = Math.max(0, Math.min(currentX, maxX));
-      currentY = Math.max(0, Math.min(currentY, maxY));
-
-      widget.style.left = currentX + 'px';
-      widget.style.top = currentY + 'px';
-      widget.style.right = 'auto';
-      widget.style.bottom = 'auto';
-    }
-
-    function dragEnd() {
-      isDragging = false;
-      widget.style.transition = '';
-      widget.style.cursor = '';
-      header.style.cursor = 'move';
-
-      // Pozisyonu kaydet
-      localStorage.setItem('testify_chat_pos', JSON.stringify({
-        left: widget.style.left,
-        top: widget.style.top
-      }));
-    }
-
-    // Event listeners
-    header.addEventListener('mousedown', dragStart);
-    header.addEventListener('touchstart', dragStart, { passive: false });
-    
-    document.addEventListener('mousemove', drag);
-    document.addEventListener('touchmove', drag, { passive: false });
-    
-    document.addEventListener('mouseup', dragEnd);
-    document.addEventListener('touchend', dragEnd);
-
-    // Kaydedilmiş pozisyonu yükle
-    try {
-      const saved = JSON.parse(localStorage.getItem('testify_chat_pos'));
-      if (saved) {
-        widget.style.left = saved.left;
-        widget.style.top = saved.top;
-        widget.style.right = 'auto';
-        widget.style.bottom = 'auto';
+  function initKeyboardShortcuts() {
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.key === 'k') {
+        e.preventDefault();
+        const input = $('#aiInput');
+        if (input) {
+          input.value = '/';
+          input.focus();
+        }
       }
-    } catch (e) {}
+
+      if (e.key === 'Escape') {
+        const widget = $('#chatWidget');
+        const toggleBtn = $('#chatToggleBtn');
+        if (widget && widget.classList.contains('chat-widget--open')) {
+          widget.classList.remove('chat-widget--open');
+          widget.classList.remove('chat-widget--minimized');
+          if (toggleBtn) {
+            toggleBtn.classList.remove('chat-toggle-btn--hidden');
+          }
+        }
+      }
+    });
   }
 
   // ═══════════════════════════════════════════════════════════════════════
   // INITIALIZATION
   // ═══════════════════════════════════════════════════════════════════════
 
-  function init() {
+  function initChatBridge() {
+    console.log('═'.repeat(80));
+    console.log(`🎓 TESTIFY CHAT BRIDGE v${VERSION}`);
+    console.log('Professional AI Education Platform');
+    console.log('═'.repeat(80));
+
     const widget = $('#chatWidget');
     const toggleBtn = $('#chatToggleBtn');
     const minimizeBtn = $('#chatMinimizeBtn');
@@ -336,7 +542,7 @@ Ne öğrenmek istersiniz?`;
     on(toggleBtn, 'click', () => {
       widget.classList.add('chat-widget--open');
       if (toggleBtn) toggleBtn.classList.add('chat-toggle-btn--hidden');
-      setTimeout(() => input.focus(), 100);
+      setTimeout(() => input && input.focus(), 100);
     });
 
     // Minimize
@@ -346,20 +552,22 @@ Ne öğrenmek istersiniz?`;
 
     // Close
     on(closeBtn, 'click', () => {
-      widget.classList.remove('chat-widget--open', 'chat-widget--minimized');
+      widget.classList.remove('chat-widget--open');
+      widget.classList.remove('chat-widget--minimized');
       if (toggleBtn) toggleBtn.classList.remove('chat-toggle-btn--hidden');
     });
 
     // Submit
     function submit() {
+      if (!input) return;
       const text = input.value.trim();
       if (!text) return;
-      
+
       input.value = '';
       input.focus();
-      
-      send(text, 'user');
-      
+
+      sendUserMessage(text);
+
       if (!handleCommand(text)) {
         routeToAI(text);
       }
@@ -367,60 +575,55 @@ Ne öğrenmek istersiniz?`;
 
     on(sendBtn, 'click', submit);
     on(input, 'keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
+      if (e.key === 'Enter' && (e.ctrlKey || !e.shiftKey)) {
         e.preventDefault();
         submit();
       }
     });
 
-    // Keyboard shortcuts
-    document.addEventListener('keydown', (e) => {
-      if (e.ctrlKey && e.key === 'k') {
-        e.preventDefault();
-        input.value = '/';
-        input.focus();
-      }
-      
-      if (e.key === 'Escape' && widget.classList.contains('chat-widget--open')) {
-        widget.classList.remove('chat-widget--open', 'chat-widget--minimized');
-        if (toggleBtn) toggleBtn.classList.remove('chat-toggle-btn--hidden');
-      }
-    });
-
-    // Make draggable
-    makeDraggable(widget);
-
     // Welcome message (first time)
-    const WELCOMED = 'testify_welcomed_v11.1';
-    if (!localStorage.getItem(WELCOMED)) {
+    const WELCOMED_KEY = 'testify_welcomed_v11.1_pro';
+    if (!localStorage.getItem(WELCOMED_KEY)) {
       setTimeout(() => {
-        sendAI(WELCOME);
-        localStorage.setItem(WELCOMED, 'true');
+        sendAIMessage(WELCOME_MESSAGE, 'ai');
+        localStorage.setItem(WELCOMED_KEY, 'true');
       }, 500);
     }
 
     // Load history
-    const history = loadHistory();
-    if (history.length > 0 && window.TestifyAI?.clearChat) {
+    const history = loadChatHistory();
+    if (history.length > 0 && window.TestifyAI && window.TestifyAI.clearChat) {
       window.TestifyAI.clearChat();
       history.slice(-20).forEach(msg => {
-        if (window.TestifyAI?.addMessage) {
+        if (window.TestifyAI && window.TestifyAI.addMessage) {
           window.TestifyAI.addMessage(msg.content, msg.role);
         }
       });
     }
 
-    console.log('✓ Testify Chat v' + VERSION + ' ready');
+    initKeyboardShortcuts();
+
+    console.log('✓ Chat bridge initialized');
+    console.log('✓ Professional service ready');
+    console.log('═'.repeat(80));
   }
 
   // Auto-init
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', initChatBridge);
   } else {
-    init();
+    initChatBridge();
   }
 
   // Export
-  window.TestifyChatBridge = { version: VERSION, send, sendAI };
+  window.TestifyChatBridge = {
+    version: VERSION,
+    sendUserMessage,
+    sendAIMessage,
+    handleCommand,
+    exportChatHistory,
+    clearChatHistory,
+    loadChatHistory
+  };
 
 })(window, document);
