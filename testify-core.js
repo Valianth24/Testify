@@ -1,8 +1,4 @@
-/*
- * TESTIFY CORE v11
- * Merkez uygulama çekirdeği ve UI köprüleri
- * Bu dosya, Testify platformunda global TestifyAI nesnesini sağlar.
- */
+
 (function (window, document) {
   'use strict';
 
