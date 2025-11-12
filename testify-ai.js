@@ -159,7 +159,9 @@ const TestifyAI_UltimateTeacher = {
         const subject = params.subject;
         const topics = params.topics;
         const difficulty = params.difficulty;
-        const questionCount = params.questionCount;
+
+        // ✅ ZORUNLU 20 SORU
+        const questionCount = 20;
         
         const systemPrompt = `<identity>
 You are MASTER TEACHER AI, a synthesis of the world's greatest educators:
@@ -583,6 +585,9 @@ This is your magnum opus. Create educational brilliance.
         try {
             // Parse request using existing system
             const params = window.TestifyAI_Final.parseRequest(userRequest, options);
+
+            // ✅ ZORUNLU 20 SORU
+            params.questionCount = 20;
             
             console.log(`📚 Subject: ${params.subject}`);
             console.log(`🎯 Exam: ${params.examInfo.name}`);
@@ -620,7 +625,8 @@ This is your magnum opus. Create educational brilliance.
                     "Authorization": `Bearer ${apiKey}`
                 },
                 body: JSON.stringify({
-                    model: "gpt-4o-mini",
+                    // ✅ MODEL ZORUNLU: gpt-5-nano
+                    model: "gpt-5-nano",
                     messages: [
                         { role: "system", content: systemPrompt },
                         { role: "user", content: userPrompt }
@@ -661,7 +667,7 @@ This is your magnum opus. Create educational brilliance.
             // Add metadata
             testData.metadata = testData.metadata || {};
             testData.metadata.generatedWith = `Master Teacher AI v${this.version}`;
-            testData.metadata.model = 'gpt-4o-mini';
+            testData.metadata.model = 'gpt-5-nano';
             testData.metadata.generationTime = `${duration}s`;
             testData.metadata.cost = `$${cost.toFixed(4)}`;
             testData.metadata.costTL = `${(cost * 35).toFixed(2)} TL`;
