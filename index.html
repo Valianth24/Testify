@@ -42,11 +42,10 @@
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1234567890123456" crossorigin="anonymous"></script>
-    
     <!-- External CSS -->
     <link rel="stylesheet" href="styles.css">
+    <!-- AdSense Manager Styles -->
+    <link rel="stylesheet" href="adsense-styles.css">
     
     <!-- jsPDF for PDF export -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -319,13 +318,6 @@
         </div>
     </header>
 
-    <!-- Top Ad Banner -->
-    <aside class="ad-banner" aria-label="Reklam" role="complementary">
-        <div id="ad-top" class="ad-container">
-            <span>📢 Reklam Alanı (728x90)</span>
-        </div>
-    </aside>
-
     <!-- Main Container -->
     <div class="main-container">
         <!-- Main Content Area -->
@@ -367,13 +359,6 @@
                         </div>
                     </div>
                 </section>
-
-                <!-- Side Ad -->
-                <aside class="ad-banner" aria-label="Reklam">
-                    <div id="ad-dashboard" class="ad-container">
-                        <span>📢 Reklam Alanı (300x250)</span>
-                    </div>
-                </aside>
             </section>
 
             <!-- Test Tab -->
@@ -614,13 +599,6 @@
                         </table>
                     </div>
                 </article>
-
-                <!-- Ad Banner -->
-                <aside class="ad-banner" aria-label="Reklam">
-                    <div id="ad-leaderboard" class="ad-container">
-                        <span>📢 Reklam Alanı (728x90)</span>
-                    </div>
-                </aside>
             </section>
 
             <!-- Analysis Tab -->
@@ -687,13 +665,6 @@
             </section>
         </main>
     </div>
-
-    <!-- Bottom Ad Banner -->
-    <aside class="ad-banner" aria-label="Reklam" role="complementary">
-        <div id="ad-bottom" class="ad-container">
-            <span>📢 Reklam Alanı (728x90)</span>
-        </div>
-    </aside>
 
     <!-- Floating Testfy Assistant -->
     <div class="chat-widget-wrapper" aria-live="polite">
@@ -766,6 +737,8 @@
     <script src="language.js"></script>
     <script src="testify-ai.js"></script>
     <script src="library.js"></script>
+    <!-- AdSense Manager JS (yeni sistem) -->
+    <script src="adsense-manager.js"></script>
 
     <!-- Birleştirilmiş APP + QUIZ + CHAT JS -->
     <script>
@@ -782,82 +755,6 @@
             return fallback;
         };
     }
-
-    /**
-     * Reklam yönetimi & sayfa geçişi entegrasyonu
-     * - Sekme değişimlerinde reklamları "yeniler"
-     * - Ad gösterimlerini (impression) takip eder
-     */
-    const AdManager = {
-        observer: null,
-
-        init() {
-            try {
-                this.setupImpressionObserver();
-            } catch (error) {
-                console.error('AdManager.init hatası:', error);
-            }
-        },
-
-        setupImpressionObserver() {
-            if (!('IntersectionObserver' in window)) return;
-
-            const ads = document.querySelectorAll('.ad-container');
-            if (!ads.length) return;
-
-            this.observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting && !entry.target.dataset.impressionLogged) {
-                        entry.target.dataset.impressionLogged = '1';
-                        console.log('📊 Ad Impression:', entry.target.id || entry.target.className || entry.target);
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            ads.forEach(ad => this.observer.observe(ad));
-        },
-
-        refreshAds() {
-            try {
-                const containers = document.querySelectorAll('.ad-container');
-                if (!containers.length) return;
-
-                containers.forEach(ad => {
-                    // İlk HTML'i hafızaya al
-                    if (!ad.dataset.initialHtml) {
-                        ad.dataset.initialHtml = ad.innerHTML;
-                    } else {
-                        // Statik placeholder varsa tekrar yaz
-                        ad.innerHTML = ad.dataset.initialHtml;
-                    }
-
-                    // Küçük bir "yenileniyor" efekti
-                    ad.style.opacity = '0.4';
-                    setTimeout(() => {
-                        ad.style.opacity = '';
-                    }, 200);
-                });
-
-                // Sayfada gerçek AdSense slotları varsa yeniden tetikle
-                if (window.adsbygoogle && document.querySelector('.adsbygoogle')) {
-                    try {
-                        document.querySelectorAll('.adsbygoogle').forEach(() => {
-                            (window.adsbygoogle = window.adsbygoogle || []).push({});
-                        });
-                    } catch (e) {
-                        console.warn('AdSense refresh error:', e);
-                    }
-                }
-            } catch (error) {
-                console.error('Reklam yenileme hatası:', error);
-            }
-        },
-
-        onTabChanged(tabName) {
-            console.log('📊 Page View:', tabName);
-            this.refreshAds();
-        }
-    };
 
     const App = {
         /**
@@ -1106,11 +1003,6 @@
                     } else {
                         window.location.hash = '#' + tabName;
                     }
-                }
-
-                // Reklamları yenile ve sayfa görüntüleme logla
-                if (window.AdManager && typeof AdManager.onTabChanged === 'function') {
-                    AdManager.onTabChanged(tabName);
                 }
 
                 // Kısa bir gecikmeden sonra loading'i kapat ve en üste kaydır
@@ -1749,7 +1641,6 @@
 
     // Uygulamayı başlat
     document.addEventListener('DOMContentLoaded', () => {
-        AdManager.init();
         App.init();
         App.handleInitialTabFromHash();
     });
@@ -2838,4 +2729,4 @@
     }
     </script>
 </body>
-</html>  
+</html>
