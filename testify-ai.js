@@ -160,7 +160,7 @@ const TestifyAI_UltimateTeacher = {
         const topics = params.topics;
         const difficulty = params.difficulty;
 
-        // ✅ ZORUNLU 20 SORU
+        // ✅ Sabit 20 soru (kullanıcının talebi)
         const questionCount = 20;
         
         const systemPrompt = `<identity>
@@ -583,10 +583,19 @@ This is your magnum opus. Create educational brilliance.
         console.log('═'.repeat(80));
         
         try {
-            // Parse request using existing system
-            const params = window.TestifyAI_Final.parseRequest(userRequest, options);
+            // ✅ Güvenli parseRequest fallback
+            const parseRequest =
+                (window.TestifyAI_Final && window.TestifyAI_Final.parseRequest) ||
+                (window.TestifyAI && window.TestifyAI.parseRequest);
 
-            // ✅ ZORUNLU 20 SORU
+            if (!parseRequest) {
+                throw new Error('parseRequest bulunamadı (TestifyAI/TestifyAI_Final). Yüklenme sırasını kontrol et.');
+            }
+
+            // Parse request using existing system
+            const params = parseRequest(userRequest, options);
+
+            // ✅ 20 soruya sabitle (loglarda da tutarlı olsun)
             params.questionCount = 20;
             
             console.log(`📚 Subject: ${params.subject}`);
@@ -625,7 +634,6 @@ This is your magnum opus. Create educational brilliance.
                     "Authorization": `Bearer ${apiKey}`
                 },
                 body: JSON.stringify({
-                    // ✅ MODEL ZORUNLU: gpt-5-nano
                     model: "gpt-5-nano",
                     messages: [
                         { role: "system", content: systemPrompt },
@@ -653,7 +661,7 @@ This is your magnum opus. Create educational brilliance.
             console.log('✅ GENERATION COMPLETE!');
             console.log(`⏱️  Duration: ${duration}s`);
             console.log(`📊 Tokens: ${usage.total_tokens || 'N/A'}`);
-            console.log(`💰 Cost: $${cost.toFixed(4)} (~${(cost * 35).toFixed(2)} TL)`);
+            console.log(`💰 Cost (est.): $${cost.toFixed(4)} (~${(cost * 35).toFixed(2)} TL)`);
             console.log('');
             
             // Parse and enhance response
@@ -669,8 +677,8 @@ This is your magnum opus. Create educational brilliance.
             testData.metadata.generatedWith = `Master Teacher AI v${this.version}`;
             testData.metadata.model = 'gpt-5-nano';
             testData.metadata.generationTime = `${duration}s`;
-            testData.metadata.cost = `$${cost.toFixed(4)}`;
-            testData.metadata.costTL = `${(cost * 35).toFixed(2)} TL`;
+            testData.metadata.cost = `$${cost.toFixed(4)} (est.)`;
+            testData.metadata.costTL = `${(cost * 35).toFixed(2)} TL (est.)`;
             testData.metadata.tokens = usage.total_tokens;
             testData.metadata.timestamp = new Date().toISOString();
             testData.metadata.qualityScore = '10/10 - World-Class Academic Standard';
@@ -729,150 +737,170 @@ window.TestifyAI_UltimateTeacher = TestifyAI_UltimateTeacher;
 /**
  * ═══════════════════════════════════════════════════════════════════════
  * AUTO-INTEGRATION: Replace old system with Ultimate Teacher
+ * (Hazır olana kadar bekleyen sağlam kanca)
  * ═══════════════════════════════════════════════════════════════════════
  */
-if (window.TestifyAI) {
-    console.log('');
-    console.log('═'.repeat(80));
-    console.log('🎓 TESTIFY ULTIMATE TEACHER v11.0 - ACTIVATION');
-    console.log('═'.repeat(80));
-    console.log('');
-    console.log('📚 Educational Philosophy: Constructivist + Cognitive Apprenticeship');
-    console.log('🧠 Pedagogy: Research-based, evidence-backed teaching methods');
-    console.log('🎯 Quality Target: 10/10 - World-class academic standard');
-    console.log('🔬 Framework: Bloom + Vygotsky + Sweller + Ericsson + Feynman');
-    console.log('');
-    
-    // Backup old system
-    if (!window.TestifyAI._v11_ultimate_backup) {
-        window.TestifyAI._v11_ultimate_backup = window.TestifyAI.generateTestFromAI;
-        console.log('✓ Old system backed up');
-    }
-    
-    // Replace with Ultimate Teacher
-    window.TestifyAI.generateTestFromAI = async function(userRequest) {
-        if (this.isGenerating) {
-            if (this.addMessage) {
-                this.addMessage(
-                    "⏳ **Master Teacher zaten çalışıyor!**\n\nLütfen bekle, kaliteli bir eğitim materyali hazırlanıyor...",
-                    'ai'
-                );
-            }
-            return;
+(function hookWhenReady() {
+    const integrate = () => {
+        console.log('');
+        console.log('═'.repeat(80));
+        console.log('🎓 TESTIFY ULTIMATE TEACHER v11.0 - ACTIVATION');
+        console.log('═'.repeat(80));
+        console.log('');
+        console.log('📚 Educational Philosophy: Constructivist + Cognitive Apprenticeship');
+        console.log('🧠 Pedagogy: Research-based, evidence-backed teaching methods');
+        console.log('🎯 Quality Target: 10/10 - World-class academic standard');
+        console.log('🔬 Framework: Bloom + Vygotsky + Sweller + Ericsson + Feynman');
+        console.log('');
+        
+        // Backup old system
+        if (!window.TestifyAI._v11_ultimate_backup) {
+            window.TestifyAI._v11_ultimate_backup = window.TestifyAI.generateTestFromAI;
+            console.log('✓ Old system backed up');
         }
         
-        this.isGenerating = true;
-        this.lastRequest = Date.now();
-        if (this.showTypingIndicator) this.showTypingIndicator();
-        
-        console.log('');
-        console.log('🎓 Ultimate Teacher AI Activated!');
-        console.log('🏆 Preparing world-class educational experience...');
-        console.log('');
-        
-        try {
-            const testData = await TestifyAI_UltimateTeacher.integrateWithLegacy(userRequest);
-            
-            if (this.hideTypingIndicator) this.hideTypingIndicator();
-            
-            const meta = testData.metadata || {};
-            const questionCount = testData.questions?.length || 0;
-            
-            if (this.addMessage) {
-                this.addMessage(
-                    `✨ **MASTERPIECE EDUCATIONAL CONTENT CREATED!**\n\n` +
-                    `🎓 **${testData.title}**\n\n` +
-                    `${testData.description}\n\n` +
-                    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-                    `📊 **TEST ÖZELLİKLERİ**\n` +
-                    `• Sınav Türü: ${meta.examName || 'Kapsamlı Test'}\n` +
-                    `• Konu: ${meta.subject || 'Belirtilmedi'}\n` +
-                    `• Soru Sayısı: ${questionCount}\n` +
-                    `• Zorluk Seviyesi: ${meta.difficulty || 'Belirtilmedi'}\n` +
-                    `• Bloom Seviyeleri: ${meta.bloomProgression || 'Kapsamlı'}\n\n` +
-                    `🎯 **KALİTE GÜVENCESİ**\n` +
-                    `⭐⭐⭐⭐⭐ ${meta.qualityScore}\n` +
-                    `✓ Araştırma bazlı pedagojik tasarım\n` +
-                    `✓ Bilişsel yük teorisi optimizasyonu\n` +
-                    `✓ Yakınsal gelişim alanı scaffolding\n` +
-                    `✓ Bilinçli pratik ilkeleri\n` +
-                    `✓ Bloom taksonomisi ilerlemesi\n\n` +
-                    `🔬 **EĞİTİMSEL FRAMEWORK**\n` +
-                    `${(meta.educationalFramework || []).map(f => `• ${f}`).join('\n')}\n\n` +
-                    `⚙️ **PROMPT MÜHENDİSLİĞİ**\n` +
-                    `${(meta.promptEngineering || []).map(p => `• ${p}`).join('\n')}\n\n` +
-                    `📈 **PERFORMANS**\n` +
-                    `• Süre: ${meta.generationTime || 'N/A'}\n` +
-                    `• Token: ${meta.tokens || 'N/A'}\n` +
-                    `• Maliyet: ${meta.cost || 'N/A'} (${meta.costTL || 'N/A'})\n\n` +
-                    `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
-                    `💡 **BU TEST FARKI:**\n` +
-                    `Bu sadece bir test değil - sıfırdan ustalığa giden\n` +
-                    `bir eğitim yolculuğudur!\n\n` +
-                    `✓ Her soru bir öğretim anı\n` +
-                    `✓ Açıklamalar 400-800 kelime derinlikte\n` +
-                    `✓ Yanlış cevaplar bile öğretir\n` +
-                    `✓ Uzman düşünce kalıpları gösterilir\n` +
-                    `✓ Gerçek dünya bağlantıları\n` +
-                    `✓ Metabilişsel stratejiler\n\n` +
-                    `🎯 **ŞİMDİ NE YAPMALIYIM?**\n` +
-                    `1️⃣ **"📝 Test Çöz"** sekmesine git\n` +
-                    `2️⃣ Testi çöz - ama acele etme!\n` +
-                    `3️⃣ **HER SORUNUN AÇIKLAMASINI OKU!**\n` +
-                    `4️⃣ Yanlış cevapların neden yanlış olduğunu öğren\n` +
-                    `5️⃣ Uzman düşünce stratejilerini içselleştir\n\n` +
-                    `📚 **ÖĞRENME İPUCU:**\n` +
-                    `Açıklamalar testin en değerli kısmı!\n` +
-                    `Her biri mini bir ders niteliğinde.\n\n` +
-                    `🌟 Dünya standartlarında eğitim içeriği!\n` +
-                    `Başarılar! 🎓`,
-                    'ai'
-                );
-            }
-            
-            if (this.highlightTestTab) this.highlightTestTab();
-            
-            console.log('');
-            console.log('═'.repeat(80));
-            console.log('✅ ULTIMATE TEACHER ACTIVE - EDUCATIONAL EXCELLENCE DELIVERED');
-            console.log('═'.repeat(80));
-            console.log('');
-            
-            return testData;
-            
-        } catch (error) {
-            console.error('');
-            console.error('❌ Ultimate Teacher Error:', error);
-            
-            if (this.hideTypingIndicator) this.hideTypingIndicator();
-            
-            // Fallback to backup
-            if (this._v11_ultimate_backup) {
-                console.log('🔄 Falling back to backup system...');
-                try {
-                    return await this._v11_ultimate_backup.call(this, userRequest);
-                } catch (fallbackError) {
-                    console.error('❌ Backup system also failed:', fallbackError);
+        // Replace with Ultimate Teacher
+        window.TestifyAI.generateTestFromAI = async function(userRequest) {
+            if (this.isGenerating) {
+                if (this.addMessage) {
+                    this.addMessage(
+                        "⏳ **Master Teacher zaten çalışıyor!**\n\nLütfen bekle, kaliteli bir eğitim materyali hazırlanıyor...",
+                        'ai'
+                    );
                 }
+                return;
             }
             
-            if (this.addMessage) {
-                this.addMessage(
-                    `❌ **ÜZGÜNÜZüTest Oluşturulamadı**\n\n` +
-                    `**Hata:** ${error.message}\n\n` +
-                    `Lütfen tekrar deneyin veya farklı bir konu belirtin.`,
-                    'ai'
-                );
+            this.isGenerating = true;
+            this.lastRequest = Date.now();
+            if (this.showTypingIndicator) this.showTypingIndicator();
+            
+            console.log('');
+            console.log('🎓 Ultimate Teacher AI Activated!');
+            console.log('🏆 Preparing world-class educational experience...');
+            console.log('');
+            
+            try {
+                const testData = await TestifyAI_UltimateTeacher.integrateWithLegacy(userRequest);
+                
+                if (this.hideTypingIndicator) this.hideTypingIndicator();
+                
+                const meta = testData.metadata || {};
+                const questionCount = testData.questions?.length || 0;
+                
+                if (this.addMessage) {
+                    this.addMessage(
+                        `✨ **MASTERPIECE EDUCATIONAL CONTENT CREATED!**\n\n` +
+                        `🎓 **${testData.title}**\n\n` +
+                        `${testData.description}\n\n` +
+                        `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
+                        `📊 **TEST ÖZELLİKLERİ**\n` +
+                        `• Sınav Türü: ${meta.examName || 'Kapsamlı Test'}\n` +
+                        `• Konu: ${meta.subject || 'Belirtilmedi'}\n` +
+                        `• Soru Sayısı: ${questionCount}\n` +
+                        `• Zorluk Seviyesi: ${meta.difficulty || 'Belirtilmedi'}\n` +
+                        `• Bloom Seviyeleri: ${meta.bloomProgression || 'Kapsamlı'}\n\n` +
+                        `🎯 **KALİTE GÜVENCESİ**\n` +
+                        `⭐⭐⭐⭐⭐ ${meta.qualityScore}\n` +
+                        `✓ Araştırma bazlı pedagojik tasarım\n` +
+                        `✓ Bilişsel yük teorisi optimizasyonu\n` +
+                        `✓ Yakınsal gelişim alanı scaffolding\n` +
+                        `✓ Bilinçli pratik ilkeleri\n` +
+                        `✓ Bloom taksonomisi ilerlemesi\n\n` +
+                        `🔬 **EĞİTİMSEL FRAMEWORK**\n` +
+                        `${(meta.educationalFramework || []).map(f => `• ${f}`).join('\n')}\n\n` +
+                        `⚙️ **PROMPT MÜHENDİSLİĞİ**\n` +
+                        `${(meta.promptEngineering || []).map(p => `• ${p}`).join('\n')}\n\n` +
+                        `📈 **PERFORMANS**\n` +
+                        `• Süre: ${meta.generationTime || 'N/A'}\n` +
+                        `• Token: ${meta.tokens || 'N/A'}\n` +
+                        `• Maliyet: ${meta.cost || 'N/A'} (${meta.costTL || 'N/A'})\n\n` +
+                        `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+                        `💡 **BU TEST FARKI:**\n` +
+                        `Bu sadece bir test değil - sıfırdan ustalığa giden\n` +
+                        `bir eğitim yolculuğudur!\n\n` +
+                        `✓ Her soru bir öğretim anı\n` +
+                        `✓ Açıklamalar 400-800 kelime derinlikte\n` +
+                        `✓ Yanlış cevaplar bile öğretir\n` +
+                        `✓ Uzman düşünce kalıpları gösterilir\n` +
+                        `✓ Gerçek dünya bağlantıları\n` +
+                        `✓ Metabilişsel stratejiler\n\n` +
+                        `🎯 **ŞİMDİ NE YAPMALIYIM?**\n` +
+                        `1️⃣ **"📝 Test Çöz"** sekmesine git\n` +
+                        `2️⃣ Testi çöz - ama acele etme!\n` +
+                        `3️⃣ **HER SORUNUN AÇIKLAMASINI OKU!**\n` +
+                        `4️⃣ Yanlış cevapların neden yanlış olduğunu öğren\n` +
+                        `5️⃣ Uzman düşünce stratejilerini içselleştir\n\n` +
+                        `📚 **ÖĞRENME İPUCU:**\n` +
+                        `Açıklamalar testin en değerli kısmı!\n` +
+                        `Her biri mini bir ders niteliğinde.\n\n` +
+                        `🌟 Dünya standartlarında eğitim içeriği!\n` +
+                        `Başarılar! 🎓`,
+                        'ai'
+                    );
+                }
+                
+                if (this.highlightTestTab) this.highlightTestTab();
+                
+                console.log('');
+                console.log('═'.repeat(80));
+                console.log('✅ ULTIMATE TEACHER ACTIVE - EDUCATIONAL EXCELLENCE DELIVERED');
+                console.log('═'.repeat(80));
+                console.log('');
+                
+                return testData;
+                
+            } catch (error) {
+                console.error('');
+                console.error('❌ Ultimate Teacher Error:', error);
+                
+                if (this.hideTypingIndicator) this.hideTypingIndicator();
+                
+                // Fallback to backup
+                if (this._v11_ultimate_backup) {
+                    console.log('🔄 Falling back to backup system...');
+                    try {
+                        return await this._v11_ultimate_backup.call(this, userRequest);
+                    } catch (fallbackError) {
+                        console.error('❌ Backup system also failed:', fallbackError);
+                    }
+                }
+                
+                if (this.addMessage) {
+                    this.addMessage(
+                        `❌ **ÜZGÜNÜZüTest Oluşturulamadı**\n\n` +
+                        `**Hata:** ${error.message}\n\n` +
+                        `Lütfen tekrar deneyin veya farklı bir konu belirtin.`,
+                        'ai'
+                    );
+                }
+            } finally {
+                this.isGenerating = false;
             }
-        } finally {
-            this.isGenerating = false;
+        };
+        
+        console.log('✓ Ultimate Teacher integrated successfully');
+        console.log('');
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.log('System ready to deliver world-class education!');
+        console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+        console.log('');
+    };
+
+    // TestifyAI hazırsa hemen bağlan, değilse bekle
+    if (window.TestifyAI && typeof window.TestifyAI === 'object') {
+        integrate();
+        return;
+    }
+
+    const tryIntegrate = () => {
+        if (window.TestifyAI && typeof window.TestifyAI === 'object') {
+            integrate();
+            clearInterval(poller);
+            window.removeEventListener('DOMContentLoaded', tryIntegrate);
         }
     };
-    
-    console.log('✓ Ultimate Teacher integrated successfully');
-    console.log('');
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.log('System ready to deliver world-class education!');
-    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
-    console.log('');
-}
+
+    window.addEventListener('DOMContentLoaded', tryIntegrate);
+    const poller = setInterval(tryIntegrate, 100);
+})();
