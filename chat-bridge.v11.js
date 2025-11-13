@@ -37,7 +37,7 @@
   const WELCOME_MESSAGE = `
 ## 🎓 Testify'a Hoş Geldiniz
 
-**"Bir test sadece değerlendirme değil, öğrenme yolculuğunun ta kendisidir."**  
+**"Bir test sadece değerlendirme değil, öğrenme yolculuğunun ta kendisidir."**
 *- Benjamin Bloom*
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -46,13 +46,13 @@
 
 **Testify**, yapay zeka destekli, dünya standartlarında eğitim içeriği sunan profesyonel bir platformdur.
 
-✨ **Vizyonumuz**  
+✨ **Vizyonumuz**
 AI teknolojisi ile eğitimde mükemmellik standardı oluşturmak
 
-💡 **Felsefemiz**  
+💡 **Felsefemiz**
 Her öğrenci, seviyesine uygun, kaliteli eğitim içeriğine erişebilmeli
 
-🎯 **Misyonumuz**  
+🎯 **Misyonumuz**
 Öğrenme merkezli, bilimsel temelli, erişilebilir eğitim
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -89,8 +89,11 @@ Testify'ın **Master Teacher AI** sistemi:
 
 ### 🎯 Önemli Not
 
-Testify, **profesyonel bir AI eğitim servisi**dir.  
-API ve altyapı tamamen Testify tarafından sağlanır.
+Testify, **kendi AI backend sistemini kullanan** profesyonel bir eğitim platformudur.
+
+✅ **API Key gerekmez** - Testify kendi altyapısını kullanır
+✅ **Hemen kullanıma hazır** - Herhangi bir kurulum yok
+✅ **Sınırsız erişim** - Testify üyeleri için tam erişim
 
 Siz sadece öğrenmeye odaklanın! 🚀
 
