@@ -72,7 +72,7 @@
     </script>
     
 
-    <!-- Floating Testfy Assistant Styles (YENİ) -->
+        <!-- Floating Testfy Assistant Styles (YENİ) -->
     <style>
         /* AI mesaj içi formatlama */
         .message-content strong {
@@ -180,7 +180,12 @@
             justify-content:space-between;
             background:linear-gradient(135deg,rgba(15,23,42,0.98),rgba(30,64,175,0.95));
             color:#f9fafb;
-            cursor:move;
+            cursor:grab;                /* 🔹 move yerine grab */
+            user-select:none;           /* 🔹 metin seçilmesin */
+            -webkit-user-select:none;
+        }
+        .chat-header.dragging{          /* 🔹 sürüklerken el işareti */
+            cursor:grabbing;
         }
         .chat-title{
             display:flex;
@@ -252,6 +257,7 @@
             }
         }
     </style>
+
 </head>
 <body>
     <!-- Skip to Main Content (Accessibility) -->
