@@ -48,9 +48,10 @@
 .ad-sidebar-right {
     position: fixed;
     right: 0;
-    top: 120px;
+    top: 50%; /* Ekranın ortasına hizala */
+    transform: translateY(-50%) translateZ(0); /* Tam ortalama + GPU acceleration */
     width: 320px;
-    height: calc(100vh - 140px);
+    max-height: 80vh; /* Maksimum yükseklik */
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -365,7 +366,7 @@
 .ad-sidebar-left,
 .ad-sidebar-right {
     will-change: transform;
-    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
