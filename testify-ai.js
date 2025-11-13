@@ -870,3 +870,70 @@ if (window.TestifyAI) {
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
     console.log('');
 }
+
+(function (window, document) {
+  'use strict';
+
+  // Basit HTML escape (XSS olmasın diye)
+  function escapeHTML(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  // Çok basit markdown -> HTML (sadece satırbaşı)
+  function renderContent(raw) {
+    const safe = escapeHTML(raw);
+    // Satır sonlarını koru
+    return safe.replace(/\n/g, '<br>');
+  }
+
+  // Eğer daha önce bir TestifyAI varsa onu kullan, yoksa boş obje yarat
+  const core = window.TestifyAI || {};
+
+  // Kullanıcı ve AI mesajlarını #aiChat içine basan fonksiyon
+  if (typeof core.addMessage !== 'function') {
+    core.addMessage = function addMessage(content, role = 'ai') {
+      const chat = document.getElementById('aiChat');
+      if (!chat) {
+        console.error('aiChat container not found');
+        return;
+      }
+
+      const isUser = role === 'user' || role === 'human';
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'ai-message ' + (isUser ? 'ai-message--user' : 'ai-message--ai');
+
+      const bubble = document.createElement('div');
+      bubble.className = 'message-bubble message-bubble--' + (isUser ? 'user' : 'ai');
+
+      const body = document.createElement('div');
+      body.className = 'message-content';
+      body.innerHTML = renderContent(content);
+
+      bubble.appendChild(body);
+      wrapper.appendChild(bubble);
+      chat.appendChild(wrapper);
+
+      // Her zaman en alta kaydır
+      chat.scrollTop = chat.scrollHeight;
+    };
+  }
+
+  // Sohbeti temizleyen fonksiyon
+  if (typeof core.clearChat !== 'function') {
+    core.clearChat = function clearChat() {
+      const chat = document.getElementById('aiChat');
+      if (chat) chat.innerHTML = '';
+    };
+  }
+
+  // Dışarıya güncel TestifyAI nesnesini ver
+  window.TestifyAI = core;
+
+})(window, document);
