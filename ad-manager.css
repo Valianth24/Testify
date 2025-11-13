@@ -1,29 +1,1353 @@
+/**
 
-.ad-banner {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
-    margin: var(--spacing-lg) 0;
-    text-align: center;
-    min-height: 90px;
+ * ═══════════════════════════════════════════════════════════════════════
+
+ * TESTIFY AD MANAGER - ADVANCED REVENUE OPTIMIZATION
+
+ * ═══════════════════════════════════════════════════════════════════════
+
+ *
+
+ * PURPOSE:
+
+ * - Advanced ad management and revenue optimization
+
+ * - Auto-refresh mechanism for increased impressions
+
+ * - Viewability tracking and optimization
+
+ * - A/B testing support for ad placements
+
+ * - Analytics integration ready
+
+ *
+
+ * REVENUE FEATURES:
+
+ * - Smart refresh (30-60s intervals)
+
+ * - Viewability-based loading (Intersection Observer)
+
+ * - Multi-format responsive ads
+
+ * - Premium placement indicators
+
+ * ═══════════════════════════════════════════════════════════════════════
+
+ */
+
+ 
+
+/* ═══════════════════════════════════════════════════════════════════════
+
+   AD CONTAINER HIERARCHY - Premium Placement System
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+ 
+
+/* Container for all ad management */
+
+.testify-ad-container {
+
+    position: relative;
+
+    isolation: isolate;
+
+}
+
+ 
+
+/* Premium placement badge */
+
+.ad-premium {
+
+    position: relative;
+
+}
+
+ 
+
+.ad-premium::after {
+
+    content: '⭐';
+
+    position: absolute;
+
+    top: -8px;
+
+    right: -8px;
+
+    width: 24px;
+
+    height: 24px;
+
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+
+    border-radius: 50%;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
+
+    font-size: 12px;
+
+    box-shadow: 0 2px 8px rgba(251, 191, 36, 0.5);
+
+    z-index: 10;
+
+    animation: pulse-premium 2s infinite;
+
 }
 
-.ad-banner:first-of-type,
-.ad-banner:last-of-type {
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
+ 
+
+@keyframes pulse-premium {
+
+    0%, 100% {
+
+        transform: scale(1);
+
+        opacity: 1;
+
+    }
+
+    50% {
+
+        transform: scale(1.1);
+
+        opacity: 0.8;
+
+    }
+
 }
+
+ 
+
+/* ═══════════════════════════════════════════════════════════════════════
+
+   SMART AD REFRESH - Increased Impressions
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+ 
+
+.ad-refreshable {
+
+    position: relative;
+
+    transition: opacity 0.3s ease;
+
+}
+
+ 
+
+.ad-refreshable.refreshing {
+
+    opacity: 0.6;
+
+    pointer-events: none;
+
+}
+
+ 
+
+.ad-refreshable.refreshing::after {
+
+    content: '';
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    width: 30px;
+
+    height: 30px;
+
+    margin: -15px 0 0 -15px;
+
+    border: 3px solid var(--primary, #4f46e5);
+
+    border-radius: 50%;
+
+    border-top-color: transparent;
+
+    animation: spin 0.8s linear infinite;
+
+    z-index: 1000;
+
+}
+
+ 
+
+@keyframes spin {
+
+    to { transform: rotate(360deg); }
+
+}
+
+ 
+
+/* Refresh indicator */
+
+.ad-refresh-timer {
+
+    position: absolute;
+
+    bottom: 4px;
+
+    right: 4px;
+
+    background: rgba(0, 0, 0, 0.7);
+
+    color: white;
+
+    padding: 2px 6px;
+
+    border-radius: 4px;
+
+    font-size: 9px;
+
+    font-weight: 600;
+
+    z-index: 100;
+
+    display: none;
+
+}
+
+ 
+
+.ad-refreshable:hover .ad-refresh-timer {
+
+    display: block;
+
+}
+
+ 
+
+/* ═══════════════════════════════════════════════════════════════════════
+
+   VIEWABILITY OPTIMIZATION - Lazy Loading
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+ 
+
+.ad-viewable {
+
+    opacity: 0;
+
+    transform: translateY(20px);
+
+    transition: opacity 0.5s ease, transform 0.5s ease;
+
+}
+
+ 
+
+.ad-viewable.in-view {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+}
+
+ 
+
+/* Viewability indicator (debug mode) */
+
+.ad-viewability-indicator {
+
+    position: absolute;
+
+    top: 4px;
+
+    left: 4px;
+
+    width: 10px;
+
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: #ef4444;
+
+    z-index: 100;
+
+    transition: background 0.3s ease;
+
+}
+
+ 
+
+.ad-viewable.in-view .ad-viewability-indicator {
+
+    background: #10b981;
+
+}
+
+ 
+
+/* Hide indicator in production */
+
+body:not(.debug-mode) .ad-viewability-indicator {
+
+    display: none;
+
+}
+
+ 
+
+/* ═══════════════════════════════════════════════════════════════════════
+
+   AD PLACEMENT ZONES - Strategic Positioning
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+ 
+
+/* Zone 1: Above the fold (Highest CPM) */
+
+.ad-zone-atf {
+
+    position: relative;
+
+    z-index: 200;
+
+}
+
+ 
+
+.ad-zone-atf .ad-unit {
+
+    border: 2px solid var(--primary, #4f46e5);
+
+    box-shadow: 0 4px 16px rgba(79, 70, 229, 0.15);
+
+}
+
+ 
+
+/* Zone 2: In-content (High engagement) */
+
+.ad-zone-content {
+
+    margin: 40px 0;
+
+    position: relative;
+
+}
+
+ 
+
+.ad-zone-content .ad-unit {
+
+    border: 2px solid var(--success, #10b981);
+
+}
+
+ 
+
+/* Zone 3: Below the fold (Standard) */
+
+.ad-zone-btf {
+
+    margin-top: 40px;
+
+}
+
+ 
+
+.ad-zone-btf .ad-unit {
+
+    border: 1px solid var(--border, #e5e7eb);
+
+}
+
+ 
+
+/* Zone 4: Sticky sidebar (Premium viewability) */
+
+.ad-zone-sticky {
+
+    position: sticky;
+
+    top: 130px;
+
+}
+
+ 
+
+.ad-zone-sticky .ad-unit {
+
+    border: 2px solid var(--warning, #f59e0b);
+
+    box-shadow: 0 4px 16px rgba(245, 158, 11, 0.15);
+
+}
+
+ 
+
+/* ═══════════════════════════════════════════════════════════════════════
+
+   HOVER EFFECTS - User Engagement
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+ 
+
+.ad-interactive {
+
+    cursor: pointer;
+
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+
+ 
+
+.ad-interactive:hover {
+
+    transform: scale(1.02);
+
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+}
+
+ 
+
+.ad-interactive:active {
+
+    transform: scale(0.98);
+
+}
+
+ 
+
+/* Glow effect on hover */
+
+.ad-glow:hover {
+
+    box-shadow:
+
+        0 0 20px rgba(79, 70, 229, 0.3),
+
+        0 4px 12px rgba(0, 0, 0, 0.1);
+
+}
+
+ 
+
+/* ═══════════════════════════════════════════════════════════════════════
+
+   MULTI-SIZE RESPONSIVE ADS - Better Fill Rates
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+ 
+
+.ad-responsive {
+
+    width: 100%;
+
+    max-width: 100%;
+
+    min-height: 90px;
+
+}
+
+ 
+
+.ad-responsive ins {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+}
+
+ 
+
+/* Desktop sizes */
+
+@media (min-width: 1200px) {
+
+    .ad-responsive.size-desktop ins {
+
+        width: 728px;
+
+        height: 90px;
+
+    }
+
+}
+
+ 
+
+/* Tablet sizes */
+
+@media (min-width: 768px) and (max-width: 1199px) {
+
+    .ad-responsive.size-tablet ins {
+
+        width: 468px;
+
+        height: 60px;
+
+    }
+
+}
+
+ 
+
+/* Mobile sizes */
+
+@media (max-width: 767px) {
+
+    .ad-responsive.size-mobile ins {
+
+        width: 320px;
+
+        height: 100px;
+
+    }
+
+}
+
+ 
+
+/* ═══════════════════════════════════════════════════════════════════════
+
+   AD FALLBACK - Empty State Management
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+ 
+
+.ad-fallback {
+
+    display: none;
+
+    background: var(--bg-tertiary, #f3f4f6);
+
+    border: 2px dashed var(--border, #d1d5db);
+
+    border-radius: 12px;
+
+    padding: 40px 20px;
+
+    text-align: center;
+
+    color: var(--text-secondary, #6b7280);
+
+}
+
+ 
+
+.ad-fallback-icon {
+
+    font-size: 48px;
+
+    margin-bottom: 12px;
+
+    opacity: 0.5;
+
+}
+
+ 
+
+.ad-fallback-text {
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+}
+
+ 
+
+/* Show fallback when ad fails to load */
+
+.ad-unit:empty + .ad-fallback {
+
+    display: block;
+
+}
+
+ 
+
+/* ═══════════════════════════════════════════════════════════════════════
+
+   ANIMATION ENTRANCE - Smooth Loading
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+ 
+
+.ad-entrance {
+
+    animation: slideInUp 0.6s ease-out;
+
+}
+
+ 
+
+@keyframes slideInUp {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(30px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+ 
+
+.ad-entrance-left {
+
+    animation: slideInLeft 0.6s ease-out;
+
+}
+
+ 
+
+@keyframes slideInLeft {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateX(-30px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateX(0);
+
+    }
+
+}
+
+ 
+
+.ad-entrance-right {
+
+    animation: slideInRight 0.6s ease-out;
+
+}
+
+ 
+
+@keyframes slideInRight {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateX(30px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateX(0);
+
+    }
+
+}
+
+ 
+
+/* Stagger animation for multiple ads */
+
+.ad-unit:nth-child(1) { animation-delay: 0s; }
+
+.ad-unit:nth-child(2) { animation-delay: 0.1s; }
+
+.ad-unit:nth-child(3) { animation-delay: 0.2s; }
+
+.ad-unit:nth-child(4) { animation-delay: 0.3s; }
+
+.ad-unit:nth-child(5) { animation-delay: 0.4s; }
+
+.ad-unit:nth-child(6) { animation-delay: 0.5s; }
+
+ 
+
+/* ═══════════════════════════════════════════════════════════════════════
+
+   AD BLOCKER DETECTION - Revenue Recovery
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+ 
+
+.ad-blocked-message {
+
+    display: none;
+
+    background: linear-gradient(135deg, #fef3c7, #fde68a);
+
+    border: 2px solid #fbbf24;
+
+    border-radius: 12px;
+
+    padding: 24px;
+
+    margin: 20px 0;
+
+    text-align: center;
+
+}
+
+ 
+
+.ad-blocked-message h3 {
+
+    color: #92400e;
+
+    font-size: 18px;
+
+    margin-bottom: 12px;
+
+}
+
+ 
+
+.ad-blocked-message p {
+
+    color: #78350f;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+ 
+
+.ad-blocked-message .btn-disable-blocker {
+
+    background: #f59e0b;
+
+    color: white;
+
+    border: none;
+
+    padding: 10px 24px;
+
+    border-radius: 8px;
+
+    font-weight: 600;
+
+    margin-top: 16px;
+
+    cursor: pointer;
+
+    transition: background 0.3s ease;
+
+}
+
+ 
+
+.ad-blocked-message .btn-disable-blocker:hover {
+
+    background: #d97706;
+
+}
+
+ 
+
+/* Show when ads are blocked */
+
+body.ads-blocked .ad-blocked-message {
+
+    display: block;
+
+}
+
+ 
+
+/* ═══════════════════════════════════════════════════════════════════════
+
+   REVENUE METRICS TRACKING - Analytics
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+ 
+
+.ad-metrics {
+
+    position: absolute;
+
+    bottom: 4px;
+
+    left: 4px;
+
+    background: rgba(0, 0, 0, 0.8);
+
+    color: #10b981;
+
+    padding: 4px 8px;
+
+    border-radius: 4px;
+
+    font-size: 10px;
+
+    font-family: monospace;
+
+    z-index: 1000;
+
+    display: none;
+
+}
+
+ 
+
+/* Show metrics in debug mode */
+
+body.debug-mode .ad-metrics {
+
+    display: block;
+
+}
+
+ 
+
+.ad-metrics-ctr {
+
+    color: #3b82f6;
+
+}
+
+ 
+
+.ad-metrics-viewability {
+
+    color: #10b981;
+
+}
+
+ 
+
+.ad-metrics-cpm {
+
+    color: #f59e0b;
+
+}
+
+ 
+
+/* ═══════════════════════════════════════════════════════════════════════
+
+   CLOSE BUTTON - User Control (Optional)
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+ 
+
+.ad-close-btn {
+
+    position: absolute;
+
+    top: -8px;
+
+    right: -8px;
+
+    width: 24px;
+
+    height: 24px;
+
+    background: #ef4444;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 50%;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    z-index: 100;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+
+    transition: all 0.2s ease;
+
+}
+
+ 
+
+.ad-unit:hover .ad-close-btn {
+
+    display: flex;
+
+}
+
+ 
+
+.ad-close-btn:hover {
+
+    background: #dc2626;
+
+    transform: scale(1.1);
+
+}
+
+ 
+
+.ad-unit.ad-closed {
+
+    display: none;
+
+}
+
+ 
+
+/* ═══════════════════════════════════════════════════════════════════════
+
+   NATIVE AD STYLING - Blended Content
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+ 
+
+.ad-native {
+
+    background: transparent;
+
+    border: none;
+
+    box-shadow: none;
+
+    padding: 0;
+
+}
+
+ 
+
+.ad-native::before {
+
+    background: var(--bg-secondary, #f9fafb);
+
+    padding: 4px 12px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    display: inline-block;
+
+    margin-bottom: 12px;
+
+}
+
+ 
+
+.ad-native-content {
+
+    display: grid;
+
+    grid-template-columns: 120px 1fr;
+
+    gap: 16px;
+
+    padding: 16px;
+
+    background: var(--card-bg, white);
+
+    border: 1px solid var(--border, #e5e7eb);
+
+    border-radius: 12px;
+
+    transition: all 0.3s ease;
+
+}
+
+ 
+
+.ad-native-content:hover {
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    transform: translateY(-2px);
+
+}
+
+ 
+
+.ad-native-image {
+
+    width: 120px;
+
+    height: 120px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+
+}
+
+ 
+
+.ad-native-title {
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    color: var(--text-primary, #111827);
+
+    margin-bottom: 8px;
+
+}
+
+ 
+
+.ad-native-description {
+
+    font-size: 14px;
+
+    color: var(--text-secondary, #6b7280);
+
+    line-height: 1.5;
+
+}
+
+ 
+
+/* ═══════════════════════════════════════════════════════════════════════
+
+   SEASONAL / PROMOTIONAL THEMES
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+ 
+
+.ad-seasonal-holiday {
+
+    border: 2px solid #dc2626;
+
+    background: linear-gradient(135deg, #fef2f2, #fee2e2);
+
+}
+
+ 
+
+.ad-seasonal-holiday::before {
+
+    content: '🎄 Sponsored';
+
+}
+
+ 
+
+.ad-seasonal-summer {
+
+    border: 2px solid #0891b2;
+
+    background: linear-gradient(135deg, #ecfeff, #cffafe);
+
+}
+
+ 
+
+.ad-seasonal-summer::before {
+
+    content: '☀️ Sponsored';
+
+}
+
+ 
+
+/* ═══════════════════════════════════════════════════════════════════════
+
+   PERFORMANCE OPTIMIZATIONS
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+ 
+
+/* GPU acceleration */
+
+.ad-unit {
+
+    transform: translateZ(0);
+
+    backface-visibility: hidden;
+
+}
+
+ 
+
+/* Contain layout changes */
 
 .ad-container {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+    contain: layout style;
+
+}
+
+ 
+
+/* Prevent layout shift with aspect ratio */
+
+.ad-unit[data-ratio="16:9"] {
+
+    aspect-ratio: 16 / 9;
+
+}
+
+ 
+
+.ad-unit[data-ratio="4:3"] {
+
+    aspect-ratio: 4 / 3;
+
+}
+
+ 
+
+.ad-unit[data-ratio="1:1"] {
+
+    aspect-ratio: 1 / 1;
+
+}
+
+ 
+
+/* ═══════════════════════════════════════════════════════════════════════
+
+   MOBILE SPECIFIC OPTIMIZATIONS
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+ 
+
+@media (max-width: 768px) {
+
+    /* Sticky bottom ad on mobile */
+
+    .ad-mobile-sticky-bottom {
+
+        position: fixed;
+
+        bottom: 0;
+
+        left: 0;
+
+        right: 0;
+
+        z-index: 999;
+
+        background: white;
+
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+
+        padding: 8px;
+
+    }
+
+ 
+
+    /* Close button for sticky mobile ad */
+
+    .ad-mobile-sticky-bottom .ad-close-btn {
+
+        display: flex;
+
+    }
+
+ 
+
+    /* Interstitial ad overlay */
+
+    .ad-interstitial {
+
+        position: fixed;
+
+        inset: 0;
+
+        background: rgba(0, 0, 0, 0.9);
+
+        z-index: 9999;
+
+        display: none;
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding: 20px;
+
+    }
+
+ 
+
+    .ad-interstitial.active {
+
+        display: flex;
+
+    }
+
+ 
+
+    .ad-interstitial-content {
+
+        max-width: 400px;
+
+        position: relative;
+
+    }
+
+ 
+
+    .ad-interstitial .ad-close-btn {
+
+        display: flex;
+
+        top: -12px;
+
+        right: -12px;
+
+        width: 32px;
+
+        height: 32px;
+
+        font-size: 18px;
+
+    }
+
+}
+
+ 
+
+/* ═══════════════════════════════════════════════════════════════════════
+
+   ACCESSIBILITY IMPROVEMENTS
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+ 
+
+.ad-unit:focus-within {
+
+    outline: 2px solid var(--primary, #4f46e5);
+
+    outline-offset: 4px;
+
+}
+
+ 
+
+/* Reduce motion for users who prefer it */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .ad-unit,
+
+    .ad-refreshable,
+
+    .ad-viewable,
+
+    .ad-interactive {
+
+        animation: none;
+
+        transition: none;
+
+    }
+
+}
+
+ 
+
+/* High contrast mode */
+
+@media (prefers-contrast: high) {
+
+    .ad-unit {
+
+        border: 3px solid currentColor;
+
+    }
+
+}
+
+ 
+
+/* ═══════════════════════════════════════════════════════════════════════
+
+   DEBUG MODE - Development Tools
+
+   ═══════════════════════════════════════════════════════════════════════ */
+
+ 
+
+body.debug-mode .ad-unit {
+
+    outline: 2px dashed #f59e0b;
+
+    outline-offset: 4px;
+
+}
+
+ 
+
+body.debug-mode .ad-unit::after {
+
+    content: attr(data-ad-slot);
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    background: #f59e0b;
+
+    color: white;
+
+    padding: 2px 8px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    z-index: 1000;
+
 }
