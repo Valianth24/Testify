@@ -9,19 +9,17 @@
     const header = widget.querySelector('.chat-header');
     if (!header) return;
 
-    // Her ihtimale karşı native drag & drop'u kapat
+    // 🔒 Native HTML5 drag & drop'u tamamen kapat
     header.setAttribute('draggable', 'false');
     widget.setAttribute('draggable', 'false');
 
-    header.addEventListener('dragstart', function (e) {
+    const preventNativeDrag = (e) => {
       e.preventDefault();
       return false;
-    });
+    };
 
-    widget.addEventListener('dragstart', function (e) {
-      e.preventDefault();
-      return false;
-    });
+    header.addEventListener('dragstart', preventNativeDrag);
+    widget.addEventListener('dragstart', preventNativeDrag);
 
     let isDragging = false;
     let startX = 0;
@@ -36,7 +34,7 @@
       // Varsayılan olarak ekranın en üstünden biraz boşluk bırak
       let minTop = margin;
 
-      // Site header'ı fixed ise, onun altından başlasın
+      // Üstteki site header'ı sabitse, onun ALTINDAN başlasın
       const appHeader = document.querySelector('.header');
       if (appHeader) {
         const rect = appHeader.getBoundingClientRect();
@@ -51,7 +49,9 @@
 
     function startDrag(clientX, clientY) {
       isDragging = true;
-      header.classList.add('dragging');
+
+      // CSS'te cursor + animasyon kontrolü için
+      widget.classList.add('chat-widget--dragging');
 
       const rect = widget.getBoundingClientRect();
       startX = clientX;
@@ -67,7 +67,7 @@
       widget.style.right = 'auto';
       widget.style.bottom = 'auto';
 
-      // Sürüklerken animasyonu kapat
+      // Mevcut transition değerini sakla, drag sırasında kapat
       widget.dataset.prevTransition = widget.style.transition || '';
       widget.style.transition = 'none';
     }
@@ -111,7 +111,8 @@
     function finishDrag() {
       if (!isDragging) return;
       isDragging = false;
-      header.classList.remove('dragging');
+
+      widget.classList.remove('chat-widget--dragging');
 
       // Animasyonu eski haline getir
       if (widget.dataset.prevTransition !== undefined) {
@@ -123,7 +124,7 @@
     // Mouse olayları
     function onMouseDown(e) {
       if (e.button !== 0) return; // sadece sol tık
-      e.preventDefault();
+      e.preventDefault();        // text seçimi + native drag'i kes
       startDrag(e.clientX, e.clientY);
       document.addEventListener('mousemove', onMouseMove);
       document.addEventListener('mouseup', onMouseUp);
