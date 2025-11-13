@@ -1,803 +1,488 @@
-/*
- * ═══════════════════════════════════════════════════════════════════════════
- * TESTIFY CHAT BRIDGE v11.1 PROFESSIONAL
- * ═══════════════════════════════════════════════════════════════════════════
- * 
- * "Education is not the filling of a pail, but the lighting of a fire."
- * - William Butler Yeats
- * 
- * TESTIFY VISION:
- * Dünya standartlarında, AI destekli eğitim içeriği ile her öğrenciye
- * kişiselleştirilmiş öğrenme deneyimi sunmak.
- * 
- * PHILOSOPHY:
- * - Öğrenme merkezli yaklaşım
- * - 10/10 kalite standardı
- * - Araştırma bazlı pedagoji
- * - Profesyonel hizmet anlayışı
- * 
- * API: Testify tarafından sağlanır - Kullanıcı yapılandırması gerektirmez
- * ═══════════════════════════════════════════════════════════════════════════
- */
+// chat-bridge.v11.js
+// TESTFY FLOATING CHAT WIDGET - v11
+// TestifyAI (Ultimate Teacher) ile entegre sohbet köprüsü
 
 (function (window, document) {
   'use strict';
 
-  const VERSION = '11.1.0-PROFESSIONAL';
-  const CHAT_HISTORY_KEY = 'testify_chat_history';
-  const MAX_HISTORY_ITEMS = 50;
-
-  const $ = (sel) => document.querySelector(sel);
-  const on = (el, evt, cb) => el && el.addEventListener(evt, cb);
-
-  // ═══════════════════════════════════════════════════════════════════════
-  // WELCOME / HELP / EXAMPLES MESSAGES
-  // ═══════════════════════════════════════════════════════════════════════
-  
-  const WELCOME_MESSAGE = `
-## 🎓 Testify'a Hoş Geldiniz
-
-**"Bir test sadece değerlendirme değil, öğrenme yolculuğunun ta kendisidir."**  
-*- Benjamin Bloom*
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-### 🌟 Testify Hakkında
-
-**Testify**, yapay zeka destekli, dünya standartlarında eğitim içeriği sunan profesyonel bir platformdur.
-
-✨ **Vizyonumuz**  
-AI teknolojisi ile eğitimde mükemmellik standardı oluşturmak
-
-💡 **Felsefemiz**  
-Her öğrenci, seviyesine uygun, kaliteli eğitim içeriğine erişebilmeli
-
-🎯 **Misyonumuz**  
-Öğrenme merkezli, bilimsel temelli, erişilebilir eğitim
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-### 🚀 Nasıl Çalışır?
-
-**Çok basit!** Sadece ne istediğinizi yazın:
-
-\`\`\`
-YKS Matematik 15 soru orta seviye
-KPSS tarih 20 soru
-Python programlama 10 soru kolay
-İngilizce grammar 15 soru
-\`\`\`
-
-Testify'ın **Master Teacher AI** sistemi:
-- GPT-4o ile güçlendirilmiş
-- Bloom Taksonomisi ile yapılandırılmış
-- 500-900 kelimelik detaylı açıklamalar
-- Profesyonel akademik standart
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-### 📚 Hızlı Komutlar
-
-- \`/yardim\` - Detaylı yardım
-- \`/örnekler\` - Örnek istekler
-- \`/sistem\` - Sistem durumu
-- \`/temizle\` - Sohbeti temizle
-
-**Kısayol:** Ctrl+K - Komut menüsü
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-### 🎯 Önemli Not
-
-Testify, **profesyonel bir AI eğitim servisi**dir.  
-API ve altyapı tamamen Testify tarafından sağlanır.
-
-Siz sadece öğrenmeye odaklanın! 🚀
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Hazırsanız, hemen başlayın! Ne öğrenmek istersiniz?
-`;
-
-  const HELP_MESSAGE = `
-## 📖 Testify Kullanım Kılavuzu
-
-### ✍️ Test İsteme
-
-**Format:**  
-\`[Sınav Tipi] [Konu] [Soru Sayısı] [Zorluk]\`
-
-**Örnekler:**
-
-**YKS/LGS/KPSS Sınavları:**
-\`\`\`
-YKS Matematik 20 soru orta
-LGS Türkçe 10 soru kolay
-KPSS Tarih 15 soru zor
-\`\`\`
-
-**Üniversite Dersleri:**
-\`\`\`
-İşletim Sistemleri 10 soru
-Veri Yapıları 15 soru orta
-Fizik 2 - Elektromanyetik 20 soru
-\`\`\`
-
-**Programlama:**
-\`\`\`
-Python temelleri 10 soru kolay
-JavaScript ES6 15 soru orta
-React Hooks 10 soru zor
-\`\`\`
-
-**Dil Sınavları:**
-\`\`\`
-İngilizce grammar 20 soru
-TOEFL reading 15 soru orta
-YÖKDİL vocabulary 10 soru
-\`\`\`
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-### ⚙️ Sistem Komutları
-
-\`/yardim\` - Bu yardım mesajı  
-\`/örnekler\` - Detaylı örnekler  
-\`/sistem\` - Sistem durumu  
-\`/temizle\` - Sohbeti temizle  
-\`/arşiv\` - Oluşturulan testler  
-\`/dışa-aktar\` - Sohbeti kaydet  
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-### ⌨️ Klavye Kısayolları
-
-**Ctrl+K** - Komut menüsü  
-**Ctrl+Enter** - Gönder  
-**Esc** - Kapat  
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-### 💡 Pro İpuçları
-
-1. **Spesifik olun**  
-   ✅ "YKS Matematik integral 15 soru orta"  
-   ❌ "Matematik soruları"
-
-2. **Zorluk belirtin**  
-   kolay, orta, zor, karışık
-
-3. **Açıklamaları okuyun**  
-   Her soru 500-900 kelimelik mini bir ders!
-
-4. **Yavaş öğrenin**  
-   Kalite için zaman ayırın.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-Daha fazla soru? Sadece sorun! 😊
-`;
-
-  const EXAMPLES_MESSAGE = `
-## 📚 Örnek Test İstekleri
-
-### 🎯 YKS Sınavları
-
-**TYT:**
-\`\`\`
-YKS TYT Matematik 40 soru karışık
-YKS TYT Türkçe 20 soru orta
-YKS TYT Fen Bilimleri 15 soru
-\`\`\`
-
-**AYT:**
-\`\`\`
-YKS AYT Matematik 30 soru zor
-YKS AYT Fizik elektrik 20 soru
-YKS AYT Kimya organik 15 soru
-\`\`\`
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-### 🎓 LGS Sınavları
-
-\`\`\`
-LGS Matematik 20 soru orta
-LGS Fen Bilimleri 15 soru
-LGS Türkçe 10 soru kolay
-LGS İngilizce 15 soru
-\`\`\`
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-### 📋 KPSS Sınavları
-
-\`\`\`
-KPSS Tarih Osmanlı 20 soru orta
-KPSS Coğrafya Türkiye 15 soru
-KPSS Vatandaşlık 10 soru
-KPSS Matematik 20 soru kolay
-\`\`\`
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-### 💻 Bilgisayar & Programlama
-
-\`\`\`
-Veri Yapıları linked list 10 soru
-Algoritmalar sorting 15 soru
-İşletim Sistemleri 20 soru zor
-Python list comprehension 10 soru kolay
-JavaScript async/await 15 soru orta
-React Hooks 10 soru
-HTML5 semantic tags 10 soru kolay
-\`\`\`
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-### 🌍 Dil Sınavları
-
-\`\`\`
-TOEFL Reading 15 soru orta
-IELTS Writing 10 soru
-YÖKDİL vocabulary 20 soru zor
-İngilizce grammar tenses 15 soru
-\`\`\`
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-### 🔬 Fen Bilimleri
-
-\`\`\`
-Fizik Newton yasaları 15 soru orta
-Kimya periyodik tablo 10 soru kolay
-Biyoloji hücre 20 soru
-\`\`\`
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-💡 **İpucu:** Ne kadar spesifik olursanız, o kadar iyi sonuç alırsınız!
-`;
-
-  // ═══════════════════════════════════════════════════════════════════════
-  // HELPERS: HTML ESCAPE & DOM RENDER
-  // ═══════════════════════════════════════════════════════════════════════
-
-  function escapeHTML(str) {
-    if (str == null) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
-  }
-
-  // Basit markdown → HTML: şu an sadece satır sonlarını koruyoruz
-  function renderContent(raw) {
-    const safe = escapeHTML(raw);
-    return safe.replace(/\n/g, '<br>');
-  }
-
-  // Core yoksa / addMessage yoksa kullanılacak fallback renderer
-  function renderMessageToDom(content, role) {
-    const chat = $('#aiChat');
-    if (!chat) {
-      console.error('aiChat container not found');
-      return;
-    }
-
-    const isUser = role === 'user' || role === 'human';
-
-    const wrapper = document.createElement('div');
-    wrapper.className = 'ai-message ' + (isUser ? 'ai-message--user' : 'ai-message--ai');
-
-    const bubble = document.createElement('div');
-    bubble.className = 'message-bubble message-bubble--' + (isUser ? 'user' : 'ai');
-
-    const body = document.createElement('div');
-    body.className = 'message-content';
-    body.innerHTML = renderContent(content);
-
-    bubble.appendChild(body);
-    wrapper.appendChild(bubble);
-    chat.appendChild(wrapper);
-
-    chat.scrollTop = chat.scrollHeight;
-  }
-
-  function clearChatDom() {
-    const chat = $('#aiChat');
-    if (chat) chat.innerHTML = '';
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════
-  // CHAT HISTORY MANAGEMENT
-  // ═══════════════════════════════════════════════════════════════════════
-
-  function saveChatHistory(role, content) {
-    try {
-      const history = JSON.parse(localStorage.getItem(CHAT_HISTORY_KEY) || '[]');
-      history.push({ role, content, timestamp: Date.now() });
-      while (history.length > MAX_HISTORY_ITEMS) history.shift();
-      localStorage.setItem(CHAT_HISTORY_KEY, JSON.stringify(history));
-    } catch (e) {
-      console.error('Chat history error:', e);
-    }
-  }
-
-  function loadChatHistory() {
-    try {
-      return JSON.parse(localStorage.getItem(CHAT_HISTORY_KEY) || '[]');
-    } catch (e) {
-      return [];
-    }
-  }
-
-  function clearChatHistory() {
-    try {
-      localStorage.removeItem(CHAT_HISTORY_KEY);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  function exportChatHistory() {
-    try {
-      const history = loadChatHistory();
-      const text = history.map(msg => 
-        `[${new Date(msg.timestamp).toLocaleString()}] ${msg.role.toUpperCase()}: ${msg.content}`
-      ).join('\n\n');
-
-      const blob = new Blob([text], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `testify_chat_${Date.now()}.txt`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════
-  // MESSAGE HANDLING
-  // ═══════════════════════════════════════════════════════════════════════
-
-  function sendUserMessage(text) {
-    if (!text || !text.trim()) return;
-    
-    const core = window.TestifyAI;
-
-    // Önce core varsa onu kullan, yoksa DOM fallback
-    if (core && typeof core.addMessage === 'function') {
-      core.addMessage(text, 'user');
-    } else {
-      renderMessageToDom(text, 'user');
-    }
-
-    saveChatHistory('user', text);
-  }
-
-  function sendAIMessage(content, role = 'ai') {
-    const core = window.TestifyAI;
-
-    if (core && typeof core.addMessage === 'function') {
-      core.addMessage(content, role);
-    } else {
-      renderMessageToDom(content, role);
-    }
-
-    saveChatHistory(role, content);
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════
-  // COMMAND HANDLING
-  // ═══════════════════════════════════════════════════════════════════════
-
-  function handleCommand(text) {
-    const core = window.TestifyAI;
-    const trimmed = text.trim();
-
-    // /yardim, /help
-    if (/^\s*\/(yardim|help)\s*$/i.test(trimmed)) {
-      sendAIMessage(HELP_MESSAGE, 'ai');
-      return true;
-    }
-
-    // /örnekler
-    if (/^\s*\/örnekler\s*$/i.test(trimmed)) {
-      sendAIMessage(EXAMPLES_MESSAGE, 'ai');
-      return true;
-    }
-
-    // /sistem
-    if (/^\s*\/sistem\s*$/i.test(trimmed)) {
-      if (core && typeof core.systemCheck === 'function') {
-        const health = core.systemCheck();
-        sendAIMessage(
-          `## 🔧 Sistem Durumu\n\n` +
-          `**Platform:** Testify Professional\n` +
-          `**Versiyon:** ${health.version}\n` +
-          `**Model:** ${health.model}\n` +
-          `**Servis:** AI Teacher (GPT-4o)\n` +
-          `**Dil:** ${health.language}\n` +
-          `**Arşiv:** ${health.archive} test\n\n` +
-          `✅ Sistem aktif ve hazır!`,
-          'ai'
-        );
-      }
-      return true;
-    }
-
-    // /temizle
-    if (/^\s*\/temizle\s*$/i.test(trimmed)) {
-      if (core && typeof core.clearChat === 'function') {
-        core.clearChat();
-      } else {
-        clearChatDom();
-      }
-      clearChatHistory();
-      sendAIMessage(
-        `## 🧹 Sohbet Temizlendi\n\n` +
-        `Yeni başlangıç için hazırız!\n\n` +
-        `Ne öğrenmek istersiniz?`,
-        'ai'
-      );
-      return true;
-    }
-
-    // /arşiv
-    if (/^\s*\/arşiv\s*$/i.test(trimmed)) {
-      if (core && typeof core.getArchive === 'function') {
-        const archive = core.getArchive();
-        if (archive.length === 0) {
-          sendAIMessage(
-            `## 📚 Arşiv Boş\n\n` +
-            `Henüz test oluşturmadınız.\n\n` +
-            `Hemen başlayın! Örnek:\n\`\`\`\nYKS Matematik 10 soru\n\`\`\``,
-            'ai'
-          );
-        } else {
-          let msg = '## 📚 Test Arşivi\n\n';
-          archive.slice(0, 10).forEach((item, idx) => {
-            const date = new Date(item.timestamp).toLocaleDateString('tr-TR');
-            msg += `**${idx + 1}.** ${item.title}\n`;
-            msg += `   ${item.questionCount} soru • ${item.difficulty} • ${date}\n\n`;
-          });
-          sendAIMessage(msg, 'ai');
-        }
-      } else {
-        sendAIMessage(
-          `## 📚 Arşiv\n\n` +
-          `Bu özellik henüz aktif değil.`,
-          'ai'
-        );
-      }
-      return true;
-    }
-
-    // /dışa-aktar
-    if (/^\s*\/dışa-aktar\s*$/i.test(trimmed)) {
-      if (exportChatHistory()) {
-        sendAIMessage('✅ Sohbet başarıyla dışa aktarıldı!', 'ai');
-      } else {
-        sendAIMessage('❌ Dışa aktarma başarısız.', 'ai');
-      }
-      return true;
-    }
-
-    // Unknown command
-    if (trimmed.startsWith('/')) {
-      sendAIMessage(
-        `❌ **Bilinmeyen komut:** \`${trimmed}\`\n\n` +
-        `Kullanılabilir komutlar: \`/yardim\``,
-        'ai'
-      );
-      return true;
-    }
-
-    return false;
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════
-  // AI REQUEST ROUTING
-  // ═══════════════════════════════════════════════════════════════════════
-
-  function routeToAI(text) {
-    const core = window.TestifyAI;
-    
-    if (!core || typeof core.generateTestFromAI !== 'function') {
-      sendAIMessage(
-        `## ❌ Sistem Hatası\n\n` +
-        `Master Teacher AI modülü yüklenemedi veya tanımlı değil.\n\n` +
-        `Lütfen sayfayı yenileyin veya daha sonra tekrar deneyin.`,
-        'ai'
-      );
-      console.error('TestifyAI core not found or generateTestFromAI missing');
-      return;
-    }
-
-    // isGenerating bir alan ise kontrol edelim
-    if (typeof core.isGenerating === 'boolean' && core.isGenerating) {
-      sendAIMessage(
-        `## ⏳ İşlem Devam Ediyor\n\n` +
-        `Profesyonel içerik hazırlanıyor.\n` +
-        `Lütfen mevcut işlemin tamamlanmasını bekleyin.\n\n` +
-        `💡 **Not:** Kaliteli içerik için biraz zaman gerekir.`,
-        'ai'
-      );
-      return;
-    }
-
-    try {
-      core.generateTestFromAI(text);
-    } catch (error) {
-      console.error('AI routing error:', error);
-      sendAIMessage(
-        `## ❌ Beklenmeyen Hata\n\n` +
-        `**Hata:** ${error.message}\n\n` +
-        `Lütfen tekrar deneyin veya farklı parametreler kullanın.`,
-        'ai'
-      );
-    }
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════
-  // DRAG / TAŞIMA İŞLEVİ
-  // ═══════════════════════════════════════════════════════════════════════
-
-  function initChatDrag(widget, header) {
-    if (!widget || !header) return;
-
-    let isDragging = false;
-    let startX, startY;
-    let startRight, startBottom;
-
-    const startDrag = (clientX, clientY) => {
-      isDragging = true;
-
-      const styles = window.getComputedStyle(widget);
-      startRight = parseFloat(styles.right) || 0;
-      startBottom = parseFloat(styles.bottom) || 0;
-
-      startX = clientX;
-      startY = clientY;
-
-      widget.dataset.dragging = 'true';
-      const oldTransition = widget.style.transition;
-      widget.dataset.oldTransition = oldTransition;
-      widget.style.transition = 'none';
-    };
-
-    const onMouseDown = (e) => {
-      if (e.button !== 0) return;
-      e.preventDefault();
-      startDrag(e.clientX, e.clientY);
-
-      document.addEventListener('mousemove', onMouseMove);
-      document.addEventListener('mouseup', onMouseUp);
-    };
-
-    const onMouseMove = (e) => {
-      if (!isDragging) return;
-
-      const dx = e.clientX - startX;
-      const dy = e.clientY - startY;
-
-      widget.style.right = (startRight - dx) + 'px';
-      widget.style.bottom = (startBottom - dy) + 'px';
-    };
-
-    const onMouseUp = () => {
-      if (!isDragging) return;
-      isDragging = false;
-
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
-
-      widget.style.transition = widget.dataset.oldTransition || '';
-      delete widget.dataset.dragging;
-      delete widget.dataset.oldTransition;
-    };
-
-    const onTouchStart = (e) => {
-      const touch = e.touches[0];
-      if (!touch) return;
-      e.preventDefault();
-      startDrag(touch.clientX, touch.clientY);
-
-      document.addEventListener('touchmove', onTouchMove, { passive: false });
-      document.addEventListener('touchend', onTouchEnd);
-      document.addEventListener('touchcancel', onTouchEnd);
-    };
-
-    const onTouchMove = (e) => {
-      if (!isDragging) return;
-      const touch = e.touches[0];
-      if (!touch) return;
-
-      const dx = touch.clientX - startX;
-      const dy = touch.clientY - startY;
-
-      widget.style.right = (startRight - dx) + 'px';
-      widget.style.bottom = (startBottom - dy) + 'px';
-    };
-
-    const onTouchEnd = () => {
-      if (!isDragging) return;
-      isDragging = false;
-
-      document.removeEventListener('touchmove', onTouchMove);
-      document.removeEventListener('touchend', onTouchEnd);
-      document.removeEventListener('touchcancel', onTouchEnd);
-
-      widget.style.transition = widget.dataset.oldTransition || '';
-      delete widget.dataset.dragging;
-      delete widget.dataset.oldTransition;
-    };
-
-    header.addEventListener('mousedown', onMouseDown);
-    header.addEventListener('touchstart', onTouchStart);
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════
-  // KEYBOARD SHORTCUTS
-  // ═══════════════════════════════════════════════════════════════════════
-
-  function initKeyboardShortcuts() {
-    document.addEventListener('keydown', (e) => {
-      if (e.ctrlKey && e.key === 'k') {
-        e.preventDefault();
-        const input = $('#aiInput');
-        if (input) {
-          input.value = '/';
-          input.focus();
-        }
+  const ChatBridge = {
+    ai: null,
+    widget: null,
+    wrapper: null,
+    header: null,
+    toggleBtn: null,
+    minimizeBtn: null,
+    closeBtn: null,
+    input: null,
+    sendBtn: null,
+    chat: null,
+    aiReady: false,
+
+    dragState: {
+      active: false,
+      offsetX: 0,
+      offsetY: 0,
+      width: 0,
+      height: 0,
+      pointerId: null
+    },
+
+    init() {
+      this.widget = document.getElementById('chatWidget');
+      this.wrapper = document.querySelector('.chat-widget-wrapper');
+      this.header = this.widget ? this.widget.querySelector('.chat-header') : null;
+      this.toggleBtn = document.getElementById('chatToggleBtn');
+      this.minimizeBtn = document.getElementById('chatMinimizeBtn');
+      this.closeBtn = document.getElementById('chatCloseBtn');
+      this.input = document.getElementById('aiInput');
+      this.sendBtn = document.getElementById('aiSendBtn');
+      this.chat = document.getElementById('aiChat');
+
+      if (!this.widget || !this.input || !this.sendBtn || !this.chat) {
+        console.warn('[ChatBridge] Gerekli DOM elemanları bulunamadı');
+        return;
       }
 
-      if (e.key === 'Escape') {
-        const widget = $('#chatWidget');
-        const toggleBtn = $('#chatToggleBtn');
-        if (widget && widget.classList.contains('chat-widget--open')) {
-          widget.classList.remove('chat-widget--open');
-          widget.classList.remove('chat-widget--minimized');
-          if (toggleBtn) {
-            toggleBtn.classList.remove('chat-toggle-btn--hidden');
-          }
-        }
-      }
-    });
-  }
+      this.ai = window.TestifyAI || null;
+      window.ChatBridge = this; // debug için
 
-  // ═══════════════════════════════════════════════════════════════════════
-  // INITIALIZATION
-  // ═══════════════════════════════════════════════════════════════════════
+      this.bindUI();
+      this.setupDrag();
+      this.ensureAIReady();
+    },
 
-  function initChatBridge() {
-    console.log('═'.repeat(80));
-    console.log(`🎓 TESTIFY CHAT BRIDGE v${VERSION}`);
-    console.log('Professional AI Education Platform');
-    console.log('═'.repeat(80));
+    // ──────────────────────────────────────────────
+    // UI EVENTLERİ
+    // ──────────────────────────────────────────────
+    bindUI() {
+      const self = this;
 
-    const widget = $('#chatWidget');
-    const toggleBtn = $('#chatToggleBtn');
-    const minimizeBtn = $('#chatMinimizeBtn');
-    const closeBtn = $('#chatCloseBtn');
-    const input = $('#aiInput');
-    const sendBtn = $('#aiSendBtn');
-
-    if (!widget || !input) {
-      console.error('Chat elements not found');
-      return;
-    }
-
-    // Drag / taşıma
-    const header = widget.querySelector('.chat-header');
-    initChatDrag(widget, header);
-
-    // Toggle
-    on(toggleBtn, 'click', () => {
-      widget.classList.add('chat-widget--open');
-      if (toggleBtn) toggleBtn.classList.add('chat-toggle-btn--hidden');
-      setTimeout(() => input && input.focus(), 100);
-    });
-
-    // Minimize
-    on(minimizeBtn, 'click', () => {
-      widget.classList.toggle('chat-widget--minimized');
-    });
-
-    // Close
-    on(closeBtn, 'click', () => {
-      widget.classList.remove('chat-widget--open');
-      widget.classList.remove('chat-widget--minimized');
-      if (toggleBtn) toggleBtn.classList.remove('chat-toggle-btn--hidden');
-    });
-
-    // Submit
-    function submit() {
-      if (!input) return;
-      const text = input.value.trim();
-      if (!text) return;
-
-      input.value = '';
-      input.focus();
-
-      sendUserMessage(text);
-
-      if (!handleCommand(text)) {
-        routeToAI(text);
-      }
-    }
-
-    on(sendBtn, 'click', submit);
-    on(input, 'keydown', (e) => {
-      if (e.key === 'Enter' && (e.ctrlKey || !e.shiftKey)) {
-        e.preventDefault();
-        submit();
-      }
-    });
-
-    // Welcome message (first time)
-    const WELCOMED_KEY = 'testify_welcomed_v11.1_pro';
-    if (!localStorage.getItem(WELCOMED_KEY)) {
-      setTimeout(() => {
-        sendAIMessage(WELCOME_MESSAGE, 'ai');
-        localStorage.setItem(WELCOMED_KEY, 'true');
-      }, 500);
-    }
-
-    // Load history (son 20 mesaj)
-    const history = loadChatHistory();
-    if (history.length > 0) {
-      const core = window.TestifyAI;
-      if (core && typeof core.clearChat === 'function') {
-        core.clearChat();
-      } else {
-        clearChatDom();
+      if (this.toggleBtn) {
+        this.toggleBtn.addEventListener('click', function () {
+          self.toggleWidget();
+        });
       }
 
-      history.slice(-20).forEach(msg => {
-        const c = window.TestifyAI;
-        if (c && typeof c.addMessage === 'function') {
-          c.addMessage(msg.content, msg.role);
-        } else {
-          renderMessageToDom(msg.content, msg.role);
+      if (this.closeBtn) {
+        this.closeBtn.addEventListener('click', function () {
+          self.closeWidget();
+        });
+      }
+
+      if (this.minimizeBtn) {
+        this.minimizeBtn.addEventListener('click', function () {
+          self.toggleMinimize();
+        });
+      }
+
+      this.sendBtn.addEventListener('click', function () {
+        self.handleSend();
+      });
+
+      this.input.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          self.handleSend();
         }
       });
+    },
+
+    // ──────────────────────────────────────────────
+    // SÜRÜKLE-BIRAK (DRAG) – SADECE HEADER'DAN
+    // ──────────────────────────────────────────────
+    setupDrag() {
+      if (!this.header || !this.widget) return;
+
+      const state = this.dragState;
+      const header = this.header;
+      const widget = this.widget;
+      const self = this;
+
+      header.style.cursor = 'move';
+
+      header.addEventListener('pointerdown', function (e) {
+        if (e.button !== 0) return; // sadece sol tık
+        if (e.target.closest('.chat-header-btn')) return; // butonlara tıklamayı engelleme
+
+        const rect = widget.getBoundingClientRect();
+        state.active = true;
+        state.pointerId = e.pointerId;
+        state.offsetX = e.clientX - rect.left;
+        state.offsetY = e.clientY - rect.top;
+        state.width = rect.width;
+        state.height = rect.height;
+
+        header.setPointerCapture(e.pointerId);
+      });
+
+      header.addEventListener('pointermove', function (e) {
+        if (!state.active || state.pointerId !== e.pointerId) return;
+
+        let left = e.clientX - state.offsetX;
+        let top = e.clientY - state.offsetY;
+
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+        const margin = 8;
+
+        if (left < margin) left = margin;
+        if (top < margin) top = margin;
+        if (left + state.width + margin > vw) {
+          left = vw - state.width - margin;
+        }
+        if (top + state.height + margin > vh) {
+          top = vh - state.height - margin;
+        }
+
+        widget.style.left = left + 'px';
+        widget.style.top = top + 'px';
+        widget.style.right = 'auto';
+        widget.style.bottom = 'auto';
+      });
+
+      const stopDrag = function (e) {
+        if (!state.active || (e && state.pointerId !== e.pointerId)) return;
+        state.active = false;
+        try {
+          if (header.hasPointerCapture(state.pointerId)) {
+            header.releasePointerCapture(state.pointerId);
+          }
+        } catch (_) {}
+        state.pointerId = null;
+      };
+
+      header.addEventListener('pointerup', stopDrag);
+      header.addEventListener('pointercancel', stopDrag);
+    },
+
+    // ──────────────────────────────────────────────
+    // AI MODÜLÜ KONTROLÜ
+    // ──────────────────────────────────────────────
+    ensureAIReady() {
+      if (!this.ai) {
+        this.showSystemError(
+          '❌ Sistem Hatası\n\n' +
+          'Master Teacher AI modülü yüklenemedi (TestifyAI bulunamadı).\n' +
+          'Lütfen "testify-core.js" ve "testify-ai.js" dosyalarının sayfada yüklü olduğundan emin olun.'
+        );
+        return;
+      }
+
+      if (
+        typeof this.ai.addMessage !== 'function' ||
+        typeof this.ai.generateTestFromAI !== 'function'
+      ) {
+        this.showSystemError(
+          '❌ Sistem Hatası\n\n' +
+          'Master Teacher AI modülü eksik veya hatalı.\n' +
+          'TestifyAI.addMessage ve TestifyAI.generateTestFromAI fonksiyonlarının tanımlı olduğundan emin olun.'
+        );
+        return;
+      }
+
+      this.aiReady = true;
+
+      // Başlangıç karşılama mesajı
+      if (typeof this.ai.systemCheck === 'function') {
+        try {
+          const info = this.ai.systemCheck();
+          const engine =
+            (info && (info.engine || info.model || info.engineVersion)) ||
+            'Master Teacher AI';
+
+          this.ai.addMessage(
+            'Merhaba, ben Testfy Master Teacher. 🎓\n\n' +
+            'Senin için sınav formatında, açıklamalı ve pedagojik sorular hazırlayabilirim.\n' +
+            'Model: ' + engine + '\n\n' +
+            'Ne tür bir test istiyorsun?\n' +
+            'Örnek: "Programlama temelleri vize için 20 soru hazırla"',
+            'ai'
+          );
+        } catch (e) {
+          console.warn('[ChatBridge] systemCheck hata:', e);
+          this.ai.addMessage(
+            'Merhaba, ben Testfy Master Teacher. 🎓\n\n' +
+            'Bana "Şu ders için şu kadar soru" şeklinde yaz, senin için tam açıklamalı bir test oluşturayım.\n' +
+            'Örnek: "İşletim sistemleri 1. vize için 15 soru"',
+            'ai'
+          );
+        }
+      } else {
+        this.ai.addMessage(
+          'Merhaba, ben Testfy Master Teacher. 🎓\n\n' +
+          'Bana istediğin testi doğal cümleyle yaz;\n' +
+          'örneğin: "Programlama temelleri 1. ders için vizeye yönelik 20 soru hazırla".',
+          'ai'
+        );
+      }
+    },
+
+    // ──────────────────────────────────────────────
+    // SİSTEM HATASI / MESAJLAR
+    // ──────────────────────────────────────────────
+    showSystemError(message) {
+      console.error('[ChatBridge] ' + message);
+      this.aiReady = false;
+
+      if (this.input) this.input.disabled = true;
+      if (this.sendBtn) this.sendBtn.disabled = true;
+
+      this.appendSystemMessage(message);
+    },
+
+    appendSystemMessage(text) {
+      if (!this.chat) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'ai-message ai-message--ai';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'message-bubble message-bubble--ai';
+
+      const body = document.createElement('div');
+      body.className = 'message-content';
+      body.innerHTML = this.escapeHTML(text).replace(/\n/g, '<br>');
+
+      bubble.appendChild(body);
+      wrapper.appendChild(bubble);
+      this.chat.appendChild(wrapper);
+      this.chat.scrollTop = this.chat.scrollHeight;
+    },
+
+    escapeHTML(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    },
+
+    // ──────────────────────────────────────────────
+    // WIDGET AÇ / KAPA / MİNİMİZE
+    // ──────────────────────────────────────────────
+    toggleWidget() {
+      if (!this.widget) return;
+      const isOpen = this.widget.classList.contains('chat-widget--open');
+
+      if (isOpen) {
+        this.widget.classList.remove('chat-widget--open');
+        this.widget.setAttribute('aria-hidden', 'true');
+      } else {
+        this.widget.classList.add('chat-widget--open');
+        this.widget.classList.remove('chat-widget--minimized');
+        this.widget.setAttribute('aria-hidden', 'false');
+      }
+    },
+
+    closeWidget() {
+      if (!this.widget || !this.toggleBtn) return;
+      this.widget.classList.remove('chat-widget--open');
+      this.widget.setAttribute('aria-hidden', 'true');
+      this.toggleBtn.classList.remove('chat-toggle-btn--hidden');
+    },
+
+    toggleMinimize() {
+      if (!this.widget) return;
+      this.widget.classList.toggle('chat-widget--minimized');
+    },
+
+    // ──────────────────────────────────────────────
+    // MESAJ GÖNDERME
+    // ──────────────────────────────────────────────
+    handleSend() {
+      if (!this.input) return;
+      const text = this.input.value.trim();
+      if (!text) return;
+
+      this.addUserMessage(text);
+      this.input.value = '';
+      this.routeToAI(text);
+    },
+
+    addUserMessage(text) {
+      if (this.ai && typeof this.ai.addMessage === 'function') {
+        this.ai.addMessage(text, 'user');
+        return;
+      }
+
+      // Fallback (normalde buraya düşmez)
+      if (!this.chat) return;
+      const wrapper = document.createElement('div');
+      wrapper.className = 'ai-message ai-message--user';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'message-bubble message-bubble--user';
+
+      const body = document.createElement('div');
+      body.className = 'message-content';
+      body.innerHTML = this.escapeHTML(text).replace(/\n/g, '<br>');
+
+      bubble.appendChild(body);
+      wrapper.appendChild(bubble);
+      this.chat.appendChild(wrapper);
+      this.chat.scrollTop = this.chat.scrollHeight;
+    },
+
+    // ──────────────────────────────────────────────
+    // KOMUTLAR & AI YÖNLENDİRME
+    // ──────────────────────────────────────────────
+    routeToAI(text) {
+      if (!this.aiReady) {
+        this.appendSystemMessage(
+          'Sistem hazır görünmüyor. Lütfen sayfayı yenileyip tekrar deneyin.'
+        );
+        return;
+      }
+
+      if (text.startsWith('/')) {
+        const handled = this.handleCommand(text);
+        if (!handled && this.ai && typeof this.ai.addMessage === 'function') {
+          this.ai.addMessage(
+            'Kullanılabilir komutlar:\n' +
+            '/sil     → Sohbeti temizle\n' +
+            '/sistem  → Sistem bilgisini göster (varsa)\n' +
+            '/arşiv   → Oluşturulan test arşivini göster (varsa)\n' +
+            '/yardım  → Bu yardım mesajını göster',
+            'ai'
+          );
+        }
+        return;
+      }
+
+      if (!this.ai || typeof this.ai.generateTestFromAI !== 'function') {
+        this.showSystemError(
+          '❌ Sistem Hatası\n\n' +
+          'Test oluşturma fonksiyonu bulunamadı (TestifyAI.generateTestFromAI).\n' +
+          'Lütfen testify-ai entegrasyonunu kontrol edin.'
+        );
+        return;
+      }
+
+      try {
+        // Asıl büyü burada: Ultimate Teacher AI devreye giriyor
+        this.ai.generateTestFromAI(text);
+      } catch (e) {
+        console.error('[ChatBridge] generateTestFromAI hatası:', e);
+        this.appendSystemMessage(
+          '❌ Test oluşturulurken bir hata oluştu.\n\n' +
+          'Hata: ' + (e.message || e.toString())
+        );
+      }
+    },
+
+    handleCommand(text) {
+      const cmd = text.split(/\s+/)[0].toLowerCase();
+
+      // /sil → sohbet temizle
+      if (cmd === '/sil' || cmd === '/clear') {
+        if (this.ai && typeof this.ai.clearChat === 'function') {
+          this.ai.clearChat();
+        } else if (this.chat) {
+          this.chat.innerHTML = '';
+        }
+        return true;
+      }
+
+      // /sistem → systemCheck (varsa)
+      if (cmd === '/sistem' || cmd === '/system') {
+        if (this.ai && typeof this.ai.systemCheck === 'function') {
+          try {
+            const info = this.ai.systemCheck();
+            const pretty = this.escapeHTML(
+              JSON.stringify(info, null, 2)
+            ).replace(/\n/g, '<br>');
+            this.ai.addMessage(
+              'Sistem Bilgisi:\n\n' +
+              '<pre style="font-size:0.75rem; white-space:pre-wrap;">' +
+              pretty +
+              '</pre>',
+              'ai'
+            );
+          } catch (e) {
+            this.ai.addMessage(
+              'Sistem bilgisi alınamadı: ' + (e.message || e.toString()),
+              'ai'
+            );
+          }
+        } else {
+          this.appendSystemMessage(
+            'Sistem bilgisi özelliği bu sürümde tanımlı değil.'
+          );
+        }
+        return true;
+      }
+
+      // /arşiv → getArchive (varsa)
+      if (cmd === '/arşiv' || cmd === '/arsiv' || cmd === '/archive') {
+        if (this.ai && typeof this.ai.getArchive === 'function') {
+          try {
+            const list = this.ai.getArchive() || [];
+            if (!list.length) {
+              this.ai.addMessage(
+                'Henüz kayıtlı bir test arşivi yok.',
+                'ai'
+              );
+            } else {
+              const lines = list.slice(0, 20).map((item, idx) => {
+                const date = item.timestamp
+                  ? new Date(item.timestamp).toLocaleString('tr-TR')
+                  : '';
+                const title = item.title || 'İsimsiz test';
+                const count =
+                  typeof item.questionCount === 'number'
+                    ? item.questionCount
+                    : '?';
+                const diff = item.difficulty || 'belirsiz';
+                return (
+                  `${idx + 1}. ${title} (${count} soru, ${diff})` +
+                  (date ? ` - ${date}` : '')
+                );
+              });
+
+              this.ai.addMessage(
+                '📚 Son oluşturulan testler:\n\n' +
+                lines.join('\n'),
+                'ai'
+              );
+            }
+          } catch (e) {
+            this.ai.addMessage(
+              'Arşiv okunamadı: ' + (e.message || e.toString()),
+              'ai'
+            );
+          }
+        } else {
+          this.appendSystemMessage(
+            'Arşiv özelliği bu sürümde tanımlı değil.'
+          );
+        }
+        return true;
+      }
+
+      // /yardım
+      if (cmd === '/yardım' || cmd === '/help') {
+        if (this.ai && typeof this.ai.addMessage === 'function') {
+          this.ai.addMessage(
+            'Testfy Master Teacher komutları:\n\n' +
+            '• Sıradan bir yazı → Senin için test isteği kabul edilir\n' +
+            '   Örnek: "Programlama temelleri vize için 20 soru hazırla"\n\n' +
+            '• /sil    → Sohbet geçmişini temizler\n' +
+            '• /sistem → Sistem durumunu gösterir (varsa)\n' +
+            '• /arşiv  → Son oluşturulan testlerin özetini gösterir (varsa)\n',
+            'ai'
+          );
+        }
+        return true;
+      }
+
+      return false;
     }
-
-    initKeyboardShortcuts();
-
-    console.log('✓ Chat bridge initialized');
-    console.log('✓ Professional service ready');
-    console.log('═'.repeat(80));
-  }
-
-  // Auto-init
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initChatBridge);
-  } else {
-    initChatBridge();
-  }
-
-  // Export
-  window.TestifyChatBridge = {
-    version: VERSION,
-    sendUserMessage,
-    sendAIMessage,
-    handleCommand,
-    exportChatHistory,
-    clearChatHistory,
-    loadChatHistory
   };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    ChatBridge.init();
+  });
 
 })(window, document);
