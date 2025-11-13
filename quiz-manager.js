@@ -18,7 +18,7 @@ const QuizManager = {
         isReviewing: false,
         testTitle: null,
         testDescription: null,
-        eventListenersAttached: false // ✅ YENİ: Duplicate önleme
+        eventListenersAttached: false // ✅ Duplicate önleme
     },
 
     /**
@@ -156,7 +156,7 @@ const QuizManager = {
     },
 
     /**
-     * ✅ YENİ: Önceki quiz'i temizle
+     * ✅ Önceki quiz'i temizle
      */
     cleanupPreviousQuiz() {
         // Timer'ı durdur
@@ -166,7 +166,7 @@ const QuizManager = {
             console.log('🧹 Önceki timer temizlendi');
         }
         
-        // Event listener'ları temizle (gerekirse)
+        // Eski seçenekleri temizle
         const optionsList = document.getElementById('optionsList');
         if (optionsList) {
             optionsList.innerHTML = '';
@@ -300,7 +300,7 @@ const QuizManager = {
         const optionsList = document.getElementById('optionsList');
         if (!optionsList) return;
 
-        // ✅ Eski event listener'ları temizle
+        // Eski seçenekleri temizle
         optionsList.innerHTML = '';
 
         const letters = ['A', 'B', 'C', 'D', 'E'];
@@ -340,7 +340,7 @@ const QuizManager = {
                 <span>${Utils.sanitizeHTML(option)}</span>
             `;
 
-            // ✅ Event listener (memory leak yok)
+            // Event listener'lar
             if (!this.state.isReviewing) {
                 const clickHandler = () => this.selectOption(index);
                 const keyHandler = (e) => {
@@ -463,7 +463,7 @@ const QuizManager = {
     },
 
     /**
-     * Butonları günceller - TAM HATASIZ
+     * Butonları günceller
      */
     updateButtons() {
         const prevBtn = document.getElementById('prevBtn');
@@ -690,7 +690,7 @@ const QuizManager = {
      */
     newQuiz() {
         try {
-            this.cleanupPreviousQuiz(); // ✅ Temizlik
+            this.cleanupPreviousQuiz();
             
             const resultsPage = document.getElementById('resultsPage');
             const quizPage = document.getElementById('quizPage');
@@ -743,7 +743,7 @@ const QuizManager = {
             const answeredCount = this.state.answers.filter(a => a !== null).length;
             const totalCount = this.state.questions.length;
 
-            this.cleanupPreviousQuiz(); // ✅ Temizlik
+            this.cleanupPreviousQuiz();
 
             if (window.StorageManager) {
                 StorageManager.clearQuizState();
@@ -790,7 +790,7 @@ const QuizManager = {
     },
 
     /**
-     * ✅ YENİ: Event listener'ları kur (sadece bir kez)
+     * Event listener'ları kur (sadece bir kez)
      */
     setupEventListeners() {
         if (this.state.eventListenersAttached) {
@@ -879,7 +879,7 @@ const QuizManager = {
     }
 };
 
-// ✅ Sadece bir kez event listener kur
+// Sadece bir kez event listener kur
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         QuizManager.setupEventListeners();
@@ -888,7 +888,7 @@ if (document.readyState === 'loading') {
     QuizManager.setupEventListeners();
 }
 
-// ✅ Sayfa kapanırken temizlik yap
+// Sayfa kapanırken temizlik yap
 window.addEventListener('beforeunload', () => {
     QuizManager.stopTimer();
 });
