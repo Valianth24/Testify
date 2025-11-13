@@ -31,7 +31,7 @@
   const on = (el, evt, cb) => el && el.addEventListener(evt, cb);
 
   // ═══════════════════════════════════════════════════════════════════════
-  // WELCOME MESSAGE - PROFESSIONAL
+  // WELCOME / HELP / EXAMPLES MESSAGES
   // ═══════════════════════════════════════════════════════════════════════
   
   const WELCOME_MESSAGE = `
@@ -260,6 +260,58 @@ Biyoloji hücre 20 soru
 `;
 
   // ═══════════════════════════════════════════════════════════════════════
+  // HELPERS: HTML ESCAPE & DOM RENDER
+  // ═══════════════════════════════════════════════════════════════════════
+
+  function escapeHTML(str) {
+    if (str == null) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  // Basit markdown → HTML: şu an sadece satır sonlarını koruyoruz
+  function renderContent(raw) {
+    const safe = escapeHTML(raw);
+    return safe.replace(/\n/g, '<br>');
+  }
+
+  // Core yoksa / addMessage yoksa kullanılacak fallback renderer
+  function renderMessageToDom(content, role) {
+    const chat = $('#aiChat');
+    if (!chat) {
+      console.error('aiChat container not found');
+      return;
+    }
+
+    const isUser = role === 'user' || role === 'human';
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'ai-message ' + (isUser ? 'ai-message--user' : 'ai-message--ai');
+
+    const bubble = document.createElement('div');
+    bubble.className = 'message-bubble message-bubble--' + (isUser ? 'user' : 'ai');
+
+    const body = document.createElement('div');
+    body.className = 'message-content';
+    body.innerHTML = renderContent(content);
+
+    bubble.appendChild(body);
+    wrapper.appendChild(bubble);
+    chat.appendChild(wrapper);
+
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function clearChatDom() {
+    const chat = $('#aiChat');
+    if (chat) chat.innerHTML = '';
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
   // CHAT HISTORY MANAGEMENT
   // ═══════════════════════════════════════════════════════════════════════
 
@@ -323,23 +375,26 @@ Biyoloji hücre 20 soru
     if (!text || !text.trim()) return;
     
     const core = window.TestifyAI;
-    if (!core || typeof core.addMessage !== 'function') {
-      console.error('TestifyAI core not found');
-      return;
+
+    // Önce core varsa onu kullan, yoksa DOM fallback
+    if (core && typeof core.addMessage === 'function') {
+      core.addMessage(text, 'user');
+    } else {
+      renderMessageToDom(text, 'user');
     }
 
-    core.addMessage(text, 'user');
     saveChatHistory('user', text);
   }
 
   function sendAIMessage(content, role = 'ai') {
     const core = window.TestifyAI;
-    if (!core || typeof core.addMessage !== 'function') {
-      console.error('TestifyAI core not found');
-      return;
+
+    if (core && typeof core.addMessage === 'function') {
+      core.addMessage(content, role);
+    } else {
+      renderMessageToDom(content, role);
     }
 
-    core.addMessage(content, role);
     saveChatHistory(role, content);
   }
 
@@ -349,8 +404,6 @@ Biyoloji hücre 20 soru
 
   function handleCommand(text) {
     const core = window.TestifyAI;
-    if (!core) return false;
-
     const trimmed = text.trim();
 
     // /yardim, /help
@@ -367,7 +420,7 @@ Biyoloji hücre 20 soru
 
     // /sistem
     if (/^\s*\/sistem\s*$/i.test(trimmed)) {
-      if (typeof core.systemCheck === 'function') {
+      if (core && typeof core.systemCheck === 'function') {
         const health = core.systemCheck();
         sendAIMessage(
           `## 🔧 Sistem Durumu\n\n` +
@@ -386,22 +439,24 @@ Biyoloji hücre 20 soru
 
     // /temizle
     if (/^\s*\/temizle\s*$/i.test(trimmed)) {
-      if (typeof core.clearChat === 'function') {
+      if (core && typeof core.clearChat === 'function') {
         core.clearChat();
-        clearChatHistory();
-        sendAIMessage(
-          `## 🧹 Sohbet Temizlendi\n\n` +
-          `Yeni başlangıç için hazırız!\n\n` +
-          `Ne öğrenmek istersiniz?`,
-          'ai'
-        );
+      } else {
+        clearChatDom();
       }
+      clearChatHistory();
+      sendAIMessage(
+        `## 🧹 Sohbet Temizlendi\n\n` +
+        `Yeni başlangıç için hazırız!\n\n` +
+        `Ne öğrenmek istersiniz?`,
+        'ai'
+      );
       return true;
     }
 
     // /arşiv
     if (/^\s*\/arşiv\s*$/i.test(trimmed)) {
-      if (typeof core.getArchive === 'function') {
+      if (core && typeof core.getArchive === 'function') {
         const archive = core.getArchive();
         if (archive.length === 0) {
           sendAIMessage(
@@ -419,6 +474,12 @@ Biyoloji hücre 20 soru
           });
           sendAIMessage(msg, 'ai');
         }
+      } else {
+        sendAIMessage(
+          `## 📚 Arşiv\n\n` +
+          `Bu özellik henüz aktif değil.`,
+          'ai'
+        );
       }
       return true;
     }
@@ -456,14 +517,16 @@ Biyoloji hücre 20 soru
     if (!core || typeof core.generateTestFromAI !== 'function') {
       sendAIMessage(
         `## ❌ Sistem Hatası\n\n` +
-        `Master Teacher AI modülü yüklenemedi.\n\n` +
-        `Lütfen sayfayı yenileyin.`,
+        `Master Teacher AI modülü yüklenemedi veya tanımlı değil.\n\n` +
+        `Lütfen sayfayı yenileyin veya daha sonra tekrar deneyin.`,
         'ai'
       );
+      console.error('TestifyAI core not found or generateTestFromAI missing');
       return;
     }
 
-    if (core.isGenerating) {
+    // isGenerating bir alan ise kontrol edelim
+    if (typeof core.isGenerating === 'boolean' && core.isGenerating) {
       sendAIMessage(
         `## ⏳ İşlem Devam Ediyor\n\n` +
         `Profesyonel içerik hazırlanıyor.\n` +
@@ -485,6 +548,104 @@ Biyoloji hücre 20 soru
         'ai'
       );
     }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // DRAG / TAŞIMA İŞLEVİ
+  // ═══════════════════════════════════════════════════════════════════════
+
+  function initChatDrag(widget, header) {
+    if (!widget || !header) return;
+
+    let isDragging = false;
+    let startX, startY;
+    let startRight, startBottom;
+
+    const startDrag = (clientX, clientY) => {
+      isDragging = true;
+
+      const styles = window.getComputedStyle(widget);
+      startRight = parseFloat(styles.right) || 0;
+      startBottom = parseFloat(styles.bottom) || 0;
+
+      startX = clientX;
+      startY = clientY;
+
+      widget.dataset.dragging = 'true';
+      const oldTransition = widget.style.transition;
+      widget.dataset.oldTransition = oldTransition;
+      widget.style.transition = 'none';
+    };
+
+    const onMouseDown = (e) => {
+      if (e.button !== 0) return;
+      e.preventDefault();
+      startDrag(e.clientX, e.clientY);
+
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+    };
+
+    const onMouseMove = (e) => {
+      if (!isDragging) return;
+
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+
+      widget.style.right = (startRight - dx) + 'px';
+      widget.style.bottom = (startBottom - dy) + 'px';
+    };
+
+    const onMouseUp = () => {
+      if (!isDragging) return;
+      isDragging = false;
+
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+
+      widget.style.transition = widget.dataset.oldTransition || '';
+      delete widget.dataset.dragging;
+      delete widget.dataset.oldTransition;
+    };
+
+    const onTouchStart = (e) => {
+      const touch = e.touches[0];
+      if (!touch) return;
+      e.preventDefault();
+      startDrag(touch.clientX, touch.clientY);
+
+      document.addEventListener('touchmove', onTouchMove, { passive: false });
+      document.addEventListener('touchend', onTouchEnd);
+      document.addEventListener('touchcancel', onTouchEnd);
+    };
+
+    const onTouchMove = (e) => {
+      if (!isDragging) return;
+      const touch = e.touches[0];
+      if (!touch) return;
+
+      const dx = touch.clientX - startX;
+      const dy = touch.clientY - startY;
+
+      widget.style.right = (startRight - dx) + 'px';
+      widget.style.bottom = (startBottom - dy) + 'px';
+    };
+
+    const onTouchEnd = () => {
+      if (!isDragging) return;
+      isDragging = false;
+
+      document.removeEventListener('touchmove', onTouchMove);
+      document.removeEventListener('touchend', onTouchEnd);
+      document.removeEventListener('touchcancel', onTouchEnd);
+
+      widget.style.transition = widget.dataset.oldTransition || '';
+      delete widget.dataset.dragging;
+      delete widget.dataset.oldTransition;
+    };
+
+    header.addEventListener('mousedown', onMouseDown);
+    header.addEventListener('touchstart', onTouchStart);
   }
 
   // ═══════════════════════════════════════════════════════════════════════
@@ -538,6 +699,10 @@ Biyoloji hücre 20 soru
       return;
     }
 
+    // Drag / taşıma
+    const header = widget.querySelector('.chat-header');
+    initChatDrag(widget, header);
+
     // Toggle
     on(toggleBtn, 'click', () => {
       widget.classList.add('chat-widget--open');
@@ -590,13 +755,22 @@ Biyoloji hücre 20 soru
       }, 500);
     }
 
-    // Load history
+    // Load history (son 20 mesaj)
     const history = loadChatHistory();
-    if (history.length > 0 && window.TestifyAI && window.TestifyAI.clearChat) {
-      window.TestifyAI.clearChat();
+    if (history.length > 0) {
+      const core = window.TestifyAI;
+      if (core && typeof core.clearChat === 'function') {
+        core.clearChat();
+      } else {
+        clearChatDom();
+      }
+
       history.slice(-20).forEach(msg => {
-        if (window.TestifyAI && window.TestifyAI.addMessage) {
-          window.TestifyAI.addMessage(msg.content, msg.role);
+        const c = window.TestifyAI;
+        if (c && typeof c.addMessage === 'function') {
+          c.addMessage(msg.content, msg.role);
+        } else {
+          renderMessageToDom(msg.content, msg.role);
         }
       });
     }
