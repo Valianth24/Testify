@@ -1,6 +1,6 @@
 /**
- * TESTIFY MAIN APPLICATION - TAM HATASIZ
- * Tüm özellikler çalışır hale getiren ana uygulama
+ * TESTIFY MAIN APPLICATION
+ * Dashboard, sekmeler, ayarlar, notlar, analiz vb.
  */
 
 'use strict';
@@ -18,30 +18,32 @@ const App = {
      */
     init() {
         console.log('🎓 Testify başlatılıyor...');
-        
+
         try {
             // Storage'ı kontrol et
             this.checkStorage();
-            
+
             // Kullanıcı verilerini yükle
             this.loadUserData();
-            
+
             // Tema yükle
             this.loadTheme();
-            
+
             // Event listener'ları ekle
             this.attachEventListeners();
-            
+
             // Dashboard'ı güncelle
             this.updateDashboard();
-            
+
             // Leaderboard'ı güncelle
             this.updateLeaderboard();
-            
+
             console.log('✅ Testify hazır!');
         } catch (error) {
             console.error('❌ Başlatma hatası:', error);
-            Utils.handleError(error, 'App.init');
+            if (window.Utils && Utils.handleError) {
+                Utils.handleError(error, 'App.init');
+            }
         }
     },
 
@@ -54,7 +56,9 @@ const App = {
             localStorage.setItem(test, test);
             localStorage.removeItem(test);
         } catch (e) {
-            Utils.showToast('LocalStorage kullanılamıyor! Veriler kaydedilmeyecek.', 'warning');
+            if (window.Utils && Utils.showToast) {
+                Utils.showToast('LocalStorage kullanılamıyor! Veriler kaydedilmeyecek.', 'warning');
+            }
             console.error('Storage hatası:', e);
         }
     },
@@ -64,19 +68,21 @@ const App = {
      */
     loadUserData() {
         try {
+            if (!window.StorageManager) return;
+
             const userData = StorageManager.getUserData();
-            
+
             // Header'daki bilgileri güncelle
             const userAvatar = document.getElementById('userAvatar');
             const streak = document.getElementById('streak');
             const totalPoints = document.getElementById('totalPoints');
             const rank = document.getElementById('rank');
-            
+
             if (userAvatar) {
                 const username = userData.username || 'U';
                 userAvatar.textContent = username.charAt(0).toUpperCase();
             }
-            
+
             if (streak) {
                 const streakText = window.t ? t('header.streak', 'Gün') : 'Gün';
                 const streakSpan = streak.querySelector('span[data-i18n="header.streak"]');
@@ -86,7 +92,7 @@ const App = {
                     streak.textContent = userData.stats.streak + ' ' + streakText;
                 }
             }
-            
+
             if (totalPoints) {
                 const xpText = window.t ? t('header.points', 'XP') : 'XP';
                 const xpSpan = totalPoints.querySelector('span[data-i18n="header.points"]');
@@ -96,13 +102,15 @@ const App = {
                     totalPoints.textContent = userData.stats.xp + ' ' + xpText;
                 }
             }
-            
+
             if (rank) {
                 rank.textContent = userData.stats.rank ? '#' + userData.stats.rank : '#--';
             }
         } catch (error) {
             console.error('Kullanıcı verisi yükleme hatası:', error);
-            Utils.handleError(error, 'loadUserData');
+            if (window.Utils && Utils.handleError) {
+                Utils.handleError(error, 'loadUserData');
+            }
         }
     },
 
@@ -114,20 +122,22 @@ const App = {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
+
             html.setAttribute('data-theme', newTheme);
-            
+
             const themeIcon = document.getElementById('themeIcon');
             if (themeIcon) {
                 themeIcon.textContent = newTheme === 'light' ? '☀️' : '🌙';
             }
-            
+
             const themeBtn = document.querySelector('.theme-toggle');
             if (themeBtn) {
                 themeBtn.setAttribute('aria-pressed', newTheme === 'dark');
             }
-            
-            Utils.setToStorage(Config.STORAGE_KEYS.THEME, newTheme);
+
+            if (window.Config && window.Utils) {
+                Utils.setToStorage(Config.STORAGE_KEYS.THEME, newTheme);
+            }
         }
     },
 
@@ -135,14 +145,20 @@ const App = {
      * Temayı yükler
      */
     loadTheme() {
-        const savedTheme = Utils.getFromStorage(Config.STORAGE_KEYS.THEME, 'light');
+        const defaultTheme = 'light';
+        let savedTheme = defaultTheme;
+
+        if (window.Config && window.Utils) {
+            savedTheme = Utils.getFromStorage(Config.STORAGE_KEYS.THEME, defaultTheme);
+        }
+
         document.documentElement.setAttribute('data-theme', savedTheme);
-        
+
         const themeIcon = document.getElementById('themeIcon');
         if (themeIcon) {
             themeIcon.textContent = savedTheme === 'light' ? '☀️' : '🌙';
         }
-        
+
         const themeBtn = document.querySelector('.theme-toggle');
         if (themeBtn) {
             themeBtn.setAttribute('aria-pressed', savedTheme === 'dark');
@@ -201,7 +217,7 @@ const App = {
     },
 
     /**
-     * ✅ DÜZELTME: Tab navigasyonu - Library kontrolü + sayfa/advert yenileme
+     * Tab navigasyonu
      */
     switchTab(tabName, options = {}) {
         try {
@@ -220,20 +236,16 @@ const App = {
                 content.classList.toggle('active', content.id === tabName);
             });
 
-            // ✅ Tab'a özel yüklemeler
-            switch(tabName) {
+            // Tab'a özel yüklemeler
+            switch (tabName) {
                 case 'library':
-                    // ✅ DÜZELTME: LibraryManager kontrolü
                     if (window.LibraryManager && typeof LibraryManager.loadLibrary === 'function') {
                         LibraryManager.loadLibrary();
                     } else {
                         console.warn('⚠️ LibraryManager henüz yüklenmedi');
-                        // Biraz bekleyip tekrar dene
                         setTimeout(() => {
-                            if (window.LibraryManager) {
+                            if (window.LibraryManager && LibraryManager.loadLibrary) {
                                 LibraryManager.loadLibrary();
-                            } else {
-                                console.error('❌ LibraryManager yüklenemedi');
                             }
                         }, 100);
                     }
@@ -268,7 +280,9 @@ const App = {
             }, 200);
         } catch (error) {
             console.error('Tab değiştirme hatası:', error);
-            Utils.handleError(error, 'switchTab');
+            if (window.Utils && Utils.handleError) {
+                Utils.handleError(error, 'switchTab');
+            }
             this.hideLoadingOverlay();
         }
     },
@@ -278,6 +292,8 @@ const App = {
      */
     updateDashboard() {
         try {
+            if (!window.StorageManager) return;
+
             const userData = StorageManager.getUserData();
             const stats = userData.stats;
 
@@ -288,16 +304,16 @@ const App = {
 
             if (totalTests) totalTests.textContent = stats.totalTests;
             if (totalQuestions) totalQuestions.textContent = stats.totalQuestions;
-            
+
             if (successRate) {
-                const rate = stats.totalQuestions > 0 
+                const rate = stats.totalQuestions > 0
                     ? Math.round((stats.correctAnswers / stats.totalQuestions) * 100)
                     : 0;
                 successRate.textContent = rate + '%';
             }
-            
+
             if (avgTime) {
-                const avg = stats.totalTests > 0 
+                const avg = stats.totalTests > 0
                     ? Math.round(stats.totalTime / stats.totalTests)
                     : 0;
                 avgTime.textContent = avg + 's';
@@ -307,7 +323,9 @@ const App = {
             this.updateActivityList();
         } catch (error) {
             console.error('Dashboard güncelleme hatası:', error);
-            Utils.handleError(error, 'updateDashboard');
+            if (window.Utils && Utils.handleError) {
+                Utils.handleError(error, 'updateDashboard');
+            }
         }
     },
 
@@ -316,16 +334,18 @@ const App = {
      */
     updateActivityList() {
         try {
+            if (!window.StorageManager) return;
+
             const activities = StorageManager.getActivities(5);
             const activityList = document.getElementById('activityList');
-            
+
             if (!activityList) return;
 
             if (activities.length === 0) {
-                const emptyText = window.t 
+                const emptyText = window.t
                     ? t('dashboard.empty', 'Henüz aktivite yok. Test çözerek başla!')
                     : 'Henüz aktivite yok. Test çözerek başla!';
-                
+
                 activityList.innerHTML = `
                     <div class="empty-state">
                         <div class="empty-state-icon">📊</div>
@@ -345,7 +365,7 @@ const App = {
                             </p>
                         </div>
                         <small style="color: var(--text-tertiary);">
-                            ${Utils.formatDate(activity.timestamp)}
+                            ${window.Utils ? Utils.formatDate(activity.timestamp) : ''}
                         </small>
                     </div>
                 </div>
@@ -373,7 +393,7 @@ const App = {
      * Aktivite açıklaması
      */
     getActivityDescription(activity) {
-        switch(activity.type) {
+        switch (activity.type) {
             case 'test_completed':
                 return `${activity.data.correctAnswers}/${activity.data.totalQuestions} doğru - %${activity.data.successRate} başarı`;
             case 'test_saved':
@@ -394,16 +414,18 @@ const App = {
      */
     updateLeaderboard() {
         try {
+            if (!window.StorageManager) return;
+
             const leaderboard = StorageManager.getLeaderboard(100);
             const tbody = document.getElementById('leaderboardBody');
-            
+
             if (!tbody) return;
 
             if (leaderboard.length === 0) {
-                const emptyText = window.t 
+                const emptyText = window.t
                     ? t('leaderboard.empty', 'Henüz veri bulunmuyor')
                     : 'Henüz veri bulunmuyor';
-                
+
                 tbody.innerHTML = `
                     <tr>
                         <td colspan="5" class="empty-cell">${emptyText}</td>
@@ -420,7 +442,7 @@ const App = {
                     <td>
                         <div class="user-info">
                             <div class="user-avatar-small">${user.username.charAt(0).toUpperCase()}</div>
-                            <span>${Utils.sanitizeHTML(user.username)}</span>
+                            <span>${window.Utils ? Utils.sanitizeHTML(user.username) : user.username}</span>
                         </div>
                     </td>
                     <td><strong>${user.xp} XP</strong></td>
@@ -430,7 +452,9 @@ const App = {
             `).join('');
         } catch (error) {
             console.error('Leaderboard güncelleme hatası:', error);
-            Utils.handleError(error, 'updateLeaderboard');
+            if (window.Utils && Utils.handleError) {
+                Utils.handleError(error, 'updateLeaderboard');
+            }
         }
     },
 
@@ -449,16 +473,18 @@ const App = {
      */
     updateNotes() {
         try {
+            if (!window.StorageManager) return;
+
             const notes = StorageManager.getNotes();
             const notesList = document.getElementById('notesList');
-            
+
             if (!notesList) return;
 
             if (notes.length === 0) {
-                const emptyText = window.t 
+                const emptyText = window.t
                     ? t('notes.empty', 'Henüz not eklemedin')
                     : 'Henüz not eklemedin';
-                
+
                 notesList.innerHTML = `
                     <div class="empty-state">
                         <div class="empty-state-icon">📚</div>
@@ -471,13 +497,13 @@ const App = {
             notesList.innerHTML = notes.map(note => {
                 const editText = window.t ? t('notes.edit', 'Düzenle') : 'Düzenle';
                 const deleteText = window.t ? t('notes.delete', 'Sil') : 'Sil';
-                
+
                 return `
                     <div class="note-card">
-                        <h3 class="note-title">${Utils.sanitizeHTML(note.title || 'Başlıksız Not')}</h3>
-                        <p class="note-content">${Utils.sanitizeHTML(note.content || '')}</p>
+                        <h3 class="note-title">${window.Utils ? Utils.sanitizeHTML(note.title || 'Başlıksız Not') : (note.title || 'Başlıksız Not')}</h3>
+                        <p class="note-content">${window.Utils ? Utils.sanitizeHTML(note.content || '') : (note.content || '')}</p>
                         <div class="note-meta">
-                            <span>${Utils.formatDate(note.createdAt)}</span>
+                            <span>${window.Utils ? Utils.formatDate(note.createdAt) : ''}</span>
                             <div>
                                 <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.85rem;" onclick="App.editNote('${note.id}')">
                                     ${editText}
@@ -492,7 +518,9 @@ const App = {
             }).join('');
         } catch (error) {
             console.error('Notlar güncelleme hatası:', error);
-            Utils.handleError(error, 'updateNotes');
+            if (window.Utils && Utils.handleError) {
+                Utils.handleError(error, 'updateNotes');
+            }
         }
     },
 
@@ -501,9 +529,11 @@ const App = {
      */
     async addNote() {
         try {
+            if (!window.StorageManager) return;
+
             const titlePrompt = window.t ? t('notes.titlePrompt', 'Not Başlığı:') : 'Not Başlığı:';
             const contentPrompt = window.t ? t('notes.contentPrompt', 'Not İçeriği:') : 'Not İçeriği:';
-            
+
             const title = prompt(titlePrompt);
             if (!title) return;
 
@@ -520,7 +550,9 @@ const App = {
             }
         } catch (error) {
             console.error('Not ekleme hatası:', error);
-            Utils.handleError(error, 'addNote');
+            if (window.Utils && Utils.handleError) {
+                Utils.handleError(error, 'addNote');
+            }
         }
     },
 
@@ -529,14 +561,16 @@ const App = {
      */
     async editNote(noteId) {
         try {
+            if (!window.StorageManager) return;
+
             const notes = StorageManager.getNotes();
             const note = notes.find(n => n.id === noteId);
-            
+
             if (!note) return;
 
             const titlePrompt = window.t ? t('notes.titlePrompt', 'Not Başlığı:') : 'Not Başlığı:';
             const contentPrompt = window.t ? t('notes.contentPrompt', 'Not İçeriği:') : 'Not İçeriği:';
-            
+
             const title = prompt(titlePrompt, note.title);
             if (title === null) return;
 
@@ -551,7 +585,9 @@ const App = {
             }
         } catch (error) {
             console.error('Not düzenleme hatası:', error);
-            Utils.handleError(error, 'editNote');
+            if (window.Utils && Utils.handleError) {
+                Utils.handleError(error, 'editNote');
+            }
         }
     },
 
@@ -560,18 +596,22 @@ const App = {
      */
     async deleteNote(noteId) {
         try {
-            const confirmMsg = window.t 
+            if (!window.StorageManager) return;
+
+            const confirmMsg = window.t
                 ? t('notes.deleteConfirm', 'Bu notu silmek istediğinizden emin misiniz?')
                 : 'Bu notu silmek istediğinizden emin misiniz?';
-            
-            const confirmed = await Utils.confirm(confirmMsg);
-            
+
+            const confirmed = await (window.Utils && Utils.confirm ? Utils.confirm(confirmMsg) : Promise.resolve(confirm(confirmMsg)));
+
             if (confirmed && StorageManager.deleteNote(noteId)) {
                 this.updateNotes();
             }
         } catch (error) {
             console.error('Not silme hatası:', error);
-            Utils.handleError(error, 'deleteNote');
+            if (window.Utils && Utils.handleError) {
+                Utils.handleError(error, 'deleteNote');
+            }
         }
     },
 
@@ -580,17 +620,19 @@ const App = {
      */
     updateAnalysis() {
         try {
+            if (!window.StorageManager) return;
+
             const userData = StorageManager.getUserData();
             const stats = userData.stats;
             const analysisContent = document.getElementById('analysisContent');
-            
+
             if (!analysisContent) return;
 
             if (stats.totalTests === 0) {
-                const emptyText = window.t 
+                const emptyText = window.t
                     ? t('analysis.empty', 'Analiz için daha fazla test çöz')
                     : 'Analiz için daha fazla test çöz';
-                
+
                 analysisContent.innerHTML = `
                     <div class="empty-state">
                         <div class="empty-state-icon">📈</div>
@@ -618,7 +660,7 @@ const App = {
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon">⏱️</div>
-                        <div class="stat-value">${Utils.formatTime(avgTime)}</div>
+                        <div class="stat-value">${window.Utils ? Utils.formatTime(avgTime) : avgTime + 's'}</div>
                         <div class="stat-label">${avgTimeText}</div>
                     </div>
                     <div class="stat-card">
@@ -641,12 +683,14 @@ const App = {
             `;
         } catch (error) {
             console.error('Analiz güncelleme hatası:', error);
-            Utils.handleError(error, 'updateAnalysis');
+            if (window.Utils && Utils.handleError) {
+                Utils.handleError(error, 'updateAnalysis');
+            }
         }
     },
 
     /**
-     * Performans metni (TR/EN)
+     * Performans metni
      */
     getPerformanceText(successRate) {
         const lang =
@@ -680,17 +724,19 @@ const App = {
     },
 
     /**
-     * ✅ DÜZELTME: Ayarları kaydeder - Validation ile
+     * Ayarları kaydeder - Validation ile
      */
     saveSettings(event) {
         event.preventDefault();
 
         try {
+            if (!window.StorageManager || !window.Utils) return;
+
             const form = event.target;
             const usernameInput = form.username;
             const emailInput = form.email;
 
-            // ✅ Validation
+            // Validation
             const isUsernameValid = Utils.validateInput(usernameInput, 'username');
             const isEmailValid = Utils.validateInput(emailInput, 'email');
 
@@ -726,7 +772,9 @@ const App = {
             }
         } catch (error) {
             console.error('Ayar kaydetme hatası:', error);
-            Utils.handleError(error, 'saveSettings');
+            if (window.Utils && Utils.handleError) {
+                Utils.handleError(error, 'saveSettings');
+            }
         }
     },
 
@@ -735,16 +783,17 @@ const App = {
      */
     async resetSettings() {
         try {
-            const confirmMsg = window.t 
+            if (!window.StorageManager || !window.Utils) return;
+
+            const confirmMsg = window.t
                 ? t('settings.resetConfirm', 'Ayarlar varsayılan değerlere dönecek. Emin misiniz?')
                 : 'Ayarlar varsayılan değerlere dönecek. Emin misiniz?';
-            
+
             const confirmed = await Utils.confirm(confirmMsg);
-            
             if (!confirmed) return;
 
             const userData = StorageManager.getUserData();
-            document.getElementById('username').value = userData.username;
+            document.getElementById('username').value = userData.username || '';
             document.getElementById('email').value = userData.email || '';
             document.getElementById('emailNotif').checked = true;
             document.getElementById('pushNotif').checked = false;
@@ -753,15 +802,19 @@ const App = {
             Utils.showToast(infoMsg, 'info');
         } catch (error) {
             console.error('Ayar sıfırlama hatası:', error);
-            Utils.handleError(error, 'resetSettings');
+            if (window.Utils && Utils.handleError) {
+                Utils.handleError(error, 'resetSettings');
+            }
         }
     },
 
     /**
-     * ✅ DÜZELTME: Dosya yükleme - Validation ile
+     * Dosya yükleme - Validation ile
      */
     handleFileUpload(event) {
         try {
+            if (!window.Config || !window.Utils) return;
+
             const file = event.target.files[0];
             if (!file) return;
 
@@ -805,7 +858,9 @@ const App = {
             Utils.showToast(successMsg, 'success');
         } catch (error) {
             console.error('Dosya yükleme hatası:', error);
-            Utils.handleError(error, 'handleFileUpload');
+            if (window.Utils && Utils.handleError) {
+                Utils.handleError(error, 'handleFileUpload');
+            }
         }
     },
 
@@ -848,10 +903,6 @@ const App = {
                 });
             }
 
-            // Test oluşturma formu submit'i js/testify-ai.js içindeki
-            // TestifyAI entegrasyonu tarafından yönetilecek.
-            // Burada ekstra submit handler eklemiyoruz.
-
             // Not ekleme butonu
             const addNoteBtn = document.getElementById('addNoteBtn');
             if (addNoteBtn) {
@@ -864,7 +915,9 @@ const App = {
             console.log('✅ Event listener\'lar eklendi');
         } catch (error) {
             console.error('Event listener hatası:', error);
-            Utils.handleError(error, 'attachEventListeners');
+            if (window.Utils && Utils.handleError) {
+                Utils.handleError(error, 'attachEventListeners');
+            }
         }
     }
 };
@@ -874,7 +927,7 @@ document.addEventListener('DOMContentLoaded', () => {
     App.init();
     App.handleInitialTabFromHash();
 
-    // TestifyAI'yi başlat (v10 override)
+    // TestifyAI'yi başlat
     try {
         if (typeof TestifyAI !== 'undefined' && TestifyAI && typeof TestifyAI.init === 'function') {
             TestifyAI.init();
@@ -904,15 +957,15 @@ window.addEventListener('popstate', (event) => {
     }
 });
 
-// Eski örnekteki gibi kullanmak istersen: SPA içinde sekme değiştirme helper'ı
-window.navigateTo = function(tabName) {
+// SPA içinde sekme değiştirme helper'ı
+window.navigateTo = function (tabName) {
     if (!tabName) return;
     if (!document.getElementById(tabName)) return;
     App.switchTab(tabName);
 };
 
 // Basit oturum takibi (isteğe bağlı log)
-(function() {
+(function () {
     const sessionStart = Date.now();
     window.addEventListener('beforeunload', () => {
         const duration = Math.round((Date.now() - sessionStart) / 1000);
