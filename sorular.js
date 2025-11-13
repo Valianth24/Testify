@@ -1,1637 +1,940 @@
-
 window.questionBank = [
-    // HAFTA 1: Windows, Mac OS, Linux/Pardus, Mobil, Genel Kavramlar
+    // HAFTA 1: Ofis Yazılımlarına Giriş
     { 
-        q: "Bilgisayarda yapmak istediğimiz işleri donanıma tercüme eden bileşen nedir?", 
+        q: "Ofis yazılımları genel olarak hangi amaçla kullanılır?", 
         t: "mcq", 
-        o: ["İşletim Sistemi", "BIOS", "Donanım Sürücüsü", "Uygulama Yazılımı"],
-        a: "İşletim Sistemi",
+        o: [
+            "Günlük ofis işleri için belge, tablo ve sunum hazırlamak",
+            "Yalnızca işletim sistemini kurmak",
+            "Bilgisayar donanımını test etmek",
+            "Sadece bilgisayar oyunları oynamak"
+        ],
+        a: "Günlük ofis işleri için belge, tablo ve sunum hazırlamak",
         difficulty: "easy",
         week: 1,
-        topic: "Genel Kavramlar",
+        topic: "Ofis Yazılımlarına Giriş",
         importance: "high",
-        explanation: "İşletim sistemi, kullanıcı ile donanım arasındaki köprüdür. Kullanıcının komutlarını donanımın anlayacağı şekilde çevirir."
+        explanation: "Ofis denince aklına hemen Word-Excel-PowerPoint üçlüsü gelsin. Hepsinin ortak amacı belge, tablo ve sunumla iş üretmektir."
     },
     { 
-        q: "İşletim sistemi bilgisayarın neye benzetilebilir?", 
+        q: "Aşağıdakilerden hangisi bir ofis paketinin temel bileşenlerinden BİRİ DEĞİLDİR?", 
         t: "mcq", 
-        o: ["Trafik Polisi", "Motor", "Yakıt", "Tekerlek"],
-        a: "Trafik Polisi",
+        o: [
+            "Kelime işlemci",
+            "Elektronik tablo (hesap tablosu)",
+            "Sunum programı",
+            "Antivirüs yazılımı"
+        ],
+        a: "Antivirüs yazılımı",
         difficulty: "easy",
         week: 1,
-        topic: "Genel Kavramlar",
+        topic: "Ofis Yazılımlarına Giriş",
         importance: "high",
-        explanation: "İşletim sistemi, tüm sistem kaynaklarını koordine eder ve trafiği yönetir, tıpkı bir trafik polisi gibi."
+        explanation: "Kelime işlemci, tablo ve sunum ofis paketinin çekirdeğidir. Antivirüs güvenlik yazılımıdır, ofis paketi bileşeni değildir."
     },
     { 
-        q: "İşletim sistemlerinin temel amaçlarından biri bilgisayarın kullanıcılar tarafından kolay kullanılmasını sağlamaktır.", 
+        q: "Microsoft Word hangi tür ofis yazılımına örnektir?", 
         t: "mcq", 
-        o: ["Doğru", "Yanlış", "Kısmen Doğru", "Belirsiz"], 
-        a: "Doğru",
+        o: [
+            "Kelime işlemci",
+            "Hesap tablosu",
+            "Sunum yazılımı",
+            "Veritabanı yazılımı"
+        ],
+        a: "Kelime işlemci",
         difficulty: "easy",
         week: 1,
-        topic: "Genel Kavramlar",
+        topic: "Ofis Yazılımlarına Giriş",
+        importance: "high",
+        explanation: "Word = Word kelimesi = Kelime. İpucu: Adının içinde zaten 'word' (kelime) geçiyor."
+    },
+    { 
+        q: "Microsoft Excel'in temel kullanım amacı aşağıdakilerden hangisidir?", 
+        t: "mcq", 
+        o: [
+            "Metin biçimlendirmek ve mektup yazmak",
+            "Tablo ve hesaplamalar yapmak",
+            "Sunum slaytları hazırlamak",
+            "E-posta göndermek"
+        ],
+        a: "Tablo ve hesaplamalar yapmak",
+        difficulty: "easy",
+        week: 1,
+        topic: "Ofis Yazılımlarına Giriş",
+        importance: "high",
+        explanation: "Excel = Tablo + Formül. Hücrelerle ve sayılarla uğraşıyorsan bu iş Excel'indir."
+    },
+    { 
+        q: "PowerPoint aşağıdaki işlerin hangisi için en uygun araçtır?", 
+        t: "mcq", 
+        o: [
+            "Slayt tabanlı sunumlar hazırlamak",
+            "Veritabanı tasarlamak",
+            "Donanım sürücüleri kurmak",
+            "İnternete bağlanmak"
+        ],
+        a: "Slayt tabanlı sunumlar hazırlamak",
+        difficulty: "easy",
+        week: 1,
+        topic: "Ofis Yazılımlarına Giriş",
+        importance: "high",
+        explanation: "PowerPoint = 'Powerful Point' gibi düşün, güçlü sunum noktaları. Slayt denince aklına PowerPoint gelsin."
+    },
+    { 
+        q: "Aşağıdakilerden hangisi Google Workspace paketine ait bir bileşendir?", 
+        t: "mcq", 
+        o: [
+            "Google Docs",
+            "Safari",
+            "Discord",
+            "Paint"
+        ],
+        a: "Google Docs",
+        difficulty: "easy",
+        week: 1,
+        topic: "Bulut Ofis",
         importance: "medium",
-        explanation: "İşletim sisteminin temel amaçlarından ilki, bilgisayarın kolay kullanılmasını sağlamaktır."
+        explanation: "Google Docs, Word'ün bulut kardeşi gibidir. Safari tarayıcıdır, Discord sohbet, Paint çizim programıdır."
     },
     { 
-        q: "İşletim sistemlerinin temel amaçlarından biri donanım kaynaklarının verimli bir şekilde kullanılmasını sağlamaktır.", 
+        q: "Bulut tabanlı ofis yazılımlarının (örneğin Google Workspace) önemli bir avantajı aşağıdakilerden hangisidir?", 
         t: "mcq", 
-        o: ["Doğru", "Yanlış", "Sadece Windows'ta", "Sadece Linux'ta"], 
-        a: "Doğru",
+        o: [
+            "Dosyalara sadece tek bir bilgisayardan erişilebilmesi",
+            "Her yerden, internet olan her cihazdan erişim sağlanabilmesi",
+            "İnternet olmasa da tüm dosyaların otomatik güncellenmesi",
+            "Yalnızca çevrimdışı çalışma imkânı sunması"
+        ],
+        a: "Her yerden, internet olan her cihazdan erişim sağlanabilmesi",
+        difficulty: "medium",
+        week: 1,
+        topic: "Bulut Ofis",
+        importance: "high",
+        explanation: "Bulut = İnternet. Ezber: 'Bulutta dosyan varsa, internet olan her yer senin ofisin.'"
+    },
+    { 
+        q: "Ofis yazılımı seçerken aşağıdakilerden hangisine bakmak GEREKMEZ?", 
+        t: "mcq", 
+        o: [
+            "Lisans maliyeti ve bütçe",
+            "Kullanım amacı (metin, hesaplama, sunum vb.)",
+            "İşletim sistemi ile uyumluluk",
+            "Bilgisayar kasasının rengi"
+        ],
+        a: "Bilgisayar kasasının rengi",
         difficulty: "easy",
         week: 1,
-        topic: "Genel Kavramlar",
-        importance: "high",
-        explanation: "İşletim sisteminin temel amaçlarından ikincisi, donanım kaynaklarının verimli kullanılmasını sağlamaktır."
+        topic: "Ofis Yazılımlarına Giriş",
+        importance: "medium",
+        explanation: "Seçimde; amaç, uyum ve fiyat önemlidir. Kasanın rengi tamamen gereksiz detaydır."
     },
     { 
-        q: "Bir bilgisayar sistemi genel olarak dört temel bileşenden oluşur. Bunlardan biri değildir?", 
+        q: "Aşağıdakilerden hangisi Microsoft Office paketine ait BİR program değildir?", 
         t: "mcq", 
-        o: ["Kullanıcılar", "Uygulamalar/Programlar", "Donanım Aygıtları", "Ağ Yönlendiricileri"], 
-        a: "Ağ Yönlendiricileri",
+        o: [
+            "Word",
+            "Excel",
+            "PowerPoint",
+            "Photoshop"
+        ],
+        a: "Photoshop",
         difficulty: "medium",
         week: 1,
-        topic: "Genel Kavramlar",
-        importance: "high",
-        explanation: "Dört temel bileşen: Kullanıcılar, Uygulamalar/Programlar, İşletim Sistemi ve Donanım Aygıtlarıdır."
+        topic: "Ofis Yazılımlarına Giriş",
+        importance: "medium",
+        explanation: "Photoshop, Adobe firmasına aittir ve görüntü düzenleme programıdır; Office paketinde yer almaz."
     },
     { 
-        q: "Kelime işlemci veya hesap makinası gibi yazılımlar, bir bilgisayar sisteminin hangi temel bileşenine örnektir?", 
+        q: "LibreOffice gibi ofis yazılımlarının ortak özelliği nedir?", 
         t: "mcq", 
-        o: ["Uygulamalar/Programlar", "İşletim Sistemi", "Donanım", "Sürücüler"],
-        a: "Uygulamalar/Programlar",
+        o: [
+            "Tamamen donanım sürücüsü olmaları",
+            "Açık kaynaklı ve genellikle ücretsiz olmaları",
+            "Sadece Mac bilgisayarlarda çalışmaları",
+            "Sadece internet tarayıcısı içinde çalışmaları"
+        ],
+        a: "Açık kaynaklı ve genellikle ücretsiz olmaları",
+        difficulty: "medium",
+        week: 1,
+        topic: "Ofis Yazılımlarına Giriş",
+        importance: "medium",
+        explanation: "LibreOffice gibi paketler açık kaynaklıdır. Ezber: 'Libre' özgür demek; özgür = açık kaynak."
+    },
+
+    // HAFTA 2: Word Arayüz & Temel İşlemler
+    { 
+        q: "Word ile hazırlanmış dosyaların yeni sürümlerdeki varsayılan dosya uzantısı aşağıdakilerden hangisidir?", 
+        t: "mcq", 
+        o: [
+            ".docx",
+            ".xlsx",
+            ".pptx",
+            ".txt"
+        ],
+        a: ".docx",
         difficulty: "easy",
-        week: 1,
-        topic: "Genel Kavramlar",
-        importance: "medium",
-        explanation: "Kelime işlemci ve hesap makinası gibi yazılımlar, Uygulamalar/Programlar bileşenine örnektir."
+        week: 2,
+        topic: "Word Temel",
+        importance: "high",
+        explanation: "Word: .docx, Excel: .xlsx, PowerPoint: .pptx. Ezber: W–D, E–X, P–P harf eşleşmelerini hatırla."
     },
     { 
-        q: "İşletim sistemi olmadan bilgisayar sadece bir donanım yığınıdır.", 
+        q: "Word penceresinin üst kısmında sekmelerin (Giriş, Ekle, Düzen/Sayfa Düzeni vb.) ve komut düğmelerinin bulunduğu bölüme ne ad verilir?", 
         t: "mcq", 
-        o: ["Doğru", "Yanlış", "Kısmen Doğru", "Sadece eski bilgisayarlarda doğru"], 
-        a: "Doğru",
+        o: [
+            "Şerit (Ribbon)",
+            "Durum çubuğu",
+            "Başlık çubuğu",
+            "Gezinti bölmesi"
+        ],
+        a: "Şerit (Ribbon)",
         difficulty: "easy",
-        week: 1,
-        topic: "Genel Kavramlar",
-        importance: "medium",
-        explanation: "İşletim sistemi olmadan bilgisayar, hiçbir işlev gösteremeyen bir donanım yığınından ibarettir."
+        week: 2,
+        topic: "Word Arayüz",
+        importance: "high",
+        explanation: "Şerit, komutların kaydırıldığı renkli yol gibi düşünebilirsin. Tüm butonlar bu şeritte durur."
     },
     { 
-        q: "Microsoft firması tarafından geliştirilen işletim sistemi hangisidir?", 
+        q: "Sık kullanılan komutların (Kaydet, Geri Al vb.) küçük simgeler hâlinde yer aldığı ve kişiselleştirilebilen çubuk aşağıdakilerden hangisidir?", 
         t: "mcq", 
-        o: ["Windows", "Mac OS", "Linux", "Unix"],
-        a: "Windows",
+        o: [
+            "Hızlı Erişim Araç Çubuğu",
+            "Görev Çubuğu",
+            "Durum Çubuğu",
+            "Gezinti Çubuğu"
+        ],
+        a: "Hızlı Erişim Araç Çubuğu",
+        difficulty: "medium",
+        week: 2,
+        topic: "Word Arayüz",
+        importance: "medium",
+        explanation: "En çok kullandığın tuşları buraya sabitlersin. Ezber: Hızlı iş = Hızlı Erişim çubuğu."
+    },
+    { 
+        q: "Yeni boş bir Word belgesi oluşturmak için kullanılan kısayol aşağıdakilerden hangisidir?", 
+        t: "mcq", 
+        o: [
+            "CTRL + N",
+            "CTRL + O",
+            "CTRL + S",
+            "CTRL + P"
+        ],
+        a: "CTRL + N",
         difficulty: "easy",
-        week: 1,
-        topic: "Windows",
-        importance: "low"
+        week: 2,
+        topic: "Klavye Kısayolları",
+        importance: "high",
+        explanation: "N = New (Yeni). Ezber: N harfi, new kelimesinin baş harfi; yeni belge demek."
     },
     { 
-        q: "Apple firması tarafından geliştirilen işletim sistemi hangisidir?", 
+        q: "Var olan bir Word belgesini açmak için kullanılan klavye kısayolu hangisidir?", 
         t: "mcq", 
-        o: ["Mac OS", "Windows", "Linux", "Android"],
-        a: "Mac OS",
+        o: [
+            "CTRL + O",
+            "CTRL + A",
+            "CTRL + F",
+            "CTRL + W"
+        ],
+        a: "CTRL + O",
         difficulty: "easy",
-        week: 1,
-        topic: "Mac OS",
-        importance: "low"
+        week: 2,
+        topic: "Klavye Kısayolları",
+        importance: "high",
+        explanation: "O = Open (Aç). Ezberle: 'O' harfi 'open' kelimesini hatırlatsın."
     },
     { 
-        q: "Windows'ta işletim sistemini ilk çalıştırdığımızda karşımıza gelen ekrana ne denir?", 
+        q: "Word belgesini kaydetmek için kullanılan kısayol aşağıdakilerden hangisidir?", 
         t: "mcq", 
-        o: ["Masaüstü", "Başlat Menüsü", "Görev Çubuğu", "Kontrol Paneli"],
-        a: "Masaüstü",
+        o: [
+            "CTRL + S",
+            "CTRL + C",
+            "CTRL + X",
+            "CTRL + V"
+        ],
+        a: "CTRL + S",
         difficulty: "easy",
-        week: 1,
-        topic: "Windows",
+        week: 2,
+        topic: "Klavye Kısayolları",
         importance: "high",
-        explanation: "İşletim sistemini ilk çalıştırdığımızda karşımıza gelen ekrana 'Masaüstü' denir."
+        explanation: "S = Save (Kaydet). Ezber: 'Kaydet' deyince S harfini düşün."
     },
     { 
-        q: "Windows Masaüstünün temel bileşenleri nelerdir?", 
+        q: "Belgedeki TÜM içeriği hızlıca seçmek için hangi kısayol kullanılır?", 
         t: "mcq", 
-        o: ["Görev çubuğu, Başlat menüsü, Hızlı erişim menüleri", "Sadece Başlat menüsü", "Sadece simgeler", "Sadece duvar kağıdı"],
-        a: "Görev çubuğu, Başlat menüsü, Hızlı erişim menüleri",
-        difficulty: "medium",
-        week: 1,
-        topic: "Windows",
-        importance: "medium",
-        explanation: "Masaüstünün temel bileşenleri: görev çubuğu, başlat menüsü ve hızlı erişim menüleridir."
-    },
-    { 
-        q: "Hangi işletim sisteminde Başlat Menüsü, o sisteme özel bir öge olarak belirtilmiştir?", 
-        t: "mcq", 
-        o: ["Windows", "Mac OS", "Linux", "Unix"],
-        a: "Windows",
-        difficulty: "medium",
-        week: 1,
-        topic: "Windows",
-        importance: "high",
-        explanation: "Başlat menüsü Microsoft Windows'a özel bir ögedir."
-    },
-    { 
-        q: "Windows'ta bir dosyayı aynı sürücü altındaki başka bir klasöre 'sürükleyip bırakmak' ne anlama gelir?", 
-        t: "mcq", 
-        o: ["Dosya bulunduğu yerden silinip yeni konuma yerleştirilir", "Dosya kopyalanır, eski konumunda kalır", "İşlem hata verir", "Dosya kısayolu oluşturulur"], 
-        a: "Dosya bulunduğu yerden silinip yeni konuma yerleştirilir",
-        difficulty: "hard",
-        week: 1,
-        topic: "Windows",
-        importance: "medium",
-        explanation: "Aynı sürücü içinde sürükle-bırak işlemi yapıldığında dosya taşınır (eski konumdan silinir)."
-    },
-    { 
-        q: "Windows'ta bir dosyayı farklı bir sürücüdeki bir klasöre 'sürükleyip bırakmak' ne anlama gelir?", 
-        t: "mcq", 
-        o: ["Dosya kopyalanır, eski konumunda kalır", "Dosya bulunduğu yerden silinip yeni konuma yerleştirilir", "İşlem hata verir", "Dosyanın sahipliği değiştirilir"], 
-        a: "Dosya kopyalanır, eski konumunda kalır",
-        difficulty: "hard",
-        week: 1,
-        topic: "Windows",
-        importance: "medium",
-        explanation: "Farklı sürücüler arasında sürükle-bırak işlemi yapıldığında dosya kopyalanır, orijinal dosya yerinde kalır."
-    },
-    { 
-        q: "Windows işletim sisteminde dosya ve klasörleri yönetmek için kullanılan araç nedir?", 
-        t: "mcq", 
-        o: ["Dosya Gezgini", "Kontrol Paneli", "Görev Yöneticisi", "Sistem Ayarları"],
-        a: "Dosya Gezgini",
+        o: [
+            "CTRL + A",
+            "CTRL + L",
+            "CTRL + E",
+            "CTRL + 1"
+        ],
+        a: "CTRL + A",
         difficulty: "easy",
-        week: 1,
-        topic: "Windows",
-        importance: "high",
-        explanation: "Windows'ta Dosya Gezgini (File Explorer), dosya ve klasörlerin yönetimi için kullanılır."
+        week: 2,
+        topic: "Klavye Kısayolları",
+        importance: "medium",
+        explanation: "A = All (Hepsi). Ezber: CTRL + A = Tümünü seç."
     },
     { 
-        q: "Mac OS masaüstünde, ekranın alt kısmında bulunan özelleştirilebilir uygulamalar alanına ne ad verilir?", 
+        q: "Belge içinde belirli bir kelimeyi aramak için kullanılan komut/kısayol aşağıdakilerden hangisidir?", 
         t: "mcq", 
-        o: ["Dock", "Taskbar", "Panel", "Launcher"],
-        a: "Dock",
+        o: [
+            "CTRL + F",
+            "CTRL + H",
+            "CTRL + G",
+            "CTRL + K"
+        ],
+        a: "CTRL + F",
         difficulty: "easy",
-        week: 1,
-        topic: "Mac OS",
+        week: 2,
+        topic: "Bul & Değiştir",
         importance: "high",
-        explanation: "Ekranın alt kısmında kullanıcı tarafından özelleştirilebilen uygulamalar alanına 'dock' denir."
+        explanation: "F = Find (Bul). Ezber: 'Find' kelimesini 'F' harfiyle bağdaştır."
     },
     { 
-        q: "Mac OS işletim sisteminin dosya gezginine verilen isim nedir?", 
+        q: "Belge içinde bir kelimeyi başka bir kelime ile toplu olarak değiştirmek için kullanılan komut/kısayol aşağıdakilerden hangisidir?", 
         t: "mcq", 
-        o: ["Finder", "Explorer", "Navigator", "Browser"],
-        a: "Finder",
+        o: [
+            "CTRL + H",
+            "CTRL + F",
+            "CTRL + Z",
+            "CTRL + Y"
+        ],
+        a: "CTRL + H",
         difficulty: "medium",
-        week: 1,
-        topic: "Mac OS",
+        week: 2,
+        topic: "Bul & Değiştir",
         importance: "high",
-        explanation: "Finder, Mac OS işletim sisteminin dosya gezginidir."
+        explanation: "H = Replace (bul-değiştir penceresinde 'Replace' sekmesi). Ezber: 'Harf değiştir' gibi düşün."
     },
     { 
-        q: "Mac OS'ta hangi menü bir nevi başlat menüsü görevi görür?", 
+        q: "Son yapılan işlemi geri almak için kullanılan kısayol aşağıdakilerden hangisidir?", 
         t: "mcq", 
-        o: ["Git Menüsü", "Dosya Menüsü", "Düzen Menüsü", "Görünüm Menüsü"],
-        a: "Git Menüsü",
-        difficulty: "medium",
-        week: 1,
-        topic: "Mac OS",
-        importance: "medium",
-        explanation: "Git menüsü, Mac OS'ta bir nevi başlat menüsü görevi görür."
-    },
-    { 
-        q: "Mac OS'ta bilgisayarı kapatmak için bulunan seçeneklerden biri değildir?", 
-        t: "mcq", 
-        o: ["Ağ Bağlantısını Kes", "Uyu", "Yeniden Başla", "Sistemi Kapat"], 
-        a: "Ağ Bağlantısını Kes",
-        difficulty: "medium",
-        week: 1,
-        topic: "Mac OS",
-        importance: "medium",
-        explanation: "Mac OS'ta kapatma seçenekleri: Uyu, Yeniden Başla, Sistemi Kapat, Kullanıcı Oturumunu Kapat."
-    },
-    { 
-        q: "Linux en basit ifade ile nedir?", 
-        t: "mcq", 
-        o: ["Özgür bir işletim sistemi çekirdeğidir", "Bir uygulama programıdır", "Bir donanım bileşenidir", "Bir web tarayıcısıdır"],
-        a: "Özgür bir işletim sistemi çekirdeğidir",
-        difficulty: "medium",
-        week: 1,
-        topic: "Linux/Pardus",
-        importance: "high",
-        explanation: "Linux, en basit ifadeyle özgür bir işletim sistemi çekirdeğidir."
-    },
-    { 
-        q: "Linux çekirdeği üzerine geliştirilen işletim sistemlerine ne ad verilir?", 
-        t: "mcq", 
-        o: ["Linux Dağıtımları", "Linux Eklentileri", "Linux Modülleri", "Linux Paketleri"],
-        a: "Linux Dağıtımları",
-        difficulty: "medium",
-        week: 1,
-        topic: "Linux/Pardus",
-        importance: "medium",
-        explanation: "Linux çekirdeği üzerine geliştirilen işletim sistemlerine 'Linux dağıtımları' adı verilir."
-    },
-    { 
-        q: "Kaynak kodlarının herkes tarafından görülebiliyor, değiştirilebiliyor ve serbestçe dağıtılabiliyor olması, yazılımın hangi özelliğini ifade eder?", 
-        t: "mcq", 
-        o: ["Açık Kaynak Kodlu", "Kapalı Kaynak Kodlu", "Shareware", "Freeware"],
-        a: "Açık Kaynak Kodlu",
+        o: [
+            "CTRL + Z",
+            "CTRL + Y",
+            "CTRL + U",
+            "CTRL + B"
+        ],
+        a: "CTRL + Z",
         difficulty: "easy",
-        week: 1,
-        topic: "Linux/Pardus",
+        week: 2,
+        topic: "Klavye Kısayolları",
         importance: "high",
-        explanation: "Kaynak kodlarının görülebilir, değiştirilebilir ve dağıtılabilir olması, 'açık kaynak kodlu' yazılımların özelliğidir."
+        explanation: "Z'yi geri sarma oku gibi düşün. Bir hata yaptığında CTRL + Z ile geri alırsın."
     },
     { 
-        q: "Pardus işletim sistemi ilk kez çalıştırıldığında ekrana gelen bir kerelik çalışan yapılandırma yardımcısının adı nedir?", 
+        q: "Geri alınan bir işlemi yeniden uygulamak (yinelemek) için kullanılan kısayol aşağıdakilerden hangisidir?", 
         t: "mcq", 
-        o: ["Kaptan", "Yardımcı", "Rehber", "Kurulum"],
-        a: "Kaptan",
+        o: [
+            "CTRL + Y",
+            "CTRL + Z",
+            "CTRL + R",
+            "CTRL + T"
+        ],
+        a: "CTRL + Y",
         difficulty: "medium",
-        week: 1,
-        topic: "Linux/Pardus",
-        importance: "high",
-        explanation: "Pardus'ta ilk çalıştırmada 'Kaptan' isimli yapılandırma yardımcısı çalışır."
-    },
-    { 
-        q: "Pardus, hangi kurum bünyesinde geliştirilmeye başlanmıştır?", 
-        t: "mcq", 
-        o: ["TÜBİTAK", "ASELSAN", "ODTÜ", "Boğaziçi Üniversitesi"],
-        a: "TÜBİTAK",
-        difficulty: "medium",
-        week: 1,
-        topic: "Linux/Pardus",
+        week: 2,
+        topic: "Klavye Kısayolları",
         importance: "medium",
-        explanation: "Pardus, TÜBİTAK bünyesinde geliştirilen yerli ve milli işletim sistemidir."
+        explanation: "Y = Again (tekrar) gibi ezberleyebilirsin. CTRL + Y geri aldığını geri getirir."
     },
     { 
-        q: "Pardus'un ilk sürümü hangi yıl yayınlanmıştır?", 
+        q: "Word’de yazım ve dilbilgisi denetimi, hangi sekme altında bulunur?", 
         t: "mcq", 
-        o: ["2005", "2000", "2010", "2015"],
-        a: "2005",
+        o: [
+            "Gözden Geçir",
+            "Giriş",
+            "Ekle",
+            "Görünüm"
+        ],
+        a: "Gözden Geçir",
+        difficulty: "easy",
+        week: 2,
+        topic: "Yazım Denetimi",
+        importance: "high",
+        explanation: "Metni kontrol etmek = Gözden geçirmek. Ezber: Yazım hatalarını düzeltmek için 'Gözden Geçir'e git."
+    },
+
+    // HAFTA 3: Biçimlendirme & Paragraflar
+    { 
+        q: "Aşağıdakilerden hangisi karakter (yazı tipi) biçimlendirmesine örnektir?", 
+        t: "mcq", 
+        o: [
+            "Metni kalın (bold) yapmak",
+            "Paragrafı iki yana yaslamak",
+            "Satır aralığını 1,5 yapmak",
+            "Paragraf başına girinti vermek"
+        ],
+        a: "Metni kalın (bold) yapmak",
+        difficulty: "easy",
+        week: 3,
+        topic: "Biçimlendirme",
+        importance: "high",
+        explanation: "Karakter biçimlendirme, harfin görünüşünü değiştirir. Kalın, italik, altı çizili hep karakter düzeyindedir."
+    },
+    { 
+        q: "Aşağıdakilerden hangisi Word'de paragraf hizalama türlerinden BİRİ DEĞİLDİR?", 
+        t: "mcq", 
+        o: [
+            "Sola hizalı",
+            "Sağa hizalı",
+            "Ortalanmış",
+            "Yukarı hizalı"
+        ],
+        a: "Yukarı hizalı",
         difficulty: "medium",
-        week: 1,
-        topic: "Linux/Pardus",
+        week: 3,
+        topic: "Paragraf",
+        importance: "medium",
+        explanation: "Hizalama soldan-sağdan ve ortadan olur; yukarı-aşağı hizalama yoktur."
+    },
+    { 
+        q: "Metnin satırların hem sol hem sağ kenar boşluklarına düzgün şekilde yaslanmasına ne ad verilir?", 
+        t: "mcq", 
+        o: [
+            "İki yana yasla",
+            "Ortala",
+            "Sola hizala",
+            "Sağa hizala"
+        ],
+        a: "İki yana yasla",
+        difficulty: "easy",
+        week: 3,
+        topic: "Paragraf",
+        importance: "high",
+        explanation: "Gazete metinleri gibi düz kenarlı görünüm istiyorsan 'İki yana yasla' kullanılır."
+    },
+    { 
+        q: "Satır aralığını 1,5 satır yapmak için hangi sekmedeki ayarlar kullanılır?", 
+        t: "mcq", 
+        o: [
+            "Giriş > Paragraf",
+            "Ekle > Metin",
+            "Gözden Geçir > Dil",
+            "Görünüm > Yakınlaştır"
+        ],
+        a: "Giriş > Paragraf",
+        difficulty: "medium",
+        week: 3,
+        topic: "Paragraf",
+        importance: "medium",
+        explanation: "Satır aralığı, paragraf özelliklerindedir. Ezber: Paragrafla ilgili her şey 'Paragraf' grubunda."
+    },
+    { 
+        q: "Gövde metni için resmi bir Word belgesinde en çok kullanılan yazı tipi boyutu hangisidir?", 
+        t: "mcq", 
+        o: [
+            "11–12 punto",
+            "6–8 punto",
+            "18–20 punto",
+            "28–36 punto"
+        ],
+        a: "11–12 punto",
+        difficulty: "easy",
+        week: 3,
+        topic: "Biçimlendirme",
+        importance: "medium",
+        explanation: "Standart raporlar genelde 11 veya 12 punto ile yazılır. Ezber: 'Ders raporu = 12 punto'."
+    },
+    { 
+        q: "SHIFT + F3 kısayolu Word'de ne için kullanılır?", 
+        t: "mcq", 
+        o: [
+            "Seçili metnin büyük/küçük harf durumunu değiştirmek",
+            "Belgeyi kaydetmek",
+            "Bul ve değiştir penceresini açmak",
+            "Yazım denetimi yapmak"
+        ],
+        a: "Seçili metnin büyük/küçük harf durumunu değiştirmek",
+        difficulty: "medium",
+        week: 3,
+        topic: "Biçimlendirme",
+        importance: "high",
+        explanation: "Shift + F3 = Harf tipi değiştir. Küçük-büyük-baş harfli arasında döner."
+    },
+    { 
+        q: "Biçim Boyacısı (Format Painter) aracı aşağıdakilerden hangisini yapar?", 
+        t: "mcq", 
+        o: [
+            "Bir metnin biçimini kopyalayıp başka bir metne uygular",
+            "Belgedeki tüm biçimlendirmeyi temizler",
+            "Sadece yazı tipini değiştirir",
+            "Sadece renkleri değiştirir"
+        ],
+        a: "Bir metnin biçimini kopyalayıp başka bir metne uygular",
+        difficulty: "medium",
+        week: 3,
+        topic: "Biçimlendirme",
+        importance: "high",
+        explanation: "Fırça simgesi, boyayı (biçimi) taşır. Ezber: Metnin şeklini 'boyamak' için kullanılır."
+    },
+    { 
+        q: "Madde işaretli liste ile numaralı listenin temel farkı nedir?", 
+        t: "mcq", 
+        o: [
+            "Madde işaretli listede sıra önemli değildir, numaralı listede sıralama vurgulanır",
+            "Madde işaretli liste sadece sayısal değerler içerir",
+            "Numaralı listeye yeni eleman eklenemez",
+            "İkisi arasında hiçbir fark yoktur"
+        ],
+        a: "Madde işaretli listede sıra önemli değildir, numaralı listede sıralama vurgulanır",
+        difficulty: "easy",
+        week: 3,
+        topic: "Listeler",
+        importance: "medium",
+        explanation: "Sıralı adımlar için numaralı liste, sadece madde madde yazmak için madde işaretli liste kullanılır."
+    },
+    { 
+        q: "Bir paragrafta İLK SATIRIN kenar boşluğundan daha içeride başladığı girinti türü aşağıdakilerden hangisidir?", 
+        t: "mcq", 
+        o: [
+            "İlk satır girintisi",
+            "Asılı girinti",
+            "Sol girinti",
+            "Sağ girinti"
+        ],
+        a: "İlk satır girintisi",
+        difficulty: "medium",
+        week: 3,
+        topic: "Paragraf",
+        importance: "medium",
+        explanation: "Romanlardaki paragraf başı gibi düşün; ilk satır içerde başlar, buna ilk satır girintisi denir."
+    },
+    { 
+        q: "Bir paragrafta ilk satır kenar boşluğunda, diğer satırlar daha içerideyse bu hangi girinti türüdür?", 
+        t: "mcq", 
+        o: [
+            "Asılı girinti",
+            "İlk satır girintisi",
+            "Sol girinti",
+            "Negatif girinti"
+        ],
+        a: "Asılı girinti",
+        difficulty: "medium",
+        week: 3,
+        topic: "Paragraf",
+        importance: "medium",
+        explanation: "Asılı = İlk satır dışarıda, diğerleri asılmış gibi içeride. Kaynakça yazarken sık kullanılır."
+    },
+    { 
+        q: "Paragraflar arasında fazladan boşluk bırakmak için hangi ayar kullanılır?", 
+        t: "mcq", 
+        o: [
+            "Paragraf öncesi/sonrası boşluk",
+            "Satır aralığı",
+            "Yazı tipi boyutu",
+            "Kenar boşluğu"
+        ],
+        a: "Paragraf öncesi/sonrası boşluk",
+        difficulty: "medium",
+        week: 3,
+        topic: "Paragraf",
+        importance: "medium",
+        explanation: "Satır aralığı satırlar arasını, paragraf öncesi/sonrası ise paragraflar arasındaki mesafeyi belirler."
+    },
+    { 
+        q: "Aşağıdakilerden hangisi karakter biçimlendirme araçlarının bulunduğu sekme/bölümdür?", 
+        t: "mcq", 
+        o: [
+            "Giriş > Yazı Tipi",
+            "Ekle > Metin",
+            "Gözden Geçir > Dil",
+            "Görünüm > Pencere"
+        ],
+        a: "Giriş > Yazı Tipi",
+        difficulty: "easy",
+        week: 3,
+        topic: "Biçimlendirme",
+        importance: "high",
+        explanation: "Kalın, italik, altı çizili gibi temel biçimler Giriş sekmesindeki 'Yazı Tipi' grubunda yer alır."
+    },
+
+    // HAFTA 4: Stiller & Başlık Yapısı
+    { 
+        q: "Word'de 'stil' kavramı aşağıdakilerden hangisini ifade eder?", 
+        t: "mcq", 
+        o: [
+            "Bir metne ait yazı tipi, boyutu, rengi ve paragraf ayarlarının paket hâlinde kaydedilmiş hâli",
+            "Belgenin yazı tipini rastgele değiştiren özellik",
+            "Sadece renk ayarlarını içeren tablo",
+            "Yalnızca sayfa numaralandırma biçimi"
+        ],
+        a: "Bir metne ait yazı tipi, boyutu, rengi ve paragraf ayarlarının paket hâlinde kaydedilmiş hâli",
+        difficulty: "medium",
+        week: 4,
+        topic: "Stiller",
+        importance: "high",
+        explanation: "Stil = Hazır şablon. 'Tek tıkla aynı görünüm' için kullanılır; tek tek uğraşmayı kurtarır."
+    },
+    { 
+        q: "Başlık 1, Başlık 2, Başlık 3 stilleri birlikte ne için kullanılır?", 
+        t: "mcq", 
+        o: [
+            "Belgeye hiyerarşik (katmanlı) başlık yapısı kazandırmak",
+            "Sadece yazı tipini büyütmek için",
+            "Sadece sayfa numarası eklemek için",
+            "Sadece tablo başlıklarını renklendirmek için"
+        ],
+        a: "Belgeye hiyerarşik (katmanlı) başlık yapısı kazandırmak",
+        difficulty: "easy",
+        week: 4,
+        topic: "Stiller",
+        importance: "high",
+        explanation: "H1 ana başlık, H2 alt başlık, H3 ise daha alt seviye. Kitap içindekiler mantığıyla aynıdır."
+    },
+    { 
+        q: "Otomatik 'İçindekiler' tablosu oluşturmak için öncelikle ne yapılmış olmalıdır?", 
+        t: "mcq", 
+        o: [
+            "Başlıklar uygun Başlık stilleri ile biçimlendirilmiş olmalıdır",
+            "Sayfa numaraları tek tek yazılmış olmalıdır",
+            "Belge tamamen iki yana yaslanmış olmalıdır",
+            "Tüm metin tek bir stil ile biçimlendirilmiş olmalıdır"
+        ],
+        a: "Başlıklar uygun Başlık stilleri ile biçimlendirilmiş olmalıdır",
+        difficulty: "medium",
+        week: 4,
+        topic: "İçindekiler Tablosu",
+        importance: "high",
+        explanation: "Word, içindekileri başlık stillerini okuyarak çıkarır. Başlık stili yoksa otomatik tablo da yok."
+    },
+    { 
+        q: "'İçindekiler' tablosu hangi sekme üzerinden eklenir?", 
+        t: "mcq", 
+        o: [
+            "Başvurular",
+            "Giriş",
+            "Ekle",
+            "Görünüm"
+        ],
+        a: "Başvurular",
+        difficulty: "easy",
+        week: 4,
+        topic: "İçindekiler Tablosu",
+        importance: "high",
+        explanation: "Kaynakça, dipnot, alıntı ve içindekiler gibi akademik işler 'Başvurular' sekmesinde toplanmıştır."
+    },
+    { 
+        q: "Belgede yeni başlık eklediğinizde veya sayfa numaraları değiştiğinde 'İçindekiler' tablosunu güncellemek için ne yapılır?", 
+        t: "mcq", 
+        o: [
+            "İçindekiler tablosuna sağ tıklayıp 'Tabloyu Güncelle' komutu seçilir",
+            "Belgeyi yeniden kaydetmek yeterlidir",
+            "Yazım denetimi çalıştırılır",
+            "Tüm metin seçilip stil değiştirilir"
+        ],
+        a: "İçindekiler tablosuna sağ tıklayıp 'Tabloyu Güncelle' komutu seçilir",
+        difficulty: "medium",
+        week: 4,
+        topic: "İçindekiler Tablosu",
+        importance: "medium",
+        explanation: "İçindekiler tablosu canlıdır ama kendiliğinden yenilenmez; sağ tık ile güncellemek gerekir."
+    },
+    { 
+        q: "Stil kullanmanın aşağıdakilerden hangisi bir avantajıdır?", 
+        t: "mcq", 
+        o: [
+            "Belgenin tamamını tek tek biçimlendirmek yerine toplu değişiklik yapabilme",
+            "Belgenin yazı tipini kilitleyip değiştirilmesini engelleme",
+            "Belgeyi sadece okuma modunda açma",
+            "Belgeyi virüslere karşı koruma"
+        ],
+        a: "Belgenin tamamını tek tek biçimlendirmek yerine toplu değişiklik yapabilme",
+        difficulty: "medium",
+        week: 4,
+        topic: "Stiller",
+        importance: "high",
+        explanation: "Stil kullanırsan, bir başlığı beğenmezsen tek tıkla hepsinin görüntüsünü değiştirebilirsin."
+    },
+    { 
+        q: "Uzun rapor ve projelerde başlık hiyerarşisi kullanmanın en önemli nedeni nedir?", 
+        t: "mcq", 
+        o: [
+            "Belgenin okunabilirliğini ve gezinilebilirliğini artırmak",
+            "Belgenin dosya boyutunu küçültmek",
+            "Belgenin yazı tipini sabitlemek",
+            "Yazım hatalarını otomatik düzeltmek"
+        ],
+        a: "Belgenin okunabilirliğini ve gezinilebilirliğini artırmak",
+        difficulty: "easy",
+        week: 4,
+        topic: "Stiller",
+        importance: "medium",
+        explanation: "Düzenli başlık = Okuyucu kaybolmaz. İpuç: İçindekiler tablosu da bu hiyerarşiye dayanır."
+    },
+    { 
+        q: "Aşağıdakilerden hangisi Word'de hazır gelen stillerden biri olabilir?", 
+        t: "mcq", 
+        o: [
+            "Başlık 1",
+            "Anakart",
+            "BIOS",
+            "Modem"
+        ],
+        a: "Başlık 1",
+        difficulty: "easy",
+        week: 4,
+        topic: "Stiller",
         importance: "low",
-        explanation: "Pardus'un ilk sürümü 2005 yılında yayınlanmıştır."
+        explanation: "Başlık 1, 2, 3 gibi isimler Word'ün hazır stilleridir. Anakart, BIOS donanım terimleridir."
     },
     { 
-        q: "Windows ve Mac OS gibi işletim sistemleri, geliştirme merkezlerine göre hangi tip işletim sistemleridir?", 
+        q: "Kendi oluşturduğunuz bir biçimi (yazı tipi, renk, girinti vb.) tekrar kullanmak istiyorsanız ne yapmanız en doğrusudur?", 
         t: "mcq", 
-        o: ["Sahipli", "Açık Kaynak", "Özgür", "Dağıtık"],
-        a: "Sahipli",
+        o: [
+            "Yeni bir stil tanımlamak",
+            "Her seferinde manuel biçimlendirmek",
+            "Belgeyi kopyalamak",
+            "Metni resim olarak kaydetmek"
+        ],
+        a: "Yeni bir stil tanımlamak",
         difficulty: "medium",
-        week: 1,
-        topic: "Linux/Pardus",
+        week: 4,
+        topic: "Stiller",
         importance: "medium",
-        explanation: "Windows ve Mac OS gibi işletim sistemleri, firmalara bağlı sahipli işletim sistemleridir."
+        explanation: "Aynı formatı tekrar tekrar kullanacaksan bunu stil yap; sonra tek tıkla uygula."
     },
     { 
-        q: "Mobil işletim sistemleri, normal işletim sistemlerine göre nasıl bir yapıdadır?", 
+        q: "Stilleri görmek ve yönetmek için kullanılan bölmenin adı nedir?", 
         t: "mcq", 
-        o: ["Daha basit", "Daha karmaşık", "Aynı seviyede", "Daha ağır"],
-        a: "Daha basit",
+        o: [
+            "Stiller bölmesi",
+            "Gezinti bölmesi",
+            "Durum çubuğu",
+            "Görev çubuğu"
+        ],
+        a: "Stiller bölmesi",
         difficulty: "easy",
-        week: 1,
-        topic: "Mobil İS",
-        importance: "medium",
-        explanation: "Mobil işletim sistemleri, masaüstü işletim sistemlerine göre daha basit yapıdadır."
-    },
-    { 
-        q: "Android işletim sistemi hangi çekirdek üzerine kurulmuştur?", 
-        t: "mcq", 
-        o: ["Linux", "Unix", "Windows NT", "BSD"],
-        a: "Linux",
-        difficulty: "medium",
-        week: 1,
-        topic: "Mobil İS",
-        importance: "high",
-        explanation: "Android, Linux çekirdeği üzerine kurulu bir mobil işletim sistemidir."
-    },
-    { 
-        q: "Apple'ın mobil cihazları için geliştirdiği işletim sisteminin adı nedir?", 
-        t: "mcq", 
-        o: ["iOS", "Android", "Windows Mobile", "Symbian"],
-        a: "iOS",
-        difficulty: "easy",
-        week: 1,
-        topic: "Mobil İS",
-        importance: "medium",
-        explanation: "iOS, Apple tarafından iPhone ve iPad için geliştirilmiş mobil işletim sistemidir."
-    },
-    { 
-        q: "Pardus işletim sisteminde paket yönetimi için kullanılan araç nedir?", 
-        t: "mcq", 
-        o: ["PiSi", "APT", "YUM", "DNF"],
-        a: "PiSi",
-        difficulty: "hard",
-        week: 1,
-        topic: "Linux/Pardus",
+        week: 4,
+        topic: "Stiller",
         importance: "low",
-        explanation: "PiSi (Packages Installed Successfully as Intended), Pardus'un paket yöneticisidir."
+        explanation: "Stiller bölmesi, tüm stilleri listeler. Ezber: Adı neyse görevi de o."
     },
     { 
-        q: "Linux sistemlerde root kullanıcısının UID (User ID) değeri nedir?", 
+        q: "Başlık stillerini kullanmadan sayfa numaralarını el ile değiştirerek 'İçindekiler' tablosu hazırlamanın sakıncası nedir?", 
         t: "mcq", 
-        o: ["0", "1", "-1", "100"],
-        a: "0",
-        difficulty: "hard",
-        week: 1,
-        topic: "Linux/Pardus",
+        o: [
+            "Başlıklar değiştiğinde tablonun otomatik güncellenmemesi",
+            "Belgenin açılamaması",
+            "Word'ün kapanması",
+            "Yazım denetiminin çalışmaması"
+        ],
+        a: "Başlıklar değiştiğinde tablonun otomatik güncellenmemesi",
+        difficulty: "medium",
+        week: 4,
+        topic: "İçindekiler Tablosu",
+        importance: "medium",
+        explanation: "Elle yapılan içindekiler her değişiklikte yeniden yazılır; stil tabanlı olan tek tıkla güncellenir."
+    },
+    { 
+        q: "Aşağıdakilerden hangisi stil kavramıyla DOĞRUDAN ilgili değildir?", 
+        t: "mcq", 
+        o: [
+            "Yazı tipi ve paragraf ayarlarını paketlemek",
+            "Belge başlık yapısı oluşturmak",
+            "Otomatik 'İçindekiler' tablosuna temel oluşturmak",
+            "Bilgisayarın açılış hızını artırmak"
+        ],
+        a: "Bilgisayarın açılış hızını artırmak",
+        difficulty: "easy",
+        week: 4,
+        topic: "Stiller",
         importance: "low",
-        explanation: "Root kullanıcısı (sistem yöneticisi) her zaman 0 UID'sine sahiptir."
+        explanation: "Stil, sadece belgenin görünüşü ile ilgilidir; bilgisayarın açılışıyla ilgisi yoktur."
     },
+
+    // HAFTA 5: Sayfa Düzeni & Nesneler
     { 
-        q: "Windows'ta sistem dosyalarının bulunduğu ana dizin hangisidir?", 
+        q: "Belgenin kenar boşluklarını (üst, alt, sağ, sol) ayarlamak için hangi sekme kullanılır?", 
         t: "mcq", 
-        o: ["C:\\Windows", "C:\\System", "C:\\Program Files", "C:\\Users"],
-        a: "C:\\Windows",
-        difficulty: "medium",
-        week: 1,
-        topic: "Windows",
-        importance: "low",
-        explanation: "Varsayılan olarak Windows sistem dosyaları C:\\Windows dizininde bulunur."
-    },
-    { 
-        q: "Mac OS'un temelini oluşturan UNIX tabanlı işletim sistemi nedir?", 
-        t: "mcq", 
-        o: ["Darwin", "FreeBSD", "Solaris", "AIX"],
-        a: "Darwin",
-        difficulty: "hard",
-        week: 1,
-        topic: "Mac OS",
-        importance: "low",
-        explanation: "Darwin, Mac OS X'in açık kaynak kodlu UNIX çekirdeğidir."
-    },
-    { 
-        q: "Windows'ta çalışan işlemleri görmek için kullanılan araç nedir?", 
-        t: "mcq", 
-        o: ["Task Manager", "Control Panel", "System Monitor", "Process Viewer"],
-        a: "Task Manager",
-        difficulty: "easy",
-        week: 1,
-        topic: "Windows",
-        importance: "low",
-        explanation: "Task Manager (Görev Yöneticisi), çalışan işlemleri, CPU ve bellek kullanımını gösterir."
-    },
-    { 
-        q: "Windows'ta kayıt defterini düzenlemek için kullanılan araç nedir?", 
-        t: "mcq", 
-        o: ["regedit", "msconfig", "services.msc", "gpedit.msc"],
-        a: "regedit",
-        difficulty: "hard",
-        week: 1,
-        topic: "Windows",
-        importance: "low",
-        explanation: "Regedit, Windows kayıt defterini (registry) düzenlemek için kullanılan araçtır."
-    },
-    { 
-        q: "Mac OS'ta terminal uygulamasının adı nedir?", 
-        t: "mcq", 
-        o: ["Terminal", "Console", "Shell", "Command Prompt"],
-        a: "Terminal",
-        difficulty: "easy",
-        week: 1,
-        topic: "Mac OS",
-        importance: "low",
-        explanation: "Mac OS'ta Terminal uygulaması, komut satırı arayüzü sağlar."
-    },
-    { 
-        q: "Linux'ta dosya izinlerini değiştirmek için kullanılan komut nedir?", 
-        t: "mcq", 
-        o: ["chmod", "chown", "chgrp", "umask"],
-        a: "chmod",
-        difficulty: "medium",
-        week: 1,
-        topic: "Linux/Pardus",
-        importance: "medium",
-        explanation: "chmod (change mode) komutu, dosya ve dizinlerin erişim izinlerini değiştirir."
-    },
-    { 
-        q: "Windows'ta disk bölümlerini yönetmek için kullanılan araç nedir?", 
-        t: "mcq", 
-        o: ["Disk Management", "Partition Manager", "Drive Manager", "Volume Control"],
-        a: "Disk Management",
-        difficulty: "medium",
-        week: 1,
-        topic: "Windows",
-        importance: "low",
-        explanation: "Disk Management aracı, disk bölümlerini oluşturma, silme ve yönetme işlemlerini yapar."
-    },
-    
-    // HAFTA 3: Mantıksal Yapı / Fonksiyonlar / Tarihçe
-    { 
-        q: "İşletim sisteminin temel görevlerinden biri nedir?", 
-        t: "mcq", 
-        o: ["Donanımı soyutlamak", "Oyun oynamak", "İnternet bağlantısı kurmak", "Video izlemek"],
-        a: "Donanımı soyutlamak",
-        difficulty: "easy",
-        week: 3,
-        topic: "Fonksiyonlar",
-        importance: "high",
-        explanation: "İşletim sisteminin görevleri: Donanımı soyutlamak, kaynakları yönetmek, kolay ortam sağlamak."
-    },
-    { 
-        q: "İşletim sisteminin hangi görevi, kullanıcıların donanım detayları ile ilgilenmesini gereksiz kılar?", 
-        t: "mcq", 
-        o: ["Donanımı soyutlamak", "Kaynak yönetimi", "Güvenlik sağlamak", "Ağ yönetimi"],
-        a: "Donanımı soyutlamak",
-        difficulty: "medium",
-        week: 3,
-        topic: "Fonksiyonlar",
-        importance: "high",
-        explanation: "Donanım soyutlama sayesinde kullanıcılar donanım detayları ile uğraşmak zorunda kalmaz."
-    },
-    { 
-        q: "CPU, RAM, disk gibi kaynakların adil dağıtımını yapan işletim sistemi görevine ne denir?", 
-        t: "mcq", 
-        o: ["Kaynak Yönetimi", "Dosya Yönetimi", "Ağ Yönetimi", "Güvenlik Yönetimi"],
-        a: "Kaynak Yönetimi",
-        difficulty: "easy",
-        week: 3,
-        topic: "Fonksiyonlar",
-        importance: "high",
-        explanation: "Kaynak yönetimi, CPU, RAM, disk gibi kaynakların işlemler arasında adil dağıtımını sağlar."
-    },
-    { 
-        q: "1950'lerde kullanılan ve kart delme makineleri ile veri girişinin yapıldığı sistemlere ne ad verilir?", 
-        t: "mcq", 
-        o: ["Batch Sistemler", "Real-time Sistemler", "Distributed Sistemler", "Cloud Sistemler"],
-        a: "Batch Sistemler",
-        difficulty: "medium",
-        week: 3,
-        topic: "İS Tarihi",
-        importance: "high",
-        explanation: "1950'lerde kart delme makineleri ile batch (toplu işlem) sistemler kullanılırdı."
-    },
-    { 
-        q: "Çoklu programlama ve zaman paylaşımlı sistemlerin doğuşu hangi yılları kapsamaktadır?", 
-        t: "mcq", 
-        o: ["1960'lar", "1950'ler", "1970'ler", "1980'ler"],
-        a: "1960'lar",
-        difficulty: "medium",
-        week: 3,
-        topic: "İS Tarihi",
-        importance: "medium",
-        explanation: "1960'larda çoklu programlama ve zaman paylaşımlı sistemler geliştirildi."
-    },
-    { 
-        q: "UNIX'in doğuşu hangi yılları kapsamaktadır?", 
-        t: "mcq", 
-        o: ["1970'ler", "1960'lar", "1980'ler", "1990'lar"],
-        a: "1970'ler",
-        difficulty: "easy",
-        week: 3,
-        topic: "İS Tarihi",
-        importance: "medium",
-        explanation: "UNIX işletim sistemi 1970'lerde geliştirildi."
-    },
-    { 
-        q: "MS-DOS ve kişisel bilgisayarların yaygınlaşması hangi yıllara denk gelmektedir?", 
-        t: "mcq", 
-        o: ["1980'ler", "1970'ler", "1990'lar", "2000'ler"],
-        a: "1980'ler",
-        difficulty: "easy",
-        week: 3,
-        topic: "İS Tarihi",
-        importance: "medium",
-        explanation: "1980'lerde MS-DOS ve kişisel bilgisayarlar yaygınlaştı."
-    },
-    { 
-        q: "Windows ve grafik arayüzlerin gelişimi hangi yıllarda gerçekleşmiştir?", 
-        t: "mcq", 
-        o: ["1990'lar", "1980'ler", "2000'ler", "1970'ler"],
-        a: "1990'lar",
-        difficulty: "easy",
-        week: 3,
-        topic: "İS Tarihi",
-        importance: "low",
-        explanation: "1990'larda Windows ve grafik arayüzler gelişim gösterdi."
-    },
-    { 
-        q: "RAM yetersiz kaldığında disk alanının kullanılması hangi bellek yönetim tekniği ile ilgilidir?", 
-        t: "mcq", 
-        o: ["Sanal Bellek", "Cache Bellek", "ROM", "BIOS"],
-        a: "Sanal Bellek",
-        difficulty: "easy",
-        week: 3,
-        topic: "Bellek Yönetimi",
-        importance: "high",
-        explanation: "Sanal bellek, RAM yetersiz kaldığında disk alanını kullanarak bellek genişletir."
-    },
-    { 
-        q: "Sanal bellekte kullanılan iki temel yöntem Sayfalama (Paging) ve nedir?", 
-        t: "mcq", 
-        o: ["Segmentasyon", "Swapping", "Caching", "Buffering"],
-        a: "Segmentasyon",
-        difficulty: "medium",
-        week: 3,
-        topic: "Bellek Yönetimi",
-        importance: "high",
-        explanation: "Sanal bellek iki temel yöntem kullanır: Sayfalama (Paging) ve Segmentasyon."
-    },
-    { 
-        q: "Mantıksal adresi fiziksel adrese dönüştüren birime ne denir?", 
-        t: "mcq", 
-        o: ["MMU", "CPU", "ALU", "CU"],
-        a: "MMU",
-        difficulty: "hard",
-        week: 3,
-        topic: "Bellek Yönetimi",
-        importance: "high",
-        explanation: "MMU (Memory Management Unit), sanal bellek sisteminde mantıksal adresleri fiziksel adreslere çevirir."
-    },
-    { 
-        q: "MMU'nun açılımı nedir?", 
-        t: "mcq", 
-        o: ["Memory Management Unit", "Memory Module Unit", "Main Memory Unit", "Multi Memory Unit"],
-        a: "Memory Management Unit",
-        difficulty: "hard",
-        week: 3,
-        topic: "Bellek Yönetimi",
-        importance: "medium",
-        explanation: "MMU, Memory Management Unit (Bellek Yönetim Birimi) anlamına gelir."
-    },
-    { 
-        q: "Dosya yönetiminde, kalıcı veri saklama birimine ne ad verilir?", 
-        t: "mcq", 
-        o: ["Dosya", "RAM", "Cache", "Register"],
-        a: "Dosya",
-        difficulty: "easy",
-        week: 3,
-        topic: "Dosya Yönetimi",
-        importance: "medium",
-        explanation: "Dosya, kalıcı veri saklama birimidir."
-    },
-    { 
-        q: "FAT32, NTFS, ext4 neye örnektir?", 
-        t: "mcq", 
-        o: ["Dosya Sistemleri", "İşletim Sistemleri", "Donanım Bileşenleri", "Programlama Dilleri"],
-        a: "Dosya Sistemleri",
-        difficulty: "medium",
-        week: 3,
-        topic: "Dosya Yönetimi",
-        importance: "high",
-        explanation: "FAT32, NTFS, ext4 farklı dosya sistemlerine örnektir."
-    },
-    { 
-        q: "FAT32'nin özelliklerinden biri değildir?", 
-        t: "mcq", 
-        o: ["Gelişmiş güvenlik özellikleri sunar", "Basit bir dosya sistemidir", "Uyumlu bir dosya sistemidir", "Sınırlı özelliklere sahiptir"], 
-        a: "Gelişmiş güvenlik özellikleri sunar",
-        difficulty: "medium",
-        week: 3,
-        topic: "Dosya Yönetimi",
-        importance: "high",
-        explanation: "FAT32 basit ve uyumludur ancak güvenlik özellikleri sınırlıdır. NTFS gelişmiş güvenlik sunar."
-    },
-    { 
-        q: "Linux işletim sistemleri için yaygın olarak kullanılan dosya sistemi nedir?", 
-        t: "mcq", 
-        o: ["ext4", "NTFS", "FAT32", "HFS+"],
-        a: "ext4",
-        difficulty: "medium",
-        week: 3,
-        topic: "Dosya Yönetimi",
-        importance: "high",
-        explanation: "ext4, Linux sistemlerde yaygın olarak kullanılan dosya sistemidir."
-    },
-    { 
-        q: "Windows'un modern dosya sistemi hangisidir?", 
-        t: "mcq", 
-        o: ["NTFS", "FAT32", "ext4", "HFS+"],
-        a: "NTFS",
-        difficulty: "easy",
-        week: 3,
-        topic: "Dosya Yönetimi",
-        importance: "high",
-        explanation: "NTFS (New Technology File System), Windows'un modern ve gelişmiş dosya sistemidir."
-    },
-    { 
-        q: "RAID 0'ın avantajı nedir?", 
-        t: "mcq", 
-        o: ["Hız", "Güvenlik", "Yedekleme", "Düşük maliyet"],
-        a: "Hız",
-        difficulty: "medium",
-        week: 3,
-        topic: "Disk Yönetimi",
-        importance: "medium",
-        explanation: "RAID 0, striping yaparak veri okuma/yazma hızını artırır ancak yedekleme yapmaz."
-    },
-    { 
-        q: "Aynalama (mirroring) yapan RAID teknolojisi hangisidir?", 
-        t: "mcq", 
-        o: ["RAID 1", "RAID 0", "RAID 5", "RAID 10"],
-        a: "RAID 1",
-        difficulty: "medium",
-        week: 3,
-        topic: "Disk Yönetimi",
-        importance: "high",
-        explanation: "RAID 1, verileri iki diske aynalayarak (mirroring) yedekleme sağlar."
-    },
-    { 
-        q: "RAID teknolojisinin temel amacı nedir?", 
-        t: "mcq", 
-        o: ["Hem hız hem veri güvenliği sağlamak", "Sadece hız artırmak", "Sadece veri güvenliği sağlamak", "Disk alanından tasarruf etmek"], 
-        a: "Hem hız hem veri güvenliği sağlamak",
-        difficulty: "medium",
-        week: 3,
-        topic: "Disk Yönetimi",
-        importance: "medium",
-        explanation: "RAID teknolojisi, farklı seviyelerde hem performans hem de veri güvenliği sağlamayı amaçlar."
-    },
-    { 
-        q: "Klavye, fare, yazıcı gibi donanımların yönetiminden hangi işletim sistemi bileşeni sorumludur?", 
-        t: "mcq", 
-        o: ["Giriş/Çıkış Yönetimi", "Bellek Yönetimi", "İşlem Yönetimi", "Dosya Yönetimi"],
-        a: "Giriş/Çıkış Yönetimi",
-        difficulty: "easy",
-        week: 3,
-        topic: "G/Ç Yönetimi",
-        importance: "medium",
-        explanation: "Giriş/Çıkış (I/O) yönetimi, tüm donanım aygıtlarının işletim sistemi tarafından kontrol edilmesini sağlar."
-    },
-    { 
-        q: "Donanım ile işletim sistemi arasındaki arayüzü sağlayan yazılımlara ne denir?", 
-        t: "mcq", 
-        o: ["Sürücüler (Drivers)", "Firmware", "BIOS", "Uygulamalar"],
-        a: "Sürücüler (Drivers)",
-        difficulty: "easy",
-        week: 3,
-        topic: "G/Ç Yönetimi",
-        importance: "high",
-        explanation: "Sürücüler (drivers), donanım ile işletim sistemi arasında iletişim sağlar."
-    },
-    { 
-        q: "İşletim sisteminin, kullanıcıların ve işlemlerin kaynaklara erişimini kontrol etme görevine ne denir?", 
-        t: "mcq", 
-        o: ["Güvenlik ve Koruma", "Kaynak Yönetimi", "İşlem Yönetimi", "Bellek Yönetimi"],
-        a: "Güvenlik ve Koruma",
-        difficulty: "medium",
-        week: 3,
-        topic: "Güvenlik",
-        importance: "high",
-        explanation: "İşletim sistemi, güvenlik ve koruma mekanizmaları ile kaynaklara erişimi kontrol eder."
-    },
-    { 
-        q: "Bir kullanıcının sisteme giriş yaparken kimliğinin doğrulanması işlemine ne denir?", 
-        t: "mcq", 
-        o: ["Kimlik Doğrulama (Authentication)", "Yetkilendirme (Authorization)", "Şifreleme (Encryption)", "Denetim (Auditing)"],
-        a: "Kimlik Doğrulama (Authentication)",
-        difficulty: "easy",
-        week: 3,
-        topic: "Güvenlik",
-        importance: "high",
-        explanation: "Kimlik doğrulama (authentication), kullanıcının kim olduğunu doğrulama işlemidir."
-    },
-    { 
-        q: "İşletim sisteminin kaynak yönetimi görevlerinden biri değildir?", 
-        t: "mcq", 
-        o: ["Kullanıcı arayüzü tasarlamak", "CPU zamanını dağıtmak", "Bellek tahsis etmek", "Dosya sistemini yönetmek"], 
-        a: "Kullanıcı arayüzü tasarlamak",
-        difficulty: "medium",
-        week: 3,
-        topic: "Fonksiyonlar",
-        importance: "medium",
-        explanation: "Kaynak yönetimi CPU, bellek, disk gibi donanım kaynaklarının yönetimini içerir; arayüz tasarımı kullanıcı deneyimi ile ilgilidir."
-    },
-    { 
-        q: "İşletim sisteminin donanım ve yazılım arasındaki konumunu belirten kavram nedir?", 
-        t: "mcq", 
-        o: ["Ara Katman", "Üst Katman", "Alt Katman", "Yan Katman"],
-        a: "Ara Katman",
-        difficulty: "medium",
-        week: 3,
-        topic: "Fonksiyonlar",
-        importance: "high",
-        explanation: "İşletim sistemi, kullanıcı/uygulama ile donanım arasında ara katman (middleware) görevi görür."
-    },
-    { 
-        q: "Bir dosya sisteminde dizin yapısının en üst noktasına ne denir?", 
-        t: "mcq", 
-        o: ["Root", "Home", "User", "System"],
-        a: "Root",
-        difficulty: "easy",
-        week: 3,
-        topic: "Dosya Yönetimi",
-        importance: "medium",
-        explanation: "Root dizini, dosya sisteminin en üst seviyesidir (Linux'ta /, Windows'ta C:\\)."
-    },
-    { 
-        q: "Sanal bellek kullanıldığında diskte kullanılan alana ne ad verilir?", 
-        t: "mcq", 
-        o: ["Swap", "Cache", "Buffer", "Partition"],
-        a: "Swap",
-        difficulty: "medium",
-        week: 3,
-        topic: "Bellek Yönetimi",
-        importance: "high",
-        explanation: "Swap alanı, RAM yetersiz kaldığında diskte kullanılan sanal bellek alanıdır."
-    },
-    { 
-        q: "Çok kullanıcılı sistemlerde kullanıcı kimlik doğrulaması yapan işletim sistemi bileşeni nedir?", 
-        t: "mcq", 
-        o: ["Authentication system", "Authorization system", "Encryption system", "Firewall"],
-        a: "Authentication system",
-        difficulty: "medium",
-        week: 3,
-        topic: "Güvenlik",
-        importance: "high",
-        explanation: "Authentication system, kullanıcıların kimlik doğrulamasını yaparak sisteme erişimi kontrol eder."
-    },
-    { 
-        q: "İşletim sisteminin boot (açılış) sürecinde ilk çalışan program nedir?", 
-        t: "mcq", 
-        o: ["Bootloader", "Kernel", "Shell", "BIOS"],
-        a: "Bootloader",
-        difficulty: "medium",
-        week: 3,
-        topic: "İS Tarihi",
-        importance: "low",
-        explanation: "Bootloader, bilgisayar açılırken işletim sistemini belleğe yükleyen ilk programdır."
-    },
-    
-    // HAFTA 4: İS Katmanları, Çekirdek, Sistem Çağrıları
-    { 
-        q: "Bir işletim sisteminin yazılım tasarımında ele alınması gereken iki önemli konudan biri Performans, diğeri nedir?", 
-        t: "mcq", 
-        o: ["Kaynakların özel kullanımı", "Kullanıcı arayüzü", "Fiyat", "Boyut"],
-        a: "Kaynakların özel kullanımı",
-        difficulty: "medium",
-        week: 4,
-        topic: "Genel Kavramlar",
-        importance: "high",
-        explanation: "İşletim sistemi tasarımında iki önemli konu: Performans ve Kaynakların özel kullanımı (yalıtım/koruma)."
-    },
-    { 
-        q: "İşlemcinin, işletim sisteminin kodlarını çalıştırmaya başladığı yetkili moda ne ad verilir?", 
-        t: "mcq", 
-        o: ["Supervisor Mod", "User Mod", "Kernel Mod", "System Mod"],
-        a: "Supervisor Mod",
-        difficulty: "medium",
-        week: 4,
-        topic: "Çekirdek",
-        importance: "high",
-        explanation: "Supervisor mod (veya kernel mod), işletim sisteminin tüm kaynaklara erişebildiği yetkili çalışma modudur."
-    },
-    { 
-        q: "Kullanıcı modundaki bir işlemin işletim sistemini çağırdığında, işlemcinin hemen supervisor moda geçmesine ne denir?", 
-        t: "mcq", 
-        o: ["Sistem Çağrısı", "Kesme", "Tuzak", "Hata"],
-        a: "Sistem Çağrısı",
-        difficulty: "medium",
-        week: 4,
-        topic: "Sistem Çağrıları",
-        importance: "high",
-        explanation: "Sistem çağrısı (system call), kullanıcı modundan kernel moduna geçişi sağlar."
-    },
-    { 
-        q: "İşlemcide, bir programın çalışma yeteneğini gösteren bite ne denir?", 
-        t: "mcq", 
-        o: ["Mod Biti", "Status Biti", "Flag Biti", "Control Biti"],
-        a: "Mod Biti",
-        difficulty: "medium",
-        week: 4,
-        topic: "Çekirdek",
-        importance: "high",
-        explanation: "Mod biti, programın kullanıcı modunda mı yoksa kernel modunda mı çalıştığını belirler."
-    },
-    { 
-        q: "Mod biti (mode bit) hangi değeri aldığında 'supervisor (kernel) mod'da çalışıldığı anlaşılır?", 
-        t: "mcq", 
-        o: ["0", "1", "2", "3"],
-        a: "0",
-        difficulty: "medium",
-        week: 4,
-        topic: "Çekirdek",
-        importance: "high",
-        explanation: "Mod biti 0 ise supervisor (kernel) modu, 1 ise kullanıcı modudur."
-    },
-    { 
-        q: "İşletim sistemi programları hangi modda çalışır?", 
-        t: "mcq", 
-        o: ["Supervisor Mod", "User Mod", "Guest Mod", "Safe Mod"],
-        a: "Supervisor Mod",
-        difficulty: "medium",
-        week: 4,
-        topic: "Çekirdek",
-        importance: "high",
-        explanation: "İşletim sistemi programları, tüm kaynaklara erişebilmek için supervisor modda çalışır."
-    },
-    { 
-        q: "İşletim sistemi ve işlemler arasında bir arayüz görevi gören, genellikle Assembly dili komutları şeklinde olan yapı nedir?", 
-        t: "mcq", 
-        o: ["Sistem Çağrıları", "Kütüphaneler", "Sürücüler", "API"],
-        a: "Sistem Çağrıları",
-        difficulty: "hard",
-        week: 4,
-        topic: "Sistem Çağrıları",
-        importance: "high",
-        explanation: "Sistem çağrıları, işlemler ile işletim sistemi arasında düşük seviyeli arayüz sağlar."
-    },
-    { 
-        q: "Microsoft Windows, sistem çağrılarını hangi API ile gerçekleştirmektedir?", 
-        t: "mcq", 
-        o: ["Win32 API", "POSIX API", "Java API", ".NET API"],
-        a: "Win32 API",
-        difficulty: "hard",
-        week: 4,
-        topic: "Sistem Çağrıları",
-        importance: "medium",
-        explanation: "Microsoft Windows, sistem çağrılarını Win32 API üzerinden gerçekleştirir."
-    },
-    { 
-        q: "UNIX/Linux sistemlerinde sistem çağrıları hangi dilde yazılmıştır?", 
-        t: "mcq", 
-        o: ["C", "Assembly", "Java", "Python"],
-        a: "C",
-        difficulty: "medium",
-        week: 4,
-        topic: "Sistem Çağrıları",
-        importance: "medium",
-        explanation: "UNIX/Linux sistem çağrıları genellikle C dili ile yazılmıştır."
-    },
-    { 
-        q: "Dosya okuma/yazma, işlem oluşturma gibi işlemler hangi mekanizma ile yapılır?", 
-        t: "mcq", 
-        o: ["Sistem Çağrıları", "Kütüphaneler", "Makrolar", "Fonksiyonlar"],
-        a: "Sistem Çağrıları",
-        difficulty: "medium",
-        week: 4,
-        topic: "Sistem Çağrıları",
-        importance: "high",
-        explanation: "Sistem çağrıları, dosya işlemleri, işlem yönetimi gibi işletim sistemi hizmetlerine erişim sağlar."
-    },
-    { 
-        q: "Word, Excel gibi kullanıcı tarafından kullanılan her tür program, işletim sistemi katmanlarının hangi seviyesinde yer alır?", 
-        t: "mcq", 
-        o: ["Uygulama Katmanı", "Çekirdek Katmanı", "Donanım Katmanı", "Sistem Katmanı"],
-        a: "Uygulama Katmanı",
-        difficulty: "easy",
-        week: 4,
-        topic: "Katmanlar",
-        importance: "medium",
-        explanation: "Uygulama Katmanı, kullanıcıların doğrudan kullandığı programların bulunduğu en üst katmandır."
-    },
-    { 
-        q: "İşletim sisteminin kalbi olarak adlandırılan ve tüm sistem kaynaklarını yöneten katman hangisidir?", 
-        t: "mcq", 
-        o: ["Çekirdek (Kernel)", "Shell", "GUI", "API"],
-        a: "Çekirdek (Kernel)",
-        difficulty: "medium",
-        week: 4,
-        topic: "Çekirdek",
-        importance: "high",
-        explanation: "Çekirdek (kernel), işletim sisteminin kalbi olarak tüm sistem kaynaklarını yönetir."
-    },
-    { 
-        q: "Aşağıdakilerden hangisi bir çekirdek türü değildir?", 
-        t: "mcq", 
-        o: ["Supervisor Çekirdek", "Monolitik", "Mikrokernel", "Hibrid Çekirdek"], 
-        a: "Supervisor Çekirdek",
-        difficulty: "medium",
-        week: 4,
-        topic: "Çekirdek",
-        importance: "medium",
-        explanation: "Çekirdek türleri: Monolitik, Mikrokernel ve Hibrid çekirdektir."
-    },
-    { 
-        q: "Tüm yazılımlar ve sürücülerin işletim sistemi çekirdeğinde yer aldığı çekirdek tipine ne denir?", 
-        t: "mcq", 
-        o: ["Monolitik Çekirdek", "Mikrokernel", "Hibrid Çekirdek", "Nano Çekirdek"],
-        a: "Monolitik Çekirdek",
-        difficulty: "hard",
-        week: 4,
-        topic: "Çekirdek",
-        importance: "high",
-        explanation: "Monolitik çekirdeklerde tüm sistem servisleri çekirdek içindedir. Hızlıdır ama bir hata tüm sistemi etkileyebilir."
-    },
-    { 
-        q: "Unix, ne tür bir çekirdeğe örnektir?", 
-        t: "mcq", 
-        o: ["Monolitik", "Mikrokernel", "Hibrid", "Nano"],
-        a: "Monolitik",
-        difficulty: "medium",
-        week: 4,
-        topic: "Çekirdek",
-        importance: "medium",
-        explanation: "Unix, monolitik çekirdek yapısına sahip bir işletim sistemidir."
-    },
-    { 
-        q: "Sadece en önemli işletim sistemi fonksiyonlarının bulunduğu küçük boyutlu çekirdeklere ne denir?", 
-        t: "mcq", 
-        o: ["Mikrokernel", "Monolitik Çekirdek", "Hibrid Çekirdek", "Makrokernel"],
-        a: "Mikrokernel",
-        difficulty: "hard",
-        week: 4,
-        topic: "Çekirdek",
-        importance: "high",
-        explanation: "Mikrokernel (microkernel), sadece temel işletim sistemi fonksiyonlarını içeren minimal çekirdek yapısıdır."
-    },
-    { 
-        q: "Mikrokernellerde, sürücüler ve dosya sistemleri çekirdeğin dışında nasıl çalışır?", 
-        t: "mcq", 
-        o: ["Kullanıcı seviyesinde", "Kernel seviyesinde", "Donanım seviyesinde", "Firmware seviyesinde"],
-        a: "Kullanıcı seviyesinde",
-        difficulty: "hard",
-        week: 4,
-        topic: "Çekirdek",
-        importance: "medium",
-        explanation: "Mikrokernellerde birçok servis kullanıcı seviyesinde çalışır, bu da daha güvenli ama daha yavaştır."
-    },
-    { 
-        q: "Monolitik ve mikrokernel yapılarının avantajlarını birleştiren çekirdek tipine ne denir?", 
-        t: "mcq", 
-        o: ["Hibrid Çekirdek", "Super Çekirdek", "Mega Çekirdek", "Dual Çekirdek"],
-        a: "Hibrid Çekirdek",
-        difficulty: "medium",
-        week: 4,
-        topic: "Çekirdek",
-        importance: "medium",
-        explanation: "Hibrid çekirdekler, monolitik ve mikrokernel yaklaşımlarının avantajlarını birleştirir."
-    },
-    { 
-        q: "Windows NT mimarisinde donanım detaylarının soyutlanmasını sağlayan katman nedir?", 
-        t: "mcq", 
-        o: ["HAL", "Executive", "Kernel", "GUI"],
-        a: "HAL",
-        difficulty: "hard",
-        week: 4,
-        topic: "Katmanlar",
-        importance: "high",
-        explanation: "HAL (Hardware Abstraction Layer), donanım detaylarını soyutlayarak işletim sisteminin taşınabilirliğini artırır."
-    },
-    { 
-        q: "HAL'in açılımı nedir?", 
-        t: "mcq", 
-        o: ["Hardware Abstraction Layer", "High Access Level", "Hardware Application Layer", "Host Abstraction Level"],
-        a: "Hardware Abstraction Layer",
-        difficulty: "hard",
-        week: 4,
-        topic: "Katmanlar",
-        importance: "medium",
-        explanation: "HAL, Hardware Abstraction Layer (Donanım Soyutlama Katmanı) anlamına gelir."
-    },
-    { 
-        q: "Windows'ta çekirdek modu ve kullanıcı modu arasındaki iletişimi hangi katman sağlar?", 
-        t: "mcq", 
-        o: ["Executive", "HAL", "Kernel", "Shell"],
-        a: "Executive",
-        difficulty: "hard",
-        week: 4,
-        topic: "Katmanlar",
-        importance: "medium",
-        explanation: "Executive katmanı, Windows'ta üst düzey sistem hizmetlerini sağlar."
-    },
-    { 
-        q: "Donanım tarafından oluşturulan ve işlemciyi durduran sinyallere ne denir?", 
-        t: "mcq", 
-        o: ["Kesme (Interrupt)", "Tuzak (Trap)", "Hata (Error)", "Sinyal (Signal)"],
-        a: "Kesme (Interrupt)",
-        difficulty: "medium",
-        week: 4,
-        topic: "Kesme ve Tuzak",
-        importance: "high",
-        explanation: "Kesme (interrupt), donanım tarafından işlemciye gönderilen acil durum sinyalidir."
-    },
-    { 
-        q: "Yazılım tarafından oluşturulan hata veya sistem çağrısı durumlarına ne denir?", 
-        t: "mcq", 
-        o: ["Tuzak (Trap)", "Kesme (Interrupt)", "Hata (Error)", "İstisna (Exception)"],
-        a: "Tuzak (Trap)",
-        difficulty: "medium",
-        week: 4,
-        topic: "Kesme ve Tuzak",
-        importance: "high",
-        explanation: "Tuzak (trap), yazılım kaynaklı istisnai durumlarda oluşur (örn: sıfıra bölme hatası)."
-    },
-    { 
-        q: "İşletim sisteminin çekirdek kodunun güncellenmesi için sistem genellikle ne yapmalıdır?", 
-        t: "mcq", 
-        o: ["Sistem yeniden başlatılmalıdır", "Sadece uygulama yeniden başlatılır", "Otomatik güncellenir", "Hiçbir şey yapmaya gerek yoktur"], 
-        a: "Sistem yeniden başlatılmalıdır",
-        difficulty: "easy",
-        week: 4,
-        topic: "Çekirdek",
-        importance: "low",
-        explanation: "Çekirdek güncellemelerinden sonra değişikliklerin geçerli olması için sistem genellikle yeniden başlatılmalıdır."
-    },
-    
-    // HAFTA 5: İşlem Yönetimi / Zamanlama Algoritmaları
-    { 
-        q: "Bir programın çalışmakta olan hâline ne denir?", 
-        t: "mcq", 
-        o: ["İşlem (Process)", "Thread", "Program", "Task"],
-        a: "İşlem (Process)",
+        o: [
+            "Düzen (veya Sayfa Düzeni)",
+            "Giriş",
+            "Ekle",
+            "Gözden Geçir"
+        ],
+        a: "Düzen (veya Sayfa Düzeni)",
         difficulty: "easy",
         week: 5,
-        topic: "İşlem Yönetimi",
+        topic: "Sayfa Düzeni",
         importance: "high",
-        explanation: "İşlem (Process), belleğe yüklenmiş ve çalışmakta olan programdır."
+        explanation: "Sayfa ile ilgili her şey (kenar, yön, boyut) 'Düzen/Sayfa Düzeni' sekmesindedir."
     },
     { 
-        q: "Bellekte çalışan en küçük iş birimi nedir?", 
+        q: "Sayfa yönlendirmesini dikeyden yataya çevirmek için aşağıdakilerden hangisi kullanılır?", 
         t: "mcq", 
-        o: ["İşlem (Process)", "Byte", "Bit", "Instruction"],
-        a: "İşlem (Process)",
+        o: [
+            "Düzen/Sayfa Düzeni > Yönlendirme",
+            "Giriş > Yazı Tipi",
+            "Ekle > Sayfa Numarası",
+            "Görünüm > Yakınlaştır"
+        ],
+        a: "Düzen/Sayfa Düzeni > Yönlendirme",
+        difficulty: "medium",
+        week: 5,
+        topic: "Sayfa Düzeni",
+        importance: "high",
+        explanation: "Yönlendirme; dikey-yatay ayarıdır. Mantık: Sayfanın yönünü 'Düzen'den ayarlarsın."
+    },
+    { 
+        q: "Yeni bir sayfaya geçmek için ENTER tuşuna defalarca basmak yerine hangi işlem yapılmalıdır?", 
+        t: "mcq", 
+        o: [
+            "Sayfa sonu eklemek (CTRL + ENTER)",
+            "Paragraf aralığını artırmak",
+            "Yazı tipini küçültmek",
+            "Kenarlıkları kaldırmak"
+        ],
+        a: "Sayfa sonu eklemek (CTRL + ENTER)",
         difficulty: "easy",
         week: 5,
-        topic: "İşlem Yönetimi",
+        topic: "Sayfa Düzeni",
         importance: "high",
-        explanation: "İşlem, bellekte çalışan en küçük bağımsız iş birimidir."
+        explanation: "Profesyonel yöntem: Sayfa sonu eklemek. Ezber: Yeni sayfa = CTRL + ENTER."
     },
     { 
-        q: "Sabit diskte duran ve pasif kod olarak tanımlanan bileşen nedir?", 
+        q: "Belgedeki bir metni veya resmi tıklayınca internet sayfası açılmasını istiyorsanız hangi öğeyi kullanırsınız?", 
         t: "mcq", 
-        o: ["Program", "İşlem", "Thread", "Veri"],
-        a: "Program",
+        o: [
+            "Köprü (Hyperlink)",
+            "Dipnot",
+            "Alıntı",
+            "Stil"
+        ],
+        a: "Köprü (Hyperlink)",
         difficulty: "easy",
         week: 5,
-        topic: "İşlem Yönetimi",
+        topic: "Köprü",
         importance: "medium",
-        explanation: "Program, diskte saklanan pasif koddur; çalıştırıldığında işlem haline gelir."
+        explanation: "Köprü, tıklayınca seni başka bir adrese 'köprüleyen' bağlantıdır."
     },
     { 
-        q: "Çalışan ve aktif durumdaki kod olarak tanımlanan bileşen nedir?", 
+        q: "Sayfa numarası eklemek için hangi sekme ve komut yolu kullanılır?", 
         t: "mcq", 
-        o: ["İşlem", "Program", "Dosya", "Klasör"],
-        a: "İşlem",
+        o: [
+            "Ekle > Sayfa Numarası",
+            "Giriş > Paragraf",
+            "Düzen > Kenar Boşlukları",
+            "Gözden Geçir > Dil"
+        ],
+        a: "Ekle > Sayfa Numarası",
         difficulty: "easy",
         week: 5,
-        topic: "İşlem Yönetimi",
-        importance: "medium",
-        explanation: "İşlem, bellekte aktif olarak çalışan koddur."
-    },
-    { 
-        q: "Program ve İşlem arasındaki temel farklardan biri nedir?", 
-        t: "mcq", 
-        o: ["Program bellekte yer kaplar, İşlem kaplamaz", "Program bellekte yer kaplamaz, İşlem bellekte alan tahsis eder", "Her ikisi de aynı miktarda bellek kullanır", "Her ikisi de bellekte yer kaplamaz"],
-        a: "Program bellekte yer kaplamaz, İşlem bellekte alan tahsis eder",
-        difficulty: "medium",
-        week: 5,
-        topic: "İşlem Yönetimi",
-        importance: "medium",
-        explanation: "İşlem çalıştığında bellekte kendine alan tahsis eder, program ise diskte pasif olarak durur."
-    },
-    { 
-        q: "İşlem Durumları (Process States) arasında 'Ready' durumunun anlamı nedir?", 
-        t: "mcq", 
-        o: ["İşlem çalışmaya hazırdır", "İşlem çalışıyor", "İşlem bekleme durumunda", "İşlem sonlandı"],
-        a: "İşlem çalışmaya hazırdır",
-        difficulty: "medium",
-        week: 5,
-        topic: "İşlem Yönetimi",
+        topic: "Sayfa Düzeni",
         importance: "high",
-        explanation: "Ready durumundaki işlem CPU'yu beklemektedir; zamanlayıcı tarafından seçilirse Running durumuna geçer."
+        explanation: "Numaralar da bir nesnedir, bu yüzden 'Ekle' sekmesinden eklenir."
     },
     { 
-        q: "Bir işlemin CPU'da aktif olarak çalıştığı duruma ne denir?", 
+        q: "Belgeye resim eklemek için hangi sekme kullanılır?", 
         t: "mcq", 
-        o: ["Running", "Ready", "Waiting", "Blocked"],
-        a: "Running",
+        o: [
+            "Ekle",
+            "Giriş",
+            "Düzen/Sayfa Düzeni",
+            "Görünüm"
+        ],
+        a: "Ekle",
         difficulty: "easy",
         week: 5,
-        topic: "İşlem Yönetimi",
-        importance: "high",
-        explanation: "Running durumunda işlem CPU'da komutlarını çalıştırmaktadır."
+        topic: "Nesneler",
+        importance: "medium",
+        explanation: "Resim, tablo, SmartArt gibi her yeni öğe 'Ekle' sekmesinden eklenir."
     },
     { 
-        q: "Bir işlemin G/Ç (I/O) isteği, bir olay ya da sinyal beklediği duruma ne ad verilir?", 
+        q: "Metni serbestçe taşıyabileceğiniz, kendi çerçevesi olan ve içine yazı yazılan nesne aşağıdakilerden hangisidir?", 
         t: "mcq", 
-        o: ["Waiting", "Running", "Ready", "New"],
-        a: "Waiting",
+        o: [
+            "Metin Kutusu",
+            "SmartArt",
+            "Tablo",
+            "Dipnot"
+        ],
+        a: "Metin Kutusu",
         difficulty: "medium",
         week: 5,
-        topic: "İşlem Yönetimi",
-        importance: "high",
-        explanation: "Waiting (veya Blocked) durumunda işlem, G/Ç veya bir olayın gerçekleşmesini bekler."
+        topic: "Nesneler",
+        importance: "medium",
+        explanation: "Metin kutusu, üzerinde yazı olan hareketli kutudur. Afiş tasarlarken çok kullanılır."
     },
     { 
-        q: "Bir işlem çalışmasını tamamladığında hangi duruma geçer?", 
+        q: "Süreç, hiyerarşi veya ilişki şemalarını görsel hâle getirmek için kullanılan Word öğesi hangisidir?", 
         t: "mcq", 
-        o: ["Terminated", "Stopped", "Finished", "Closed"],
-        a: "Terminated",
+        o: [
+            "SmartArt",
+            "Metin Kutusu",
+            "Dipnot",
+            "Alıntı"
+        ],
+        a: "SmartArt",
+        difficulty: "medium",
+        week: 5,
+        topic: "Nesneler",
+        importance: "medium",
+        explanation: "SmartArt = Akıllı çizelge. Organizasyon şeması gibi yapılar için idealdir."
+    },
+    { 
+        q: "Word'de birden fazla sütundan oluşan, satır ve sütun kesişimlerinde hücreler bulunan yapı aşağıdakilerden hangisidir?", 
+        t: "mcq", 
+        o: [
+            "Tablo",
+            "SmartArt",
+            "Metin Kutusu",
+            "Biçim Boyacısı"
+        ],
+        a: "Tablo",
         difficulty: "easy",
         week: 5,
-        topic: "İşlem Yönetimi",
+        topic: "Nesneler",
         importance: "medium",
-        explanation: "Terminated durumunda işlem çalışmasını tamamlamış ve sonlandırılmıştır."
+        explanation: "Satır-sütun yapısı varsa bu tablodur. Excel mantığının küçük hali gibi düşünebilirsin."
     },
     { 
-        q: "Bir işlemin tüm bilgilerini tutan veri yapısının kısaltması nedir?", 
+        q: "Belgeyi yazdırmadan önce çıktı önizlemesi yapmak için hangi menü kullanılır?", 
         t: "mcq", 
-        o: ["PCB", "PID", "CPU", "RAM"],
-        a: "PCB",
-        difficulty: "medium",
-        week: 5,
-        topic: "İşlem Yönetimi",
-        importance: "high",
-        explanation: "PCB (Process Control Block), işlemin durum bilgileri, CPU register değerleri, bellek bilgileri gibi tüm bilgileri içerir."
-    },
-    { 
-        q: "PCB'nin açılımı nedir?", 
-        t: "mcq", 
-        o: ["Process Control Block", "Program Control Block", "Processor Control Base", "Process Code Block"],
-        a: "Process Control Block",
-        difficulty: "medium",
-        week: 5,
-        topic: "İşlem Yönetimi",
-        importance: "high",
-        explanation: "PCB, Process Control Block (İşlem Kontrol Bloğu) anlamına gelir."
-    },
-    { 
-        q: "Aşağıdakilerden hangisi PCB içinde tutulan bilgilerden biri değildir?", 
-        t: "mcq", 
-        o: ["İşlem kimliği (PID)", "Program sayacı", "CPU register bilgileri", "Kullanıcının adı ve soyadı"], 
-        a: "Kullanıcının adı ve soyadı",
-        difficulty: "medium",
-        week: 5,
-        topic: "İşlem Yönetimi",
-        importance: "medium",
-        explanation: "PCB'de işlem durumu, PID, program sayacı, registerlar, bellek bilgileri vb. tutulur; kullanıcı kişisel bilgileri tutulmaz."
-    },
-    { 
-        q: "Her işleme verilen benzersiz sayısal tanımlayıcıya ne denir?", 
-        t: "mcq", 
-        o: ["PID", "UID", "GID", "TID"],
-        a: "PID",
+        o: [
+            "Dosya > Yazdır",
+            "Giriş > Yazı Tipi",
+            "Gözden Geçir > Yazım Denetimi",
+            "Görünüm > Okuma Modu"
+        ],
+        a: "Dosya > Yazdır",
         difficulty: "easy",
         week: 5,
-        topic: "İşlem Yönetimi",
+        topic: "Yazdırma",
         importance: "high",
-        explanation: "PID (Process ID), her işlemi benzersiz şekilde tanımlayan sayısal kimliktir."
+        explanation: "Yazdırma işlemlerinin hepsi Dosya > Yazdır ekranında toplanır; burada önizleme de vardır."
     },
     { 
-        q: "PID'nin açılımı nedir?", 
+        q: "Üstbilgi (Header) alanına yazılan metinler belge içinde nasıl görünür?", 
         t: "mcq", 
-        o: ["Process ID", "Program ID", "Processor ID", "Primary ID"],
-        a: "Process ID",
+        o: [
+            "Her sayfanın üst kısmında tekrarlanır",
+            "Sadece ilk sayfada görünür",
+            "Sadece seçili paragrafta görünür",
+            "Görünmez, sadece yazdırılır"
+        ],
+        a: "Her sayfanın üst kısmında tekrarlanır",
         difficulty: "medium",
         week: 5,
-        topic: "İşlem Yönetimi",
+        topic: "Sayfa Düzeni",
         importance: "medium",
-        explanation: "PID, Process ID (İşlem Kimliği) anlamına gelir."
+        explanation: "Başlık, tarih, sayfa numarası gibi bilgileri her sayfada görmek için üstbilgi alanı kullanılır."
     },
     { 
-        q: "En basit zamanlama algoritması olup, ilk gelenin önce çalıştığı algoritmanın kısaltması nedir?", 
+        q: "Sekme durakları (tab stop) kullanmanın temel amacı nedir?", 
         t: "mcq", 
-        o: ["FCFS", "SJF", "RR", "Priority"],
-        a: "FCFS",
+        o: [
+            "Metni belirli sütunlara hizalayarak düzenli bir görünüm sağlamak",
+            "Yazım denetimini hızlandırmak",
+            "Belgeyi otomatik kaydetmek",
+            "Satır aralığını ayarlamak"
+        ],
+        a: "Metni belirli sütunlara hizalayarak düzenli bir görünüm sağlamak",
         difficulty: "medium",
         week: 5,
-        topic: "Zamanlama Algoritmaları",
-        importance: "high",
-        explanation: "FCFS (First Come First Serve), işlemleri geliş sırasına göre çalıştıran en basit algoritmadır."
-    },
-    { 
-        q: "FCFS zamanlama algoritmasının açılımı nedir?", 
-        t: "mcq", 
-        o: ["First Come First Serve", "Fast CPU First System", "First Call First Service", "First Control First Start"],
-        a: "First Come First Serve",
-        difficulty: "hard",
-        week: 5,
-        topic: "Zamanlama Algoritmaları",
-        importance: "high",
-        explanation: "FCFS, First Come First Serve (İlk Gelen İlk Servis Edilir) anlamına gelir."
-    },
-    { 
-        q: "SJF zamanlama algoritmasının açılımı nedir?", 
-        t: "mcq", 
-        o: ["Shortest Job First", "Simple Job First", "System Job First", "Sequential Job First"],
-        a: "Shortest Job First",
-        difficulty: "hard",
-        week: 5,
-        topic: "Zamanlama Algoritmaları",
-        importance: "high",
-        explanation: "SJF, Shortest Job First (En Kısa İş Önce) anlamına gelir."
-    },
-    { 
-        q: "Zamanlama algoritmaları arasında yer alan, her işleme eşit zaman dilimi veren algoritma hangisidir?", 
-        t: "mcq", 
-        o: ["Round Robin", "FCFS", "SJF", "Priority"],
-        a: "Round Robin",
-        difficulty: "hard",
-        week: 5,
-        topic: "Zamanlama Algoritmaları",
+        topic: "Sayfa Düzeni",
         importance: "medium",
-        explanation: "Round Robin, her işleme sabit zaman dilimi (time quantum) vererek sırayla çalıştırır."
-    },
-    { 
-        q: "Round Robin algoritmasında her işleme verilen sabit zaman dilimine ne denir?", 
-        t: "mcq", 
-        o: ["Time quantum", "Time slice", "CPU burst", "Clock cycle"],
-        a: "Time quantum",
-        difficulty: "hard",
-        week: 5,
-        topic: "Zamanlama Algoritmaları",
-        importance: "medium",
-        explanation: "Time quantum (zaman dilimi), Round Robin'de her işlemin CPU'yu kullanabileceği süreyi belirler."
-    },
-    { 
-        q: "Bir işlemin çalışması tamamlanmadan CPU'dan alınması durumuna ne denir?", 
-        t: "mcq", 
-        o: ["Preemption", "Context Switch", "Interrupt", "Termination"],
-        a: "Preemption",
-        difficulty: "hard",
-        week: 5,
-        topic: "Zamanlama Algoritmaları",
-        importance: "high",
-        explanation: "Preemption (önalım), bir işlemin çalışmasının zorla durdurulması ve başka işleme geçilmesidir."
-    },
-    { 
-        q: "FCFS algoritması preemptive midir?", 
-        t: "mcq", 
-        o: ["Hayır", "Evet", "Bazen", "Sisteme bağlı"], 
-        a: "Hayır",
-        difficulty: "medium",
-        week: 5,
-        topic: "Zamanlama Algoritmaları",
-        importance: "high",
-        explanation: "FCFS non-preemptive'dir; işlem bitene kadar CPU'yu bırakmaz."
-    },
-    { 
-        q: "Round Robin algoritması preemptive midir?", 
-        t: "mcq", 
-        o: ["Evet", "Hayır", "Bazen", "Sisteme bağlı"], 
-        a: "Evet",
-        difficulty: "medium",
-        week: 5,
-        topic: "Zamanlama Algoritmaları",
-        importance: "high",
-        explanation: "Round Robin preemptive'dir; time quantum bittiğinde işlem CPU'dan alınır."
-    },
-    { 
-        q: "SJF algoritmasının dezavantajı nedir?", 
-        t: "mcq", 
-        o: ["Uzun işlemler açlık (starvation) yaşayabilir", "Çok yavaş çalışır", "Sadece tek CPU'da çalışır", "Bellek kullanımı fazladır"], 
-        a: "Uzun işlemler açlık (starvation) yaşayabilir",
-        difficulty: "hard",
-        week: 5,
-        topic: "Zamanlama Algoritmaları",
-        importance: "high",
-        explanation: "SJF'de kısa işlemler öncelikli olduğundan, uzun işlemler sürekli ertelenebilir (starvation)."
-    },
-    { 
-        q: "Bir işlemden diğerine geçiş sırasında CPU'nun durum bilgilerini kaydetme ve yükleme işlemine ne denir?", 
-        t: "mcq", 
-        o: ["Context Switch", "Process Switch", "Mode Switch", "Task Switch"],
-        a: "Context Switch",
-        difficulty: "hard",
-        week: 5,
-        topic: "İşlem Yönetimi",
-        importance: "high",
-        explanation: "Context Switch, CPU'nun bir işlemden diğerine geçerken durum bilgilerini kaydetme ve yükleme işlemidir."
-    },
-    { 
-        q: "Context Switch sırasında CPU üretken iş yapmaz, bu duruma ne denir?", 
-        t: "mcq", 
-        o: ["Overhead", "Underflow", "Bottleneck", "Deadlock"],
-        a: "Overhead",
-        difficulty: "hard",
-        week: 5,
-        topic: "İşlem Yönetimi",
-        importance: "medium",
-        explanation: "Context Switch overhead'i, sistem performansını düşürür çünkü bu sürede yararlı iş yapılmaz."
-    },
-    { 
-        q: "UNIX/Linux sistemlerinde yeni işlem oluşturmak için kullanılan sistem çağrısı nedir?", 
-        t: "mcq", 
-        o: ["fork", "exec", "create", "spawn"],
-        a: "fork",
-        difficulty: "hard",
-        week: 5,
-        topic: "İşlem Yönetimi",
-        importance: "high",
-        explanation: "fork() sistem çağrısı, mevcut işlemin bir kopyasını oluşturarak yeni işlem yaratır."
-    },
-    { 
-        q: "Bir işlemi sonlandırmak için kullanılan sistem çağrısı nedir?", 
-        t: "mcq", 
-        o: ["exit", "kill", "stop", "terminate"],
-        a: "exit",
-        difficulty: "medium",
-        week: 5,
-        topic: "İşlem Yönetimi",
-        importance: "medium",
-        explanation: "exit() sistem çağrısı, işlemi sonlandırır ve kaynaklarını serbest bırakır."
-    },
-    { 
-        q: "İşlemler arası iletişime ne denir?", 
-        t: "mcq", 
-        o: ["IPC", "RPC", "API", "DLL"],
-        a: "IPC",
-        difficulty: "medium",
-        week: 5,
-        topic: "İşlem İletişimi",
-        importance: "high",
-        explanation: "IPC (Inter-Process Communication), işlemlerin birbiriyle veri alışverişi yapmasını sağlar."
-    },
-    { 
-        q: "IPC'nin açılımı nedir?", 
-        t: "mcq", 
-        o: ["Inter-Process Communication", "Internal Process Control", "Integrated Process Command", "Internet Protocol Connection"],
-        a: "Inter-Process Communication",
-        difficulty: "hard",
-        week: 5,
-        topic: "İşlem İletişimi",
-        importance: "medium",
-        explanation: "IPC, Inter-Process Communication (İşlemler Arası İletişim) anlamına gelir."
-    },
-    { 
-        q: "Aşağıdakilerden hangisi bir IPC mekanizması değildir?", 
-        t: "mcq", 
-        o: ["Paylaşılan Bellek", "Mesaj Kuyrukları", "Pipe", "Cache Bellek"], 
-        a: "Cache Bellek",
-        difficulty: "medium",
-        week: 5,
-        topic: "İşlem İletişimi",
-        importance: "medium",
-        explanation: "IPC mekanizmaları: Paylaşılan bellek, mesaj kuyrukları, pipe, socket vb. Cache bellek IPC mekanizması değildir."
-    },
-    { 
-        q: "Bir işlem içinde çalışan ve CPU tarafından zamanlanan en küçük birime ne denir?", 
-        t: "mcq", 
-        o: ["Thread", "Process", "Task", "Job"],
-        a: "Thread",
-        difficulty: "medium",
-        week: 5,
-        topic: "Thread",
-        importance: "high",
-        explanation: "Thread (iş parçacığı), bir işlem içinde paralel çalışabilen hafif yürütme birimidir."
-    },
-    { 
-        q: "Thread'lerin aynı işlem içindeki diğer thread'lerle paylaştığı kaynak nedir?", 
-        t: "mcq", 
-        o: ["Kod ve Veri Segmenti", "Stack", "Registerlar", "Program Counter"], 
-        a: "Kod ve Veri Segmenti",
-        difficulty: "hard",
-        week: 5,
-        topic: "Thread",
-        importance: "high",
-        explanation: "Aynı işlemdeki thread'ler kod, veri ve heap'i paylaşır; ancak her birinin kendi stack ve register'ları vardır."
-    },
-    { 
-        q: "Çok çekirdekli sistemlerde thread'lerin gerçekten paralel çalışması durumuna ne denir?", 
-        t: "mcq", 
-        o: ["Paralellik", "Concurrency", "Multitasking", "Time-sharing"],
-        a: "Paralellik",
-        difficulty: "medium",
-        week: 5,
-        topic: "Thread",
-        importance: "medium",
-        explanation: "Çok çekirdekli sistemlerde thread'ler aynı anda farklı çekirdeklerde çalışabilir (gerçek paralellik)."
-    },
-    { 
-        q: "Birden fazla işlem veya thread'in paylaşılan kaynağa eşzamanlı erişimde oluşan problemlere ne denir?", 
-        t: "mcq", 
-        o: ["Race Condition", "Deadlock", "Starvation", "Thrashing"],
-        a: "Race Condition",
-        difficulty: "hard",
-        week: 5,
-        topic: "Senkronizasyon",
-        importance: "high",
-        explanation: "Race condition, paylaşılan kaynağa eşzamanlı erişimde tutarsızlıklara yol açan durumdur."
-    },
-    { 
-        q: "Paylaşılan kaynağa aynı anda sadece bir işlemin erişebilmesini sağlayan kod bölgesine ne denir?", 
-        t: "mcq", 
-        o: ["Critical Section", "Protected Area", "Safe Zone", "Exclusive Region"],
-        a: "Critical Section",
-        difficulty: "hard",
-        week: 5,
-        topic: "Senkronizasyon",
-        importance: "high",
-        explanation: "Critical section (kritik bölge), paylaşılan kaynağa erişen kod bölümüdür ve korunması gerekir."
-    },
-    { 
-        q: "Kritik bölgeyi korumak için kullanılan ve sadece bir işlemin kaynağa erişmesini sağlayan mekanizmaya ne denir?", 
-        t: "mcq", 
-        o: ["Mutex", "Semaphore", "Monitor", "Lock"],
-        a: "Mutex",
-        difficulty: "hard",
-        week: 5,
-        topic: "Senkronizasyon",
-        importance: "high",
-        explanation: "Mutex (Mutual Exclusion), kritik bölgeye tek bir işlemin girmesini sağlayan kilitleme mekanizmasıdır."
-    },
-    { 
-        q: "Senkronizasyon için kullanılan ve sayaç mantığıyla çalışan yapıya ne denir?", 
-        t: "mcq", 
-        o: ["Semaphore", "Mutex", "Barrier", "Spinlock"],
-        a: "Semaphore",
-        difficulty: "hard",
-        week: 5,
-        topic: "Senkronizasyon",
-        importance: "high",
-        explanation: "Semaphore, sayaç kullanarak birden fazla işlemin senkronize edilmesini sağlar."
-    },
-    { 
-        q: "İki veya daha fazla işlemin birbirini beklemesi ve hiçbirinin ilerleyememesi durumuna ne denir?", 
-        t: "mcq", 
-        o: ["Deadlock", "Livelock", "Starvation", "Race Condition"],
-        a: "Deadlock",
-        difficulty: "medium",
-        week: 5,
-        topic: "Deadlock",
-        importance: "high",
-        explanation: "Deadlock (kilitlenme), işlemlerin birbirlerinin kaynaklarını bekleyerek sonsuz döngüye girmesidir."
-    },
-    { 
-        q: "Öncelik tabanlı zamanlamada, düşük öncelikli işlemlerin sürekli ertelenmesi durumuna ne denir?", 
-        t: "mcq", 
-        o: ["Starvation", "Deadlock", "Livelock", "Thrashing"],
-        a: "Starvation",
-        difficulty: "hard",
-        week: 5,
-        topic: "Zamanlama Algoritmaları",
-        importance: "medium",
-        explanation: "Starvation (açlık), düşük öncelikli işlemlerin sürekli ertelenerek hiç CPU alamama durumudur."
-    },
-    { 
-        q: "Starvation problemini çözmek için zamanla işlem önceliğini artırma tekniğine ne denir?", 
-        t: "mcq", 
-        o: ["Aging", "Boosting", "Elevation", "Promotion"],
-        a: "Aging",
-        difficulty: "hard",
-        week: 5,
-        topic: "Zamanlama Algoritmaları",
-        importance: "medium",
-        explanation: "Aging, bekleyen işlemlerin önceliğini zamanla artırarak starvation'ı önler."
-    },
-    { 
-        q: "Bir işlemin sistemde toplam geçirdiği süreye (bekleme + çalışma) ne denir?", 
-        t: "mcq", 
-        o: ["Turnaround Time", "Waiting Time", "Response Time", "Execution Time"],
-        a: "Turnaround Time",
-        difficulty: "hard",
-        week: 5,
-        topic: "Performans",
-        importance: "medium",
-        explanation: "Turnaround time, işlemin gelişinden tamamlanmasına kadar geçen toplam süredir."
-    },
-    { 
-        q: "Bir işlemin hazır kuyruğunda beklediği süreye ne denir?", 
-        t: "mcq", 
-        o: ["Waiting Time", "Response Time", "Turnaround Time", "Burst Time"],
-        a: "Waiting Time",
-        difficulty: "medium",
-        week: 5,
-        topic: "Performans",
-        importance: "medium",
-        explanation: "Waiting time, işlemin ready kuyruğunda CPU'yu beklediği toplam süredir."
-    },
-    { 
-        q: "Bir işlemin ilk kez CPU'ya atanana kadar geçen süreye ne denir?", 
-        t: "mcq", 
-        o: ["Response Time", "Waiting Time", "Turnaround Time", "Latency"],
-        a: "Response Time",
-        difficulty: "hard",
-        week: 5,
-        topic: "Performans",
-        importance: "medium",
-        explanation: "Response time, işlemin sisteme girmesinden ilk kez CPU almasına kadar geçen süredir."
-    },
-    { 
-        q: "CPU'nun yararlı iş yaptığı sürenin toplam süreye oranına ne denir?", 
-        t: "mcq", 
-        o: ["CPU Utilization", "Throughput", "Efficiency", "Performance"],
-        a: "CPU Utilization",
-        difficulty: "medium",
-        week: 5,
-        topic: "Performans",
-        importance: "high",
-        explanation: "CPU Utilization (CPU kullanım oranı), CPU'nun ne kadar verimli kullanıldığını gösterir."
-    },
-    { 
-        q: "Birim zamanda tamamlanan işlem sayısına ne denir?", 
-        t: "mcq", 
-        o: ["Throughput", "CPU Utilization", "Response Time", "Bandwidth"],
-        a: "Throughput",
-        difficulty: "medium",
-        week: 5,
-        topic: "Performans",
-        importance: "medium",
-        explanation: "Throughput (verim), sistemin birim zamanda kaç işlem tamamladığını gösterir."
-    },
-    { 
-        q: "Birden fazla CPU veya çekirdeğe sahip sistemlere ne denir?", 
-        t: "mcq", 
-        o: ["Multiprocessor", "Multitasking", "Multiprogramming", "Multiuser"],
-        a: "Multiprocessor",
-        difficulty: "medium",
-        week: 5,
-        topic: "Çok İşlemcili Sistemler",
-        importance: "medium",
-        explanation: "Multiprocessor (çok işlemcili) sistemlerde birden fazla CPU paralel çalışır."
-    },
-    { 
-        q: "Çok çekirdekli sistemlerde her işlemcinin kendi yerel belleği olduğu ve ağ üzerinden iletişim kurduğu yapıya ne denir?", 
-        t: "mcq", 
-        o: ["Distributed System", "Shared Memory System", "Clustered System", "Grid System"],
-        a: "Distributed System",
-        difficulty: "hard",
-        week: 5,
-        topic: "Çok İşlemcili Sistemler",
-        importance: "low",
-        explanation: "Distributed sistemlerde işlemciler fiziksel olarak ayrı ve ağ üzerinden haberleşir."
-    },
-    { 
-        q: "Belirli süre kısıtlamaları içinde görevleri tamamlaması gereken sistemlere ne denir?", 
-        t: "mcq", 
-        o: ["Real-Time System", "Batch System", "Time-Sharing System", "Interactive System"],
-        a: "Real-Time System",
-        difficulty: "medium",
-        week: 5,
-        topic: "Gerçek Zamanlı Sistemler",
-        importance: "low",
-        explanation: "Real-time sistemlerde görevler belirli zaman sınırları içinde tamamlanmalıdır (örn: uçak kontrol sistemleri)."
-    },
-    { 
-        q: "Bir işletim sisteminin çoklu görev (multitasking) yapabilmesi için hangi özellik gereklidir?", 
-        t: "mcq", 
-        o: ["Zamanlama mekanizması", "Sadece çok çekirdekli CPU", "Grafik arayüz", "Ağ bağlantısı"], 
-        a: "Zamanlama mekanizması",
-        difficulty: "medium",
-        week: 5,
-        topic: "Zamanlama Algoritmaları",
-        importance: "high",
-        explanation: "Multitasking için zamanlayıcı gereklidir; tek çekirdekli CPU'da bile zaman paylaşımı ile yapılabilir."
-    },
-    { 
-        q: "Bir işlemin bellek alanı hangi bölümlerden oluşur?", 
-        t: "mcq", 
-        o: ["Kod, veri, heap ve stack", "Sadece kod ve veri", "Sadece heap ve stack", "Sadece kod"], 
-        a: "Kod, veri, heap ve stack",
-        difficulty: "hard",
-        week: 5,
-        topic: "İşlem Yönetimi",
-        importance: "high",
-        explanation: "İşlem bellek alanı dört ana bölümden oluşur: kod (text), veri (data), heap (dinamik bellek) ve stack (yerel değişkenler)."
-    },
-    { 
-        q: "UNIX/Linux sistemlerinde bir işlemin önceliğini değiştirmek için kullanılan komut nedir?", 
-        t: "mcq", 
-        o: ["nice", "priority", "setprio", "renice"],
-        a: "nice",
-        difficulty: "hard",
-        week: 5,
-        topic: "Zamanlama Algoritmaları",
-        importance: "low",
-        explanation: "nice komutu, işlem önceliğini ayarlamak için kullanılır."
-    },
-    { 
-        q: "Bir işlemin CPU'da çalışırken kesintiye uğraması ve daha yüksek öncelikli işleme geçilmesi durumuna ne denir?", 
-        t: "mcq", 
-        o: ["Preemptive scheduling", "Non-preemptive scheduling", "Context switch", "Process migration"],
-        a: "Preemptive scheduling",
-        difficulty: "hard",
-        week: 5,
-        topic: "Zamanlama Algoritmaları",
-        importance: "high",
-        explanation: "Preemptive scheduling'de işlemci, çalışan işlemi durdurarak daha yüksek öncelikli işleme geçebilir."
-    },
-    { 
-        q: "Çoklu işlemci sistemlerde işlemciler arasında yük dengelemesi yapan bileşene ne denir?", 
-        t: "mcq", 
-        o: ["Scheduler", "Dispatcher", "Allocator", "Balancer"],
-        a: "Scheduler",
-        difficulty: "hard",
-        week: 5,
-        topic: "Zamanlama Algoritmaları",
-        importance: "medium",
-        explanation: "Scheduler (zamanlayıcı), işlemleri işlemcilere dağıtarak yük dengelemesi yapar."
-    },
-    { 
-        q: "Bir işlemin bellekteki başlangıç adresini tutan register nedir?", 
-        t: "mcq", 
-        o: ["Base register", "Limit register", "Program counter", "Stack pointer"],
-        a: "Base register",
-        difficulty: "hard",
-        week: 5,
-        topic: "İşlem Yönetimi",
-        importance: "medium",
-        explanation: "Base register, işlemin bellek alanının başlangıç adresini tutar."
-    },
-    { 
-        q: "Bir işlemin çocuk işlem yaratması durumunda, çocuk işlemin kaynakları kimden alır?", 
-        t: "mcq", 
-        o: ["Ebeveyn işlemden", "İşletim sisteminden direkt", "Diğer işlemlerden", "Disk alanından"], 
-        a: "Ebeveyn işlemden",
-        difficulty: "medium",
-        week: 5,
-        topic: "İşlem Yönetimi",
-        importance: "medium",
-        explanation: "Çocuk işlem, ebeveyn işlemin kaynaklarını kullanır veya işletim sistemi yeni kaynaklar tahsis eder."
-    },
-    { 
-        q: "Bir işlemin beklemeden dolayı CPU kullanmadığı duruma ne denir?", 
-        t: "mcq", 
-        o: ["Idle", "Blocked", "Suspended", "Stopped"],
-        a: "Idle",
-        difficulty: "easy",
-        week: 5,
-        topic: "İşlem Yönetimi",
-        importance: "low",
-        explanation: "Idle durumunda sistem veya işlem beklemede olup CPU kullanmaz."
+        explanation: "Sekme durakları, özellikle özgeçmiş ve fatura gibi hizalı metinlerde sütun düzeni kurmak için kullanılır."
     }
 ];
 
