@@ -21,6 +21,14 @@
     header.addEventListener('dragstart', preventNativeDrag);
     widget.addEventListener('dragstart', preventNativeDrag);
 
+    // 🔍 Header içindeki buton / link gibi etkileşimli elemanları tespit et
+    function isInteractiveElement(el) {
+      if (!el) return false;
+      return !!el.closest(
+        'button, a, input, textarea, select, [data-chat-no-drag], .chat-header-btn'
+      );
+    }
+
     let isDragging = false;
     let startX = 0;
     let startY = 0;
@@ -50,7 +58,7 @@
     function startDrag(clientX, clientY) {
       isDragging = true;
 
-      // CSS'te cursor + animasyon kontrolü için
+      // CSS tarafında imleç + animasyon kontrolü için
       widget.classList.add('chat-widget--dragging');
 
       const rect = widget.getBoundingClientRect();
@@ -124,7 +132,13 @@
     // Mouse olayları
     function onMouseDown(e) {
       if (e.button !== 0) return; // sadece sol tık
-      e.preventDefault();        // text seçimi + native drag'i kes
+
+      // ❗ Header içindeki X, minimize vb. butonlara tıklarken drag BAŞLATMA
+      if (isInteractiveElement(e.target)) {
+        return; // normal click çalışsın
+      }
+
+      e.preventDefault(); // text seçimi + native drag'i kes
       startDrag(e.clientX, e.clientY);
       document.addEventListener('mousemove', onMouseMove);
       document.addEventListener('mouseup', onMouseUp);
@@ -145,6 +159,12 @@
     function onTouchStart(e) {
       if (!e.touches || e.touches.length === 0) return;
       const t = e.touches[0];
+
+      // ❗ Mobilde X'e bastığında drag başlamasın; yoksa click iptal olur
+      if (isInteractiveElement(e.target)) {
+        return; // close/minimize butonunun kendi click'i çalışsın
+      }
+
       e.preventDefault();
       startDrag(t.clientX, t.clientY);
       document.addEventListener('touchmove', onTouchMove, { passive: false });
