@@ -1,1816 +1,1820 @@
-// BİLGİSAYAR DONANIMI 1–5. HAFTA VİZE SORU BANKASI
-// 100 SORU • TÜMÜ ÇOKTAN SEÇMELİ • EĞİTİCİ & TAKTİKLİ AÇIKLAMALI
+// OFİS PROGRAMLARI 1–8 HAFTA VİZE SORU BANKASI
+// 100 soru – Word, Excel, PowerPoint, temel kavramlar
 
 window.questionBank = [
+    // ===== HAFTA 1 – Temel Ofis Kavramları, Dosyalar, Arayüz =====
 
-    // ========= HAFTA 1 – TARİHÇE, TEMEL KAVRAMLAR, BİLİŞİM SİSTEMLERİ =========
-
-    // Q01
+    // 1
     {
-        q: "ENIAC bilgisayarının bilgisayar tarihindeki en önemli özelliği nedir?",
+        q: "Aşağıdakilerden hangisi ofis programlarının temel kullanım amaçlarından biridir?",
         t: "mcq",
         o: [
-            "İlk genel amaçlı sayısal elektronik bilgisayar olması",
-            "İlk dizüstü bilgisayar olması",
-            "İlk grafik arayüzlü bilgisayar olması",
-            "İlk kişisel bilgisayar olması"
+            "Yalnızca oyun oynamak için kullanmak",
+            "Metin, tablo ve sunu gibi belgeleri oluşturup düzenlemek",
+            "Sadece internete bağlanmak için kullanmak",
+            "Sadece bilgisayarı açıp kapatmak için kullanmak"
         ],
-        a: "İlk genel amaçlı sayısal elektronik bilgisayar olması",
+        a: "Metin, tablo ve sunu gibi belgeleri oluşturup düzenlemek",
         difficulty: "easy",
         week: 1,
-        topic: "ENIAC",
+        topic: "Temel Kavramlar",
         importance: "high",
-        explanation: "Taktik: ENIAC’ı görünce aklına hemen 'ilk genel amaçlı sayısal elektronik bilgisayar' gelsin."
+        explanation: "Ofis programlarının temel amacı; metin, tablo ve sunu gibi belgeleri üretmek, düzenlemek ve saklamaktır."
     },
 
-    // Q02
+    // 2
     {
-        q: "ENIAC hangi amaçla geliştirilmiştir?",
+        q: "Aşağıdaki uzantılardan hangisi modern bir Word belgesini gösterir?",
         t: "mcq",
         o: [
-            "II. Dünya Savaşı’nda askerî hesaplamalar için",
-            "Ev kullanıcılarının ofis işleri için",
-            "Sadece oyun oynamak için",
-            "Sadece internet erişimi için"
+            ".xls",
+            ".pptx",
+            ".docx",
+            ".pdf"
         ],
-        a: "II. Dünya Savaşı’nda askerî hesaplamalar için",
+        a: ".docx",
         difficulty: "easy",
         week: 1,
-        topic: "ENIAC",
+        topic: "Dosya Uzantıları",
         importance: "high",
-        explanation: "“Savaş = balistik hesaplar = ENIAC” diye eşleştir, sınavda direkt yakalarsın."
+        explanation: ".docx uzantısı, Microsoft Word’ün yeni nesil belge formatıdır."
     },
 
-    // Q03
+    // 3
     {
-        q: "Aşağıdakilerden hangisi ENIAC’ın özelliklerinden biridir?",
+        q: "Aşağıdaki uzantılardan hangisi Excel çalışma kitabını ifade eder?",
         t: "mcq",
         o: [
-            "Yaklaşık 30 ton ağırlığında ve 140 kW enerji tüketiyordu",
-            "Hafif ve taşınabilir bir cihazdı",
-            "Transistör teknolojisi kullanıyordu",
-            "Sadece bir masa üstüne sığıyordu"
+            ".pptx",
+            ".xlsx",
+            ".doc",
+            ".txt"
         ],
-        a: "Yaklaşık 30 ton ağırlığında ve 140 kW enerji tüketiyordu",
+        a: ".xlsx",
+        difficulty: "easy",
+        week: 1,
+        topic: "Dosya Uzantıları",
+        importance: "high",
+        explanation: ".xlsx, Excel çalışma kitabı formatıdır ve içinde birden çok çalışma sayfası barındırabilir."
+    },
+
+    // 4
+    {
+        q: "PowerPoint sunu dosyalarının varsayılan uzantısı aşağıdakilerden hangisidir?",
+        t: "mcq",
+        o: [
+            ".pptx",
+            ".pdf",
+            ".docx",
+            ".accdb"
+        ],
+        a: ".pptx",
+        difficulty: "easy",
+        week: 1,
+        topic: "Dosya Uzantıları",
+        importance: "high",
+        explanation: "PowerPoint sunuları .pptx uzantısı ile kaydedilir."
+    },
+
+    // 5
+    {
+        q: "Bir belge üzerinde yapılan değişiklikleri var olan dosyanın üzerine yazmak için hangi işlem kullanılır?",
+        t: "mcq",
+        o: [
+            "Farklı Kaydet",
+            "Yazdır",
+            "Kaydet",
+            "Kapat"
+        ],
+        a: "Kaydet",
+        difficulty: "easy",
+        week: 1,
+        topic: "Dosya İşlemleri",
+        importance: "high",
+        explanation: "Kaydet komutu, mevcut dosyanın üzerine güncel haliyle yazılmasını sağlar."
+    },
+
+    // 6
+    {
+        q: "Yeni bir dosya adı ve farklı konum belirleyerek belgeyi kopya halinde saklamak için hangi komut kullanılır?",
+        t: "mcq",
+        o: [
+            "Kaydet",
+            "Farklı Kaydet",
+            "Geri Al",
+            "Yinele"
+        ],
+        a: "Farklı Kaydet",
+        difficulty: "easy",
+        week: 1,
+        topic: "Dosya İşlemleri",
+        importance: "high",
+        explanation: "\"Farklı Kaydet\" komutu, dosyayı yeni bir adla veya konumla kaydetmek için kullanılır."
+    },
+
+    // 7
+    {
+        q: "Office programlarında daha önce yapılan bir işlemi geri almak için kullanılan klavye kısayolu aşağıdakilerden hangisidir?",
+        t: "mcq",
+        o: [
+            "Ctrl + Z",
+            "Ctrl + C",
+            "Ctrl + S",
+            "Ctrl + P"
+        ],
+        a: "Ctrl + Z",
+        difficulty: "easy",
+        week: 1,
+        topic: "Klavye Kısayolları",
+        importance: "high",
+        explanation: "Ctrl + Z tuş kombinasyonu, son yapılan işlemi geri alır."
+    },
+
+    // 8
+    {
+        q: "Bir metni kopyalamak için en sık kullanılan kısayol kombinasyonu hangisidir?",
+        t: "mcq",
+        o: [
+            "Ctrl + X",
+            "Ctrl + V",
+            "Ctrl + C",
+            "Ctrl + N"
+        ],
+        a: "Ctrl + C",
+        difficulty: "easy",
+        week: 1,
+        topic: "Klavye Kısayolları",
+        importance: "high",
+        explanation: "Ctrl + C seçili metni veya nesneyi panoya kopyalar."
+    },
+
+    // 9
+    {
+        q: "Şerit (Ribbon) nedir?",
+        t: "mcq",
+        o: [
+            "Belgenin kaydedildiği klasör",
+            "Belge içindeki paragrafların tamamı",
+            "Menü ve araç düğmelerinin bulunduğu üst kısımdaki alan",
+            "Sadece durum çubuğunun olduğu alt kısım"
+        ],
+        a: "Menü ve araç düğmelerinin bulunduğu üst kısımdaki alan",
         difficulty: "medium",
         week: 1,
-        topic: "ENIAC",
-        importance: "medium",
-        explanation: "Akılda tut: 30 ton + 140 kW → devasa, çok enerji harcayan ilk nesil bilgisayar."
+        topic: "Arayüz",
+        importance: "high",
+        explanation: "Şerit, sekmeler ve komut gruplarını barındıran üst araç çubuğu alanıdır."
     },
 
-    // Q04
+    // 10
     {
-        q: "ENIAC hangi sayı sistemini kullanıyor ve hafızasında ne tutabiliyordu?",
+        q: "Office programlarında genellikle pencerenin üst sol köşesinde bulunan ve sık kullanılan komutların yer aldığı araç çubuğu hangisidir?",
         t: "mcq",
         o: [
-            "Onluk sayı sistemi, 10 haneli ondalık sayı",
-            "İkili sayı sistemi, 1 bitlik veri",
-            "Sekizlik sistem, 100 bitlik veri",
-            "Onaltılık sistem, 4 haneli sayı"
+            "Durum Çubuğu",
+            "Hızlı Erişim Araç Çubuğu",
+            "Kaydırma Çubuğu",
+            "Başlık Çubuğu"
         ],
-        a: "Onluk sayı sistemi, 10 haneli ondalık sayı",
+        a: "Hızlı Erişim Araç Çubuğu",
+        difficulty: "medium",
+        week: 1,
+        topic: "Arayüz",
+        importance: "medium",
+        explanation: "Hızlı Erişim Araç Çubuğu; Kaydet, Geri Al gibi sık kullanılan komutlara hızlı erişim sağlar."
+    },
+
+    // ===== HAFTA 2 – Word Temel Metin İşlemleri =====
+
+    // 11
+    {
+        q: "Word'de yazı tipini değiştirmek için ağırlıklı olarak hangi sekme kullanılır?",
+        t: "mcq",
+        o: [
+            "Gözden Geçir",
+            "Görünüm",
+            "Giriş",
+            "Postalar"
+        ],
+        a: "Giriş",
+        difficulty: "easy",
+        week: 2,
+        topic: "Word Temel",
+        importance: "high",
+        explanation: "Metin biçimlendirme işlemleri büyük ölçüde Giriş sekmesindeki Yazı Tipi ve Paragraf gruplarından yapılır."
+    },
+
+    // 12
+    {
+        q: "Aşağıdakilerden hangisi Word’de karakter biçimlendirme (harf düzeyinde) işlemine örnektir?",
+        t: "mcq",
+        o: [
+            "Satır aralığını değiştirmek",
+            "Paragrafı iki yana yaslamak",
+            "Yazıyı kalın yapmak",
+            "Sayfa kenar boşluklarını ayarlamak"
+        ],
+        a: "Yazıyı kalın yapmak",
+        difficulty: "easy",
+        week: 2,
+        topic: "Karakter Biçimlendirme",
+        importance: "high",
+        explanation: "Kalın, italik, altı çizili gibi işlemler karakter biçimlendirmedir."
+    },
+
+    // 13
+    {
+        q: "Word’de paragraf hizalamayı değiştirmek için hangi grup kullanılır?",
+        t: "mcq",
+        o: [
+            "Yazı Tipi grubu",
+            "Paragraf grubu",
+            "Stiller grubu",
+            "Düzen grubu"
+        ],
+        a: "Paragraf grubu",
+        difficulty: "easy",
+        week: 2,
+        topic: "Paragraf Biçimlendirme",
+        importance: "high",
+        explanation: "Satır aralığı, girinti, hizalama gibi işlemler Paragraf grubundan yönetilir."
+    },
+
+    // 14
+    {
+        q: "Aşağıdakilerden hangisi bir paragraf hizalama türü değildir?",
+        t: "mcq",
+        o: [
+            "Sola hizala",
+            "Ortala",
+            "İki yana yasla",
+            "Yukarıya hizala"
+        ],
+        a: "Yukarıya hizala",
+        difficulty: "medium",
+        week: 2,
+        topic: "Paragraf Biçimlendirme",
+        importance: "medium",
+        explanation: "Yukarıya hizala Word’de paragraf hizalama seçeneği değildir."
+    },
+
+    // 15
+    {
+        q: "Biçim Boyacısı (Format Painter) aracı ne işe yarar?",
+        t: "mcq",
+        o: [
+            "Belgeyi yazdırır",
+            "Belgeyi kaydeder",
+            "Seçili metnin biçimlendirmesini kopyalayıp başka metne uygular",
+            "Metni siler"
+        ],
+        a: "Seçili metnin biçimlendirmesini kopyalayıp başka metne uygular",
+        difficulty: "medium",
+        week: 2,
+        topic: "Word Araçları",
+        importance: "high",
+        explanation: "Biçim Boyacısı, kaynağın biçim ayarlarını başka metinlere hızlıca kopyalamak için kullanılır."
+    },
+
+    // 16
+    {
+        q: "Word’de bir listede madde işaretleri (bullet) eklemek için hangi grup kullanılır?",
+        t: "mcq",
+        o: [
+            "Paragraf grubu",
+            "Ekle grubu",
+            "Gözden Geçir grubu",
+            "Görünüm grubu"
+        ],
+        a: "Paragraf grubu",
+        difficulty: "easy",
+        week: 2,
+        topic: "Listeler",
+        importance: "high",
+        explanation: "Numaralandırma ve madde işaretleri Paragraf grubunda yer alır."
+    },
+
+    // 17
+    {
+        q: "Word’de yazım ve dilbilgisi denetimini başlatmak için genellikle hangi sekme kullanılır?",
+        t: "mcq",
+        o: [
+            "Giriş",
+            "Ekle",
+            "Gözden Geçir",
+            "Postalar"
+        ],
+        a: "Gözden Geçir",
+        difficulty: "medium",
+        week: 2,
+        topic: "Yazım Denetimi",
+        importance: "medium",
+        explanation: "Yazım denetimi araçları Gözden Geçir sekmesi altında bulunur."
+    },
+
+    // 18
+    {
+        q: "Word’de satır aralığını değiştirmek için aşağıdakilerden hangisi kullanılır?",
+        t: "mcq",
+        o: [
+            "Yazı Tipi boyutu",
+            "Satır ve Paragraf Aralığı komutu",
+            "Sayfa Yönlendirme",
+            "Kenar boşluğu"
+        ],
+        a: "Satır ve Paragraf Aralığı komutu",
+        difficulty: "medium",
+        week: 2,
+        topic: "Satır Aralığı",
+        importance: "medium",
+        explanation: "Satır aralığı, Paragraf grubundaki Satır ve Paragraf Aralığı menüsünden ayarlanır."
+    },
+
+    // 19
+    {
+        q: "Word’de metni eğik yapmak için kullanılan kısayol aşağıdakilerden hangisidir?",
+        t: "mcq",
+        o: [
+            "Ctrl + U",
+            "Ctrl + I",
+            "Ctrl + B",
+            "Ctrl + P"
+        ],
+        a: "Ctrl + I",
+        difficulty: "easy",
+        week: 2,
+        topic: "Klavye Kısayolları",
+        importance: "medium",
+        explanation: "Ctrl + I, seçili metni italik (eğik) yapar."
+    },
+
+    // 20
+    {
+        q: "Bir belgedeki tüm metni seçmek için kullanılan kısayol hangisidir?",
+        t: "mcq",
+        o: [
+            "Ctrl + A",
+            "Ctrl + L",
+            "Ctrl + K",
+            "Ctrl + M"
+        ],
+        a: "Ctrl + A",
+        difficulty: "easy",
+        week: 2,
+        topic: "Klavye Kısayolları",
+        importance: "high",
+        explanation: "Ctrl + A, belgedeki tüm içerikleri seçer; bu sık sorulan bir temel kısayoldur."
+    },
+
+    // ===== HAFTA 3 – Word Sayfa Düzeni, Tablolar, Nesneler =====
+
+    // 21
+    {
+        q: "Word’de sayfanın dikey konumunu yatay yapmak için hangi sekme kullanılır?",
+        t: "mcq",
+        o: [
+            "Giriş",
+            "Ekle",
+            "Düzen (Sayfa Düzeni)",
+            "Görünüm"
+        ],
+        a: "Düzen (Sayfa Düzeni)",
+        difficulty: "medium",
+        week: 3,
+        topic: "Sayfa Düzeni",
+        importance: "high",
+        explanation: "Sayfa yönlendirme ve kenar boşluğu gibi ayarlar Düzen/Sayfa Düzeni sekmesinden yapılır."
+    },
+
+    // 22
+    {
+        q: "Sayfa kenar boşluklarını ayarlamak için kullanılan komut aşağıdakilerden hangisidir?",
+        t: "mcq",
+        o: [
+            "Yönlendirme",
+            "Kenar Boşlukları",
+            "Filtre",
+            "Biçim Boyacısı"
+        ],
+        a: "Kenar Boşlukları",
+        difficulty: "easy",
+        week: 3,
+        topic: "Sayfa Düzeni",
+        importance: "medium",
+        explanation: "Kenar Boşlukları komutu, belgenin üst, alt, sağ ve sol boşluklarını düzenlemek için kullanılır."
+    },
+
+    // 23
+    {
+        q: "Word’de tablo eklemek için öncelikle hangi sekme kullanılır?",
+        t: "mcq",
+        o: [
+            "Giriş",
+            "Ekle",
+            "Gözden Geçir",
+            "Görünüm"
+        ],
+        a: "Ekle",
+        difficulty: "easy",
+        week: 3,
+        topic: "Tablolar",
+        importance: "high",
+        explanation: "Tablo ekleme işlemi Ekle sekmesindeki Tablo komutuyla yapılır."
+    },
+
+    // 24
+    {
+        q: "Bir Word belgesine resim eklemek için hangi komut kullanılır?",
+        t: "mcq",
+        o: [
+            "Resim",
+            "Grafik",
+            "Dipnot",
+            "Altbilgi"
+        ],
+        a: "Resim",
+        difficulty: "easy",
+        week: 3,
+        topic: "Nesne Ekleme",
+        importance: "medium",
+        explanation: "Resim eklemek için Ekle sekmesindeki Resimler komutu kullanılır."
+    },
+
+    // 25
+    {
+        q: "Üstbilgi (Header) ne işe yarar?",
+        t: "mcq",
+        o: [
+            "Belgeyi otomatik olarak kaydeder",
+            "Sayfanın üst kısmına tekrar eden bilgi ekler",
+            "Belgeyi şifreler",
+            "Sayfayı ikiye böler"
+        ],
+        a: "Sayfanın üst kısmına tekrar eden bilgi ekler",
+        difficulty: "medium",
+        week: 3,
+        topic: "Üstbilgi/Altbilgi",
+        importance: "medium",
+        explanation: "Üstbilgi, her sayfanın üst kısmında görünen sabit bilgi (tarih, başlık, sayfa numarası vb.) eklemek için kullanılır."
+    },
+
+    // 26
+    {
+        q: "Word’de sayfaya sayfa numarası eklemek için aşağıdaki seçeneklerden hangisi kullanılır?",
+        t: "mcq",
+        o: [
+            "Sayfa Numarası",
+            "Dipnot",
+            "Alıntı",
+            "İçindekiler Tablosu"
+        ],
+        a: "Sayfa Numarası",
+        difficulty: "easy",
+        week: 3,
+        topic: "Sayfa Numarası",
+        importance: "high",
+        explanation: "Sayfa numarası, Ekle sekmesindeki Sayfa Numarası komutuyla eklenir."
+    },
+
+    // 27
+    {
+        q: "Sayfa sonu eklemek için hangi komut kullanılır?",
+        t: "mcq",
+        o: [
+            "Satır Sonu",
+            "Sayfa Sonu",
+            "Bölüm Sonu",
+            "Dipnot"
+        ],
+        a: "Sayfa Sonu",
+        difficulty: "medium",
+        week: 3,
+        topic: "Sonlandırma",
+        importance: "medium",
+        explanation: "Sayfa Sonu, imlecin bulunduğu yerden sonraki metni yeni sayfada başlatmak için kullanılır."
+    },
+
+    // 28
+    {
+        q: "Word’de tablo hücrelerini birleştirmek için kullanılan işlem hangisidir?",
+        t: "mcq",
+        o: [
+            "Hücreleri Böl",
+            "Sıralama",
+            "Hücreleri Birleştir",
+            "Filtre Uygula"
+        ],
+        a: "Hücreleri Birleştir",
+        difficulty: "easy",
+        week: 3,
+        topic: "Tablolar",
+        importance: "medium",
+        explanation: "Yatay veya dikey yan yana hücreleri tek hücre haline getirmek için Hücreleri Birleştir kullanılır."
+    },
+
+    // 29
+    {
+        q: "Word’de işaretli bir tablonun satır ve sütun kenarlıklarını görünür/gizli yapmak için hangi bölüm kullanılır?",
+        t: "mcq",
+        o: [
+            "Tablo Stilleri ve Kenarlıklar",
+            "Paragraf Stilleri",
+            "Yazı Tipi grubunda Alt Çizgi",
+            "Sayfa Rengi"
+        ],
+        a: "Tablo Stilleri ve Kenarlıklar",
+        difficulty: "medium",
+        week: 3,
+        topic: "Tablo Biçimlendirme",
+        importance: "medium",
+        explanation: "Tablo araçlarındaki Tasarım sekmesi, kenarlıklar ve stillerin yönetildiği yerdir."
+    },
+
+    // 30
+    {
+        q: "Word’de alt bilgi (Footer) nereye eklenir?",
+        t: "mcq",
+        o: [
+            "Sayfanın üst kısmına",
+            "Sayfanın sol kenarına",
+            "Sayfanın alt kısmına",
+            "Sadece ilk sayfaya"
+        ],
+        a: "Sayfanın alt kısmına",
+        difficulty: "easy",
+        week: 3,
+        topic: "Üstbilgi/Altbilgi",
+        importance: "medium",
+        explanation: "Alt bilgi, her sayfanın alt kısmında tekrar eden içerik eklemek için kullanılır."
+    },
+
+    // ===== HAFTA 4 – Word Yazdırma, Gözden Geçirme, Genel =====
+
+    // 31
+    {
+        q: "Word’de belgeyi yazdırma görüntüsünde görmek için hangi sekme veya kısayol kombinasyonu kullanılır?",
+        t: "mcq",
+        o: [
+            "Dosya > Yazdır",
+            "Giriş > Yazdır",
+            "Görünüm > Web Düzeni",
+            "Ekle > Yazdır"
+        ],
+        a: "Dosya > Yazdır",
+        difficulty: "easy",
+        week: 4,
+        topic: "Yazdırma",
+        importance: "high",
+        explanation: "Yazdır önizleme ve yazdırma işlemleri Dosya menüsündeki Yazdır bölümünden yapılır."
+    },
+
+    // 32
+    {
+        q: "Belgede yapılan değişiklikleri izlemek (Track Changes) için hangi sekme kullanılır?",
+        t: "mcq",
+        o: [
+            "Giriş",
+            "Gözden Geçir",
+            "Ekle",
+            "Görünüm"
+        ],
+        a: "Gözden Geçir",
+        difficulty: "medium",
+        week: 4,
+        topic: "Gözden Geçirme",
+        importance: "medium",
+        explanation: "Değişiklikleri İzle özelliği Gözden Geçir sekmesi altında bulunur."
+    },
+
+    // 33
+    {
+        q: "Yorum eklemek için kullanılan özellik aşağıdakilerden hangisidir?",
+        t: "mcq",
+        o: [
+            "Dipnot",
+            "Üstbilgi",
+            "Yorum",
+            "İçindekiler Tablosu"
+        ],
+        a: "Yorum",
+        difficulty: "easy",
+        week: 4,
+        topic: "Gözden Geçirme",
+        importance: "medium",
+        explanation: "Yorumlar, belge üzerinde açıklama ve not eklemek için kullanılır."
+    },
+
+    // 34
+    {
+        q: "Yazdırma işleminde sadece seçili bir bölümün çıktısını almak için aşağıdakilerden hangisi seçilmelidir?",
+        t: "mcq",
+        o: [
+            "Tüm Sayfalar",
+            "Geçerli Sayfa",
+            "Belirli Sayfa Aralığı",
+            "Seçim"
+        ],
+        a: "Seçim",
+        difficulty: "medium",
+        week: 4,
+        topic: "Yazdırma",
+        importance: "medium",
+        explanation: "Yazdırma seçeneklerindeki \"Seçim\" ile yalnızca seçili metnin çıktısı alınır."
+    },
+
+    // 35
+    {
+        q: "Word’de bir belgenin farklı bir dosya türü (örneğin PDF) olarak kaydedilmesi için hangi komut kullanılır?",
+        t: "mcq",
+        o: [
+            "Kaydet",
+            "Farklı Kaydet",
+            "Yazdır",
+            "Paylaş"
+        ],
+        a: "Farklı Kaydet",
+        difficulty: "medium",
+        week: 4,
+        topic: "Dosya Türleri",
+        importance: "high",
+        explanation: "Belgeyi PDF gibi farklı biçimlerde saklamak için Farklı Kaydet kullanılır."
+    },
+
+    // ===== HAFTA 5 – Excel Temelleri =====
+
+    // 36
+    {
+        q: "Excel’de satır ve sütunların kesiştiği birime ne denir?",
+        t: "mcq",
+        o: [
+            "Tablo",
+            "Hücre",
+            "Alan",
+            "Formül"
+        ],
+        a: "Hücre",
+        difficulty: "easy",
+        week: 5,
+        topic: "Excel Temel",
+        importance: "high",
+        explanation: "Hücre, Excel’de veri girilen temel birimdir."
+    },
+
+    // 37
+    {
+        q: "Excel’de sütunlar nasıl adlandırılır?",
+        t: "mcq",
+        o: [
+            "1, 2, 3, 4 ...",
+            "A, B, C, D ...",
+            "I, II, III, IV ...",
+            "R1, R2, R3 ... "
+        ],
+        a: "A, B, C, D ...",
+        difficulty: "easy",
+        week: 5,
+        topic: "Satır/Sütun",
+        importance: "medium",
+        explanation: "Excel’de sütunlar harflerle, satırlar sayılarla gösterilir."
+    },
+
+    // 38
+    {
+        q: "Excel’de formül yazmaya başlarken hücreye ilk yazılması gereken karakter nedir?",
+        t: "mcq",
+        o: [
+            "=",
+            "+",
+            "#",
+            "%"
+        ],
+        a: "=",
+        difficulty: "easy",
+        week: 5,
+        topic: "Formüller",
+        importance: "high",
+        explanation: "Excel’de tüm formüller eşittir (=) işareti ile başlar."
+    },
+
+    // 39
+    {
+        q: "Excel’de A1 ile B1 hücrelerindeki sayıları toplamak için hangi formül doğrudur?",
+        t: "mcq",
+        o: [
+            "=TOPLA(A1;B1)",
+            "A1+B1=",
+            "TOPLA(A1,B1)=",
+            "=SUM(A1;B1;C1)"
+        ],
+        a: "=TOPLA(A1;B1)",
+        difficulty: "medium",
+        week: 5,
+        topic: "Formüller",
+        importance: "high",
+        explanation: "Türkçe Excel’de toplama için TOPLA işlevi kullanılır ve formül =TOPLA(A1;B1) şeklindedir."
+    },
+
+    // 40
+    {
+        q: "Excel’de aşağıdakilerden hangisi bir hücre başvurusu örneğidir?",
+        t: "mcq",
+        o: [
+            "A1",
+            "1A",
+            "A.1",
+            "A-1"
+        ],
+        a: "A1",
+        difficulty: "easy",
+        week: 5,
+        topic: "Hücre Başvurusu",
+        importance: "high",
+        explanation: "Önce sütun harfi, sonra satır numarası yazılır; A1 geçerli bir hücre adresidir."
+    },
+
+    // 41
+    {
+        q: "Excel’de aynı satırdaki C1, D1 ve E1 hücrelerini toplamak için hangi formül uygundur?",
+        t: "mcq",
+        o: [
+            "=TOPLA(C1;D1;E1)",
+            "=TOPLA(C1:E1)",
+            "=C1+D1+E1",
+            "Hepsi"
+        ],
+        a: "Hepsi",
+        difficulty: "medium",
+        week: 5,
+        topic: "Formüller",
+        importance: "medium",
+        explanation: "Üçü de toplama işlemini yapar; ancak =TOPLA(C1:E1) daha pratik bir yazımdır."
+    },
+
+    // 42
+    {
+        q: "Excel’de otomatik toplama (AutoSum) için kullanılan simge genellikle hangisidir?",
+        t: "mcq",
+        o: [
+            "α",
+            "Σ",
+            "π",
+            "√"
+        ],
+        a: "Σ",
+        difficulty: "easy",
+        week: 5,
+        topic: "Formüller",
+        importance: "medium",
+        explanation: "Sigma (Σ) simgesi Otomatik Toplam aracını temsil eder."
+    },
+
+    // 43
+    {
+        q: "Excel’de aynı çalışma kitabı içinde birden fazla sayfa bulunmasının sebebi nedir?",
+        t: "mcq",
+        o: [
+            "Bilgisayarı yavaşlatmak",
+            "Farklı ama ilişkili tabloları tek dosyada toplamak",
+            "Yazdırmayı engellemek",
+            "Formülleri çalıştırmamak"
+        ],
+        a: "Farklı ama ilişkili tabloları tek dosyada toplamak",
+        difficulty: "medium",
+        week: 5,
+        topic: "Çalışma Sayfaları",
+        importance: "medium",
+        explanation: "Çalışma sayfaları, verileri sınıflandırarak tek dosyada düzenli bir yapı sunar."
+    },
+
+    // 44
+    {
+        q: "Excel’de bir sütunu tamamen seçmek için ne yapılır?",
+        t: "mcq",
+        o: [
+            "Sütun başlığındaki harfe tıklanır",
+            "Tablonun sol üst köşesine tıklanır",
+            "Her hücre tek tek seçilir",
+            "Satır numarasına tıklanır"
+        ],
+        a: "Sütun başlığındaki harfe tıklanır",
+        difficulty: "easy",
+        week: 5,
+        topic: "Satır/Sütun",
+        importance: "medium",
+        explanation: "Sütun başlığındaki harfe tıklamak tüm sütunu seçer."
+    },
+
+    // 45
+    {
+        q: "Excel’de bir hücredeki içeriği sağa, sola veya ortaya hizalamak için hangi grup kullanılır?",
+        t: "mcq",
+        o: [
+            "Yazı Tipi grubu",
+            "Hizalama grubu",
+            "Stiller grubu",
+            "Biçim Boyacısı"
+        ],
+        a: "Hizalama grubu",
+        difficulty: "medium",
+        week: 5,
+        topic: "Hizalama",
+        importance: "medium",
+        explanation: "Home/Giriş sekmesindeki Hizalama (Alignment) grubu hücre hizalama ayarlarını içerir."
+    },
+
+    // ===== HAFTA 6 – Excel Fonksiyonlar, Grafikler, Sıralama =====
+
+    // 46
+    {
+        q: "Excel’de bir aralıktaki sayıların ortalamasını almak için hangi işlev kullanılır?",
+        t: "mcq",
+        o: [
+            "TOPLA",
+            "ORTALAMA",
+            "MAK",
+            "MİN"
+        ],
+        a: "ORTALAMA",
+        difficulty: "easy",
+        week: 6,
+        topic: "İşlevler",
+        importance: "high",
+        explanation: "ORTALAMA işlevi, seçilen sayıların aritmetik ortalamasını hesaplar."
+    },
+
+    // 47
+    {
+        q: "Excel’de EĞER (IF) işlevinin temel amacı nedir?",
+        t: "mcq",
+        o: [
+            "Sadece toplama yapmak",
+            "Koşula göre farklı sonuçlar üretmek",
+            "Yazdırma ayarlarını değiştirmek",
+            "Sayfa yönlendirmesini ayarlamak"
+        ],
+        a: "Koşula göre farklı sonuçlar üretmek",
+        difficulty: "medium",
+        week: 6,
+        topic: "Koşullu İşlevler",
+        importance: "high",
+        explanation: "EĞER fonksiyonu, bir koşul doğruysa bir değer, yanlışsa başka bir değer döndürür."
+    },
+
+    // 48
+    {
+        q: "Excel’de $A$1 şeklindeki hücre gösterimi ne tür başvuruya örnektir?",
+        t: "mcq",
+        o: [
+            "Göreli (Bağıl) başvuru",
+            "Mutlak başvuru",
+            "Karışık başvuru",
+            "Hatalı başvuru"
+        ],
+        a: "Mutlak başvuru",
+        difficulty: "medium",
+        week: 6,
+        topic: "Hücre Başvuruları",
+        importance: "high",
+        explanation: "Hem sütun hem satır sabitlenmişse mutlak başvuru söz konusudur."
+    },
+
+    // 49
+    {
+        q: "Excel’de verileri küçükten büyüğe sıralamak için hangi özellik kullanılır?",
+        t: "mcq",
+        o: [
+            "Filtrele",
+            "Sırala",
+            "Otomatik Toplam",
+            "Biçim Boyacısı"
+        ],
+        a: "Sırala",
+        difficulty: "medium",
+        week: 6,
+        topic: "Sıralama",
+        importance: "medium",
+        explanation: "Sırala komutu, tabloda artan veya azalan sıralama yapmayı sağlar."
+    },
+
+    // 50
+    {
+        q: "Excel’de belirli şartı sağlayan kayıtları geçici olarak görüntülemek için hangi özellik kullanılır?",
+        t: "mcq",
+        o: [
+            "Filtre",
+            "Sırala",
+            "Düzen",
+            "Biçim Boyacısı"
+        ],
+        a: "Filtre",
+        difficulty: "medium",
+        week: 6,
+        topic: "Filtreleme",
+        importance: "high",
+        explanation: "Filtre özelliği, istediğiniz ölçüte uyan satırları göstermeye yarar."
+    },
+
+    // 51
+    {
+        q: "Excel’de veri aralığından grafik oluşturmak için önce ne yapılmalıdır?",
+        t: "mcq",
+        o: [
+            "Veri aralığı seçilir, sonra Ekle sekmesinden grafik seçilir",
+            "Önce grafik eklenir sonra veri yazılır",
+            "Yalnızca başlık yazılır",
+            "Sayfa kenar boşluğu değiştirilir"
+        ],
+        a: "Veri aralığı seçilir, sonra Ekle sekmesinden grafik seçilir",
+        difficulty: "medium",
+        week: 6,
+        topic: "Grafikler",
+        importance: "medium",
+        explanation: "Doğru grafik için önce doğru veri aralığının seçilmesi gerekir."
+    },
+
+    // 52
+    {
+        q: "Aşağıdakilerden hangisi Excel’de sık kullanılan grafik türlerinden biridir?",
+        t: "mcq",
+        o: [
+            "Sütun grafiği",
+            "Metin grafiği",
+            "Akış grafiği",
+            "Yazı tip grafiği"
+        ],
+        a: "Sütun grafiği",
+        difficulty: "easy",
+        week: 6,
+        topic: "Grafikler",
+        importance: "medium",
+        explanation: "Sütun, çizgi ve pasta grafikleri Excel’de sık kullanılan grafik türleridir."
+    },
+
+    // 53
+    {
+        q: "Excel’de bir hücredeki değeri yüzde biçiminde göstermek için hangi biçimlendirme türü kullanılır?",
+        t: "mcq",
+        o: [
+            "Genel",
+            "Para Birimi",
+            "Yüzde",
+            "Metin"
+        ],
+        a: "Yüzde",
+        difficulty: "easy",
+        week: 6,
+        topic: "Biçimlendirme",
+        importance: "medium",
+        explanation: "Yüzde biçimlendirmesi, hücredeki değeri % işareti ile gösterir."
+    },
+
+    // 54
+    {
+        q: "Excel’de tablo başlık satırını kaydırma çubukları hareket etse bile sabit tutmak için hangi özellik kullanılır?",
+        t: "mcq",
+        o: [
+            "Filtrele",
+            "Başlık Ekle",
+            "Bölmeyi Dondur",
+            "Sayfa Sonu Ekle"
+        ],
+        a: "Bölmeyi Dondur",
         difficulty: "hard",
-        week: 1,
-        topic: "ENIAC",
+        week: 6,
+        topic: "Görünüm",
         importance: "medium",
-        explanation: "“10–10” ezberi: onluk sistem + 10 haneli ondalık sayı → ENIAC sorularında kurtarıcı."
+        explanation: "Bölmeyi Dondur, belirli satır veya sütunları ekranda sabit tutar."
     },
 
-    // Q05
+    // ===== HAFTA 7 – PowerPoint Temelleri =====
+
+    // 55
     {
-        q: "Von Neumann mimarisinin temel fikri aşağıdakilerden hangisidir?",
+        q: "PowerPoint’in temel kullanım amacı nedir?",
         t: "mcq",
         o: [
-            "Program ve verilerin aynı ana hafızada saklanması (kayıtlı program kavramı)",
-            "Programların delikli kartlarda saklanması",
-            "Veri ve programların tamamen ayrı makinelerde olması",
-            "Hiç hafıza kullanılmaması"
+            "Veri tabanı yönetmek",
+            "Sunum hazırlamak",
+            "Metin editörü olmak",
+            "Resim düzenlemek"
         ],
-        a: "Program ve verilerin aynı ana hafızada saklanması (kayıtlı program kavramı)",
+        a: "Sunum hazırlamak",
         difficulty: "easy",
-        week: 1,
-        topic: "Von Neumann",
+        week: 7,
+        topic: "PowerPoint Temel",
         importance: "high",
-        explanation: "Anahtar kelime: 'kayıtlı program'. Program + veri aynı hafıza → Von Neumann."
+        explanation: "PowerPoint, slayt tabanlı sunumlar hazırlamak için kullanılır."
     },
 
-    // Q06
+    // 56
     {
-        q: "Aşağıdakilerden hangisi Von Neumann mimarisinin temel birimlerinden biri DEĞİLDİR?",
+        q: "PowerPoint’te yeni slayt eklemek için hangi sekme ağırlıklı olarak kullanılır?",
         t: "mcq",
         o: [
-            "Grafik İşlem Birimi (GPU)",
-            "Ana Hafıza",
-            "Aritmetik Mantık Birimi (ALU)",
-            "Giriş/Çıkış Birimleri"
+            "Giriş",
+            "Ekle",
+            "Görünüm",
+            "Gözden Geçir"
         ],
-        a: "Grafik İşlem Birimi (GPU)",
-        difficulty: "medium",
-        week: 1,
-        topic: "Von Neumann",
+        a: "Giriş",
+        difficulty: "easy",
+        week: 7,
+        topic: "Slayt İşlemleri",
         importance: "medium",
-        explanation: "Temel set: Ana hafıza + ALU + Kontrol birimi + G/Ç. GPU sonradan lüks olarak geliyor."
+        explanation: "Yeni Slayt komutu genellikle Giriş sekmesinde yer alır."
     },
 
-    // Q07
+    // 57
     {
-        q: "IAS bilgisayarında hafıza kapasitesi aşağıdakilerden hangisidir?",
+        q: "PowerPoint’te slaytların genel renk ve yazı tipi uyumunu belirleyen hazır tasarımlar ne olarak adlandırılır?",
         t: "mcq",
         o: [
-            "1000 kelime, her biri 40 bit",
-            "100 kelime, her biri 8 bit",
-            "1024 byte",
-            "10 kelime, her biri 10 bit"
+            "Tema",
+            "Grafik",
+            "Tablo",
+            "Çerçeve"
         ],
-        a: "1000 kelime, her biri 40 bit",
+        a: "Tema",
+        difficulty: "easy",
+        week: 7,
+        topic: "Tasarım",
+        importance: "medium",
+        explanation: "Tema, sununun genel görsel stilini belirleyen hazır şablonlardır."
+    },
+
+    // 58
+    {
+        q: "Slaytlar arası geçiş efektlerini ayarlamak için hangi sekme kullanılır?",
+        t: "mcq",
+        o: [
+            "Giriş",
+            "Geçişler",
+            "Animasyonlar",
+            "Ekle"
+        ],
+        a: "Geçişler",
+        difficulty: "easy",
+        week: 7,
+        topic: "Geçişler",
+        importance: "medium",
+        explanation: "Geçişler sekmesi, slaytlar arasında kullanılacak geçiş efektlerini içerir."
+    },
+
+    // 59
+    {
+        q: "PowerPoint’te bir metin kutusuna harflerin tek tek belirmesi gibi efekt vermek için hangi sekme kullanılır?",
+        t: "mcq",
+        o: [
+            "Tasarım",
+            "Geçişler",
+            "Animasyonlar",
+            "Görünüm"
+        ],
+        a: "Animasyonlar",
+        difficulty: "medium",
+        week: 7,
+        topic: "Animasyonlar",
+        importance: "medium",
+        explanation: "Animasyonlar sekmesi, slayt içindeki nesnelere verilen hareket ve efektleri ayarlar."
+    },
+
+    // 60
+    {
+        q: "Slayt gösterisini baştan başlatmak için kullanılan kısayol aşağıdakilerden hangisidir?",
+        t: "mcq",
+        o: [
+            "F2",
+            "F5",
+            "F8",
+            "Esc"
+        ],
+        a: "F5",
+        difficulty: "easy",
+        week: 7,
+        topic: "Slayt Gösterisi",
+        importance: "high",
+        explanation: "F5 tuşu, slayt gösterisini ilk slayttan başlatır."
+    },
+
+    // 61
+    {
+        q: "Slayt gösterisinden çıkmak için kullanılan tuş hangisidir?",
+        t: "mcq",
+        o: [
+            "Enter",
+            "Shift",
+            "Esc",
+            "Tab"
+        ],
+        a: "Esc",
+        difficulty: "easy",
+        week: 7,
+        topic: "Slayt Gösterisi",
+        importance: "medium",
+        explanation: "Esc tuşu, slayt gösterisinden çıkarak normal görünüme döner."
+    },
+
+    // 62
+    {
+        q: "PowerPoint’te slaytların küçük resimler halinde yan tarafta görüldüğü görünüm hangisidir?",
+        t: "mcq",
+        o: [
+            "Slayt Sıralayıcı",
+            "Not Sayfası",
+            "Okuma Görünümü",
+            "Anahat Görünümü"
+        ],
+        a: "Slayt Sıralayıcı",
+        difficulty: "medium",
+        week: 7,
+        topic: "Görünümler",
+        importance: "medium",
+        explanation: "Slayt Sıralayıcı, slaytların küçük resim halinde düzenlenmesini sağlar."
+    },
+
+    // 63
+    {
+        q: "PowerPoint’te slayta konuşmacı için not eklemek için hangi bölüm kullanılır?",
+        t: "mcq",
+        o: [
+            "Başlık alanı",
+            "Dipnot alanı",
+            "Notlar bölmesi",
+            "Üstbilgi"
+        ],
+        a: "Notlar bölmesi",
+        difficulty: "medium",
+        week: 7,
+        topic: "Notlar",
+        importance: "medium",
+        explanation: "Notlar bölmesi, sunu sırasında sadece konuşmacının görebileceği açıklamaları içerir."
+    },
+
+    // 64
+    {
+        q: "PowerPoint’te slayda tablo eklemek için hangi sekmeden işlem yapılır?",
+        t: "mcq",
+        o: [
+            "Giriş",
+            "Ekle",
+            "Tasarım",
+            "Gözden Geçir"
+        ],
+        a: "Ekle",
+        difficulty: "easy",
+        week: 7,
+        topic: "Tablolar",
+        importance: "medium",
+        explanation: "Ekle sekmesi, tablo, resim, şekil gibi nesneleri slayda yerleştirmek için kullanılır."
+    },
+
+    // ===== HAFTA 8 – Genel Tekrar, Dosya Yönetimi ve Uygulama =====
+
+    // 65
+    {
+        q: "Aşağıdakilerden hangisi Word, Excel ve PowerPoint için ortak bir özelliktir?",
+        t: "mcq",
+        o: [
+            "Hepsi .exe uzantılıdır",
+            "Hepsi komut satırı ile çalışır",
+            "Hepsinde Kaydet ve Farklı Kaydet komutları bulunur",
+            "Hiçbirinde yazdırma yapılamaz"
+        ],
+        a: "Hepsinde Kaydet ve Farklı Kaydet komutları bulunur",
+        difficulty: "easy",
+        week: 8,
+        topic: "Genel Tekrar",
+        importance: "high",
+        explanation: "Tüm ofis programlarında dosya yönetimi için Kaydet ve Farklı Kaydet komutları bulunur."
+    },
+
+    // 66
+    {
+        q: "Aşağıdakilerden hangisi Office programlarında kullanılan bir klavye kısayolu değildir?",
+        t: "mcq",
+        o: [
+            "Ctrl + C",
+            "Ctrl + V",
+            "Ctrl + S",
+            "Shift + Alt + Del"
+        ],
+        a: "Shift + Alt + Del",
+        difficulty: "medium",
+        week: 8,
+        topic: "Kısayollar",
+        importance: "medium",
+        explanation: "Ctrl + C/V/S ofis programlarında sık kullanılır; Shift + Alt + Del yaygın ofis kısayolu değildir."
+    },
+
+    // 67
+    {
+        q: "Bir ofis belgesini e-posta ile göndermeden önce genellikle yapılması en doğru olan işlem aşağıdakilerden hangisidir?",
+        t: "mcq",
+        o: [
+            "Belgeyi kaydetmeden göndermek",
+            "Belgeyi yazdırmak",
+            "Belgeyi kaydedip son halini kontrol etmek",
+            "Bilgisayarı kapatmak"
+        ],
+        a: "Belgeyi kaydedip son halini kontrol etmek",
+        difficulty: "easy",
+        week: 8,
+        topic: "Dosya Yönetimi",
+        importance: "medium",
+        explanation: "Belge gönderilmeden önce mutlaka kaydedilmeli ve kontrol edilmelidir."
+    },
+
+    // 68
+    {
+        q: "Ofis programlarında 'Şablon (Template)' kavramı neyi ifade eder?",
+        t: "mcq",
+        o: [
+            "Hazır biçimlendirilmiş, tekrar kullanılabilir belge yapısı",
+            "Sadece boş bir sayfa",
+            "Yazıcı ayarları",
+            "Virüs temizleme aracı"
+        ],
+        a: "Hazır biçimlendirilmiş, tekrar kullanılabilir belge yapısı",
+        difficulty: "medium",
+        week: 8,
+        topic: "Şablonlar",
+        importance: "medium",
+        explanation: "Şablonlar, önceden tasarlanmış ve tekrar kullanılan belge taslaklarıdır."
+    },
+
+    // 69
+    {
+        q: "Aşağıdakilerden hangisi Excel’de yapılan bir çalışmayı PowerPoint sunusunda kullanmanın doğru yoludur?",
+        t: "mcq",
+        o: [
+            "Excel dosyasını doğrudan yazıcıya yollamak",
+            "Excel tablosunu kopyalayıp PowerPoint slaytına yapıştırmak",
+            "Excel dosyasını Word olarak kaydedip açmak",
+            "Tabloyu manuel olarak tekrar yazmak"
+        ],
+        a: "Excel tablosunu kopyalayıp PowerPoint slaytına yapıştırmak",
+        difficulty: "medium",
+        week: 8,
+        topic: "Programlar Arası Geçiş",
+        importance: "medium",
+        explanation: "Excel’deki tablo doğrudan kopyalanıp PowerPoint slaytına yapıştırılabilir."
+    },
+
+    // 70
+    {
+        q: "Aşağıdaki işlemlerden hangisi veri kaybını önlemede en etkilidir?",
+        t: "mcq",
+        o: [
+            "Dosyaları kaydetmeden çalışmak",
+            "Belgeyi sadece masaüstünde tutmak",
+            "Belgeyi düzenli olarak kaydetmek ve yedeklemek",
+            "Sadece yazıcı çıktısı almak"
+        ],
+        a: "Belgeyi düzenli olarak kaydetmek ve yedeklemek",
+        difficulty: "medium",
+        week: 8,
+        topic: "Dosya Güvenliği",
+        importance: "high",
+        explanation: "Veri kaybını önlemek için dosyalar düzenli kaydedilmeli ve yedeklenmelidir."
+    },
+
+    // 71
+    {
+        q: "Aşağıdakilerden hangisi Word’de paragraf biçimlendirme menüsünde bulunabilecek bir özellik değildir?",
+        t: "mcq",
+        o: [
+            "Satır aralığı",
+            "Girinti",
+            "Hizalama",
+            "Grafik türü"
+        ],
+        a: "Grafik türü",
+        difficulty: "easy",
+        week: 8,
+        topic: "Word Tekrar",
+        importance: "medium",
+        explanation: "Grafik türü Excel’deki bir kavramdır; paragraf menüsünde yer almaz."
+    },
+
+    // 72
+    {
+        q: "Excel’de 'Çalışma Kitabı' (Workbook) neyi ifade eder?",
+        t: "mcq",
+        o: [
+            "Tek bir hücreyi",
+            "Tek bir satırı",
+            "Birden fazla çalışma sayfası içeren dosyayı",
+            "Sadece grafikleri"
+        ],
+        a: "Birden fazla çalışma sayfası içeren dosyayı",
+        difficulty: "easy",
+        week: 8,
+        topic: "Excel Tekrar",
+        importance: "medium",
+        explanation: "Çalışma kitabı, içinde birden çok çalışma sayfası barındıran Excel dosyasıdır."
+    },
+
+    // 73
+    {
+        q: "PowerPoint’te yalnızca tek slaydı çıktısını almak için yazdırma ayarlarında ne seçilmelidir?",
+        t: "mcq",
+        o: [
+            "Tüm Slaytlar",
+            "Slayt Aralığı",
+            "Geçerli Slayt",
+            "Not Sayfası"
+        ],
+        a: "Geçerli Slayt",
+        difficulty: "medium",
+        week: 8,
+        topic: "PowerPoint Tekrar",
+        importance: "medium",
+        explanation: "Geçerli Slayt seçeneği o anda açık olan slaydı yazdırır."
+    },
+
+    // 74
+    {
+        q: "Ofis programlarında 'Ara ve Değiştir' (Find and Replace) özelliğinin temel amacı nedir?",
+        t: "mcq",
+        o: [
+            "Belgeyi yazdırmak",
+            "Belgedeki belirli ifadeleri bulup başka bir ifadeyle değiştirmek",
+            "Belgeyi şifrelemek",
+            "Belgeyi kapatmak"
+        ],
+        a: "Belgedeki belirli ifadeleri bulup başka bir ifadeyle değiştirmek",
+        difficulty: "medium",
+        week: 8,
+        topic: "Arama",
+        importance: "medium",
+        explanation: "Ara ve Değiştir, metin içinde tekrar eden kelimeleri hızlıca bulup değiştirmenizi sağlar."
+    },
+
+    // 75
+    {
+        q: "Aşağıdakilerden hangisi bir ofis programı değildir?",
+        t: "mcq",
+        o: [
+            "Word",
+            "Excel",
+            "PowerPoint",
+            "Paint"
+        ],
+        a: "Paint",
+        difficulty: "easy",
+        week: 8,
+        topic: "Genel Bilgi",
+        importance: "medium",
+        explanation: "Paint bir basit çizim programıdır; klasik ofis paketi içinde yer almaz."
+    },
+
+    // 76
+    {
+        q: "Word’de belgenin sadece belirli bir bölümünü kalın yazmak istiyorsak ne yapmalıyız?",
+        t: "mcq",
+        o: [
+            "Tüm belgeyi seçip kalın yapmalıyız",
+            "Hiçbir şey seçmeden kalın butonuna basmalıyız",
+            "İlgili metni seçip kalın (B) komutunu uygulamalıyız",
+            "Belgeyi silmeliyiz"
+        ],
+        a: "İlgili metni seçip kalın (B) komutunu uygulamalıyız",
+        difficulty: "easy",
+        week: 8,
+        topic: "Word Uygulama",
+        importance: "medium",
+        explanation: "Biçimlendirme her zaman önce seçim, sonra komut prensibiyle çalışır."
+    },
+
+    // 77
+    {
+        q: "Excel’de bir sütunun toplamını hızlıca bulmak için en pratik yol hangisidir?",
+        t: "mcq",
+        o: [
+            "Sütunu silmek",
+            "Sütunu kopyalamak",
+            "Sütun altındaki hücreyi seçip Otomatik Toplam komutunu kullanmak",
+            "Satır aralığını değiştirmek"
+        ],
+        a: "Sütun altındaki hücreyi seçip Otomatik Toplam komutunu kullanmak",
+        difficulty: "medium",
+        week: 8,
+        topic: "Excel Uygulama",
+        importance: "medium",
+        explanation: "Otomatik Toplam, sütun ya da satırdaki sayıları hızla toplar."
+    },
+
+    // 78
+    {
+        q: "PowerPoint’te hazırlanan bir sunuyu projeksiyon cihazında gösterirken genellikle hangi görüntü modu kullanılır?",
+        t: "mcq",
+        o: [
+            "Yalnızca okuma görünümü",
+            "Slayt Gösterisi modu",
+            "Yazdırma önizleme",
+            "Web düzeni"
+        ],
+        a: "Slayt Gösterisi modu",
+        difficulty: "easy",
+        week: 8,
+        topic: "PowerPoint Uygulama",
+        importance: "medium",
+        explanation: "Sunum sırasında Slayt Gösterisi modu kullanılır."
+    },
+
+    // 79
+    {
+        q: "Ofis programlarında sık kullanılan 'Ctrl + P' kısayolunun görevi nedir?",
+        t: "mcq",
+        o: [
+            "Kaydet",
+            "Yazdır",
+            "Kopyala",
+            "Geri Al"
+        ],
+        a: "Yazdır",
+        difficulty: "easy",
+        week: 8,
+        topic: "Kısayollar",
+        importance: "medium",
+        explanation: "Ctrl + P kısayolu yazdırma penceresini açar."
+    },
+
+    // 80
+    {
+        q: "Word’de bir metni kesmek (taşımak) için hangi kısayol kullanılır?",
+        t: "mcq",
+        o: [
+            "Ctrl + C",
+            "Ctrl + V",
+            "Ctrl + X",
+            "Ctrl + Z"
+        ],
+        a: "Ctrl + X",
+        difficulty: "easy",
+        week: 8,
+        topic: "Kısayollar",
+        importance: "medium",
+        explanation: "Ctrl + X, seçili metni kesip panoya taşır."
+    },
+
+    // 81
+    {
+        q: "Excel’de A1 hücresindeki değerin iki katını hesaplamak için hangi formül doğrudur?",
+        t: "mcq",
+        o: [
+            "=A1*2",
+            "=TOPLA(A1;2)",
+            "=ORTALAMA(A1;2)",
+            "=A1/2"
+        ],
+        a: "=A1*2",
+        difficulty: "easy",
+        week: 8,
+        topic: "Excel Formül",
+        importance: "medium",
+        explanation: "Çarpma işlemi * işareti ile yapılır; A1’in iki katı A1*2’dir."
+    },
+
+    // 82
+    {
+        q: "Word’de tablo ekledikten sonra sütun genişliğini ayarlamak için aşağıdakilerden hangisi yapılabilir?",
+        t: "mcq",
+        o: [
+            "Sütun çizgisini farenin sol tuşu ile sürüklemek",
+            "Tabloyu silmek",
+            "Sayfa kenar boşluğunu değiştirmek",
+            "Yazı tipini büyütmek"
+        ],
+        a: "Sütun çizgisini farenin sol tuşu ile sürüklemek",
+        difficulty: "medium",
+        week: 8,
+        topic: "Word Tablo",
+        importance: "medium",
+        explanation: "Sütun kenarlıklarını sürükleyerek genişlik daraltılıp genişletilebilir."
+    },
+
+    // 83
+    {
+        q: "PowerPoint’te slayda hazır bir SmartArt diyagramı eklemek için hangi sekme kullanılır?",
+        t: "mcq",
+        o: [
+            "Giriş",
+            "Ekle",
+            "Tasarım",
+            "Slayt Gösterisi"
+        ],
+        a: "Ekle",
+        difficulty: "medium",
+        week: 8,
+        topic: "SmartArt",
+        importance: "medium",
+        explanation: "SmartArt, Ekle sekmesindeki SmartArt komutu ile eklenir."
+    },
+
+    // 84
+    {
+        q: "Excel’de sayıları Türk Lirası biçiminde göstermek için hangi biçimlendirme seçilmelidir?",
+        t: "mcq",
+        o: [
+            "Genel",
+            "Metin",
+            "Para Birimi",
+            "Yüzde"
+        ],
+        a: "Para Birimi",
+        difficulty: "easy",
+        week: 8,
+        topic: "Excel Biçim",
+        importance: "medium",
+        explanation: "Para Birimi biçimi, sayıları para sembolüyle birlikte gösterir."
+    },
+
+    // 85
+    {
+        q: "Word’de sayfa kenarlığı eklemek için hangi sekmedeki seçenek kullanılır?",
+        t: "mcq",
+        o: [
+            "Giriş > Paragraf",
+            "Ekle > Tablo",
+            "Düzen/Sayfa Düzeni > Sayfa Kenarlıkları",
+            "Görünüm > Cetvel"
+        ],
+        a: "Düzen/Sayfa Düzeni > Sayfa Kenarlıkları",
+        difficulty: "medium",
+        week: 8,
+        topic: "Word Sayfa Kenarlığı",
+        importance: "medium",
+        explanation: "Sayfa Kenarlıkları, sayfaya dekoratif çerçeveler eklemek için kullanılır."
+    },
+
+    // 86
+    {
+        q: "PowerPoint’te slaytların sırasını değiştirmek için ne yapılmalıdır?",
+        t: "mcq",
+        o: [
+            "Slaytları silmek",
+            "Slayt küçük resimlerini sürükleyip bırakmak",
+            "Tema değiştirmek",
+            "Yazı tipini değiştirmek"
+        ],
+        a: "Slayt küçük resimlerini sürükleyip bırakmak",
+        difficulty: "easy",
+        week: 8,
+        topic: "Slayt Sırası",
+        importance: "medium",
+        explanation: "Sol taraftaki slayt küçük resimleri sürüklenerek sırayla yeniden düzenlenebilir."
+    },
+
+    // 87
+    {
+        q: "Excel’de formül çubuğunun temel görevi nedir?",
+        t: "mcq",
+        o: [
+            "Sadece tablo başlığı yazmak",
+            "Seçili hücrenin içeriğini görüntülemek ve düzenlemek",
+            "Sayfa numarası yazmak",
+            "Yazıcı ayarı yapmak"
+        ],
+        a: "Seçili hücrenin içeriğini görüntülemek ve düzenlemek",
+        difficulty: "medium",
+        week: 8,
+        topic: "Formül Çubuğu",
+        importance: "medium",
+        explanation: "Formül çubuğu, seçili hücrede bulunan veri veya formülü gösterir ve düzenleme yapmayı sağlar."
+    },
+
+    // 88
+    {
+        q: "Word’de yazı tipini (fontu) değiştirmek için kullanılan açılır kutunun bulunduğu grup hangisidir?",
+        t: "mcq",
+        o: [
+            "Paragraf",
+            "Yazı Tipi",
+            "Stiller",
+            "Düzen"
+        ],
+        a: "Yazı Tipi",
+        difficulty: "easy",
+        week: 8,
+        topic: "Word Yazı Tipi",
+        importance: "medium",
+        explanation: "Yazı Tipi grubu, font adı ve boyutunun seçildiği gruptur."
+    },
+
+    // 89
+    {
+        q: "PowerPoint’te sunuyu video dosyası olarak dışa aktarmanın amacı nedir?",
+        t: "mcq",
+        o: [
+            "Sunuyu yazıcıdan çıkarmak",
+            "Sunuyu sadece Word’de açmak",
+            "Sunuyu video formatında paylaşabilmek",
+            "Sunuyu metin belgesine dönüştürmek"
+        ],
+        a: "Sunuyu video formatında paylaşabilmek",
         difficulty: "hard",
-        week: 1,
-        topic: "IAS",
-        importance: "medium",
-        explanation: "Ezber: 'IAS = 1000 × 40'. Sayı sorusu gelirse tek hamlede alırsın."
-    },
-
-    // Q08
-    {
-        q: "UNIVAC I bilgisayarının tarihsel önemi nedir?",
-        t: "mcq",
-        o: [
-            "İlk ticari bilgisayar olması",
-            "İlk taşınabilir bilgisayar olması",
-            "İlk grafik kartına sahip bilgisayar olması",
-            "İlk oyun konsolu olması"
-        ],
-        a: "İlk ticari bilgisayar olması",
-        difficulty: "easy",
-        week: 1,
-        topic: "UNIVAC",
-        importance: "high",
-        explanation: "UNIVAC I = 'marketle tanışan bilgisayar' → ilk ticari bilgisayar."
-    },
-
-    // Q09
-    {
-        q: "IBM 701 ve IBM 702 daha çok hangi amaçla kullanılan ilk IBM bilgisayarlarıdır?",
-        t: "mcq",
-        o: [
-            "Bilimsel ve iş dünyası uygulamaları için",
-            "Sadece oyun oynamak için",
-            "Sadece ev eğlencesi için",
-            "Sadece askeri radar için"
-        ],
-        a: "Bilimsel ve iş dünyası uygulamaları için",
-        difficulty: "medium",
-        week: 1,
-        topic: "IBM",
-        importance: "medium",
-        explanation: "701–702’yi 'bilim + iş' diye kodla; slaytta tam böyle geçiyor."
-    },
-
-    // Q10
-    {
-        q: "Transistörlerin vakum tüplerine göre en önemli avantajlarından biri aşağıdakilerden hangisidir?",
-        t: "mcq",
-        o: [
-            "Daha küçük boyut, daha az ısınma ve daha az enerji tüketimi",
-            "Daha fazla ısınma ve daha fazla enerji tüketimi",
-            "Sadece mekanik parçalardan oluşmaları",
-            "Bilgisayarı yavaşlatmaları"
-        ],
-        a: "Daha küçük boyut, daha az ısınma ve daha az enerji tüketimi",
-        difficulty: "easy",
-        week: 1,
-        topic: "Transistör",
-        importance: "high",
-        explanation: "Üçlü ezber: Küçük + Az ısı + Az enerji = transistör avantajı."
-    },
-
-    // Q11
-    {
-        q: "Entegre devrelerin (IC) bilgisayar gelişimindeki rolü nedir?",
-        t: "mcq",
-        o: [
-            "Tek yonga üzerinde çok sayıda transistör barındırarak nesil bilgisayarların gelişmesini sağlamak",
-            "Bilgisayarların tamamen mekanik olmasını sağlamak",
-            "Sadece ekran kartı üretmek",
-            "Sadece yazıcı kontrolü yapmak"
-        ],
-        a: "Tek yonga üzerinde çok sayıda transistör barındırarak nesil bilgisayarların gelişmesini sağlamak",
-        difficulty: "medium",
-        week: 1,
-        topic: "IC",
-        importance: "high",
-        explanation: "IC = 'çok transistörlü tek çip'. Ne kadar çok, o kadar güçlü ve küçük bilgisayar."
-    },
-
-    // Q12
-    {
-        q: "Moore Kanunu’na göre entegre devre üzerindeki transistör sayısı yaklaşık olarak nasıl değişir?",
-        t: "mcq",
-        o: [
-            "Her 2 yılda bir iki katına çıkar",
-            "Her yıl yarıya düşer",
-            "Her 10 yılda bir sabit kalır",
-            "Her ay sıfırlanır"
-        ],
-        a: "Her 2 yılda bir iki katına çıkar",
-        difficulty: "easy",
-        week: 1,
-        topic: "Moore Kanunu",
-        importance: "high",
-        explanation: "Ezber cümle: '2 yılda 2 kat' → Moore Kanunu’nu böyle aklında tut."
-    },
-
-    // Q13
-    {
-        q: "Intel 4004 işlemcisinin bilgisayar tarihindeki önemi nedir?",
-        t: "mcq",
-        o: [
-            "İlk mikroişlemci olması",
-            "İlk grafik kartı olması",
-            "İlk optik disk sürücüsü olması",
-            "İlk işletim sistemi olması"
-        ],
-        a: "İlk mikroişlemci olması",
-        difficulty: "medium",
-        week: 1,
-        topic: "Mikroişlemci",
-        importance: "high",
-        explanation: "Intel 4004 → 'ilk mikroişlemci' ezberle; CPU’nun tek yongaya taşındığı nokta."
-    },
-
-    // Q14
-    {
-        q: "Mikroişlemci kavramı aşağıdakilerden hangisini ifade eder?",
-        t: "mcq",
-        o: [
-            "CPU fonksiyonlarının tek bir yonga üzerinde toplanması",
-            "RAM ve ROM’un aynı yongaya koyulması",
-            "Sadece ekran kartının küçültülmesi",
-            "Sadece sabit diskin küçültülmesi"
-        ],
-        a: "CPU fonksiyonlarının tek bir yonga üzerinde toplanması",
-        difficulty: "medium",
-        week: 1,
-        topic: "Mikroişlemci",
-        importance: "medium",
-        explanation: "Mikroişlemci = 'tek çipte CPU'. 4004 bunun ilk örneğiydi."
-    },
-
-    // Q15
-    {
-        q: "Altair 8800 ve Apple I bilgisayarları hangi tarihi süreci başlatmıştır?",
-        t: "mcq",
-        o: [
-            "Kişisel bilgisayar devrimi",
-            "Sadece askeri bilgisayar dönemini",
-            "Tamamen analog hesap makineleri dönemini",
-            "Sadece ana bilgisayar (mainframe) dönemini"
-        ],
-        a: "Kişisel bilgisayar devrimi",
-        difficulty: "easy",
-        week: 1,
-        topic: "PC Tarihi",
-        importance: "medium",
-        explanation: "Garajda başlayan devrim: Altair 8800 + Apple I → kişisel bilgisayarların doğuşu."
-    },
-
-    // Q16
-    {
-        q: "Kavramsal bilgisayar mimarisinde 'veri işleme birimi' hangi bileşendir?",
-        t: "mcq",
-        o: [
-            "ALU (Aritmetik Mantık Birimi)",
-            "RAM",
-            "Sabit disk",
-            "Monitör"
-        ],
-        a: "ALU (Aritmetik Mantık Birimi)",
-        difficulty: "easy",
-        week: 1,
-        topic: "Kavramsal Mimari",
-        importance: "high",
-        explanation: "Veri işleme = hesap yapmak → ALU’nun işi. 'ALU = işlemci kası' diye düşün."
-    },
-
-    // Q17
-    {
-        q: "Kavramsal bilgisayar mimarisinde 'veri saklama birimi' hangi bileşendir?",
-        t: "mcq",
-        o: [
-            "Hafıza (RAM, disk vb.)",
-            "ALU",
-            "Klavye",
-            "Yazıcı"
-        ],
-        a: "Hafıza (RAM, disk vb.)",
-        difficulty: "easy",
-        week: 1,
-        topic: "Kavramsal Mimari",
-        importance: "high",
-        explanation: "Veri saklama = depo. Depo deyince RAM + disk gibi bellek birimlerini düşün."
-    },
-
-    // Q18
-    {
-        q: "Aşağıdakilerden hangisi bilgisayarın ana bileşenlerinden BİRİ değildir?",
-        t: "mcq",
-        o: [
-            "Yazıcı kartuşu",
-            "CPU (İşlemci)",
-            "Ana Hafıza (RAM)",
-            "İkincil Saklama (HDD/SSD)"
-        ],
-        a: "Yazıcı kartuşu",
-        difficulty: "easy",
-        week: 1,
-        topic: "Ana Bileşenler",
-        importance: "medium",
-        explanation: "CPU + RAM + disk çekirdek sistemdir; yazıcı kartuşu çevre birimidir, çekirdeğe girmez."
-    },
-
-    // Q19
-    {
-        q: "Bir bilişim sisteminin temel öğeleri arasında aşağıdakilerden hangisi YER ALMAZ?",
-        t: "mcq",
-        o: [
-            "Bitki örtüsü",
-            "Donanım",
-            "Yazılım",
-            "Veri, insan ve süreçler"
-        ],
-        a: "Bitki örtüsü",
-        difficulty: "easy",
-        week: 1,
-        topic: "Bilişim Sistemi",
-        importance: "high",
-        explanation: "Bilişim sistemi = donanım + yazılım + veri + insan + süreç. Ağaçlar bu ekibin üyesi değil :)"
-    },
-
-    // Q20
-    {
-        q: "Bilişim sisteminin çalışma döngüsü hangi sırayla gerçekleşir?",
-        t: "mcq",
-        o: [
-            "Girdi → İşleme → Çıktı → Geri bildirim",
-            "Girdi → Çıktı → İşleme → Geri bildirim",
-            "İşleme → Girdi → Çıktı",
-            "Çıktı → Geri bildirim → Girdi"
-        ],
-        a: "Girdi → İşleme → Çıktı → Geri bildirim",
-        difficulty: "easy",
-        week: 1,
-        topic: "Bilişim Sistemi",
-        importance: "high",
-        explanation: "Klasik ezber: INPUT → PROCESS → OUTPUT → FEEDBACK. Soru kalıbı sık gelir."
-    },
-
-    // Q21
-    {
-        q: "Aşağıdakilerden hangisi bilişim sistemi çeşitlerinden biri DEĞİLDİR?",
-        t: "mcq",
-        o: [
-            "Spor destek sistemleri",
-            "İşlem süreç sistemleri",
-            "Karar destek sistemleri",
-            "Üst düzey yönetici destek sistemleri"
-        ],
-        a: "Spor destek sistemleri",
-        difficulty: "medium",
-        week: 1,
-        topic: "Bilişim Türleri",
-        importance: "high",
-        explanation: "Slayttaki 6’lı listeyi ezberle: İşlem süreç, Ofis, Bilgi temelli, Karar destek, İşletme bilgi, Yönetici destek."
-    },
-
-    // Q22
-    {
-        q: "Bilişim sistemlerinin olumlu etkilerinden biri aşağıdakilerden hangisidir?",
-        t: "mcq",
-        o: [
-            "İş süreçlerinin hızlanması ve kağıt işlerinin azalması",
-            "Her alanda daha fazla kâğıt kullanılması",
-            "Karar destek mekanizmalarının yok olması",
-            "Müşteri verilerinin analiz edilememesi"
-        ],
-        a: "İş süreçlerinin hızlanması ve kağıt işlerinin azalması",
-        difficulty: "easy",
-        week: 1,
-        topic: "Olumlu Etkiler",
-        importance: "medium",
-        explanation: "Olumlu = hız, verimlilik, analiz, çevrim içi hizmet. Kağıt azalması da bunun doğal sonucu."
-    },
-
-    // Q23
-    {
-        q: "Bilişim sistemlerinin olumsuz etkilerinden biri aşağıdakilerden hangisidir?",
-        t: "mcq",
-        o: [
-            "İnsan iş gücünün yerini alarak işsizlik riski oluşturması",
-            "Tıpta ilerlemeye katkı sağlaması",
-            "Müşteri davranışlarını analiz etmeyi kolaylaştırması",
-            "Karar destek sağlaması"
-        ],
-        a: "İnsan iş gücünün yerini alarak işsizlik riski oluşturması",
-        difficulty: "medium",
-        week: 1,
-        topic: "Olumsuz Etkiler",
-        importance: "high",
-        explanation: "Negatifler: işsizlik, mahremiyet sorunları, sistem çökünce hayatın durması, sağlık sorunları."
-    },
-
-    // Q24
-    {
-        q: "Aşağıdakilerden hangisi bilişim sistemleriyle ilgili bir MAHREMİYET (gizlilik) sorunu örneğidir?",
-        t: "mcq",
-        o: [
-            "Kişisel verilerin izinsiz paylaşılması",
-            "İş süreçlerinin otomatikleşmesi",
-            "Kağıt işlerinin azalması",
-            "Karar destek sistemlerinin kullanılması"
-        ],
-        a: "Kişisel verilerin izinsiz paylaşılması",
-        difficulty: "medium",
-        week: 1,
-        topic: "Mahremiyet",
-        importance: "medium",
-        explanation: "Mahremiyet = kişisel verilerin korunması. Verilerin sızması doğrudan gizlilik ihlalidir."
-    },
-
-    // Q25
-    {
-        q: "Bir bilişim sisteminde 'sistem kesintisi' yaşanmasının olası sonucu aşağıdakilerden hangisidir?",
-        t: "mcq",
-        o: [
-            "Hayatın birçok alanında işlemlerin durma noktasına gelmesi",
-            "Her şeyin daha hızlı çalışması",
-            "Veri güvenliğinin kendiliğinden artması",
-            "Kâğıt işlerinin tamamen bitmesi"
-        ],
-        a: "Hayatın birçok alanında işlemlerin durma noktasına gelmesi",
-        difficulty: "medium",
-        week: 1,
-        topic: "Olumsuz Etkiler",
-        importance: "medium",
-        explanation: "Bankacılık, sağlık, ulaşım; hepsi bilişimle çalışıyor. Sistem durursa, hayat da yavaşlar."
-    },
-
-    // ========= HAFTA 2 – İŞLEMCİLER (CPU) =========
-
-    // Q26
-    {
-        q: "İşlemci (CPU) için en uygun tanım aşağıdakilerden hangisidir?",
-        t: "mcq",
-        o: [
-            "Bilgisayarın beyni, komutları işleyen birim",
-            "Verileri kalıcı olarak saklayan birim",
-            "Sadece görüntü üreten birim",
-            "Sadece ses işleyen birim"
-        ],
-        a: "Bilgisayarın beyni, komutları işleyen birim",
-        difficulty: "easy",
-        week: 2,
-        topic: "CPU Tanımı",
-        importance: "high",
-        explanation: "CPU = beyin ezberi çok önemli; soru gördüğün anda işaretleyebilirsin."
-    },
-
-    // Q27
-    {
-        q: "Aşağıdakilerden hangisi işlemcinin temel görevlerinden biri DEĞİLDİR?",
-        t: "mcq",
-        o: [
-            "Monitörün fiziksel üretimini yapmak",
-            "Bellekten komut almak",
-            "Aritmetik ve mantıksal işlemleri yapmak",
-            "Giriş/çıkış birimlerini koordine etmek"
-        ],
-        a: "Monitörün fiziksel üretimini yapmak",
-        difficulty: "easy",
-        week: 2,
-        topic: "CPU Görevleri",
-        importance: "medium",
-        explanation: "CPU donanım üretmez; hazır donanımı kullanır. Diğer üçü gerçek görevidir."
-    },
-
-    // Q28
-    {
-        q: "ALU (Aritmetik Mantık Birimi) hangi tür işlemleri gerçekleştirir?",
-        t: "mcq",
-        o: [
-            "Toplama, çıkarma ve mantıksal işlemler",
-            "Sadece veri depolama",
-            "Sadece internet bağlantısı",
-            "Sadece ses kaydı"
-        ],
-        a: "Toplama, çıkarma ve mantıksal işlemler",
-        difficulty: "easy",
-        week: 2,
-        topic: "ALU",
-        importance: "high",
-        explanation: "ALU = hesap makinesi + mantık kapıları. Matematik ve mantık ondan sorulur."
-    },
-
-    // Q29
-    {
-        q: "Kontrol Birimi (CU) için en doğru ifade hangisidir?",
-        t: "mcq",
-        o: [
-            "Komutların sırasını ve işleyişini kontrol eder",
-            "Verileri kalıcı olarak saklar",
-            "Sadece grafik oluşturur",
-            "Sadece güç üretir"
-        ],
-        a: "Komutların sırasını ve işleyişini kontrol eder",
-        difficulty: "medium",
-        week: 2,
-        topic: "Kontrol Birimi",
-        importance: "high",
-        explanation: "CU = 'trafik polisi'. Hangi komut ne zaman çalışacak, hepsini o ayarlar."
-    },
-
-    // Q30
-    {
-        q: "Kayıtlar (registers) işlemci içinde ne amaçla kullanılır?",
-        t: "mcq",
-        o: [
-            "İşlem sırasında geçici verileri çok hızlı saklamak için",
-            "Uzun süreli yedekleme yapmak için",
-            "Monitörü bağlamak için",
-            "Sadece ses dosyası tutmak için"
-        ],
-        a: "İşlem sırasında geçici verileri çok hızlı saklamak için",
-        difficulty: "medium",
-        week: 2,
-        topic: "Register",
-        importance: "medium",
-        explanation: "Register = CPU’nun minicik ama ultra hızlı not kağıtları gibi düşün."
-    },
-
-    // Q31
-    {
-        q: "Önbellek (cache) belleğiyle ilgili doğru ifade hangisidir?",
-        t: "mcq",
-        o: [
-            "Çok hızlı, küçük boyutlu belleklerdir (L1, L2, L3)",
-            "RAM’den daha yavaştır",
-            "Sadece sabit disklerde bulunur",
-            "Verileri kalıcı saklar"
-        ],
-        a: "Çok hızlı, küçük boyutlu belleklerdir (L1, L2, L3)",
-        difficulty: "medium",
-        week: 2,
-        topic: "Cache",
-        importance: "high",
-        explanation: "Cache = CPU’ya yakın turbo bellek. Hızlı ama kapasitesi az."
-    },
-
-    // Q32
-    {
-        q: "Aşağıdakilerden hangisi 'mikroişlemci' kavramını en iyi açıklar?",
-        t: "mcq",
-        o: [
-            "CPU’nun tek bir yonga üzerine entegre edilmesi",
-            "Sadece RAM’in küçültülmesi",
-            "Sadece ekran kartının büyütülmesi",
-            "Sadece sabit diskin küçültülmesi"
-        ],
-        a: "CPU’nun tek bir yonga üzerine entegre edilmesi",
-        difficulty: "medium",
-        week: 2,
-        topic: "Mikroişlemci",
-        importance: "medium",
-        explanation: "Mikroişlemci = 'mikro çipte CPU'. 4004 bunun ilk örneğiydi."
-    },
-
-    // Q33
-    {
-        q: "Çok çekirdekli (multi-core) işlemciler için aşağıdakilerden hangisi doğrudur?",
-        t: "mcq",
-        o: [
-            "Aynı anda daha fazla işi paralel olarak yapabilirler",
-            "Her zaman tek çekirdekliden daha yavaş çalışırlar",
-            "Sadece tek program çalıştırabilirler",
-            "Hiçbir zaman enerji tüketmezler"
-        ],
-        a: "Aynı anda daha fazla işi paralel olarak yapabilirler",
-        difficulty: "easy",
-        week: 2,
-        topic: "Multi-core",
-        importance: "high",
-        explanation: "Çekirdek sayısı = aynı anda yapılabilecek iş sayısı gibi düşünebilirsin."
-    },
-
-    // Q34
-    {
-        q: "Saat hızı (clock speed) hangi birimle ölçülür?",
-        t: "mcq",
-        o: [
-            "GHz",
-            "GB",
-            "dpi",
-            "MB/s"
-        ],
-        a: "GHz",
-        difficulty: "easy",
-        week: 2,
-        topic: "Saat Hızı",
-        importance: "high",
-        explanation: "Frekans = Hz. İşlemcide genelde GHz olarak görürsün."
-    },
-
-    // Q35
-    {
-        q: "Saat hızının artırılması genellikle ne sonuç doğurur?",
-        t: "mcq",
-        o: [
-            "Birim zamanda daha fazla komut işlenir, ısı ve enerji tüketimi artar",
-            "Tüm işlemler durur",
-            "Her zaman güç tüketimi azalır",
-            "Bilgisayarın bileşen sayısı artar"
-        ],
-        a: "Birim zamanda daha fazla komut işlenir, ısı ve enerji tüketimi artar",
-        difficulty: "medium",
-        week: 2,
-        topic: "Saat Hızı",
-        importance: "medium",
-        explanation: "Taktik: 'Hız artarsa → performans + ısı + güç' üçü birlikte artar."
-    },
-
-    // Q36
-    {
-        q: "64 bit işlemciler için aşağıdakilerden hangisi doğrudur?",
-        t: "mcq",
-        o: [
-            "Daha fazla bellek adresleyebilir ve günümüzde standarttır",
-            "Daha az bellek adresleyebilir",
-            "Bellek kullanmaz",
-            "Sadece 8 bitlik veriyi işleyebilir"
-        ],
-        a: "Daha fazla bellek adresleyebilir ve günümüzde standarttır",
-        difficulty: "easy",
-        week: 2,
-        topic: "Bit Mimarisi",
-        importance: "high",
-        explanation: "32 bit ≈ 4 GB bellek sınırı; 64 bit çok daha fazlasını adresleyebilir."
-    },
-
-    // Q37
-    {
-        q: "L1, L2 ve L3 önbellek seviyeleriyle ilgili doğru ifade hangisidir?",
-        t: "mcq",
-        o: [
-            "L1 en hızlı ve en küçük; L3 daha büyük ama nispeten daha yavaştır",
-            "L1 en yavaş, L3 en hızlıdır",
-            "Hepsi RAM’den daha yavaştır",
-            "Sadece L3 işlemci içinde bulunur"
-        ],
-        a: "L1 en hızlı ve en küçük; L3 daha büyük ama nispeten daha yavaştır",
-        difficulty: "medium",
-        week: 2,
-        topic: "Cache Seviyeleri",
-        importance: "medium",
-        explanation: "Ezber: L1 hız kralı, L3 kapasite kralı. Üçü de RAM’den çok hızlıdır."
-    },
-
-    // Q38
-    {
-        q: "RISC (Reduced Instruction Set Computer) mimarisi için hangisi doğrudur?",
-        t: "mcq",
-        o: [
-            "Daha az ve basit komut setine sahiptir, komutlar genelde tek saat vuruşunda çalışır",
-            "Çok karmaşık ve sayıca fazla komut içerir",
-            "Hiç komut içermez",
-            "Sadece masaüstü bilgisayarlarda kullanılır"
-        ],
-        a: "Daha az ve basit komut setine sahiptir, komutlar genelde tek saat vuruşunda çalışır",
-        difficulty: "hard",
-        week: 2,
-        topic: "RISC",
-        importance: "medium",
-        explanation: "RISC = 'Reduced' → sade ve az komut. Basitlik üzerinden hız kazanır."
-    },
-
-    // Q39
-    {
-        q: "CISC (Complex Instruction Set Computer) mimarisi için hangisi doğrudur?",
-        t: "mcq",
-        o: [
-            "Daha karmaşık ve çok sayıda komut içerir, tek komutla birden fazla iş yapılabilir",
-            "Hiç komut içermez",
-            "Sadece mobil cihazlarda kullanılır",
-            "Sadece 8 bitlik sistemlerde kullanılır"
-        ],
-        a: "Daha karmaşık ve çok sayıda komut içerir, tek komutla birden fazla iş yapılabilir",
-        difficulty: "hard",
-        week: 2,
-        topic: "CISC",
-        importance: "medium",
-        explanation: "CISC = 'Complex' → karmaşık komutlar, örnek: x86 mimarisi."
-    },
-
-    // Q40
-    {
-        q: "Aşağıdakilerden hangisi RISC mimarisine örnektir?",
-        t: "mcq",
-        o: [
-            "ARM tabanlı işlemciler",
-            "x86 masaüstü işlemciler",
-            "ENIAC tüplü devreleri",
-            "UNIVAC ana bilgisayarları"
-        ],
-        a: "ARM tabanlı işlemciler",
-        difficulty: "medium",
-        week: 2,
-        topic: "RISC Örnek",
-        importance: "medium",
-        explanation: "Telefon–tablet–Apple M serisi = ARM = RISC dünyası."
-    },
-
-    // Q41
-    {
-        q: "Aşağıdakilerden hangisi CISC mimarisine örnektir?",
-        t: "mcq",
-        o: [
-            "x86 (Intel/AMD) masaüstü işlemciler",
-            "ARM tabanlı mobil işlemciler",
-            "Sadece GPU’lar",
-            "Sadece 8 bitlik mikrodenetleyiciler"
-        ],
-        a: "x86 (Intel/AMD) masaüstü işlemciler",
-        difficulty: "medium",
-        week: 2,
-        topic: "CISC Örnek",
-        importance: "medium",
-        explanation: "Evde kullandığın klasik Intel/AMD işlemcilerin çoğu x86-CISC tabanlıdır."
-    },
-
-    // Q42
-    {
-        q: "Aşağıdakilerden hangisi işlemci üreticilerinden biridir?",
-        t: "mcq",
-        o: [
-            "Intel ve AMD",
-            "Canon ve Epson",
-            "Seagate ve Western Digital",
-            "HP ve Samsung yazıcı"
-        ],
-        a: "Intel ve AMD",
-        difficulty: "easy",
-        week: 2,
-        topic: "Üreticiler",
-        importance: "medium",
-        explanation: "Intel & AMD → CPU üreticisi; Seagate/W.Disk depolama üreticisidir."
-    },
-
-    // Q43
-    {
-        q: "Apple’ın M serisi işlemcileri hangi mimariyi temel alır?",
-        t: "mcq",
-        o: [
-            "ARM tabanlı mimari",
-            "Sadece x86 mimarisi",
-            "Vakum tüplü mimari",
-            "Hiçbir işlemci mimarisini kullanmaz"
-        ],
-        a: "ARM tabanlı mimari",
-        difficulty: "medium",
-        week: 2,
-        topic: "Apple M Serisi",
+        week: 8,
+        topic: "Dışa Aktarma",
         importance: "low",
-        explanation: "Slaytta özellikle vurgulanıyor: Apple M = ARM tabanlı, RISC dünyasına aittir."
+        explanation: "Sunuyu video yapmak, sunuyu PowerPoint olmayan cihazlarda da izlenebilir hale getirir."
     },
 
-    // Q44
+    // 90
     {
-        q: "İşlemcilerde üretim teknolojisinin 90 nm’den 7 nm’ye, 3 nm’ye düşmesi ne anlama gelir?",
+        q: "Excel’de satır eklemek için ne yapılabilir?",
         t: "mcq",
         o: [
-            "Daha küçük transistörler, daha az güç tüketimi ve daha yüksek performans",
-            "Daha büyük transistörler ve daha fazla güç tüketimi",
-            "Her zaman daha yavaş işlemciler",
-            "İşlemcinin hiçbir zaman ısınmaması"
+            "Satır numarasına sağ tıklayıp Ekle seçmek",
+            "Sütun başlığına sağ tıklayıp Sil seçmek",
+            "Dosyayı kapatmak",
+            "Sadece yazı tipini değiştirmek"
         ],
-        a: "Daha küçük transistörler, daha az güç tüketimi ve daha yüksek performans",
-        difficulty: "hard",
-        week: 2,
-        topic: "Üretim Teknolojisi",
-        importance: "medium",
-        explanation: "nm küçüldükçe aynı alana daha çok transistör sığar → güç/performans verimi artar."
-    },
-
-    // Q45
-    {
-        q: "İşlemcilerin geleceğiyle ilgili hangisi slaytta geçen bir trenddir?",
-        t: "mcq",
-        o: [
-            "Daha fazla çekirdek ve yapay zekâ optimizasyonu",
-            "Tamamen mekanik tasarıma dönüş",
-            "Vakum tüplerine geri dönülmesi",
-            "Belleksiz işlemciler tasarlanması"
-        ],
-        a: "Daha fazla çekirdek ve yapay zekâ optimizasyonu",
+        a: "Satır numarasına sağ tıklayıp Ekle seçmek",
         difficulty: "medium",
-        week: 2,
-        topic: "Gelecek",
+        week: 8,
+        topic: "Excel Satır/Sütun",
+        importance: "medium",
+        explanation: "Satır numarasına sağ tıklayıp Ekle denildiğinde yeni bir satır eklenir."
+    },
+
+    // 91
+    {
+        q: "Word’de sütunlu metin (gazete yazısı gibi) oluşturmak için hangi özellik kullanılır?",
+        t: "mcq",
+        o: [
+            "Sütunlar",
+            "Dipnot",
+            "Yorum",
+            "İçindekiler"
+        ],
+        a: "Sütunlar",
+        difficulty: "hard",
+        week: 8,
+        topic: "Word Sütun",
         importance: "low",
-        explanation: "Gelecek: çok çekirdek, AI hızlandırma, kuantum ve nöromorfik gibi yeni yaklaşımlar."
+        explanation: "Sütunlar komutu, metni birden fazla sütuna bölmek için kullanılır."
     },
 
-    // Q46
+    // 92
     {
-        q: "Aşağıdakilerden hangisi işlemci performansını etkileyen bir etken DEĞİLDİR?",
+        q: "Ofis programlarında 'PANONUN' (Clipboard) temel görevi nedir?",
         t: "mcq",
         o: [
-            "Kasanın dış rengi",
-            "Çekirdek sayısı",
-            "Saat hızı",
-            "Önbellek (cache) miktarı"
+            "Yazıcıyı yönetmek",
+            "Kopyalanan veya kesilen öğeleri geçici olarak saklamak",
+            "Dosyaları şifrelemek",
+            "İnternete bağlanmak"
         ],
-        a: "Kasanın dış rengi",
-        difficulty: "easy",
-        week: 2,
-        topic: "Performans",
-        importance: "medium",
-        explanation: "Performans = mimari + çekirdek + saat hızı + cache. Estetik unsurlar etkilemez."
-    },
-
-    // Q47
-    {
-        q: "Sunucu işlemcilerine örnek olarak aşağıdakilerden hangisi verilebilir?",
-        t: "mcq",
-        o: [
-            "Intel Xeon ve AMD EPYC",
-            "Intel Celeron",
-            "Altair 8800",
-            "ENIAC"
-        ],
-        a: "Intel Xeon ve AMD EPYC",
+        a: "Kopyalanan veya kesilen öğeleri geçici olarak saklamak",
         difficulty: "medium",
-        week: 2,
-        topic: "Sunucu İşlemcileri",
+        week: 8,
+        topic: "Pano",
+        importance: "medium",
+        explanation: "Pano, kopyala/kes-yapıştır işlemlerinde verilerin geçici tutulduğu alandır."
+    },
+
+    // 93
+    {
+        q: "PowerPoint’te 'Geçiş Süresi' ayarı neyi belirler?",
+        t: "mcq",
+        o: [
+            "Slayttaki metin boyutunu",
+            "Slaytın arka plan rengini",
+            "Bir slayttan diğerine geçişin süresini",
+            "Sunucunun konuşma hızını"
+        ],
+        a: "Bir slayttan diğerine geçişin süresini",
+        difficulty: "medium",
+        week: 8,
+        topic: "Geçiş Süresi",
         importance: "low",
-        explanation: "Slaytta: Xeon & EPYC özellikle sunucular için tasarlanan işlemci aileleridir."
+        explanation: "Geçiş süresi, slayt geçiş efektinin ne kadar süreceğini belirler."
     },
 
-    // Q48
+    // 94
     {
-        q: "İşlemcinin ağır çoklu görev (çok sekmeli tarayıcı, video işleme, oyun) senaryosunda avantaj sağlaması için hangisi daha kritiktir?",
+        q: "Excel’de hatalı yazılmış bir formülde genellikle hangi işaret görünür?",
         t: "mcq",
         o: [
-            "Yeterli çekirdek sayısı ve iyi önbellek",
-            "Sadece kasa rengi",
-            "Sadece BIOS markası",
-            "Sadece RAM yuvasının sayısı"
+            "###",
+            "???",
+            "!!!",
+            "#####"
         ],
-        a: "Yeterli çekirdek sayısı ve iyi önbellek",
-        difficulty: "medium",
-        week: 2,
-        topic: "Performans",
-        importance: "medium",
-        explanation: "Çok iş = çok çekirdek + güçlü cache. Saat hızı da önemli ama tek başına yetmez."
-    },
-
-    // Q49
-    {
-        q: "Aşağıdakilerden hangisi mobil cihazlar için yaygın işlemci mimarisidir?",
-        t: "mcq",
-        o: [
-            "ARM",
-            "x86-64 masaüstü",
-            "ENIAC tüplü mimarisi",
-            "UNIVAC devreleri"
-        ],
-        a: "ARM",
-        difficulty: "easy",
-        week: 2,
-        topic: "Mobil İşlemciler",
-        importance: "medium",
-        explanation: "Telefon ve tablet deyince aklına ARM gelsin; enerji verimliliğiyle öne çıkar."
-    },
-
-    // Q50
-    {
-        q: "Aşağıdaki işlemci özelliklerinden hangisi, paralel çalışabilen çoklu uygulamalar için DOĞRUDAN daha büyük avantaj sağlar?",
-        t: "mcq",
-        o: [
-            "Yüksek çekirdek sayısı",
-            "Sadece büyük kasa hacmi",
-            "Sadece yüksek ekran parlaklığı",
-            "Sadece optik sürücü hızı"
-        ],
-        a: "Yüksek çekirdek sayısı",
-        difficulty: "medium",
-        week: 2,
-        topic: "Çekirdekler",
-        importance: "medium",
-        explanation: "Birden çok görev = birden çok çekirdek. Çekirdek sayısı arttıkça paralel iş kapasitesi artar."
-    },
-
-    // ========= HAFTA 3 – ANAKARTLAR =========
-
-    // Q51
-    {
-        q: "Anakart için en uygun tanım aşağıdakilerden hangisidir?",
-        t: "mcq",
-        o: [
-            "Bilgisayarın tüm bileşenlerini birbirine bağlayan ana devre kartı",
-            "Sadece verileri kalıcı saklayan aygıt",
-            "Sadece görüntü üreten kart",
-            "Sadece güç sağlayan cihaz"
-        ],
-        a: "Bilgisayarın tüm bileşenlerini birbirine bağlayan ana devre kartı",
-        difficulty: "easy",
-        week: 3,
-        topic: "Anakart Tanımı",
-        importance: "high",
-        explanation: "Anakart = 'otoban kavşağı'. Tüm donanımlar burada buluşur."
-    },
-
-    // Q52
-    {
-        q: "Aşağıdakilerden hangisi anakartın temel görevlerinden biri DEĞİLDİR?",
-        t: "mcq",
-        o: [
-            "İşletim sistemi yazmak",
-            "Donanımlar arası veri iletimini sağlamak",
-            "Güç dağılımını düzenlemek",
-            "Genişleme ve yükseltme imkânı sunmak"
-        ],
-        a: "İşletim sistemi yazmak",
-        difficulty: "easy",
-        week: 3,
-        topic: "Anakart Görevleri",
-        importance: "medium",
-        explanation: "İşletim sistemi yazılım işidir; anakart sadece donanım altyapısını sunar."
-    },
-
-    // Q53
-    {
-        q: "CPU soketinin görevi nedir?",
-        t: "mcq",
-        o: [
-            "İşlemcinin anakarta elektriksel ve mekanik bağlantısını sağlamak",
-            "RAM modüllerini yerleştirmek",
-            "Sabit diskleri bağlamak",
-            "Monitörü bağlamak"
-        ],
-        a: "İşlemcinin anakarta elektriksel ve mekanik bağlantısını sağlamak",
-        difficulty: "easy",
-        week: 3,
-        topic: "CPU Soketi",
-        importance: "high",
-        explanation: "Soket = işlemci yuvası. Uyumlu soket olmazsa işlemciyi takamazsın."
-    },
-
-    // Q54
-    {
-        q: "Aşağıdakilerden hangisi tipik işlemci soketi türlerindendir?",
-        t: "mcq",
-        o: [
-            "LGA, PGA, BGA",
-            "DDR3, DDR4",
-            "HDMI, VGA",
-            "RJ-45, RJ-11"
-        ],
-        a: "LGA, PGA, BGA",
-        difficulty: "medium",
-        week: 3,
-        topic: "Soket Tipleri",
-        importance: "medium",
-        explanation: "LGA/PGA/BGA = işlemci soketi; DDR bellek, HDMI/VGA görüntü; RJ-45 ağ konnektörüdür."
-    },
-
-    // Q55
-    {
-        q: "RAM slotlarının temel görevi nedir?",
-        t: "mcq",
-        o: [
-            "Bellek modüllerinin anakarta takılmasını sağlamak",
-            "İşlemci soğutucusunu bağlamak",
-            "Sabit diskleri sabitlemek",
-            "Kasa fanlarını bağlamak"
-        ],
-        a: "Bellek modüllerinin anakarta takılmasını sağlamak",
-        difficulty: "easy",
-        week: 3,
-        topic: "RAM Slotları",
-        importance: "high",
-        explanation: "RAM modülleri bu yuvalara takılır; DDR nesline göre slot tasarımı değişir."
-    },
-
-    // Q56
-    {
-        q: "Dual channel (çift kanal) RAM yapısı anakartta neyi ifade eder?",
-        t: "mcq",
-        o: [
-            "İki bellek kanalını paralel kullanarak bellek bant genişliğini artırmayı",
-            "Sadece tek bir RAM yuvası olmasını",
-            "RAM’in sabit diske takılmasını",
-            "RAM’in sadece tek çekirdekli çalışmasını"
-        ],
-        a: "İki bellek kanalını paralel kullanarak bellek bant genişliğini artırmayı",
-        difficulty: "medium",
-        week: 3,
-        topic: "RAM Kanalı",
-        importance: "medium",
-        explanation: "Dual/quad channel = paralel yol; veri yolu genişliği artar, performans yükselir."
-    },
-
-    // Q57
-    {
-        q: "Chipset (yonga seti) için en doğru ifade hangisidir?",
-        t: "mcq",
-        o: [
-            "Anakartın beyni gibi davranır, bileşenler arası veri akışını yönetir",
-            "Sadece kasanın rengini ayarlar",
-            "Sadece fan hızını ayarlar",
-            "Sadece monitör parlaklığını ayarlar"
-        ],
-        a: "Anakartın beyni gibi davranır, bileşenler arası veri akışını yönetir",
-        difficulty: "medium",
-        week: 3,
-        topic: "Chipset",
-        importance: "high",
-        explanation: "Chipset = 'trafik kontrol merkezi'. CPU–RAM–disk–G/Ç arası haberleşmeyi organize eder."
-    },
-
-    // Q58
-    {
-        q: "Klasik ayrımda 'kuzey köprüsü' hangi bağlantıları yönetir?",
-        t: "mcq",
-        o: [
-            "CPU ile RAM ve GPU arasındaki hızlı veri trafiğini",
-            "Sadece USB portlarını",
-            "Sadece ses giriş/çıkışlarını",
-            "Sadece güç kablolarını"
-        ],
-        a: "CPU ile RAM ve GPU arasındaki hızlı veri trafiğini",
+        a: "#####",
         difficulty: "hard",
-        week: 3,
-        topic: "Kuzey Köprüsü",
-        importance: "medium",
-        explanation: "Kuzey = hızlı bileşenler (CPU, RAM, ekran kartı), Güney = daha yavaş G/Ç birimleri."
-    },
-
-    // Q59
-    {
-        q: "Güney köprüsü (southbridge) daha çok hangi bileşenleri yönetir?",
-        t: "mcq",
-        o: [
-            "Diskler, USB, ağ kartı gibi G/Ç birimlerini",
-            "Sadece CPU ile RAM bağlantısını",
-            "Sadece ekran kartını",
-            "Sadece güç kaynağını"
-        ],
-        a: "Diskler, USB, ağ kartı gibi G/Ç birimlerini",
-        difficulty: "medium",
-        week: 3,
-        topic: "Güney Köprüsü",
-        importance: "medium",
-        explanation: "Güney = 'çevre yolu'; disk, USB, ağ gibi çevre cihazları onunla konuşur."
-    },
-
-    // Q60
-    {
-        q: "Anakart üzerindeki BIOS/UEFI çipinde ne bulunur?",
-        t: "mcq",
-        o: [
-            "Bilgisayar açılışında çalışan temel sistem yazılımı",
-            "Kullanıcı belgeleri",
-            "Oyun kayıt dosyaları",
-            "Grafik sürücüleri"
-        ],
-        a: "Bilgisayar açılışında çalışan temel sistem yazılımı",
-        difficulty: "easy",
-        week: 3,
-        topic: "BIOS Çipi",
-        importance: "high",
-        explanation: "Bu çipte BIOS/UEFI kodu bulunur; açılışta donanımı tanıyan ilk yazılımdır."
-    },
-
-    // Q61
-    {
-        q: "24-pin ATX konnektörü anakart üzerinde hangi amaçla kullanılır?",
-        t: "mcq",
-        o: [
-            "Anakartın ana güç bağlantısını sağlamak",
-            "Sadece klavye bağlamak",
-            "Sadece monitör bağlamak",
-            "Sadece hoparlör bağlamak"
-        ],
-        a: "Anakartın ana güç bağlantısını sağlamak",
-        difficulty: "easy",
-        week: 3,
-        topic: "Güç Bağlantısı",
-        importance: "medium",
-        explanation: "Büyük 24-pin fiş = anakarta hayat veren ana güç bağlantısıdır."
-    },
-
-    // Q62
-    {
-        q: "Anakart üzerindeki 4/8-pin ek güç konnektörü genellikle hangi bileşen içindir?",
-        t: "mcq",
-        o: [
-            "CPU (işlemci)",
-            "RAM",
-            "Sabit disk",
-            "Klavye"
-        ],
-        a: "CPU (işlemci)",
-        difficulty: "medium",
-        week: 3,
-        topic: "CPU Güç",
-        importance: "medium",
-        explanation: "İşlemcinin ayrı bir güç hattına ihtiyacı vardır; 4/8-pin konnektör bunu sağlar."
-    },
-
-    // Q63
-    {
-        q: "Anakart arka panelindeki G/Ç portları arasında hangisi bulunabilir?",
-        t: "mcq",
-        o: [
-            "USB ve Ethernet portları",
-            "RAM slotları",
-            "CPU soketi",
-            "M.2 NVMe yuvası"
-        ],
-        a: "USB ve Ethernet portları",
-        difficulty: "easy",
-        week: 3,
-        topic: "G/Ç Portları",
-        importance: "medium",
-        explanation: "Arka panel: USB, HDMI, Ethernet, ses portları; RAM/CPU/M.2 ise kartın iç yüzünde."
-    },
-
-    // Q64
-    {
-        q: "PCI Express (PCIe) slotları hangi amaçla kullanılır?",
-        t: "mcq",
-        o: [
-            "Genişleme kartlarını (ekran, ses, ağ kartı vb.) takmak için",
-            "Sadece güç kablosu bağlamak için",
-            "Sadece RAM takmak için",
-            "Sadece optik sürücü bağlamak için"
-        ],
-        a: "Genişleme kartlarını (ekran, ses, ağ kartı vb.) takmak için",
-        difficulty: "medium",
-        week: 3,
-        topic: "PCIe",
-        importance: "high",
-        explanation: "PCIe = 'ekstra yetenek yuvası'. Ekran kartı genelde x16 PCIe’ye takılır."
-    },
-
-    // Q65
-    {
-        q: "Aşağıdakilerden hangisi PCIe hat genişliği (lane) türlerinden biridir?",
-        t: "mcq",
-        o: [
-            "x1, x4, x8, x16",
-            "1 GB, 2 GB",
-            "720p, 1080p",
-            "12 V, 5 V"
-        ],
-        a: "x1, x4, x8, x16",
-        difficulty: "medium",
-        week: 3,
-        topic: "PCIe Hatları",
-        importance: "medium",
-        explanation: "x1–x16 sayıları, verinin aynı anda kaç hat üzerinden taşındığını gösterir."
-    },
-
-    // Q66
-    {
-        q: "SATA portları anakartta hangi tür aygıtları bağlamak için kullanılır?",
-        t: "mcq",
-        o: [
-            "HDD/SSD ve optik sürücüler gibi depolama aygıtları",
-            "Klavye ve fare",
-            "Monitör",
-            "CPU"
-        ],
-        a: "HDD/SSD ve optik sürücüler gibi depolama aygıtları",
-        difficulty: "easy",
-        week: 3,
-        topic: "SATA",
-        importance: "high",
-        explanation: "SATA deyince aklına disk hattı gelsin: HDD, SATA SSD, DVD sürücü."
-    },
-
-    // Q67
-    {
-        q: "M.2 NVMe yuvaları genellikle hangi bileşen için kullanılır?",
-        t: "mcq",
-        o: [
-            "Yüksek hızlı SSD’ler",
-            "Klavye",
-            "Mouse",
-            "Yazıcı"
-        ],
-        a: "Yüksek hızlı SSD’ler",
-        difficulty: "medium",
-        week: 3,
-        topic: "M.2 NVMe",
-        importance: "medium",
-        explanation: "M.2 NVMe = 'sakız gibi ince, çok hızlı SSD' diye akılda tut."
-    },
-
-    // Q68
-    {
-        q: "IDE bağlantısıyla ilgili doğru ifade hangisidir?",
-        t: "mcq",
-        o: [
-            "Eski nesil anakartlarda kullanılan bir depolama arabirimidir",
-            "En yeni NVMe standardıdır",
-            "RAM’i bağlamak için kullanılır",
-            "Sadece monitörler için kullanılır"
-        ],
-        a: "Eski nesil anakartlarda kullanılan bir depolama arabirimidir",
-        difficulty: "hard",
-        week: 3,
-        topic: "IDE",
+        week: 8,
+        topic: "Hata Gösterimi",
         importance: "low",
-        explanation: "IDE/PATA eski; yerini SATA ve NVMe aldı. Tarihsel soru gelebilir."
+        explanation: "##### işareti genelde hücre genişliği yetersiz veya sayı gösteriminde sorun olduğunda görünür."
     },
 
-    // Q69
+    // 95
     {
-        q: "Aşağıdakilerden hangisi anakart form faktörlerinden biridir?",
+        q: "Word’de dosyayı şifreleyerek açarken parola istemesini sağlamak için hangi yol izlenir?",
         t: "mcq",
         o: [
-            "ATX, Micro-ATX, Mini-ITX",
-            "DDR3, DDR4, DDR5",
-            "USB 2.0, USB 3.0",
-            "HDMI, DisplayPort"
+            "Giriş > Kalın",
+            "Dosya > Bilgi > Belgeyi Koru",
+            "Görünüm > Yakınlaştır",
+            "Ekle > Sayfa Numarası"
         ],
-        a: "ATX, Micro-ATX, Mini-ITX",
-        difficulty: "easy",
-        week: 3,
-        topic: "Form Faktör",
-        importance: "medium",
-        explanation: "Form faktör = boyut ve yerleşim standardı. ATX en yaygın, Mini-ITX en küçüklerdendir."
-    },
-
-    // Q70
-    {
-        q: "Anakart seçerken aşağıdakilerden hangisine dikkat etmek GEREKMEZ?",
-        t: "mcq",
-        o: [
-            "Monitörün ekran parlaklığına",
-            "CPU uyumlu soket tipine",
-            "RAM tipi ve maksimum kapasiteye",
-            "Genişleme slotları ve port sayısına"
-        ],
-        a: "Monitörün ekran parlaklığına",
-        difficulty: "easy",
-        week: 3,
-        topic: "Seçim Kriteri",
-        importance: "medium",
-        explanation: "Anakart seçimi donanım uyumluluğu ile ilgilidir; parlaklık monitör özellikleridir."
-    },
-
-    // Q71
-    {
-        q: "Bir anakartın yükseltme (upgrade) imkânı sunması ne demektir?",
-        t: "mcq",
-        o: [
-            "İleride yeni RAM, ekran kartı veya depolama birimi eklenebilmesi",
-            "Kasanın renginin değişebilmesi",
-            "Sadece BIOS markasının değişebilmesi",
-            "Monitör boyutunun değişebilmesi"
-        ],
-        a: "İleride yeni RAM, ekran kartı veya depolama birimi eklenebilmesi",
-        difficulty: "medium",
-        week: 3,
-        topic: "Yükseltme",
-        importance: "medium",
-        explanation: "Boş yuva = gelecekte yükseltme şansı. Sınavda 'genişleme' kelimesine dikkat."
-    },
-
-    // Q72
-    {
-        q: "Aşağıdakilerden hangisi anakart üzerindeki G/Ç portlarından biri DEĞİLDİR?",
-        t: "mcq",
-        o: [
-            "Gaz pedalı girişi",
-            "USB portu",
-            "Ethernet portu",
-            "Ses giriş/çıkışları"
-        ],
-        a: "Gaz pedalı girişi",
-        difficulty: "easy",
-        week: 3,
-        topic: "G/Ç Portları",
+        a: "Dosya > Bilgi > Belgeyi Koru",
+        difficulty: "hard",
+        week: 8,
+        topic: "Word Güvenlik",
         importance: "low",
-        explanation: "USB, Ethernet, ses portları klasik; 'gaz pedalı girişi' otomotivde olur, PC anakartında değil."
+        explanation: "Belgeyi Koru seçeneklerinden parola belirlenerek belge açılışına şifre konabilir."
     },
 
-    // Q73
+    // 96
     {
-        q: "Anakartın 'güç dağılımını düzenleyen' görevi ile ne kastedilmektedir?",
+        q: "PowerPoint’te slaytın arka planını değiştirmek için hangi sekme kullanılmalıdır?",
         t: "mcq",
         o: [
-            "Güç kaynağından gelen elektriği uygun şekilde bileşenlere dağıtmak",
-            "Sadece ekran parlaklığını ayarlamak",
-            "Sadece klavye tuşlarını aydınlatmak",
-            "Sadece kasanın rengini değiştirmek"
+            "Tasarım",
+            "Ekle",
+            "Giriş",
+            "Gözden Geçir"
         ],
-        a: "Güç kaynağından gelen elektriği uygun şekilde bileşenlere dağıtmak",
-        difficulty: "medium",
-        week: 3,
-        topic: "Güç Dağılımı",
-        importance: "medium",
-        explanation: "VRM’ler ve güç yolları, anakartın bileşenlere stabil voltaj vermesini sağlar."
-    },
-
-    // Q74
-    {
-        q: "Anakart form faktörü ile kasa seçiminde aşağıdakilerden hangisi doğrudur?",
-        t: "mcq",
-        o: [
-            "Kasanın, anakartın form faktörünü (ATX, mATX vb.) desteklemesi gerekir",
-            "Her anakart her kasaya takılabilir",
-            "Kasa boyutu önemli değildir",
-            "Form faktörü sadece renkle ilgilidir"
-        ],
-        a: "Kasanın, anakartın form faktörünü (ATX, mATX vb.) desteklemesi gerekir",
-        difficulty: "medium",
-        week: 3,
-        topic: "Form Faktör",
-        importance: "medium",
-        explanation: "ATX kasa, Mini-ITX anakartı alır ama tersi her zaman olmaz; uyuma dikkat."
-    },
-
-    // Q75
-    {
-        q: "Anakart üzerindeki 'BIOS/UEFI çipi' hangi HAFTA konusu ile de yakından ilişkilidir?",
-        t: "mcq",
-        o: [
-            "4. hafta – BIOS ve CMOS",
-            "1. hafta – ENIAC tarihi",
-            "2. hafta – Yazılım mühendisliği",
-            "5. hafta – Yazıcı teknolojileri"
-        ],
-        a: "4. hafta – BIOS ve CMOS",
+        a: "Tasarım",
         difficulty: "easy",
-        week: 3,
-        topic: "Hafta Bağlantısı",
+        week: 8,
+        topic: "Arka Plan",
         importance: "low",
-        explanation: "Anakart bileşeni olarak görünse de ayrıntılı anlatım 4. haftadaki BIOS/CMOS konusudur."
+        explanation: "Tasarım sekmesi slaytların tema ve arka plan ayarlarını içerir."
     },
 
-    // ========= HAFTA 4 – BIOS ve CMOS =========
-
-    // Q76
+    // 97
     {
-        q: "BIOS’un açılımı aşağıdakilerden hangisidir?",
+        q: "Excel’de tarih biçiminde gösterilen bir hücrede, arka planda saklanan veri türü genellikle nedir?",
         t: "mcq",
         o: [
-            "Basic Input/Output System",
-            "Binary Internal Operating Service",
-            "Basic Internet Operation System",
-            "Bus Integrated Output Software"
+            "Metin",
+            "Resim",
+            "Sayı",
+            "Formül değil"
         ],
-        a: "Basic Input/Output System",
-        difficulty: "easy",
-        week: 4,
-        topic: "BIOS",
-        importance: "high",
-        explanation: "BIOS = Temel Giriş/Çıkış Sistemi. 'Input/Output' kelimeleri çok kritik."
-    },
-
-    // Q77
-    {
-        q: "BIOS genellikle anakart üzerinde hangi bellek türünde saklanır?",
-        t: "mcq",
-        o: [
-            "ROM bellek üzerinde",
-            "RAM üzerinde",
-            "Sabit disk üzerinde",
-            "USB bellek üzerinde"
-        ],
-        a: "ROM bellek üzerinde",
-        difficulty: "medium",
-        week: 4,
-        topic: "BIOS Konumu",
-        importance: "high",
-        explanation: "BIOS kodu kalıcı olmalı → ROM çipinde tutulur; pil gerektirmez."
-    },
-
-    // Q78
-    {
-        q: "BIOS’un bilgisayar açılışındaki görevlerinden biri AŞAĞIDAKİLERDEN hangisidir?",
-        t: "mcq",
-        o: [
-            "POST (Power On Self Test) yaparak donanımları kontrol etmek",
-            "Sadece oyunları başlatmak",
-            "Sadece yazıcıya veri göndermek",
-            "Sadece masaüstü arka planını değiştirmek"
-        ],
-        a: "POST (Power On Self Test) yaparak donanımları kontrol etmek",
-        difficulty: "easy",
-        week: 4,
-        topic: "BIOS Görevleri",
-        importance: "high",
-        explanation: "Açılışta bip sesleri + donanım kontrolü = POST; bunu BIOS başlatır."
-    },
-
-    // Q79
-    {
-        q: "Aşağıdakilerden hangisi BIOS’un görevlerinden BİRİ DEĞİLDİR?",
-        t: "mcq",
-        o: [
-            "Fotoğraf düzenlemek",
-            "Boot sırasını belirlemek",
-            "Donanımı tanımak (RAM, disk vb.)",
-            "Hata durumunda uyarı sesleri vermek"
-        ],
-        a: "Fotoğraf düzenlemek",
-        difficulty: "easy",
-        week: 4,
-        topic: "BIOS Görevleri",
-        importance: "medium",
-        explanation: "Fotoğraf düzenleme işletim sistemi ve uygulamaların işidir; BIOS sadece temel açılış görevlerini yapar."
-    },
-
-    // Q80
-    {
-        q: "CMOS’un açılımı aşağıdakilerden hangisidir?",
-        t: "mcq",
-        o: [
-            "Complementary Metal-Oxide Semiconductor",
-            "Central Memory Operating System",
-            "Computer Memory Output Storage",
-            "Core Machine Operating Software"
-        ],
-        a: "Complementary Metal-Oxide Semiconductor",
+        a: "Sayı",
         difficulty: "hard",
-        week: 4,
-        topic: "CMOS",
-        importance: "medium",
-        explanation: "Tam açılımı ezber zor olabilir ama 'CMOS = ayarları saklayan küçük bellek yongası' mantığını bilmen yeter."
+        week: 8,
+        topic: "Tarih Biçimi",
+        importance: "low",
+        explanation: "Excel tarihler aslında sayısal değerlerdir, sadece tarih biçimiyle görüntülenir."
     },
 
-    // Q81
+    // 98
     {
-        q: "CMOS yongasında hangi tür bilgiler saklanır?",
+        q: "Word’de 'Stiller' (Styles) özelliğinin temel kullanım amacı nedir?",
         t: "mcq",
         o: [
-            "BIOS ayarları, tarih, saat ve boot sırası gibi bilgiler",
-            "Kullanıcı belgeleri",
-            "Fotoğraf dosyaları",
-            "Oyun kayıt dosyaları"
+            "Belgeyi yazdırmak",
+            "Belgedeki başlık ve metinlerin biçimlendirmesini tutarlı hale getirmek",
+            "Dosyayı şifrelemek",
+            "Belgeyi kapatmak"
         ],
-        a: "BIOS ayarları, tarih, saat ve boot sırası gibi bilgiler",
+        a: "Belgedeki başlık ve metinlerin biçimlendirmesini tutarlı hale getirmek",
         difficulty: "medium",
-        week: 4,
-        topic: "CMOS Görevi",
-        importance: "high",
-        explanation: "CMOS = ayar defteri. BIOS kodu ROM’da, AYARLAR ise CMOS’ta tutulur."
-    },
-
-    // Q82
-    {
-        q: "CMOS yongasındaki bilgilerin korunması için aşağıdakilerden hangisi gereklidir?",
-        t: "mcq",
-        o: [
-            "Küçük bir pil (CMOS pili)",
-            "Harici sabit disk",
-            "USB bellek",
-            "Monitör"
-        ],
-        a: "Küçük bir pil (CMOS pili)",
-        difficulty: "easy",
-        week: 4,
-        topic: "CMOS Pili",
-        importance: "high",
-        explanation: "CMOS pili biterse saat/ tarih sıfırlanır, BIOS ayarları defaulta döner."
-    },
-
-    // Q83
-    {
-        q: "CMOS pili biterse aşağıdakilerden hangisi yaşanabilir?",
-        t: "mcq",
-        o: [
-            "Tarih ve saat ayarlarının sıfırlanması",
-            "İşlemcinin tamamen yanması",
-            "Monitörün patlaması",
-            "Sabit diskin fiziksel olarak küçülmesi"
-        ],
-        a: "Tarih ve saat ayarlarının sıfırlanması",
-        difficulty: "medium",
-        week: 4,
-        topic: "CMOS Pili",
+        week: 8,
+        topic: "Stiller",
         importance: "medium",
-        explanation: "Bilgisayar her açılışta tarihi 2000’lere atıyorsa ilk şüpheli: CMOS pili."
+        explanation: "Stiller, belgede aynı türdeki öğelere tek tıkla aynı biçimi vermek için kullanılır."
     },
 
-    // Q84
+    // 99
     {
-        q: "BIOS ile CMOS arasındaki farkla ilgili AŞAĞIDAKİLERDEN hangisi doğrudur?",
+        q: "PowerPoint’te aynı animasyon ayarlarını başka bir nesneye kopyalamak için kullanılan araç hangisidir?",
         t: "mcq",
         o: [
-            "BIOS ROM bellek üzerindeki programdır, CMOS ise ayarları tutan küçük bellektir",
-            "İkisi de tamamen aynı şeydir",
-            "CMOS bir program, BIOS sadece pildir",
-            "BIOS sadece saat bilgisini saklar, CMOS işletim sistemini saklar"
+            "Biçim Boyacısı",
+            "Animasyon Boyacısı",
+            "Tablo Stilleri",
+            "Geçişler"
         ],
-        a: "BIOS ROM bellek üzerindeki programdır, CMOS ise ayarları tutan küçük bellektir",
+        a: "Animasyon Boyacısı",
         difficulty: "hard",
-        week: 4,
-        topic: "BIOS vs CMOS",
-        importance: "high",
-        explanation: "Ezber: BIOS = program, CMOS = ayar belleği + pil. Bu farkı mutlaka bil."
+        week: 8,
+        topic: "Animasyon Boyacısı",
+        importance: "low",
+        explanation: "Animasyon Boyacısı, bir nesnedeki animasyon ayarlarını başka nesneye kopyalar."
     },
 
-    // Q85
+    // 100
     {
-        q: "Aşağıdakilerden hangisi PİLE İHTİYAÇ DUYAR?",
+        q: "Aşağıdakilerden hangisi ofis programları ile verimli çalışmak için önerilen bir alışkanlıktır?",
         t: "mcq",
         o: [
-            "CMOS bellek",
-            "BIOS kodunun bulunduğu ROM",
-            "Sabit disk plakaları",
-            "USB bellek"
+            "Belgeyi hiç kaydetmemek",
+            "Sık sık kaydedip yedek almak",
+            "Her zaman aynı şifreyi kullanmak",
+            "Tüm dosyaları masaüstüne yığmak"
         ],
-        a: "CMOS bellek",
-        difficulty: "medium",
-        week: 4,
-        topic: "Güç Bağımlılığı",
-        importance: "medium",
-        explanation: "CMOS ayarları pile bağlıdır; BIOS kodu ROM’da kalıcıdır ve pile ihtiyaç duymaz."
-    },
-
-    // Q86
-    {
-        q: "UEFI hakkında aşağıdakilerden hangisi doğrudur?",
-        t: "mcq",
-        o: [
-            "Klasik BIOS’un yerini alan, grafik arayüzlü ve gelişmiş özelliklere sahip sistemdir",
-            "Sadece komut satırından kullanılan eski bir BIOS türüdür",
-            "Sadece mobil cihazlarda kullanılır",
-            "Sabit disklerin manyetik yapısını açıklar"
-        ],
-        a: "Klasik BIOS’un yerini alan, grafik arayüzlü ve gelişmiş özelliklere sahip sistemdir",
-        difficulty: "medium",
-        week: 4,
-        topic: "UEFI",
-        importance: "medium",
-        explanation: "UEFI = modern BIOS. Büyük disk desteği, güvenli boot, grafik arayüz gibi ekstra özellikler getirir."
-    },
-
-    // Q87
-    {
-        q: "Aşağıdakilerden hangisi UEFI’nin klasik BIOS’a göre avantajlarından biri DEĞİLDİR?",
-        t: "mcq",
-        o: [
-            "Saat ve tarih bilgisini saklaması",
-            "Grafik arayüz desteği",
-            "Daha büyük diskleri desteklemesi",
-            "Daha fazla yapılandırma imkânı sunması"
-        ],
-        a: "Saat ve tarih bilgisini saklaması",
-        difficulty: "hard",
-        week: 4,
-        topic: "BIOS vs UEFI",
-        importance: "medium",
-        explanation: "Saat/tarih CMOS’un işidir; UEFI’nin farkı grafik arayüz ve gelişmiş özelliklerdir."
-    },
-
-    // Q88
-    {
-        q: "Boot sırası (boot order) ile ilgili doğru ifade hangisidir?",
-        t: "mcq",
-        o: [
-            "Bilgisayarın hangi aygıttan (disk, USB vb.) önce işletim sistemi arayacağını belirleyen ayardır",
-            "Ekran çözünürlüğünü belirler",
-            "RAM frekansını belirler",
-            "CPU çekirdek sayısını değiştirir"
-        ],
-        a: "Bilgisayarın hangi aygıttan (disk, USB vb.) önce işletim sistemi arayacağını belirleyen ayardır",
-        difficulty: "medium",
-        week: 4,
-        topic: "Boot Sırası",
-        importance: "high",
-        explanation: "USB’den format atmak istiyorsan boot sırasını USB’yi öne alacak şekilde değiştirirsin."
-    },
-
-    // Q89
-    {
-        q: "CMOS sıfırlama (Clear CMOS) işlemi genellikle ne amaçla yapılır?",
-        t: "mcq",
-        o: [
-            "BIOS ayarlarını fabrika varsayılanına döndürmek için",
-            "Sabit diski tamamen biçimlendirmek için",
-            "İşletim sistemini silmek için",
-            "Monitörün parlaklığını artırmak için"
-        ],
-        a: "BIOS ayarlarını fabrika varsayılanına döndürmek için",
-        difficulty: "medium",
-        week: 4,
-        topic: "Clear CMOS",
-        importance: "medium",
-        explanation: "Yanlış BIOS ayarı yüzünden sistem açılmıyorsa CMOS sıfırlama hayat kurtarır."
-    },
-
-    // Q90
-    {
-        q: "Aşağıdakilerden hangisi 'BIOS, CMOS, UEFI' üçlüsünün görev paylaşımını en doğru özetler?",
-        t: "mcq",
-        o: [
-            "BIOS/UEFI açılış yazılımıdır; CMOS ise bu yazılıma ait ayarları tutan bellek yongasıdır",
-            "BIOS sadece pil, CMOS sadece yazılımdır",
-            "Üçü de aynı şeydir, fark yoktur",
-            "Sadece işletim sistemi çekirdeğini ifade ederler"
-        ],
-        a: "BIOS/UEFI açılış yazılımıdır; CMOS ise bu yazılıma ait ayarları tutan bellek yongasıdır",
-        difficulty: "hard",
-        week: 4,
-        topic: "Genel Özet",
-        importance: "high",
-        explanation: "Tek cümle özeti: BIOS/UEFI = program, CMOS = ayarların saklandığı pil destekli bellek."
-    },
-
-    // ========= HAFTA 5 – HAFIZA BİRİMLERİ (BELLEK) =========
-
-    // Q91
-    {
-        q: "Bilgisayar hafızası (bellek) neyi ifade eder?",
-        t: "mcq",
-        o: [
-            "Verilerin geçici veya kalıcı olarak saklandığı donanım birimlerini",
-            "Sadece CPU’nun soğutucusunu",
-            "Sadece monitör parlaklığını",
-            "Sadece yazıcının kartuşunu"
-        ],
-        a: "Verilerin geçici veya kalıcı olarak saklandığı donanım birimlerini",
+        a: "Sık sık kaydedip yedek almak",
         difficulty: "easy",
-        week: 5,
-        topic: "Bellek Tanımı",
+        week: 8,
+        topic: "Çalışma Alışkanlığı",
         importance: "high",
-        explanation: "Bellek = bilgisayarın hafızası; RAM, ROM, disk, bulut hepsi bu şemsiyenin altında."
-    },
-
-    // Q92
-    {
-        q: "Aşağıdakilerden hangisi bellek sınıflandırmasında birincil (ana) bellek grubuna girer?",
-        t: "mcq",
-        o: [
-            "RAM ve ROM",
-            "HDD ve SSD",
-            "CD/DVD ve USB bellek",
-            "Bulut depolama"
-        ],
-        a: "RAM ve ROM",
-        difficulty: "medium",
-        week: 5,
-        topic: "Birincil Bellek",
-        importance: "high",
-        explanation: "Slayt: Birincil = RAM + ROM; ikincil = HDD/SSD; üçüncül = bulut/harici yedek."
-    },
-
-    // Q93
-    {
-        q: "RAM (Random Access Memory) için aşağıdakilerden hangisi DOĞRUDUR?",
-        t: "mcq",
-        o: [
-            "Bilgisayar kapandığında içeriği silinen, geçici (volatil) bellek türüdür",
-            "Verileri elektrik kesilse bile daima saklar",
-            "Sadece okunabilir, yazılamaz",
-            "Sadece optik disklerde bulunur"
-        ],
-        a: "Bilgisayar kapandığında içeriği silinen, geçici (volatil) bellek türüdür",
-        difficulty: "easy",
-        week: 5,
-        topic: "RAM",
-        importance: "high",
-        explanation: "RAM = uçucu. Fiși çekince gider; bu yüzden programlar kapanınca kaydedilmeyen işler kaybolur."
-    },
-
-    // Q94
-    {
-        q: "Aşağıdakilerden hangisi RAM’in kullanım amaçlarından biridir?",
-        t: "mcq",
-        o: [
-            "İşletim sistemi ve çalışan programların geçici verilerini tutmak",
-            "DVD filmleri fiziksel olarak saklamak",
-            "Kalıcı yedekleme yapmak",
-            "Sadece bilgisayarın rengini değiştirmek"
-        ],
-        a: "İşletim sistemi ve çalışan programların geçici verilerini tutmak",
-        difficulty: "medium",
-        week: 5,
-        topic: "RAM Kullanımı",
-        importance: "medium",
-        explanation: "Ne açıksa RAM’de. Çok program açarsan RAM doluyor ve sistem yavaşlıyor."
-    },
-
-    // Q95
-    {
-        q: "SRAM ve DRAM ile ilgili hangisi doğrudur?",
-        t: "mcq",
-        o: [
-            "SRAM daha hızlı ve pahalıdır, genelde cache’te; DRAM ise ana bellek için kullanılır",
-            "DRAM daha hızlıdır ve sadece cache’te kullanılır",
-            "İkisi de sadece sabit disklerde kullanılır",
-            "İkisi de sadece ROM türüdür"
-        ],
-        a: "SRAM daha hızlı ve pahalıdır, genelde cache’te; DRAM ise ana bellek için kullanılır",
-        difficulty: "hard",
-        week: 5,
-        topic: "SRAM vs DRAM",
-        importance: "medium",
-        explanation: "Ezber: S = Speed (hızlı) → SRAM = cache; D = Daha yaygın → DRAM = sistem belleği."
-    },
-
-    // Q96
-    {
-        q: "ROM (Read Only Memory) için aşağıdakilerden hangisi DOĞRUDUR?",
-        t: "mcq",
-        o: [
-            "Sadece okunabilir, kalıcı (non-volatile) bellek türüdür",
-            "Bilgisayar kapanınca içeriği silinir",
-            "Hiçbir bilgi tutulamaz",
-            "Sadece RAM’i kontrol eder"
-        ],
-        a: "Sadece okunabilir, kalıcı (non-volatile) bellek türüdür",
-        difficulty: "easy",
-        week: 5,
-        topic: "ROM",
-        importance: "high",
-        explanation: "ROM = sadece okunur ve kalıcı; BIOS/UEFI kodu gibi açılışta gerekli bilgiler burada tutulur."
-    },
-
-    // Q97
-    {
-        q: "Aşağıdakilerden hangisi ROM türlerinden BİRİ DEĞİLDİR?",
-        t: "mcq",
-        o: [
-            "SDRAM",
-            "PROM",
-            "EPROM",
-            "EEPROM"
-        ],
-        a: "SDRAM",
-        difficulty: "hard",
-        week: 5,
-        topic: "ROM Türleri",
-        importance: "medium",
-        explanation: "PROM/EPROM/EEPROM = ROM türleri; SDRAM ise bir RAM türüdür."
-    },
-
-    // Q98
-    {
-        q: "İkincil bellekler için aşağıdakilerden hangisi DOĞRUDUR?",
-        t: "mcq",
-        o: [
-            "HDD, SSD, CD/DVD gibi verileri kalıcı olarak saklayan belleklerdir",
-            "Sadece geçici veri tutar",
-            "Sadece CPU içinde bulunur",
-            "Sadece RAM yongasıdır"
-        ],
-        a: "HDD, SSD, CD/DVD gibi verileri kalıcı olarak saklayan belleklerdir",
-        difficulty: "medium",
-        week: 5,
-        topic: "İkincil Bellek",
-        importance: "high",
-        explanation: "İkincil = kalıcı depolama. Dosyalarımızı normalde burada saklarız."
-    },
-
-    // Q99
-    {
-        q: "SSD ile HDD karşılaştırıldığında aşağıdakilerden hangisi doğrudur?",
-        t: "mcq",
-        o: [
-            "SSD genelde daha hızlı, sessiz ve dayanıklıdır; HDD genelde daha ucuz ve yüksek kapasiteli",
-            "HDD her zaman SSD’den daha hızlıdır",
-            "SSD mutlaka daha ucuzdur",
-            "İkisi arasında hiçbir fark yoktur"
-        ],
-        a: "SSD genelde daha hızlı, sessiz ve dayanıklıdır; HDD genelde daha ucuz ve yüksek kapasiteli",
-        difficulty: "medium",
-        week: 5,
-        topic: "SSD vs HDD",
-        importance: "high",
-        explanation: "Tek cümle ezber: Hız istiyorsan SSD, çok kapasite ve ucuzluk istiyorsan HDD."
-    },
-
-    // Q100
-    {
-        q: "Bellek kapasite birimlerinin KÜÇÜKTEN BÜYÜĞE doğru doğru sıralanışı aşağıdakilerden hangisidir?",
-        t: "mcq",
-        o: [
-            "Bit < Byte < KB < MB < GB < TB < PB",
-            "Byte < Bit < KB < MB < GB < TB < PB",
-            "KB < Byte < Bit < MB < GB < TB < PB",
-            "Bit < KB < Byte < MB < GB < PB < TB"
-        ],
-        a: "Bit < Byte < KB < MB < GB < TB < PB",
-        difficulty: "easy",
-        week: 5,
-        topic: "Birimler",
-        importance: "high",
-        explanation: "Ezber merdiveni: bit → byte → KB → MB → GB → TB → PB. Bir altı 1024 katı şeklinde ilerler."
+        explanation: "Sık kaydetme ve yedekleme, veri kaybını önleyerek vize ve proje çalışmalarında güven sağlar."
     }
-
 ];
