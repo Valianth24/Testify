@@ -5,15 +5,15 @@
   'use strict';
 
   const CONFIG = {
-    maxElements: 40,           // Ekranda aynı anda maksimum öğe
-    spawnInterval: 600,        // Kaç ms'de bir yeni öğe üretilecek
-    heartRatio: 0.65,          // % kaç kalp, % kaç yazı
+    maxElements: 70,           // Ekranda aynı anda maksimum öğe (ARTTIRILDI)
+    spawnInterval: 450,        // Daha sık üretim (daha çok kalp)
+    heartRatio: 0.9,           // %90 kalp, %10 yazı (HEART çok, TEXT az)
     minDuration: 7,            // Animasyon minimum süresi (sn)
     maxDuration: 14,           // Animasyon maksimum süresi (sn)
-    minSize: 14,               // px
-    maxSize: 32,               // px
+    minSize: 14,               // Temel boyut (kalp için çarpan uygulanacak)
+    maxSize: 26,
     minRotate: -25,            // derece
-    maxRotate: 25,             // derece
+    maxRotate: 25,
     minOpacity: 0.45,
     maxOpacity: 0.9
   };
@@ -62,11 +62,11 @@
       }
 
       .eylul-love-rain-heart {
-        color: #fb7185; /* pembe */
+        /* Temel renk – inline style ile kırmızı/pembe gelecek */
       }
 
       .eylul-love-rain-text {
-        color: #facc15; /* sıcak sarı */
+        color: #fef9c3; /* daha soft sarı */
         font-weight: 600;
       }
 
@@ -100,7 +100,6 @@
     layerEl.id = 'eylulLoveRainLayer';
     layerEl.className = 'eylul-love-rain-layer';
 
-    // Body yükseklik değişse bile full screen kalsın
     document.body.appendChild(layerEl);
   }
 
@@ -116,28 +115,40 @@
     el.className = 'eylul-love-rain-item ' + (isHeart ? 'eylul-love-rain-heart' : 'eylul-love-rain-text');
 
     if (isHeart) {
-      // Rastgele kalp karakterleri
-      const hearts = ['❤', '💜', '💖', '💘', '💕', '💗'];
+      // Sadece kırmızı & pembe tonlu kalpler
+      const hearts = ['❤', '❤️', '💖', '💕', '💗', '💘'];
       el.textContent = hearts[randInt(0, hearts.length - 1)];
+
+      // Rastgele kırmızı / pembe ton
+      const redOrPink = Math.random() < 0.5
+        ? '#ef4444'   // kırmızı
+        : '#fb7185';  // pembe
+      el.style.color = redOrPink;
     } else {
       el.textContent = 'Seni seviyorum Eylülüm';
+      el.style.color = '#fef3c7'; // soft sarı
     }
 
     const vw = Math.random() * 100; // 0–100 arası viewport genişliği
     const duration = rand(CONFIG.minDuration, CONFIG.maxDuration);
-    const size = rand(CONFIG.minSize, CONFIG.maxSize);
+
+    // Temel boyut + kalpler için büyütme
+    const baseSize = rand(CONFIG.minSize, CONFIG.maxSize);
+    const size = isHeart
+      ? baseSize * 1.7  // KALPLER DAHA BÜYÜK
+      : baseSize * 0.9; // Yazılar biraz daha küçük
+
     const rotate = rand(CONFIG.minRotate, CONFIG.maxRotate);
     const opacity = rand(CONFIG.minOpacity, CONFIG.maxOpacity);
     const drift = rand(-80, 80); // Yavaş yatay kayma
 
     el.style.left = vw + 'vw';
-    el.style.fontSize = size + 'px';
+    el.style.fontSize = size.toFixed(1) + 'px';
     el.style.opacity = opacity.toString();
     el.style.setProperty('--drift-x', drift + 'px');
     el.style.animation = `eylul-love-fall ${duration.toFixed(2)}s linear forwards`;
     el.style.transform = `rotate(${rotate.toFixed(1)}deg)`;
 
-    // Bittiğinde DOM'dan temizle
     el.addEventListener('animationend', function () {
       if (el && el.parentNode) {
         el.parentNode.removeChild(el);
@@ -152,8 +163,8 @@
     if (spawnTimer) return;
 
     // İlk birkaç tanesini hemen üret
-    for (let i = 0; i < 8; i++) {
-      setTimeout(spawnElement, i * 120);
+    for (let i = 0; i < 10; i++) {
+      setTimeout(spawnElement, i * 100);
     }
 
     spawnTimer = setInterval(spawnElement, CONFIG.spawnInterval);
