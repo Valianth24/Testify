@@ -1,577 +1,854 @@
-// WEB TASARIM TEMELLERİ 1–6 HAFTA VİZE SORU BANKASI
-// 30 soru – internet & web, HTML temelleri, metin etiketleri, bağlantılar, tablolar, formlar, multimedya
+// HTML EK SORULARI (50 adet – kod odaklı, tam vize ayarı)
+// Bunu mevcut HTML questionBank'inin ALTINA yapıştır:
+// window.questionBank = window.questionBank.concat([ ... ]) yapısı ile ekler.
 
-window.questionBank = [
-    // ===== HAFTA 1 – Web ve HTML’e Giriş =====
+window.questionBank = window.questionBank.concat([
+    // ==== 1. HAFTA – Temel Yapı, head/body, title, headingler ====
     {
-        q: "Bir kurum, kurumsal kimliğini yansıtmak ve ürünlerini hem ulusal hem de uluslararası düzeyde, 7/24 tanıtmak için internet üzerinden herkese açık bir sistem kurmak istemektedir. Bu sistemin oluşturulma SÜRECİNE ve ortaya çıkan SONUCA verilen adlar aşağıdakilerin hangisinde doğru ve eksiksiz olarak verilmiştir?",
+        q: "<html><head><title>Deneme</title></head><body><h1>Merhaba</h1></body></html> kodu tarayıcıda çalıştırıldığında aşağıdakilerden hangisi DOĞRU olur?",
         t: "mcq",
         o: [
-            "Sürece 'web tasarımı', ortaya çıkan sonuca 'web sitesi' denir.",
-            "Sürece 'hosting', ortaya çıkan sonuca 'domain' denir.",
-            "Sürece 'web uygulaması', ortaya çıkan sonuca 'web servisi' denir.",
-            "Sürece 'grafik tasarım', ortaya çıkan sonuca 'web arayüzü' denir.",
-            "Sürece 'proje yönetimi', ortaya çıkan sonuca 'HTML sayfası' denir."
+            "Sekme başlığında Merhaba, sayfa içinde Deneme büyük başlık olarak görünür.",
+            "Sekme başlığında Deneme, sayfa içinde Merhaba büyük başlık olarak görünür.",
+            "Hem sekme hem sayfa içinde sadece Deneme yazar.",
+            "Hem sekme hem sayfa içinde sadece Merhaba yazar.",
+            "Sayfada hiçbir şey görünmez, kod yanlıştır."
         ],
-        a: "Sürece 'web tasarımı', ortaya çıkan sonuca 'web sitesi' denir.",
-        difficulty: "medium",
-        week: 1,
-        topic: "Web Tasarımı Temelleri",
-        importance: "high",
-        explanation: "Slaytta, ulusal ve uluslararası ağ ortamında yayınlanan online sistemlere WEB SİTESİ, bu sitelerin oluşturulma sürecine WEB TASARIMI denildiği vurgulanır."
-    },
-    {
-        q: "Bir web tasarımcısı, hazırladığı sitede hangi kısımların içerik olarak sıklıkla değişeceğini, hangi alanların sabit kalacağını belirlemek istemektedir. Bu aşamada 'statik' ve 'dinamik' kavramlarını doğru kullanmak zorundadır. Aşağıdaki ifadelerden hangisi statik ve dinamik içerik ayrımını EN DOĞRU şekilde açıklar?",
-        t: "mcq",
-        o: [
-            "Statik içerik, her sayfa yenilendiğinde rastgele değişen içeriktir; dinamik içerik ise asla değişmeyen sabit kısımlardır.",
-            "Statik içerik, sadece veritabanına bağlı çalışan içeriktir; dinamik içerik ise düz HTML’den oluşur.",
-            "Statik içerik, site yayınlandıktan sonra nadiren değişen sabit metin ve görsellerdir; dinamik içerik ise kullanıcıya, zamana veya veritabanına göre değişebilen bölümlerdir.",
-            "Statik içerik yalnızca yönetici panelinden düzenlenebilen içeriktir; dinamik içerik ise hiçbir zaman düzenlenemez.",
-            "Statik içerik yalnızca mobilde çalışan kısımlardır; dinamik içerik ise sadece masaüstünde görüntülenebilir."
-        ],
-        a: "Statik içerik, site yayınlandıktan sonra nadiren değişen sabit metin ve görsellerdir; dinamik içerik ise kullanıcıya, zamana veya veritabanına göre değişebilen bölümlerdir.",
-        difficulty: "medium",
-        week: 1,
-        topic: "Statik ve Dinamik Yapılar",
-        importance: "high",
-        explanation: "Notlarda, sitenin hangi kısmının statik (sabit) hangi kısmının dinamik (değişebilir) olacağına karar verilmesi gerektiği belirtilir; statik içerik sabit, dinamik içerik ise güncellenmeye ve değişmeye açık kısımlardır."
-    },
-    {
-        q: "Bir kurum yeni web sitesini yayınlamak istemektedir. Alan adını (örneğin bozok.edu.tr) satın almış, fakat dosyalarını barındıracağı fiziksel sunucu hizmetini henüz almamıştır. Web tasarım temellerine göre aşağıdakilerden hangisi bu eksik kalan hizmeti en doğru adlandırır?",
-        t: "mcq",
-        o: [
-            "Domain registry (isim tescil hizmeti)",
-            "Görsel tasarım (arayüz tasarımı)",
-            "Hosting (yer sağlama / barındırma hizmeti)",
-            "Yazılım geliştirme (backend kodlama)",
-            "SEO (arama motoru optimizasyonu)"
-        ],
-        a: "Hosting (yer sağlama / barındırma hizmeti)",
+        a: "Sekme başlığında Deneme, sayfa içinde Merhaba büyük başlık olarak görünür.",
         difficulty: "easy",
         week: 1,
-        topic: "Hosting ve Domain",
+        topic: "title vs h1",
         importance: "high",
-        explanation: "Slaytta web tasarımının dört temel unsuru arasında HOSTING (yer sağlama) ve DOMAIN REGISTRY (isim tescil) ayrı ayrı sayılır. Alan adı varsa ama dosyalar için sunucu yoksa eksik olan kısım hostingtir."
+        explanation: "title sekme başlığında; body içindeki h1 ise sayfanın gövdesinde görünür. Vizede title ile h1 karışımı çok sorulur."
     },
     {
-        q: "Bir girişimci, web sitesinin geleneksel reklamlara göre avantajlarını araştırmaktadır. Aşağıdakilerden hangisi web sitesi sahibi olmanın slaytlarda belirtilen AVANTAJLARINDAN BİRİ DEĞİLDİR?",
+        q: "<!DOCTYPE html><html lang=tr><head><meta charset=UTF-8></head><body>...</body></html> iskeletiyle ilgili aşağıdakilerden hangisi DOĞRUDUR?",
         t: "mcq",
         o: [
-            "Tanıtımın ulusal ve uluslararası düzeyde yapılabilmesini sağlaması",
-            "Ürün ve hizmetlerin 7/24 tanıtımına olanak vermesi",
-            "Zaman ve imaj kazandırması, kurumsal görünümü güçlendirmesi",
-            "Potansiyel müşterilerin doğrudan firmaya ulaşmasını kolaylaştırması",
-            "Yazılı basında çıkan tüm reklamların otomatik olarak siteye taşınmasını zorunlu kılması"
+            "<!DOCTYPE html> sadece CSS dosyaları için kullanılır.",
+            "lang=tr, sayfanın dilinin Türkçe olduğunu belirtir.",
+            "meta charset=UTF-8 sadece arka planda script çalıştırmak içindir.",
+            "body etiketi kullanıcıya görünmeyen kısımları tutar.",
+            "head etiketi her zaman sayfa içinde görünen başlıkları taşır."
         ],
-        a: "Yazılı basında çıkan tüm reklamların otomatik olarak siteye taşınmasını zorunlu kılması",
+        a: "lang=tr, sayfanın dilinin Türkçe olduğunu belirtir.",
         difficulty: "easy",
         week: 1,
-        topic: "Web Sitesinin Avantajları",
+        topic: "doctype ve lang",
         importance: "medium",
-        explanation: "Slaytta web sitesinin hesaplı reklam imkânı, ulusal/uluslararası tanıtım, 7/24 erişim gibi avantajlar sayılır; yazılı basın reklamlarının otomatik taşınması gibi bir zorunluluk geçmez."
+        explanation: "lang özniteliği sayfanın dil bilgisini belirtir. meta charset UTF-8 karakter kodlaması içindir, body ise görünen içeriktir."
     },
     {
-        q: "Bir web tasarımcısı yeni bir proje planlarken alan adı seçiminden siteye konulacak içerik türüne kadar pek çok kararı baştan vermek zorundadır. Aşağıdakilerden hangisi slaytlarda belirtilen 'alan adı seçimi' için önerilen İLKELERDEN BİRİDİR?",
+        q: "<h1>Anasayfa</h1><h3>Alt Baslik</h3> kodu ile ilgili aşağıdakilerden hangisi DOĞRUDUR?",
         t: "mcq",
         o: [
-            "Alan adının mümkün olduğunca uzun ve karmaşık şifrelerden oluşması",
-            "Alan adının yalnızca rakamlardan oluşması, harf içermemesi",
-            "Alan adının kolay okunup yazılabilir olması ve sitenin/firmanın içeriğiyle uyumlu seçilmesi",
-            "Alan adının mutlaka '.gov' uzantısıyla bitmesi",
-            "Alan adında Türkçe karakterlerin yoğun şekilde kullanılması"
+            "h3, h1 den daha büyük ve kalın görünür.",
+            "h1 ve h3 aynı boyutta görünür, sadece rengi değişir.",
+            "h1 en büyük başlık, h3 ondan daha küçük bir başlıktır.",
+            "h1 sadece italik yazar, h3 sadece kalın yazar.",
+            "h etiketleri sayfada görünmez, sadece head içinde kullanılır."
         ],
-        a: "Alan adının kolay okunup yazılabilir olması ve sitenin/firmanın içeriğiyle uyumlu seçilmesi",
+        a: "h1 en büyük başlık, h3 ondan daha küçük bir başlıktır.",
+        difficulty: "easy",
+        week: 1,
+        topic: "heading etiketleri",
+        importance: "high",
+        explanation: "h1 en büyük, h6 en küçük başlık etiketidir. Bu sıralama vize sorularında sık gelir."
+    },
+    {
+        q: "Aşağıdaki HTML kodunun çıktısı ile ilgili hangisi DOĞRUDUR?\n\n<p>Yozgat</p><p>Bozok</p>",
+        t: "mcq",
+        o: [
+            "Yozgat ve Bozok aynı satırda yan yana görünür.",
+            "Yozgat kalın, Bozok italik görünür.",
+            "Yozgat ve Bozok ayrı satırlarda, her biri paragraf olarak görünür.",
+            "Sadece Yozgat görünür, Bozok görünmez.",
+            "Tarayıcı hata verir ve hiç bir şey çizmez."
+        ],
+        a: "Yozgat ve Bozok ayrı satırlarda, her biri paragraf olarak görünür.",
+        difficulty: "easy",
+        week: 1,
+        topic: "p etiketi",
+        importance: "medium",
+        explanation: "p etiketi blok seviye elemandır; her p yeni satırda kendi paragraf kutusunu oluşturur."
+    },
+    {
+        q: "Aşağıdaki kodun davranışı nasıldır?\n\nAnkara<br>Turkiye nin baskenti",
+        t: "mcq",
+        o: [
+            "br etiketi italik yazı oluşturur.",
+            "br etiketi kalın yazı oluşturur.",
+            "br etiketi satır sonu ekleyerek Turkiye nin baskenti ifadesini ikinci satıra geçirir.",
+            "br etiketi yazıyı görünmez yapar.",
+            "br etiketi sadece başlık etiketleri içinde çalışır."
+        ],
+        a: "br etiketi satır sonu ekleyerek Turkiye nin baskenti ifadesini ikinci satıra geçirir.",
+        difficulty: "easy",
+        week: 1,
+        topic: "br satır sonu",
+        importance: "high",
+        explanation: "br bir satır sonu etiketi, kapanış etiketine gerek yoktur ve genelde küçük kod sorusu olarak gelir."
+    },
+    {
+        q: "Aşağıdaki HTML parçalarından hangisi YORUM satırı oluşturur, tarayıcıda görünmez?",
+        t: "mcq",
+        o: [
+            "// Bu yorumdur",
+            "/* Bu yorumdur */",
+            "<!-- Bu yorumdur -->",
+            "<comment>Bu yorumdur</comment>",
+            "# Bu yorumdur"
+        ],
+        a: "<!-- Bu yorumdur -->",
+        difficulty: "easy",
+        week: 1,
+        topic: "yorum satiri",
+        importance: "high",
+        explanation: "HTML yorum sözdizimi <!-- --> şeklindedir. Diğerleri farklı dillerdeki yorum gösterimleridir."
+    },
+    {
+        q: "HTML ile ilgili olarak aşağıdaki kod parçasında hangi etiket hatalı yerde kullanılmıştır?\n\n<html>\n  <head>\n    <title>Anasayfa</title>\n    <h1>Baslik</h1>\n  </head>\n  <body>\n    <p>Merhaba</p>\n  </body>\n</html>",
+        t: "mcq",
+        o: [
+            "html",
+            "head",
+            "title",
+            "h1",
+            "body"
+        ],
+        a: "h1",
         difficulty: "medium",
         week: 1,
-        topic: "Alan Adı Seçimi",
-        importance: "medium",
-        explanation: "Slaytta alan adı seçerken kolay okunup yazılabilir olması ve sitenin içeriğiyle/ünvanıyla uyumlu olması gerektiği özellikle vurgulanır."
-    },
-
-    // ===== HAFTA 2 – HTML Temelleri ve Sözdizimi =====
-    {
-        q: "Bir öğrenci, HTML ile ilk web sayfasını hazırlarken, tarayıcının dosyayı 'HTML5 standardına göre' yorumlamasını garanti altına almak istemektedir. Dosyanın en üstüne koyması gereken bildirim aşağıdakilerden hangisidir?",
-        t: "mcq",
-        o: [
-            "<HTML5>",
-            "<DOCTYPE html5>",
-            "<!DOCTYPE HTML SYSTEM>",
-            "<!DOCTYPE html>",
-            "<?html version=\"5\"?>"
-        ],
-        a: "<!DOCTYPE html>",
-        difficulty: "easy",
-        week: 2,
-        topic: "HTML Syntax ve Yapı",
+        topic: "head vs body",
         importance: "high",
-        explanation: "Slaytlarda verilen örneklerde HTML5 için kullanılan doctype bildirimi '!DOCTYPE html' şeklindedir ve sayfanın en üst satırında yer alır."
+        explanation: "Görsel içerikler, başlıklar h1 body içinde olmalıdır. head kısmı genelde görünmeyen bilgiler ve title gibi etiketler içindir."
     },
     {
-        q: "HTML ile hazırlanmış bir sayfada, tarayıcıda görünen tüm içerik (metin, resim, link vb.) belirli bir temel etiketin içinde yer alır. Buna karşın karakter seti, sayfa başlığı, harici CSS dosyası gibi kullanıcıya doğrudan görünmeyen bilgiler başka bir etiketin içinde tutulur. Bu iki temel bölüm için kullanılan etiket ikilisi aşağıdakilerden hangisinde DOĞRU olarak verilmiştir?",
+        q: "HTML de küçük büyük harf duyarlılığı ile ilgili aşağıdaki kodlardan hangisi tarayıcı tarafından GEÇERLİ bir paragraf olarak yorumlanır?",
         t: "mcq",
         o: [
-            "<content> … </content> ve <meta> … </meta>",
-            "<head> … </head> ve <title> … </title>",
-            "<body> … </body> ve <footer> … </footer>",
-            "<header> … </header> ve <nav> … </nav>",
-            "<head> … </head> ve <body> … </body>"
+            "<P>Metin</P>",
+            "<p>Metin</p>",
+            "<p>Metin</P>",
+            "Hepsi geçerli kabul edilir.",
+            "Hiçbiri geçerli değildir."
         ],
-        a: "<head> … </head> ve <body> … </body>",
-        difficulty: "easy",
-        week: 2,
-        topic: "HTML Belge Yapısı",
-        importance: "high",
-        explanation: "Slaytlarda <html> etiketinin iki ana bölümü olarak <head> (arka plan bilgileri) ve <body> (kullanıcının gördüğü kısım) anlatılır."
-    },
-    {
-        q: "Aşağıdaki ifadelerden hangisi HTML etiketlerinin yazım kuralları (syntax) açısından DOĞRU bir bilgidir?",
-        t: "mcq",
-        o: [
-            "HTML etiketleri mutlaka büyük harflerle yazılmalıdır; küçük harf kullanmak hatadır.",
-            "HTML etiketleri yalnızca tek olarak kullanılabilir, açılış-kapanış çifti kullanılamaz.",
-            "HTML etiketleri ' < ' ve ' > ' karakterleri arasında yazılır ve çoğu zaman açılış-kapanış çifti hâlinde kullanılır.",
-            "HTML etiketleri sadece sayfa kaydedilirken otomatik oluşur, programcı doğrudan yazmaz.",
-            "HTML etiketlerinde Türkçe karakter kullanılması zorunludur."
-        ],
-        a: "HTML etiketleri ' < ' ve ' > ' karakterleri arasında yazılır ve çoğu zaman açılış-kapanış çifti hâlinde kullanılır.",
+        a: "Hepsi geçerli kabul edilir.",
         difficulty: "medium",
-        week: 2,
-        topic: "HTML Syntax",
-        importance: "high",
-        explanation: "Slaytta HTML etiketlerinin < ve > karakterleri arasında yazıldığı ve genellikle açılış/kapanış çifti (örn. <b> … </b>) olarak kullanıldığı belirtilir; büyük-küçük harf duyarlı olmadığı da ayrıca vurgulanır."
+        week: 1,
+        topic: "case insensitive",
+        importance: "medium",
+        explanation: "HTML etiket isimleri genelde büyük küçük harfe duyarlı değildir. p, P veya karışık yazılsa da tarayıcı bunları aynı kabul eder."
     },
     {
-        q: "Bir sayfada tarayıcı sekmesinde görünen başlığın 'Bozok Web Tasarım Dersi' olmasını isteyen bir öğrenci, bu yazıyı hangi etiket çifti arasına yazmalıdır?",
+        q: "index.html dosyası ile ilgili olarak aşağıdakilerden hangisi DOĞRUDUR?",
         t: "mcq",
         o: [
-            "<h1>Bozok Web Tasarım Dersi</h1>",
-            "<title>Bozok Web Tasarım Dersi</title>",
-            "<meta>Bozok Web Tasarım Dersi</meta>",
-            "<header>Bozok Web Tasarım Dersi</header>",
-            "<caption>Bozok Web Tasarım Dersi</caption>"
+            "Sadece CSS kodlarının yazıldığı özel dosyadır.",
+            "Sunucuda genellikle ziyaretçilere ilk gösterilen varsayılan anasayfa dosyasıdır.",
+            "Sadece JavaScript kodlarının tutulduğu dosya adıdır.",
+            "Tarayıcı bu dosyayı asla otomatik açmaz, mutlaka tam yol yazmak gerekir.",
+            "Sadece mobil uygulamalarda kullanılır."
         ],
-        a: "<title>Bozok Web Tasarım Dersi</title>",
+        a: "Sunucuda genellikle ziyaretçilere ilk gösterilen varsayılan anasayfa dosyasıdır.",
         difficulty: "easy",
-        week: 2,
-        topic: "Head ve Title",
+        week: 1,
+        topic: "index.html",
+        importance: "medium",
+        explanation: "Birçok sunucu index.html yi kök klasör için varsayılan giriş dosyası olarak kullanır."
+    },
+    {
+        q: "Aşağıdaki seçeneklerden hangisi HTML belgesinde DOCTYPE bildiriminin temel amacını en iyi açıklar?",
+        t: "mcq",
+        o: [
+            "Sayfanın dilini belirtir.",
+            "Tarayıcıya bu belgenin HTML5 standardına göre yazıldığını belirtir.",
+            "Sadece CSS dosyasını bağlamak için kullanılır.",
+            "JavaScript kodlarını etkinleştirmek için zorunludur.",
+            "Tablo çizmek için kullanılır."
+        ],
+        a: "Tarayıcıya bu belgenin HTML5 standardına göre yazıldığını belirtir.",
+        difficulty: "easy",
+        week: 1,
+        topic: "doctype",
         importance: "high",
-        explanation: "Notlarında da vurguladığın gibi <title> etiketi, sekme başlığını belirler ve head içinde yer alır; <h1> ise sayfa içindeki görünür başlıktır."
-    },
-    {
-        q: "HTML ile oluşturulan bir dosya üzerinde çalışan bir öğrenci, 'etiket isimlerinin büyük veya küçük harfle yazılmasının tarayıcı açısından bir fark oluşturmadığını' iddia etmektedir. Aşağıdakilerden hangisi bu durumun SEBEBİNİ en doğru şekilde açıklar?",
-        t: "mcq",
-        o: [
-            "HTML, derlenmiş bir dil olduğu için derleyici harfleri otomatik olarak büyütür.",
-            "HTML, yorumlanırken etiket isimlerini büyük-küçük harf duyarlı (case sensitive) olarak algılar.",
-            "HTML, yalnızca küçük harfle yazılan etiketleri kabul eder; tarayıcı büyük harfleri otomatik düzeltir.",
-            "HTML bir işaretleme dilidir ve etiket isimleri büyük-küçük harfe duyarlı değildir; <body> ile <BODY> aynı etikettir.",
-            "HTML etiketleri aslında sayfanın içine yazılmaz, tarayıcı tarafından sonradan eklenir."
-        ],
-        a: "HTML bir işaretleme dilidir ve etiket isimleri büyük-küçük harfe duyarlı değildir; <body> ile <BODY> aynı etikettir.",
-        difficulty: "medium",
-        week: 2,
-        topic: "Case Sensitivity",
-        importance: "medium",
-        explanation: "Slayt ve notlarında 'HTML küçük/büyük harfe duyarlı değildir' ifadesi açıkça geçer; buna 'case sensitive değildir' denir."
-    },
-    {
-        q: "HTML sürümleriyle ilgili aşağıdaki ifadelerden hangisi DOĞRUDUR?",
-        t: "mcq",
-        o: [
-            "HTML5 tamamen yeni bir dil olup önceki sürümlerdeki etiketlerin hiçbiri geçerli değildir.",
-            "HTML 4.01 sürümü yayınlandıktan sonra HTML geliştirimi durdurulmuş, doğrudan CSS3'e geçilmiştir.",
-            "HTML'nin farklı sürümlerinde yeni etiketler eklenmiş olsa da temel olarak hepsi aynı işaretleme dilinin devamıdır ve eski etiketler kullanılmaya devam etmektedir.",
-            "HTML 2.0 sürümüyle birlikte yalnızca metin tabanlı içerik desteği tamamen kaldırılmıştır.",
-            "HTML'nin sürümleri, sadece tarayıcı üreticilerinin verdiği ticari isimlerdir ve teknik bir fark içermez."
-        ],
-        a: "HTML'nin farklı sürümlerinde yeni etiketler eklenmiş olsa da temel olarak hepsi aynı işaretleme dilinin devamıdır ve eski etiketler kullanılmaya devam etmektedir.",
-        difficulty: "hard",
-        week: 2,
-        topic: "HTML Versiyonları",
-        importance: "medium",
-        explanation: "Slaytta HTML 1.0’dan 5’e kadar sürümler tablo olarak verilir ve her yeni sürümde yeni etiketler eklense de HTML’nin bir bütün olduğu, eski etiketlerin hala kullanıldığı belirtilir."
+        explanation: "Modern sayfalarda <!DOCTYPE html> bildirimi HTML5 modu için kullanılır; vizede klasik bilgi sorusudur."
     },
 
-    // ===== HAFTA 3 – Metin Biçimlendirme ve Linkler =====
+    // ==== 2. HAFTA – Linkler, listeler, resim ====
     {
-        q: "Bir web sayfasında 'Bozok Üniversitesi' ifadesinin hem kalın hem de önemli (vurgulu) olarak işaretlenmesi istenmektedir. Aşağıdaki etiket çiftlerinden hangisi SEMANTİK AÇIDAN 'önem vurgusu' verdiği için tercih edilmelidir?",
+        q: "Aşağıdaki HTML kodu ne işe yarar?\n\n<a href=google.com>Git</a>",
         t: "mcq",
         o: [
-            "<b>Bozok Üniversitesi</b>",
-            "<i>Bozok Üniversitesi</i>",
-            "<strong>Bozok Üniversitesi</strong>",
-            "<u>Bozok Üniversitesi</u>",
-            "<small>Bozok Üniversitesi</small>"
+            "Sayfaya resim ekler.",
+            "Git kelimesini tıklanabilir hale getirerek kullaniciyi google.com adresine götürür.",
+            "Sayfaya tablo ekler.",
+            "Sayfaya yeni bir sekme ekler ama link vermez.",
+            "Sayfaya sadece yorum satırı ekler."
         ],
-        a: "<strong>Bozok Üniversitesi</strong>",
-        difficulty: "medium",
-        week: 3,
-        topic: "Metin ve Görünüm Etiketleri",
-        importance: "medium",
-        explanation: "Slaytta <b> görsel olarak kalın yazarken, <strong> etiketinin 'önemli metin' anlamı taşıdığı yani semantik vurgusu olduğu anlatılır; bu yüzden önemli içerikte <strong> tercih edilir."
-    },
-    {
-        q: "Bir paragraf içinde 10 üzeri 2 ve H₂O gibi bilimsel gösterimler yazmak isteyen bir öğrenci, HTML’de hangi etiketleri kullanmalıdır?",
-        t: "mcq",
-        o: [
-            "<big> ve <small>",
-            "<sup> ve <sub>",
-            "<em> ve <strong>",
-            "<mark> ve <code>",
-            "<u> ve <s>"
-        ],
-        a: "<sup> ve <sub>",
+        a: "Git kelimesini tıklanabilir hale getirerek kullaniciyi google.com adresine götürür.",
         difficulty: "easy",
-        week: 3,
-        topic: "Üst ve Alt Simge",
-        importance: "medium",
-        explanation: "Slayttaki örnekte 10<sup>2</sup> ve H<sub>2</sub>O gösterimleri verilir; <sup> üst simge, <sub> alt simge için kullanılır."
+        week: 2,
+        topic: "a href",
+        importance: "high",
+        explanation: "a etiketi bağlantı oluşturur, href ise hedef adresi gösterir."
     },
     {
-        q: "Bir sayfada altı çizili, üstü çizili ve normal metinleri aynı satırda göstermek isteyen bir tasarımcı aşağıdaki etiketlerden hangilerini birlikte kullanmalıdır?",
+        q: "Aşağıdaki kodun davranışı nasıldır?\n\n<a href=bozok.edu.tr target=_blank>Site</a>",
         t: "mcq",
         o: [
-            "<u>, <em>, <b>",
-            "<u>, <s>, <strong>",
-            "<u>, <s>, <i>",
-            "<s>, <mark>, <small>",
-            "<code>, <pre>, <kbd>"
+            "Bağlantı aynı sekmede açılır.",
+            "Bağlantı yeni sekmede veya pencerede açılır.",
+            "Link hiç çalışmaz.",
+            "Sadece e posta programını açar.",
+            "Sadece dosya indirme başlatır."
         ],
-        a: "<u>, <s>, <i>",
+        a: "Bağlantı yeni sekmede veya pencerede açılır.",
+        difficulty: "easy",
+        week: 2,
+        topic: "target blank",
+        importance: "high",
+        explanation: "target=_blank linki yeni sekmede açar; vize sorularında sık sorulan bir ayrıntıdır."
+    },
+    {
+        q: "Aşağıdaki seçeneklerden hangisi numaralı liste (1,2,3) oluşturan temel HTML iskeletidir?",
+        t: "mcq",
+        o: [
+            "<ul><li>Bir</li><li>Iki</li></ul>",
+            "<ol><item>Bir</item><item>Iki</item></ol>",
+            "<ol><li>Bir</li><li>Iki</li></ol>",
+            "<list><li>Bir</li><li>Iki</li></list>",
+            "<nl><li>Bir</li><li>Iki</li></nl>"
+        ],
+        a: "<ol><li>Bir</li><li>Iki</li></ol>",
+        difficulty: "easy",
+        week: 2,
+        topic: "ol ul listeler",
+        importance: "medium",
+        explanation: "ol numaralı, ul madde işaretli liste oluşturur. Öğrencilerin en çok karıştırdığı noktalardan biridir."
+    },
+    {
+        q: "Aşağıdaki kodlardan hangisi madde işaretli liste (bullet) oluşturur?",
+        t: "mcq",
+        o: [
+            "<ol><li>Elma</li><li>Armut</li></ol>",
+            "<ul><li>Elma</li><li>Armut</li></ul>",
+            "<list><li>Elma</li><li>Armut</li></list>",
+            "<li><ul>Elma</ul></li>",
+            "<p><li>Elma</li></p>"
+        ],
+        a: "<ul><li>Elma</li><li>Armut</li></ul>",
+        difficulty: "easy",
+        week: 2,
+        topic: "ul listesi",
+        importance: "medium",
+        explanation: "ul unordered list, yani noktalı madde işaretli liste üretir."
+    },
+    {
+        q: "<img src=logo.png alt=Bozok> kodu ile ilgili aşağıdakilerden hangisi DOĞRUDUR?",
+        t: "mcq",
+        o: [
+            "src, alternatif metni; alt ise resim dosya yolunu tutar.",
+            "src, resmin kurulacağı klasörün adıdır.",
+            "alt, resim yüklenemezse veya ekran okuyucu kullanılırsa gösterilecek açıklamadır.",
+            "alt, resmin boyutunu piksel olarak belirtir.",
+            "Bu etiket sadece ses dosyası eklemek için kullanılır."
+        ],
+        a: "alt, resim yüklenemezse veya ekran okuyucu kullanılırsa gösterilecek açıklamadır.",
         difficulty: "medium",
-        week: 3,
-        topic: "Metin Biçimlendirme",
+        week: 2,
+        topic: "img src alt",
+        importance: "high",
+        explanation: "Erişilebilirlik için alt metni çok önemlidir; src ise dosya yoludur."
+    },
+    {
+        q: "Aşağıdaki HTML kodu ile ilgili hangisi DOĞRUDUR?\n\n<a href=tel:05551234567>Ara</a>",
+        t: "mcq",
+        o: [
+            "Kullanıcıya e posta gönderir.",
+            "Mobil cihazlarda tıklandığında telefon araması başlatmak için kullanılır.",
+            "Sadece masaüstü bilgisayarlarda çalışır, telefonda çalışmaz.",
+            "Sadece resim indirir.",
+            "Sadece tablo oluşturur."
+        ],
+        a: "Mobil cihazlarda tıklandığında telefon araması başlatmak için kullanılır.",
+        difficulty: "medium",
+        week: 2,
+        topic: "tel link",
         importance: "low",
-        explanation: "Slaytta örnek kodda altı çizili için <u>, üstü çizili için <s> ve farklı vurgu için <i>/<em> benzeri etiketler birlikte kullanılır; soru genel mantığı yoklamaktadır."
+        explanation: "tel protokollü linkler akıllı telefonda arama ekranını açar; detay seven hocalar bu tarz sorular sorabilir."
     },
     {
-        q: "HTML’de başka bir sayfaya ya da dış bir siteye tıklanabilir bağlantı vermek için kullanılan temel etiket aşağıdakilerden hangisidir?",
+        q: "Aşağıdaki HTML kodu ne tür bir yol kullanmaktadır?\n\n<a href=./img/foto.png>Resim</a>",
         t: "mcq",
         o: [
-            "<link>",
+            "Mutlak (absolute) URL",
+            "Göreli (relative) yol",
+            "Sanal yol, çalışmaz",
+            "E posta protokolü",
+            "Telefon protokolü"
+        ],
+        a: "Göreli (relative) yol",
+        difficulty: "medium",
+        week: 2,
+        topic: "relative path",
+        importance: "medium",
+        explanation: "./ ifadesi mevcut dizine göre göreli yolu gösterir; http ile başlayan adresler mutlak URL dir."
+    },
+    {
+        q: "<strong>kalin</strong> ile ilgili aşağıdaki ifadelerden hangisi DOĞRUDUR?",
+        t: "mcq",
+        o: [
+            "Sadece italik gösterir.",
+            "Görünüm olarak b etiketi gibi kalın gösterir, anlam olarak önemli vurgu belirtir.",
+            "Metni gizler, görünmez yapar.",
+            "Sadece başlıklar içinde kullanılabilir.",
+            "Sadece linkler için kullanılır."
+        ],
+        a: "Görünüm olarak b etiketi gibi kalın gösterir, anlam olarak önemli vurgu belirtir.",
+        difficulty: "medium",
+        week: 2,
+        topic: "strong etiketi",
+        importance: "medium",
+        explanation: "strong anlamsal vurgu taşır; ekran okuyucular için de önemlidir, vize teorik sorularında gelebilir."
+    },
+    {
+        q: "<em>vurgulu</em> etiketi ile ilgili aşağıdakilerden hangisi DOĞRUDUR?",
+        t: "mcq",
+        o: [
+            "Metni altı çizili yapar.",
+            "Metni kalın yapar.",
+            "Metni italik yapar ve anlamsal vurgu taşır.",
+            "Sadece tablolar içinde kullanılır.",
+            "Sadece form elemanları ile kullanılabilir."
+        ],
+        a: "Metni italik yapar ve anlamsal vurgu taşır.",
+        difficulty: "medium",
+        week: 2,
+        topic: "em etiketi",
+        importance: "medium",
+        explanation: "em emphasis yani vurgu anlamına gelir; hem görünüm hem anlam olarak önemli bir etikettir."
+    },
+
+    // ==== 3. HAFTA – Tablolar, nav, semantik ====
+    {
+        q: "Aşağıdaki tablonun başlık hücresi hangi etiketle tanımlanmalıdır?\n\n<table>\n  <tr>\n    ? Günler ?\n  </tr>\n</table>",
+        t: "mcq",
+        o: [
+            "<td>Günler</td>",
+            "<th>Günler</th>",
+            "<head>Günler</head>",
+            "<caption>Günler</caption>",
+            "<title>Günler</title>"
+        ],
+        a: "<th>Günler</th>",
+        difficulty: "easy",
+        week: 3,
+        topic: "th vs td",
+        importance: "high",
+        explanation: "th tablo başlık hücresi, td veri hücresidir. Hoca özellikle sorularda bu ayrımı yoklar."
+    },
+    {
+        q: "<table border=1> ile ilgili aşağıdakilerden hangisi DOĞRUDUR?",
+        t: "mcq",
+        o: [
+            "Tablonun kenarlığını gösterir, değer arttıkça çizgi kalınlığı artar.",
+            "Sadece tablo başlığını gösterir.",
+            "Sadece satır sayısını belirler.",
+            "Sadece sütun genişliğini ayarlar.",
+            "Tarayıcıyı hataya düşürür."
+        ],
+        a: "Tablonun kenarlığını gösterir, değer arttıkça çizgi kalınlığı artar.",
+        difficulty: "easy",
+        week: 3,
+        topic: "table border",
+        importance: "medium",
+        explanation: "border eski yöntemle tablo çevresine çerçeve çizmek için kullanılır; modernde CSS tercih edilir ama vize sorusu olabilir."
+    },
+    {
+        q: "<nav>\n  <a href=index.html>Anasayfa</a>\n  <a href=iletisim.html>Iletisim</a>\n</nav> kodu neyi ifade eder?",
+        t: "mcq",
+        o: [
+            "Tablo satırlarını gösteren bölüm",
+            "Sayfanın navigasyon menüsü için kullanılan semantik bir bölümdür.",
+            "Sadece alt bilgi toplamak için kullanılır.",
+            "Sadece resim galerisi yapmak içindir.",
+            "Sadece form elemanları ile kullanılabilir."
+        ],
+        a: "Sayfanın navigasyon menüsü için kullanılan semantik bir bölümdür.",
+        difficulty: "medium",
+        week: 3,
+        topic: "nav etiketi",
+        importance: "medium",
+        explanation: "nav sayfa içi menü ve gezinme linklerini gruplayan semantik etikettir; HTML5 semantik konu başlığında sorulabilir."
+    },
+    {
+        q: "<header>, <nav>, <section>, <footer> gibi etiketler için aşağıdakilerden hangisi DOĞRUDUR?",
+        t: "mcq",
+        o: [
+            "Hepsi sadece tablolarda kullanılır.",
+            "Hepsi sadece formlar için ayrılmıştır.",
+            "Hepsi semantik anlam taşıyan, sayfa bölümlerini tarif eden etiketlerdir.",
+            "Hepsi sadece mobil tarayıcılar içindir.",
+            "HTML4 ile gelen, artık kullanılmayan etiketlerdir."
+        ],
+        a: "Hepsi semantik anlam taşıyan, sayfa bölümlerini tarif eden etiketlerdir.",
+        difficulty: "medium",
+        week: 3,
+        topic: "semantik etiketler",
+        importance: "medium",
+        explanation: "HTML5 ile gelen bu etiketler arama motorları ve erişilebilirlik açısından sayfa yapısını daha anlamlı hale getirir."
+    },
+    {
+        q: "Aşağıdaki kod parçası ne yapar?\n\n<table>\n  <caption>Ders Programi</caption>\n  ...\n</table>",
+        t: "mcq",
+        o: [
+            "Tablonun kenarlığını ayarlar.",
+            "Tabloya bir başlık ekler ve genelde tablonun üstünde görünür.",
+            "Tablonun arka plan rengini ayarlar.",
+            "Tablonun sütun sayısını belirtir.",
+            "Tablodaki yazıları italik yapar."
+        ],
+        a: "Tabloya bir başlık ekler ve genelde tablonun üstünde görünür.",
+        difficulty: "easy",
+        week: 3,
+        topic: "caption",
+        importance: "low",
+        explanation: "caption tablo başlığını tanımlar; özellikle ders programı, fiyat tablosu gibi örneklerde karşına çıkabilir."
+    },
+    {
+        q: "Aşağıdaki kod parçası ne tür liste üretir?\n\n<ol type=A>\n  <li>HTML</li>\n  <li>CSS</li>\n</ol>",
+        t: "mcq",
+        o: [
+            "Rakamlı liste 1 2",
+            "Küçük harfli liste a b",
+            "Büyük harfli liste A B",
+            "Roma rakamlı liste I II",
+            "Madde işaretli liste"
+        ],
+        a: "Büyük harfli liste A B",
+        difficulty: "medium",
+        week: 3,
+        topic: "ol type",
+        importance: "medium",
+        explanation: "ol type=A büyük harfli, type=a küçük harfli; type=1 rakamlı, type=I Roma rakamlı liste üretir."
+    },
+
+    // ==== 4. HAFTA – div vs span, class vs id, block vs inline ====
+    {
+        q: "<div>... </div> ve <span>... </span> etiketleri ile ilgili aşağıdakilerden hangisi DOĞRUDUR?",
+        t: "mcq",
+        o: [
+            "div satır içi, span blok seviyedir.",
+            "div blok seviye, span satır içi (inline) elemandır.",
+            "Her ikisi de sadece resim göstermek için kullanılır.",
+            "Her ikisi de sadece form içinde kullanılabilir.",
+            "Tarayıcı bu etiketleri hiç tanımaz."
+        ],
+        a: "div blok seviye, span satır içi (inline) elemandır.",
+        difficulty: "medium",
+        week: 4,
+        topic: "div vs span",
+        importance: "high",
+        explanation: "div tam satırı kaplayan blok; span satır içi küçük alanlar için kullanılır. Vize klasik sorusudur."
+    },
+    {
+        q: "class ve id öznitelikleri ile ilgili aşağıdakilerden hangisi DOĞRUDUR?",
+        t: "mcq",
+        o: [
+            "Bir sayfada sadece tek class kullanılabilir.",
+            "Bir sayfada id değerleri tekrar tekrar kullanılabilir.",
+            "class genellikle birden fazla elemana aynı stil veya gruplama vermek için kullanılır, id ise sayfada benzersiz kimlik tanımlamak için kullanılır.",
+            "id sadece tablolar için, class sadece listeler için kullanılır.",
+            "class sadece JavaScript içindir, id sadece CSS içindir."
+        ],
+        a: "class genellikle birden fazla elemana aynı stil veya gruplama vermek için kullanılır, id ise sayfada benzersiz kimlik tanımlamak için kullanılır.",
+        difficulty: "medium",
+        week: 4,
+        topic: "class vs id",
+        importance: "high",
+        explanation: "CSS de class nokta ile (.kutu), id kare ile (#kutu) seçilir; id benzersiz, class tekrar edebilir. Ezber: id = kimlik, tekil."
+    },
+    {
+        q: "Aşağıdaki HTML kodu için hangisi DOĞRUDUR?\n\n<div id=ustMenu class=navBar>Menu</div>",
+        t: "mcq",
+        o: [
+            "Bir elemana hem id hem class verilemez, hatalıdır.",
+            "id sadece sayının başladığı isimler alabilir.",
+            "Elemana ustMenu kimliğini ve navBar sınıfını aynı anda atar.",
+            "Bu etiket tarayıcıda görünmez.",
+            "Sadece JavaScript kodu için anlamlıdır, HTML de kullanılamaz."
+        ],
+        a: "Elemana ustMenu kimliğini ve navBar sınıfını aynı anda atar.",
+        difficulty: "medium",
+        week: 4,
+        topic: "id ve class birlikte",
+        importance: "medium",
+        explanation: "Bir elemana aynı anda hem id hem class verilebilir. id tekil, class stil grupları içindir."
+    },
+    {
+        q: "Aşağıdaki elemanlardan hangisi varsayılan olarak blok seviye elemandır?",
+        t: "mcq",
+        o: [
+            "<span>",
             "<a>",
-            "<url>",
-            "<href>",
-            "<nav>"
+            "<img>",
+            "<p>",
+            "<strong>"
+        ],
+        a: "<p>",
+        difficulty: "medium",
+        week: 4,
+        topic: "block inline",
+        importance: "medium",
+        explanation: "p, div, h1 gibi etiketler blok; span, a, img gibi etiketler varsayılan olarak satır içidir."
+    },
+    {
+        q: "Aşağıdaki elemanlardan hangisi varsayılan olarak inline (satır içi) elemandır?",
+        t: "mcq",
+        o: [
+            "<div>",
+            "<section>",
+            "<article>",
+            "<header>",
+            "<a>"
         ],
         a: "<a>",
-        difficulty: "easy",
-        week: 3,
-        topic: "Bağlantı Oluşturma",
-        importance: "high",
-        explanation: "Slaytlarda bağlantı (köprü) oluşturma konusu işlenirken <a> etiketi ve href özelliğiyle örnekler verilir: <a href=\"…\">Metin</a>."
-    },
-    {
-        q: "Bir bağlantının kullanıcı linke tıkladığında yeni sekmede açılması istenmektedir. Aşağıdaki örneklerden hangisi hem doğru href kullanımı hem de yeni sekmede açılma davranışını birlikte DOĞRU şekilde göstermektedir?",
-        t: "mcq",
-        o: [
-            "<a src=\"https://www.google.com\" newtab>Google</a>",
-            "<a link=\"https://www.google.com\" target=\"new\">Google</a>",
-            "<a href=\"https://www.google.com\" window=\"_blank\">Google</a>",
-            "<a href=\"https://www.google.com\" target=\"_blank\">Google</a>",
-            "<a ref=\"https://www.google.com\" open=\"blank\">Google</a>"
-        ],
-        a: "<a href=\"https://www.google.com\" target=\"_blank\">Google</a>",
         difficulty: "medium",
-        week: 3,
-        topic: "Bağlantı Özellikleri",
-        importance: "high",
-        explanation: "Slayt ve notlarda target=\"_blank\" kullanımının linki yeni sekmede açtığı gösterilir; href ise gidilecek adresi belirtir."
-    },
-    {
-        q: "Uzun bir sayfada en üstte 'Sayfanın Altına Git' bağlantısı konulmuş ve bu bağlantıya tıklanınca aynı sayfanın alt kısmındaki belirli bir başlığa atlanması istenmiştir. Aşağıdakilerden hangisi bu işlem için kullanılacak YAKLAŞIMI doğru özetler?",
-        t: "mcq",
-        o: [
-            "Sayfanın altındaki metni <footer> içine almak yeterlidir, ek bir ayara gerek yoktur.",
-            "Bağlantı <a href=\"alt\">…</a> şeklinde yazılır, alt kısma özel bir tanımlama yapılmaz.",
-            "Bağlantı için <a href=\"#alt\">…</a> yazılır; hedef etikete id=\"alt\" gibi bir kimlik atanır.",
-            "Sayfada JavaScript ile otomatik kaydırma yapılır; HTML bağlantısı kullanılamaz.",
-            "Bunun için yalnızca <nav> etiketi kullanılır, başka etikete gerek yoktur."
-        ],
-        a: "Bağlantı için <a href=\"#alt\">…</a> yazılır; hedef etikete id=\"alt\" gibi bir kimlik atanır.",
-        difficulty: "medium",
-        week: 3,
-        topic: "Sayfa İçi Bağlantılar",
-        importance: "medium",
-        explanation: "Slaytlarda # işaretinin aynı sayfa içinde bir id’ye atlama (anchor) için kullanıldığı örneklenir: <a href=\"#alt\">…</a> ve hedefte id=\"alt\"."
+        week: 4,
+        topic: "inline örneği",
+        importance: "low",
+        explanation: "a, strong, em, img, span gibi etiketler satır içi elemanlardır."
     },
 
-    // ===== HAFTA 4 – Tablolar ve Bağlantı Tekrarı =====
+    // ==== 5. HAFTA – Formlar ====
     {
-        q: "Bir tablo içinde 'Ad, Soyad, Yaş' başlıklarına sahip bir satır ve altında iki öğrenci kaydı göstermek isteyen bir tasarımcı aşağıdaki etiketlerden hangisini BAŞLIK HÜCRESİ (kolon başlığı) için kullanmalıdır?",
+        q: "Aşağıdaki HTML kodu ne işe yarar?\n\n<form action=kaydet.php method=post>\n  ...\n</form>",
         t: "mcq",
         o: [
-            "<td>",
-            "<tr>",
-            "<th>",
-            "<thead>",
-            "<caption>"
+            "Sadece tablo oluşturur.",
+            "Kullanıcıdan veri alıp kaydet.php ye post yöntemi ile gönderecek bir form tanımlar.",
+            "Sadece sayfayı yeniler, veri gönderemez.",
+            "Sadece CSS stil dosyasını bağlar.",
+            "Sadece JavaScript dosyasını çağırır."
         ],
-        a: "<th>",
-        difficulty: "easy",
-        week: 4,
-        topic: "Tablo İşlemleri",
-        importance: "high",
-        explanation: "Slaytta 'TABLO İŞLEMLERİ' bölümünde tabloda başlık hücreleri için <th>, veri hücreleri için <td> kullanıldığı açıkça belirtilir."
-    },
-    {
-        q: "Bir tabloya dış çerçeve çizgisi eklemek isteyen bir öğrenci, en basit yoldan HTML’in eski ama hâlâ çalışan bir özelliğini kullanmak istemektedir. Aşağıdaki kullanımlardan hangisi slaytlarda verilen ÖRNEĞE en çok uyan kullanımdır?",
-        t: "mcq",
-        o: [
-            "<table border=\"1\"> … </table>",
-            "<table frame=\"1\"> … </table>",
-            "<table outline=\"1\"> … </table>",
-            "<table style=\"line:1\"> … </table>",
-            "<table rule=\"all\"> … </table>"
-        ],
-        a: "<table border=\"1\"> … </table>",
-        difficulty: "easy",
-        week: 4,
-        topic: "Tablo Kenarlıkları",
-        importance: "medium",
-        explanation: "Slayttaki örneklerde tablolar <table border=\"1\"> şeklinde oluşturulur; bu öznitelik temel sınav sorusu olmaya uygundur."
-    },
-    {
-        q: "Aşağıdakilerden hangisi tablo yapısı içinde satır ve sütun mantığını DOĞRU eşleştirmiştir?",
-        t: "mcq",
-        o: [
-            "<tr> sütunları, <td> ise satırları temsil eder.",
-            "<tr> tablonun başlığını, <th> ise tablonun tamamını temsil eder.",
-            "<table> satırı, <tr> ise sütunu temsil eder.",
-            "<tr> satırı, <td> ve <th> ise o satırdaki hücreleri (sütunları) temsil eder.",
-            "<thead> satırları, <tbody> ise sadece sütunları temsil eder."
-        ],
-        a: "<tr> satırı, <td> ve <th> ise o satırdaki hücreleri (sütunları) temsil eder.",
+        a: "Kullanıcıdan veri alıp kaydet.php ye post yöntemi ile gönderecek bir form tanımlar.",
         difficulty: "medium",
-        week: 4,
-        topic: "Tablo Mantığı",
-        importance: "medium",
-        explanation: "Tablo satırları <tr> etiketleriyle, her satırdaki hücreler ise veri için <td>, başlık için <th> ile tanımlanır."
-    },
-    {
-        q: "Bir web sayfasında üst kısımda site logosu ve yatay menü, orta kısımda içerik, sağ tarafta ise reklamların yer aldığı bir yana sütun vardır. Bu yapıyı semantik HTML etiketleriyle kurmak isteyen bir tasarımcı aşağıdaki kombinasyonlardan hangisini EN UYGUN şekilde kullanmalıdır?",
-        t: "mcq",
-        o: [
-            "<header> üst kısım, <section> içerik, <aside> yan sütun",
-            "<nav> üst kısım, <article> içerik, <footer> yan sütun",
-            "<section> üst kısım, <header> içerik, <aside> alt kısım",
-            "<article> üst kısım, <nav> içerik, <section> yan sütun",
-            "<div> üst kısım, <div> içerik, <div> yan sütun; semantik etiket kullanılamaz"
-        ],
-        a: "<header> üst kısım, <section> içerik, <aside> yan sütun",
-        difficulty: "hard",
-        week: 4,
-        topic: "Semantik Etiketler",
+        week: 5,
+        topic: "form action method",
         importance: "high",
-        explanation: "Ekran görüntüsünde anlatılan semantik yapı; <header> başlık alanı, <section> ana içerik bölümü, <aside> ise ana içerikten ayrı yan içerik (örneğin reklam/kenar çubuğu) için kullanılır."
+        explanation: "action hedefi, method ise gönderim türünü belirtir. post daha gizli veri gönderimi için sık kullanılır."
     },
     {
-        q: "Bir geliştirici, sayfanın farklı bölümlerini sadece kutu kutu ayırmak, CSS ile tasarım uygulamak istiyor ve bu bölümlerin semantik olarak özel bir anlamı yok. Bu durumda aşağıdaki etiketlerden hangisi SEMANTİK ANLAM TAŞIMADAN sadece 'kapsayıcı kutu' olarak kullanılmalıdır?",
+        q: "<input type=text name=ad placeholder=Isminiz> elemanı ile ilgili hangisi DOĞRUDUR?",
         t: "mcq",
         o: [
-            "<header>",
-            "<section>",
-            "<div>",
-            "<article>",
-            "<footer>"
+            "type=text, metin girilebilen giriş kutusu oluşturur.",
+            "placeholder, girilen metni siler.",
+            "name özniteliği zorunlu değildir, form verisine etki etmez.",
+            "Bu eleman sadece parola girişi içindir.",
+            "Bu eleman sadece buton oluşturur."
         ],
-        a: "<div>",
+        a: "type=text, metin girilebilen giriş kutusu oluşturur.",
         difficulty: "easy",
-        week: 4,
-        topic: "Div Kullanımı",
+        week: 5,
+        topic: "input text",
         importance: "medium",
-        explanation: "Notlarında da belirttiğin gibi <div> etiketi, bölümleri kutu kutu ayırmak için kullanılan, semantik anlam taşımayan genel bir kapsayıcıdır."
+        explanation: "placeholder, kutu boşken gri ipucu metni gösterir; name sunucu tarafında alan adıdır."
+    },
+    {
+        q: "<input type=password name=sifre> ile ilgili hangisi DOĞRUDUR?",
+        t: "mcq",
+        o: [
+            "Girilen karakterler ekranda aynen görünür.",
+            "Girilen karakterler gizlenir, genelde nokta veya yildiz olarak gösterilir.",
+            "Sadece sayısal giris kabul eder.",
+            "Sadece buton gibi çalışır.",
+            "Sadece radio butonları için kullanılır."
+        ],
+        a: "Girilen karakterler gizlenir, genelde nokta veya yildiz olarak gösterilir.",
+        difficulty: "easy",
+        week: 5,
+        topic: "input password",
+        importance: "medium",
+        explanation: "type=password parolaların gizlenmesi için kullanılır; vize form sorularında sık çıkar."
+    },
+    {
+        q: "<input type=radio name=cinsiyet value=Kadin> Kadin\n<input type=radio name=cinsiyet value=Erkek> Erkek\n satırlarına göre aşağıdakilerden hangisi DOĞRUDUR?",
+        t: "mcq",
+        o: [
+            "Aynı name değerine sahip radio butonlar birbirinden bağımsızdır.",
+            "Aynı name değerine sahip radio butonlar bir grup oluşturur ve gruptan sadece bir tanesi seçilebilir.",
+            "value özniteliği zorunlu değildir, seçilse de sunucuya gönderilmez.",
+            "Bu elemanlar sadece tablo içinde çalışır.",
+            "radio butonlar tıklandığında metin kutusuna dönüşür."
+        ],
+        a: "Aynı name değerine sahip radio butonlar bir grup oluşturur ve gruptan sadece bir tanesi seçilebilir.",
+        difficulty: "medium",
+        week: 5,
+        topic: "radio name gruplama",
+        importance: "high",
+        explanation: "radio grupları name ile tanımlanır, bu sayede tek seçimli alanlar oluşturulur."
+    },
+    {
+        q: "<label for=eposta>E posta</label>\n<input type=email id=eposta> kodu ile ilgili hangisi DOĞRUDUR?",
+        t: "mcq",
+        o: [
+            "for ile id nin aynı olması, label a tıklanınca ilgili input a odaklanmayı sağlar.",
+            "label sadece tablo içinde kullanılabilir.",
+            "type=email normal metin kutusundan farkı olmayan bir tiptir.",
+            "id yalnızca CSS için, label yalnızca JavaScript için kullanılır.",
+            "for özniteliği hatalıdır, HTML de yoktur."
+        ],
+        a: "for ile id nin aynı olması, label a tıklanınca ilgili input a odaklanmayı sağlar.",
+        difficulty: "medium",
+        week: 5,
+        topic: "label for id",
+        importance: "medium",
+        explanation: "label for ile input id eşleşirse erişilebilirlik artar ve kullanıcı label a tıklayınca kutu aktif olur."
+    },
+    {
+        q: "<input type=submit value=Gonder> elemanının görevi nedir?",
+        t: "mcq",
+        o: [
+            "Sadece sayfayı yeniler, form verisi göndermez.",
+            "Formu temizler, tüm alanları sıfırlar.",
+            "Formu göndermek için tıklanabilir bir buton oluşturur.",
+            "Sadece dosya yüklemek için kullanılır.",
+            "Sadece resim göstermek için kullanılır."
+        ],
+        a: "Formu göndermek için tıklanabilir bir buton oluşturur.",
+        difficulty: "easy",
+        week: 5,
+        topic: "submit butonu",
+        importance: "medium",
+        explanation: "type=submit form action adresine veriyi gönderen standart gönder butonudur."
     },
 
-    // ===== HAFTA 5 – Formlar ve Temel Elemanlar =====
+    // ==== 6. HAFTA – Ses, video, iframe, image map ====
     {
-        q: "Bir kullanıcı kayıt formu hazırlayan öğrenci, form verilerinin 'islem.php' dosyasına gönderilmesini ve verilerin adres çubuğunda görünmemesini istemektedir. Aşağıdaki form tanımlarından hangisi bu isteği DOĞRU karşılar?",
+        q: "<audio controls>\n  <source src=sarki.mp3 type=audio/mpeg>\n</audio> kodu ile ilgili hangisi DOĞRUDUR?",
         t: "mcq",
         o: [
-            "<form target=\"islem.php\" send=\"hidden\">",
-            "<form file=\"islem.php\" type=\"post\">",
-            "<form action=\"islem.php\" method=\"get\">",
-            "<form action=\"islem.php\" method=\"post\">",
-            "<form src=\"islem.php\" hide=\"true\">"
+            "Sadece resim gösterir.",
+            "Tarayıcıda ses çalar ve controls özniteliği oynat durdur gibi tuşlar ekler.",
+            "Sadece video oynatır.",
+            "Sadece tablo oluşturur.",
+            "Sadece form alanı açar."
         ],
-        a: "<form action=\"islem.php\" method=\"post\">",
+        a: "Tarayıcıda ses çalar ve controls özniteliği oynat durdur gibi tuşlar ekler.",
         difficulty: "medium",
-        week: 5,
-        topic: "Form Temelleri",
+        week: 6,
+        topic: "audio source controls",
         importance: "high",
-        explanation: "Slaytta method=\"get\" verileri URL’ye ekler, method=\"post\" ise verileri gizli (adres çubuğunda görünmeden) gönderir şeklinde anlatılır."
+        explanation: "audio etiketi ses oynatmak için; source ise dosya kaynağını belirtir. controls koymazsan kullanıcı arayüzü görünmez."
     },
     {
-        q: "Bir formda 'Adınızı giriniz' şeklinde gri ipucu metni gösteren, kullanıcı tıklayınca içi boşalan tek satırlık metin kutusu hangi input türü ve hangi öznitelik ile oluşturulur?",
+        q: "<video width=320 height=240 controls>\n  <source src=video.mp4 type=video/mp4>\n</video> kodu ne yapar?",
         t: "mcq",
         o: [
-            "<input type=\"text\" title=\"Adınızı giriniz\">",
-            "<input type=\"text\" placeholder=\"Adınızı giriniz\">",
-            "<input type=\"label\" text=\"Adınızı giriniz\">",
-            "<input type=\"hint\" value=\"Adınızı giriniz\">",
-            "<input type=\"note\" message=\"Adınızı giriniz\">"
+            "Sadece ses oynatır.",
+            "Sayfaya video ekler ve belirtilen boyutta oynatma alanı oluşturur.",
+            "Tarayıcının sekme başlığını değiştirir.",
+            "Sadece arka planda çalışan gizli bir süreç oluşturur.",
+            "Sadece resim galerisi açar."
         ],
-        a: "<input type=\"text\" placeholder=\"Adınızı giriniz\">",
-        difficulty: "easy",
-        week: 5,
-        topic: "Input Metin Kutusu",
-        importance: "medium",
-        explanation: "Slaytta örnek olarak <input type=\"text\" name=\"ad\" placeholder=\"Adınızı giriniz\"> kullanılır; placeholder gri ipucu metnidir."
-    },
-    {
-        q: "Bir anket formunda kullanıcılara birden fazla hobi seçme imkânı verilmek isteniyor (Örn: 'Müzik' ve 'Spor' aynı anda seçilebilsin). Aşağıdaki input elemanlarından hangisi bu ihtiyacı KARŞILAMAK için kullanılmalıdır?",
-        t: "mcq",
-        o: [
-            "type=\"radio\"",
-            "type=\"password\"",
-            "type=\"checkbox\"",
-            "type=\"submit\"",
-            "type=\"file\""
-        ],
-        a: "type=\"checkbox\"",
-        difficulty: "easy",
-        week: 5,
-        topic: "Checkbox ve Radio",
-        importance: "high",
-        explanation: "Slaytta örnek olarak hobiler checkbox ile verilmiştir; checkbox birden fazla seçime izin verir, radio ise aynı grupta tek seçime izin verir."
-    },
-    {
-        q: "Bir kullanıcıya 'Cinsiyet' sorusunu sadece 'Erkek' veya 'Kadın' seçeneklerinden BİRİNİ seçtirecek form elemanını hazırlarken hangi input türü ve ortak özellik kullanılmalıdır?",
-        t: "mcq",
-        o: [
-            "İki ayrı input: type=\"checkbox\" ve name değerleri farklı",
-            "İki ayrı input: type=\"radio\" ve name değeri aynı",
-            "İki ayrı input: type=\"text\" ve value değerleri farklı",
-            "İki ayrı input: type=\"button\" ve onclick değerleri farklı",
-            "Tek bir input: type=\"select\" ve multiple özelliği açık"
-        ],
-        a: "İki ayrı input: type=\"radio\" ve name değeri aynı",
+        a: "Sayfaya video ekler ve belirtilen boyutta oynatma alanı oluşturur.",
         difficulty: "medium",
-        week: 5,
-        topic: "Radio Butonlar",
-        importance: "high",
-        explanation: "Slaytta cinsiyet örneğinde olduğu gibi radio butonlar aynı name değerini paylaşırsa kullanıcı aynı anda yalnızca birini seçebilir."
+        week: 6,
+        topic: "video etiketi",
+        importance: "medium",
+        explanation: "video etiketi görsel video oynatıcı sağlar; width height piksel boyutunu belirtir."
     },
     {
-        q: "Uzun bir 'mesaj' alanı oluşturmak ve kullanıcının birden fazla satır yazabilmesini sağlamak için aşağıdaki form elemanlarından hangisi kullanılmalıdır?",
+        q: "<iframe src=https://bozok.edu.tr width=600 height=400></iframe> kodu ne yapar?",
         t: "mcq",
         o: [
-            "<input type=\"text\">",
-            "<textarea> … </textarea>",
-            "<input type=\"password\">",
-            "<select> … </select>",
-            "<label> … </label>"
+            "Sayfayı başka bir sekmede açar.",
+            "bozok.edu.tr sayfasını mevcut sayfanın içinde pencere gibi gömülü olarak gösterir.",
+            "Sadece ses çalar.",
+            "Sadece form veri gönderir.",
+            "Tarayıcıyı kilitler, çalışmaz."
         ],
-        a: "<textarea> … </textarea>",
-        difficulty: "easy",
-        week: 5,
-        topic: "Textarea",
+        a: "bozok.edu.tr sayfasını mevcut sayfanın içinde pencere gibi gömülü olarak gösterir.",
+        difficulty: "medium",
+        week: 6,
+        topic: "iframe",
+        importance: "high",
+        explanation: "iframe sayfa içinde sayfa mantığıyla başka bir kaynağı gömmek için kullanılır; vizede mutlaka sorulabilecek konudur."
+    },
+    {
+        q: "image map ile ilgili aşağıdaki parçalardan hangisi doğrudur?\n\n<img src=harita.png usemap=#bolgeler>\n<map name=bolgeler>\n  <area shape=rect coords=0,0,100,100 href=link1.html>\n</map>",
+        t: "mcq",
+        o: [
+            "usemap ve name değerleri aynı olmalıdır, böylece resim ile harita bölgeleri ilişkilendirilir.",
+            "coords değerleri sadece yazı tipini belirler.",
+            "shape daire ise her zaman rect yazılır.",
+            "area etiketi resim eklemek için kullanılır.",
+            "map etiketi sadece ses dosyaları ile çalışır."
+        ],
+        a: "usemap ve name değerleri aynı olmalıdır, böylece resim ile harita bölgeleri ilişkilendirilir.",
+        difficulty: "hard",
+        week: 6,
+        topic: "image map",
         importance: "medium",
-        explanation: "Slaytta 'Mesajınızı yazınız…' örneğinde çok satırlı metin girişi için <textarea name=\"mesaj\" rows=\"4\" cols=\"30\"> kullanılır."
+        explanation: "usemap de #bolgeler, map name de bolgeler şeklinde eşleştirilir; coords seçilebilir alanın koordinatlarını belirtir."
+    },
+    {
+        q: "Aşağıdaki HTML kodu ile ilgili hangisi DOĞRUDUR?\n\n<source src=video.webm type=video/webm>",
+        t: "mcq",
+        o: [
+            "Tek başına kullanılır ve video etiketi gerektirmez.",
+            "audio veya video gibi ortam etiketleri içinde, farklı format kaynakları tanımlamak için kullanılır.",
+            "Sadece tablo satırı oluşturur.",
+            "Sadece form alanı oluşturur.",
+            "Sadece head içinde kullanılır."
+        ],
+        a: "audio veya video gibi ortam etiketleri içinde, farklı format kaynakları tanımlamak için kullanılır.",
+        difficulty: "medium",
+        week: 6,
+        topic: "source etiketi",
+        importance: "medium",
+        explanation: "source etiketi medya kaynağını belirtir; tarayıcı uygun formatı seçer."
     },
 
-    // ===== HAFTA 6 – Gelişmiş Formlar ve Multimedya =====
+    // ==== 7. HAFTA – meta, charset, viewport, entity ====
     {
-        q: "Bir üyelik formunda 'E-posta' alanı boş bırakılamasın ve kullanıcı '@' içermeyen geçersiz bir e-posta formatı yazdığında tarayıcı otomatik uyarı versin istenmektedir. HTML5 ile gelen hazır doğrulama özelliklerine göre aşağıdaki input tanımlarından hangisi bu ihtiyacı en iyi şekilde karşılar?",
+        q: "<meta charset=UTF-8> etiketi ne işe yarar?",
         t: "mcq",
         o: [
-            "<input type=\"text\" name=\"eposta\">",
-            "<input type=\"email\" name=\"eposta\">",
-            "<input type=\"email\" name=\"eposta\" required>",
-            "<input type=\"mail\" name=\"eposta\" validate>",
-            "<input type=\"text\" name=\"eposta\" maxlength=\"10\">"
+            "Sayfanın arka plan rengini değiştirir.",
+            "Sayfanın dilini İngilizce yapar.",
+            "Sayfada kullanılan karakter kodlamasını belirtir, Türkçe karakterlerin doğru görünmesini sağlar.",
+            "Sadece JavaScript dosyalarını bağlar.",
+            "Sadece CSS dosyalarını bağlar."
         ],
-        a: "<input type=\"email\" name=\"eposta\" required>",
-        difficulty: "medium",
-        week: 6,
-        topic: "Form Doğrulama",
-        importance: "high",
-        explanation: "Slaytta HTML5 doğrulama örneklerinde type=\"email\" ile e-posta format kontrolü, required ile alanın boş bırakılamaması sağlanır."
-    },
-    {
-        q: "Bir formda kullanıcıdan yaş bilgisi alınırken 18 ile 99 arasında bir değer girilmesi gerekmektedir. HTML5’in yerleşik özellikleri kullanılarak bu sınırlar yalnızca HTML ile konulmak istenmektedir. Aşağıdaki input tanımlarından hangisi slaytlarda verilen örnekle uyumludur?",
-        t: "mcq",
-        o: [
-            "<input type=\"number\" name=\"yas\" min=\"18\" max=\"99\">",
-            "<input type=\"text\" name=\"yas\" min=\"18\" max=\"99\">",
-            "<input type=\"range\" name=\"yas\" value=\"18-99\">",
-            "<input type=\"number\" name=\"yas\" limit=\"18-99\">",
-            "<input type=\"number\" name=\"yas\" minlength=\"18\" maxlength=\"99\">"
-        ],
-        a: "<input type=\"number\" name=\"yas\" min=\"18\" max=\"99\">",
-        difficulty: "medium",
-        week: 6,
-        topic: "Sayı Alanı Doğrulama",
-        importance: "medium",
-        explanation: "Slaytta HTML5 doğrulama örneklerinde 'type=\"number\"' ile birlikte min ve max öznitelikleri kullanılarak sayısal sınırlar belirlenir."
-    },
-    {
-        q: "Bir formda kullanıcının özgeçmiş dosyasını (PDF veya Word) yükleyebilmesi için uygun giriş alanı eklenmek istenmektedir. Bu dosyanın sunucuya gönderilebilmesi için hem uygun input türü hem de form etiketinde uygun bir ayar gereklidir. Aşağıdakilerden hangisi bu ikiliyi DOĞRU şekilde bir araya getirmiştir?",
-        t: "mcq",
-        o: [
-            "Formda enctype=\"text/plain\" kullanılmalı, input ise type=\"file\" olmalıdır.",
-            "Formda enctype=\"multipart/form-data\" kullanılmalı, input ise type=\"file\" olmalıdır.",
-            "Formda method=\"get\" kullanılmalı, input ise type=\"upload\" olmalıdır.",
-            "Formda action=\"file.php\" kullanılmalı, input ise type=\"text\" olmalıdır.",
-            "Formda charset=\"UTF-8\" kullanılmalı, input ise type=\"binary\" olmalıdır."
-        ],
-        a: "Formda enctype=\"multipart/form-data\" kullanılmalı, input ise type=\"file\" olmalıdır.",
-        difficulty: "hard",
-        week: 6,
-        topic: "Dosya Yükleme",
-        importance: "high",
-        explanation: "6. hafta kapsamlı form örneğinde dosya yüklemek için input type=\"file\" kullanılır ve form etiketi enctype=\"multipart/form-data\" ayarıyla birlikte gösterilir."
-    },
-    {
-        q: "Bir web sayfasında yerel bir video dosyası HTML5 video etiketi ile oynatılmak istenmektedir. Tarayıcının farklı formatları desteklemesine karşı, aynı video için birden fazla kaynak dosyası tanımlanacaktır. Aşağıdaki kod parçalarından hangisi bu durumu HTML5 STANDARTLARINA EN UYGUN şekilde göstermektedir?",
-        t: "mcq",
-        o: [
-            "<video src=\"video.mp4\" src2=\"video.webm\">Video</video>",
-            "<video controls><source file=\"video.mp4\"></video>",
-            "<video controls><source src=\"video.mp4\" type=\"video/mp4\"><source src=\"video.webm\" type=\"video/webm\">Tarayıcınız videoyu desteklemiyor.</video>",
-            "<video><source href=\"video.mp4\">Video</video>",
-            "<video autoplay src=\"video.mp4\" type=\"video/mp4\">Video</video>"
-        ],
-        a: "<video controls><source src=\"video.mp4\" type=\"video/mp4\"><source src=\"video.webm\" type=\"video/webm\">Tarayıcınız videoyu desteklemiyor.</video>",
-        difficulty: "hard",
-        week: 6,
-        topic: "Video ve Source Kullanımı",
-        importance: "medium",
-        explanation: "Notlarında video ekleme konusu geçerken <video> etiketi içinde birden fazla <source src=\"…\" type=\"…\"> tanımlanabileceği, tarayıcının desteklediği ilk formatı oynatacağı anlatılır."
-    },
-    {
-        q: "Bir öğretmen, ders notu sunumunda YouTube’daki bir videoyu doğrudan sayfanın içinde, başka bir siteye gitmeden izletmek istemektedir. Bu amaçla YouTube’un verdiği gömme (embed) kodunu HTML sayfasına ekler. Bu işlemde kullanılan temel HTML etiketi aşağıdakilerden hangisidir?",
-        t: "mcq",
-        o: [
-            "<frame>",
-            "<media>",
-            "<iframe>",
-            "<layer>",
-            "<canvas>"
-        ],
-        a: "<iframe>",
+        a: "Sayfada kullanılan karakter kodlamasını belirtir, Türkçe karakterlerin doğru görünmesini sağlar.",
         difficulty: "easy",
-        week: 6,
-        topic: "iframe Kullanımı",
+        week: 7,
+        topic: "meta charset",
         importance: "high",
-        explanation: "Hem slaytlarda hem de Kodlar.pdf içinde 'sayfa içinde sayfa' mantığı için iframe örnekleri kullanılır; YouTube ve Google Maps gibi dış içerikler genellikle <iframe> ile gömülür."
+        explanation: "UTF-8 ayarı yapılmazsa Türkçe karakterlerde bozulma olabilir; bu da sınavda klasik bir teorik bilgi sorusudur."
     },
     {
-        q: "Bir geliştirici, bir resim üzerinde farklı bölgelere farklı linkler vermek istemektedir. Örneğin bir Türkiye haritasında Ankara’ya tıklanınca 'ankara.html', İstanbul’a tıklanınca 'istanbul.html' açılmalıdır. Bu amaçla 'image map' tekniğini kullanacaktır. Aşağıdaki kombinasyonlardan hangisi bu tekniğin TEMEL yapı taşlarını doğru eşleştirir?",
+        q: "<meta name=viewport content=width=device-width, initial-scale=1.0> etiketi için aşağıdakilerden hangisi DOĞRUDUR?",
         t: "mcq",
         o: [
-            "<img> etiketi ve <area> etiketleri, ancak <map> etiketi kullanılmaz.",
-            "<map> etiketi ve <area> etiketleri, ancak resim <img> ile değil <picture> ile gösterilir.",
-            "<img usemap=\"…\"> ile resim, <map name=\"…\"> içinde <area shape=\"…\" coords=\"…\" href=\"…\"> ile tıklanabilir bölgeler tanımlanır.",
-            "<canvas> üzerinde JavaScript ile alan çizmek zorunludur, HTML etiketleriyle yapılamaz.",
-            "Sadece CSS ile background-image kullanılır, herhangi bir HTML etiketi gerekmez."
+            "Sadece masaüstü tarayıcıları etkiler.",
+            "Mobil cihazlarda sayfanın ekrana uygun ölçeklenmesine yardım eder.",
+            "Sadece tablo genişliğini ayarlar.",
+            "Sadece arka plan resmini değiştirir.",
+            "Sayfayı arama motorlarından gizler."
         ],
-        a: "<img usemap=\"…\"> ile resim, <map name=\"…\"> içinde <area shape=\"…\" coords=\"…\" href=\"…\"> ile tıklanabilir bölgeler tanımlanır.",
-        difficulty: "hard",
-        week: 6,
-        topic: "Image Map ve Koordinatlar",
+        a: "Mobil cihazlarda sayfanın ekrana uygun ölçeklenmesine yardım eder.",
+        difficulty: "medium",
+        week: 7,
+        topic: "viewport meta",
         importance: "medium",
-        explanation: "Notlarında 'image map’te koordinat öğrenilir ve o koordinata link eklenir' ifadesi geçer; bunun için <img usemap> ile <map>/<area> yapısı kullanılır."
+        explanation: "Responsive tasarımda viewport metası önemlidir; vizeyi hazırlayan hoca mobil tasarıma değindiyse bu soru gelebilir."
+    },
+    {
+        q: "Aşağıdaki HTML kodu ne gösterir?\n\n<p>&lt;b&gt;kalin&lt;/b&gt;</p>",
+        t: "mcq",
+        o: [
+            "kalin kelimesini gerçekten kalın yazar.",
+            "b etiketi uygulanmış gerçek kalın metindir.",
+            "Tarayıcıda aynen <b>kalin</b> metni olduğu gibi, köşeli parantezleri ile görünür.",
+            "Tarayıcı hata verir.",
+            "Paragraf boş görünür."
+        ],
+        a: "Tarayıcıda aynen <b>kalin</b> metni olduğu gibi, köşeli parantezleri ile görünür.",
+        difficulty: "medium",
+        week: 7,
+        topic: "html entity",
+        importance: "medium",
+        explanation: "lt ve gt karakter entity leri sayesinde köşeli parantezler düz metin gibi gösterilir, etiket olarak yorumlanmaz."
+    },
+
+    // ==== 8. HAFTA – Çeşitli karma sorular ====
+    {
+        q: "Aşağıdaki kodun görsel çıktısı için hangisi DOĞRUDUR?\n\n<p>Merhaba <span style=font-weight:bold>Yusuf</span></p>",
+        t: "mcq",
+        o: [
+            "Merhaba ve Yusuf aynı stilde normal yazılır.",
+            "Merhaba italik, Yusuf altı çizili yazılır.",
+            "Merhaba normal, Yusuf ise kalın yazılır ve aynı satırda görünür.",
+            "Merhaba büyük başlık, Yusuf paragraf olur.",
+            "Yusuf görünmez, sadece Merhaba görünür."
+        ],
+        a: "Merhaba normal, Yusuf ise kalın yazılır ve aynı satırda görünür.",
+        difficulty: "medium",
+        week: 8,
+        topic: "span inline stil",
+        importance: "medium",
+        explanation: "span inline olduğu için satır kırılmaz; font-weight:bold sadece Yusuf kelimesini kalın yapar."
+    },
+    {
+        q: "Aşağıdaki HTML parçası nasıl bir çıktı üretir?\n\n<ol>\n  <li>HTML</li>\n  <li>CSS\n    <ul>\n      <li>Renkler</li>\n      <li>Yazi tipleri</li>\n    </ul>\n  </li>\n</ol>",
+        t: "mcq",
+        o: [
+            "Sadece HTML ve CSS yazılı iki satır üretir.",
+            "Numaralı bir liste içinde sadece tek seviye eleman gösterir.",
+            "HTML ve CSS numaralı liste olur, CSS nin altında madde işaretli iç liste olarak Renkler ve Yazi tipleri görünür.",
+            "Tüm elemanlar tek satırda görünür.",
+            "Tarayıcı iç içe liste hatası verir."
+        ],
+        a: "HTML ve CSS numaralı liste olur, CSS nin altında madde işaretli iç liste olarak Renkler ve Yazi tipleri görünür.",
+        difficulty: "hard",
+        week: 8,
+        topic: "iç içe liste",
+        importance: "medium",
+        explanation: "ol içinde li, li içinde ul iç içe liste oluşturmaya örnektir; sınavda kod parçasından çıktı yorumlatılabilir."
+    },
+    {
+        q: "<head> etiketinin içine yazılan aşağıdaki elemanlardan hangisi KULLANICILAR tarafından doğrudan sayfada görülür?",
+        t: "mcq",
+        o: [
+            "<meta charset=UTF-8>",
+            "<link rel=stylesheet href=stil.css>",
+            "<title>Testify</title>",
+            "<script src=app.js></script>",
+            "Hiçbiri head içinde görünmez."
+        ],
+        a: "<title>Testify</title>",
+        difficulty: "easy",
+        week: 8,
+        topic: "head icerigi",
+        importance: "medium",
+        explanation: "title sekme başlığında görünür; diğer head içeriği genelde görünmez ayar ve bağlantılardır."
+    },
+    {
+        q: "Aşağıdaki etiketlerden hangisi yatay çizgi oluşturur?",
+        t: "mcq",
+        o: [
+            "<br>",
+            "<hr>",
+            "<line>",
+            "<border>",
+            "<rule>"
+        ],
+        a: "<hr>",
+        difficulty: "easy",
+        week: 8,
+        topic: "hr etiketi",
+        importance: "low",
+        explanation: "hr horizontal rule yani yatay çizgidir; br satır sonu ekler."
+    },
+    {
+        q: "Aşağıdaki kod ise:\n\n<p>Birinci satir</p>\n<hr>\n<p>Ikinci satir</p>\n Bu kod ne tür bir düzen oluşturur?",
+        t: "mcq",
+        o: [
+            "İki paragraf arasında yatay çizgi görünür.",
+            "Paragraflar arasında boşluk olmaz.",
+            "Her satır alt alta ama çizgisiz görünür.",
+            "Yalnızca çizgi görünür, metinler gizlenir.",
+            "Tarayıcı hata verir."
+        ],
+        a: "İki paragraf arasında yatay çizgi görünür.",
+        difficulty: "easy",
+        week: 8,
+        topic: "p ve hr birlikte",
+        importance: "low",
+        explanation: "hr iki paragraf arasına çizgi çeker, genelde bölüm ayırmak için kullanılır."
     }
-];
+]);
