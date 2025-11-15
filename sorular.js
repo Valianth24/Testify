@@ -1,7 +1,7 @@
 
 // HTML EK SORULARI (50 adet – kod odaklı, tam vize ayarı)
 // Bunu mevcut HTML questionBank'inin ALTINA yapıştır:
-// window.questionBank = window.questionBank.concat([ ... ]) yapısı ile ekler.
+
 
 window.questionBank = window.questionBank.concat([
     // ==== 1. HAFTA – Temel Yapı, head/body, title, headingler ====
