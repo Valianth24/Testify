@@ -1,4 +1,3 @@
-// HTML EK SORULARI (50 adet – kod odaklı, tam vize ayarı)
 
 window.questionBank = [
     // ==== 1. HAFTA – Temel Yapı, head/body, title, headingler ====
