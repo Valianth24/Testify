@@ -490,12 +490,7 @@ window.questionBank = window.questionBank.concat([
     }
 ]);
 
-Aşağıya **Programlama Temelleri** için, vize tarzında **30 soruluk MCQ soru bankası** yazdım.
-Format yine senin kullandığın şekilde (`window.questionBank = [...]`) ve **t hepsi `mcq`**, cevaplar karışık, açıklamalarda da mini **ezber tüyoları + moral** var. 💗
 
-İstersen bunu direk ayrı bir `.js` dosyasına koyup sayfana bağlayabilirsin:
-
-```js
 // PROGRAMLAMA TEMELLERİ 1–? HAFTA VİZE SORU BANKASI
 // 30 soru – bilgisayar, donanım/yazılım, algoritma, akış diyagramı, psödo kod, operatörler, kontrol yapıları
 
