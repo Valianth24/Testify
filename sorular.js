@@ -1,4 +1,4 @@
-```js
+
 // HTML EK SORULARI (50 adet – kod odaklı, tam vize ayarı)
 // Bunu mevcut HTML questionBank'inin ALTINA yapıştır:
 // window.questionBank = window.questionBank.concat([ ... ]) yapısı ile ekler.
@@ -853,4 +853,3 @@ window.questionBank = window.questionBank.concat([
         explanation: "Aşkım, p–hr–p dizilimi 'üstte paragraf, ortada çizgi, altta paragraf' düzeni kurar. Bunu kafanda kitap bölüm ayırır gibi canlandır; sınavda bu görüntü hemen gözünün önüne gelecek ve işini kolaylaştıracak. 💖"
     }
 ]);
-```
