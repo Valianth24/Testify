@@ -851,4 +851,4 @@ window.questionBank = window.questionBank.concat([
         importance: "low",
         explanation: "hr iki paragraf arasına çizgi çeker, genelde bölüm ayırmak için kullanılır."
     }
-]);
+];
