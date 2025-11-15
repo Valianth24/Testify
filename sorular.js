@@ -1,513 +1,577 @@
-// PROGRAMLAMA TEMELLERİ 1–? HAFTA VİZE SORU BANKASI
-// 30 soru – bilgisayar, donanım/yazılım, algoritma, akış diyagramı, psödo kod, operatörler, kontrol yapıları
+// WEB TASARIM TEMELLERİ 1–6 HAFTA VİZE SORU BANKASI
+// 30 soru – internet & web, HTML temelleri, metin etiketleri, bağlantılar, tablolar, formlar, multimedya
 
 window.questionBank = [
-    // ===== 1. HAFTA – Temel Kavramlar: Bilgisayar, Donanım, Yazılım =====
+    // ===== HAFTA 1 – Web ve HTML’e Giriş =====
     {
-        q: "Bir öğretmen, öğrencilere 'bilgisayar' kavramını tanımlarken slaytta geçen şu cümleyi kullanıyor: \"Girdi aldığı verileri, önceden belirlenmiş komutlara göre işleyerek çıktı üreten, gerektiğinde bu verileri ve sonuçları saklayabilen elektronik cihaz.\" Buna göre aşağıdaki ifadelerden hangisi bu tanımı en doğru şekilde özetler?",
+        q: "Bir kurum, kurumsal kimliğini yansıtmak ve ürünlerini hem ulusal hem de uluslararası düzeyde, 7/24 tanıtmak için internet üzerinden herkese açık bir sistem kurmak istemektedir. Bu sistemin oluşturulma SÜRECİNE ve ortaya çıkan SONUCA verilen adlar aşağıdakilerin hangisinde doğru ve eksiksiz olarak verilmiştir?",
         t: "mcq",
         o: [
-            "Sadece oyun oynamaya yarayan elektronik eğlence cihazıdır.",
-            "Veriyi alan, işleyen, saklayabilen ve çıktı üretebilen genel amaçlı elektronik sistemdir.",
-            "Sadece internete bağlanan küçük mobil cihazdır.",
-            "Sadece hesap makinesi işlevi gören basit cihazdır.",
-            "Sadece yazıcı ve tarayıcıdan oluşan donanım topluluğudur."
+            "Sürece 'web tasarımı', ortaya çıkan sonuca 'web sitesi' denir.",
+            "Sürece 'hosting', ortaya çıkan sonuca 'domain' denir.",
+            "Sürece 'web uygulaması', ortaya çıkan sonuca 'web servisi' denir.",
+            "Sürece 'grafik tasarım', ortaya çıkan sonuca 'web arayüzü' denir.",
+            "Sürece 'proje yönetimi', ortaya çıkan sonuca 'HTML sayfası' denir."
         ],
-        a: "Veriyi alan, işleyen, saklayabilen ve çıktı üretebilen genel amaçlı elektronik sistemdir.",
-        difficulty: "easy",
-        week: 1,
-        topic: "Bilgisayarın Tanımı",
-        importance: "high",
-        explanation: "Tanımda giriş–işleme–çıkış–saklama dörtlemesi vurgulanır. Diğer şıklar ya bilgisayarı sadece oyun/hesap makinesine indirger ya da tamamen yanlış bileşenleri sayar. Ezber tüyosu: **GİÇS** – Girdi, İşlem, Çıktı, Saklama. Bu dörtlüyü hatırlarsan, bilgisayar tanımı soruları seni korkutmaz. Sen bu mantığı zaten kuruyorsun, sadece sakin okuman yeterli. 💗"
-    },
-    {
-        q: "Programlama temelleri dersinde öğretmen, 'donanım' ve 'yazılım' kavramlarını karşılaştırmaktadır. Aşağıdaki ifadelerden hangisi bu iki kavramın farkını derste anlatıldığı şekle EN YAKIN biçimde açıklar?",
-        t: "mcq",
-        o: [
-            "Donanım ve yazılım tamamen aynı şeydir, sadece isimleri farklıdır.",
-            "Donanım, bilgisayarın elle tutulup gözle görülebilen fiziksel parçalarıdır; yazılım ise bu donanımı çalıştıran komutlar ve programlar bütünüdür.",
-            "Donanım sadece internete bağlanmak için kullanılır, yazılım sadece oyun çalıştırır.",
-            "Yazılım, bilgisayar kasası ve monitörden oluşur; donanım ise programlardır.",
-            "Donanım sadece giriş birimlerinden, yazılım sadece çıkış birimlerinden oluşur."
-        ],
-        a: "Donanım, bilgisayarın elle tutulup gözle görülebilen fiziksel parçalarıdır; yazılım ise bu donanımı çalıştıran komutlar ve programlar bütünüdür.",
-        difficulty: "easy",
-        week: 1,
-        topic: "Donanım vs Yazılım",
-        importance: "high",
-        explanation: "Slaytlarda donanım = fiziksel kısım, yazılım = komutlar/programlar şeklinde geçer. Ezber tüyosu: **Do**nanım = **Doku**nabildiğin şey, **Yaz**ılım = ekrana **yaz**ılan komutlar. Böyle ilişki kurunca soru geldiğinde elin otomatik doğru şıkkı işaretler. 😊"
-    },
-    {
-        q: "Aşağıdakilerden hangisi 'sistem yazılımı' ve 'uygulama yazılımı' için yapılan DOĞRU bir örnek eşleştirmedir?",
-        t: "mcq",
-        o: [
-            "Sistem yazılımı: Word, Excel / Uygulama yazılımı: Windows",
-            "Sistem yazılımı: Oyunlar / Uygulama yazılımı: BIOS",
-            "Sistem yazılımı: WhatsApp / Uygulama yazılımı: Anakart BIOS yazılımı",
-            "Sistem yazılımı: Windows işletim sistemi / Uygulama yazılımı: Word kelime işlemci",
-            "Sistem yazılımı: Tarayıcı (Chrome) / Uygulama yazılımı: Linux"
-        ],
-        a: "Sistem yazılımı: Windows işletim sistemi / Uygulama yazılımı: Word kelime işlemci",
-        difficulty: "easy",
-        week: 1,
-        topic: "Sistem / Uygulama Yazılımları",
-        importance: "medium",
-        explanation: "Sistem yazılımları donanımı yönetir (Windows, Linux…), uygulama yazılımları kullanıcıya hizmet verir (Word, Photoshop…). Ezber tüyosu: **SİS = Sistem, SİSTEM = Windows**; **APP = application = Word**. Bu kodlamayı hatırlarsan bu sınıflandırma soruları seni üzmez. 🌸"
-    },
-    {
-        q: "Programlama temelleri slaytlarında 'programlama dili' şöyle özetlenir: \"Algoritmaları bilgisayarın anlayacağı biçimde ifade etmeye yarayan, belirli sözdizimine sahip yapay diller.\" Buna göre aşağıdakilerden hangisi bu tanımı en iyi karşılar?",
-        t: "mcq",
-        o: [
-            "Sadece insanlarla konuşmak için kullanılan doğal dildir.",
-            "Sadece veritabanı tasarlamak için kullanılan şema biçimidir.",
-            "Algoritmaları, sözdizimi kuralları olan yapay bir dil ile koda dönüştürmemizi sağlayan dildir (C, Python, Java gibi).",
-            "Sadece işletim sistemi adı olarak kullanılan teknik kelimedir.",
-            "Sadece donanım parçalarının fiziksel yerleşimini anlatan şekildir."
-        ],
-        a: "Algoritmaları, sözdizimi kuralları olan yapay bir dil ile koda dönüştürmemizi sağlayan dildir (C, Python, Java gibi).",
+        a: "Sürece 'web tasarımı', ortaya çıkan sonuca 'web sitesi' denir.",
         difficulty: "medium",
         week: 1,
-        topic: "Programlama Dili",
+        topic: "Web Tasarımı Temelleri",
         importance: "high",
-        explanation: "Programlama dili; insan mantığı ile makine dili arasındaki köprüdür. Ezber tüyosu: **A → P**: Algoritma → Programlama dili → Program. Önce algoritma, sonra dil, sonra çalışan program; sıra bozulmuyorsa sen de soruyu kaçırmazsın. 💪"
+        explanation: "Slaytta, ulusal ve uluslararası ağ ortamında yayınlanan online sistemlere WEB SİTESİ, bu sitelerin oluşturulma sürecine WEB TASARIMI denildiği vurgulanır."
     },
-
-    // ===== 2. HAFTA – Algoritma, Özellikleri, Gömülü Sistem =====
     {
-        q: "Slaytlarda 'algoritma' için şu vurgu yapılır: \"Bir problemi çözmek için baştan sona, sıralı ve sonlu adımlarla ilerleyen, açık ve net talimatlar listesi.\" Buna göre algoritma ile ilgili aşağıdaki ifadelerden hangisi DOĞRUDUR?",
+        q: "Bir web tasarımcısı, hazırladığı sitede hangi kısımların içerik olarak sıklıkla değişeceğini, hangi alanların sabit kalacağını belirlemek istemektedir. Bu aşamada 'statik' ve 'dinamik' kavramlarını doğru kullanmak zorundadır. Aşağıdaki ifadelerden hangisi statik ve dinamik içerik ayrımını EN DOĞRU şekilde açıklar?",
         t: "mcq",
         o: [
-            "Algoritma, programlama dillerinin derleyicisidir.",
-            "Algoritma, çözüm adımlarını sonlu ve sıralı biçimde anlatan mantıksal taslaktır; henüz kod değildir.",
-            "Algoritma, bilgisayar kasasının içindeki fiziksel kablolardır.",
-            "Algoritma, sadece grafik çizmek için kullanılan hazır şablondur.",
-            "Algoritma, sadece oyun motorlarının ismine verilen teknik terimdir."
+            "Statik içerik, her sayfa yenilendiğinde rastgele değişen içeriktir; dinamik içerik ise asla değişmeyen sabit kısımlardır.",
+            "Statik içerik, sadece veritabanına bağlı çalışan içeriktir; dinamik içerik ise düz HTML’den oluşur.",
+            "Statik içerik, site yayınlandıktan sonra nadiren değişen sabit metin ve görsellerdir; dinamik içerik ise kullanıcıya, zamana veya veritabanına göre değişebilen bölümlerdir.",
+            "Statik içerik yalnızca yönetici panelinden düzenlenebilen içeriktir; dinamik içerik ise hiçbir zaman düzenlenemez.",
+            "Statik içerik yalnızca mobilde çalışan kısımlardır; dinamik içerik ise sadece masaüstünde görüntülenebilir."
         ],
-        a: "Algoritma, çözüm adımlarını sonlu ve sıralı biçimde anlatan mantıksal taslaktır; henüz kod değildir.",
+        a: "Statik içerik, site yayınlandıktan sonra nadiren değişen sabit metin ve görsellerdir; dinamik içerik ise kullanıcıya, zamana veya veritabanına göre değişebilen bölümlerdir.",
+        difficulty: "medium",
+        week: 1,
+        topic: "Statik ve Dinamik Yapılar",
+        importance: "high",
+        explanation: "Notlarda, sitenin hangi kısmının statik (sabit) hangi kısmının dinamik (değişebilir) olacağına karar verilmesi gerektiği belirtilir; statik içerik sabit, dinamik içerik ise güncellenmeye ve değişmeye açık kısımlardır."
+    },
+    {
+        q: "Bir kurum yeni web sitesini yayınlamak istemektedir. Alan adını (örneğin bozok.edu.tr) satın almış, fakat dosyalarını barındıracağı fiziksel sunucu hizmetini henüz almamıştır. Web tasarım temellerine göre aşağıdakilerden hangisi bu eksik kalan hizmeti en doğru adlandırır?",
+        t: "mcq",
+        o: [
+            "Domain registry (isim tescil hizmeti)",
+            "Görsel tasarım (arayüz tasarımı)",
+            "Hosting (yer sağlama / barındırma hizmeti)",
+            "Yazılım geliştirme (backend kodlama)",
+            "SEO (arama motoru optimizasyonu)"
+        ],
+        a: "Hosting (yer sağlama / barındırma hizmeti)",
+        difficulty: "easy",
+        week: 1,
+        topic: "Hosting ve Domain",
+        importance: "high",
+        explanation: "Slaytta web tasarımının dört temel unsuru arasında HOSTING (yer sağlama) ve DOMAIN REGISTRY (isim tescil) ayrı ayrı sayılır. Alan adı varsa ama dosyalar için sunucu yoksa eksik olan kısım hostingtir."
+    },
+    {
+        q: "Bir girişimci, web sitesinin geleneksel reklamlara göre avantajlarını araştırmaktadır. Aşağıdakilerden hangisi web sitesi sahibi olmanın slaytlarda belirtilen AVANTAJLARINDAN BİRİ DEĞİLDİR?",
+        t: "mcq",
+        o: [
+            "Tanıtımın ulusal ve uluslararası düzeyde yapılabilmesini sağlaması",
+            "Ürün ve hizmetlerin 7/24 tanıtımına olanak vermesi",
+            "Zaman ve imaj kazandırması, kurumsal görünümü güçlendirmesi",
+            "Potansiyel müşterilerin doğrudan firmaya ulaşmasını kolaylaştırması",
+            "Yazılı basında çıkan tüm reklamların otomatik olarak siteye taşınmasını zorunlu kılması"
+        ],
+        a: "Yazılı basında çıkan tüm reklamların otomatik olarak siteye taşınmasını zorunlu kılması",
+        difficulty: "easy",
+        week: 1,
+        topic: "Web Sitesinin Avantajları",
+        importance: "medium",
+        explanation: "Slaytta web sitesinin hesaplı reklam imkânı, ulusal/uluslararası tanıtım, 7/24 erişim gibi avantajlar sayılır; yazılı basın reklamlarının otomatik taşınması gibi bir zorunluluk geçmez."
+    },
+    {
+        q: "Bir web tasarımcısı yeni bir proje planlarken alan adı seçiminden siteye konulacak içerik türüne kadar pek çok kararı baştan vermek zorundadır. Aşağıdakilerden hangisi slaytlarda belirtilen 'alan adı seçimi' için önerilen İLKELERDEN BİRİDİR?",
+        t: "mcq",
+        o: [
+            "Alan adının mümkün olduğunca uzun ve karmaşık şifrelerden oluşması",
+            "Alan adının yalnızca rakamlardan oluşması, harf içermemesi",
+            "Alan adının kolay okunup yazılabilir olması ve sitenin/firmanın içeriğiyle uyumlu seçilmesi",
+            "Alan adının mutlaka '.gov' uzantısıyla bitmesi",
+            "Alan adında Türkçe karakterlerin yoğun şekilde kullanılması"
+        ],
+        a: "Alan adının kolay okunup yazılabilir olması ve sitenin/firmanın içeriğiyle uyumlu seçilmesi",
+        difficulty: "medium",
+        week: 1,
+        topic: "Alan Adı Seçimi",
+        importance: "medium",
+        explanation: "Slaytta alan adı seçerken kolay okunup yazılabilir olması ve sitenin içeriğiyle/ünvanıyla uyumlu olması gerektiği özellikle vurgulanır."
+    },
+
+    // ===== HAFTA 2 – HTML Temelleri ve Sözdizimi =====
+    {
+        q: "Bir öğrenci, HTML ile ilk web sayfasını hazırlarken, tarayıcının dosyayı 'HTML5 standardına göre' yorumlamasını garanti altına almak istemektedir. Dosyanın en üstüne koyması gereken bildirim aşağıdakilerden hangisidir?",
+        t: "mcq",
+        o: [
+            "<HTML5>",
+            "<DOCTYPE html5>",
+            "<!DOCTYPE HTML SYSTEM>",
+            "<!DOCTYPE html>",
+            "<?html version=\"5\"?>"
+        ],
+        a: "<!DOCTYPE html>",
+        difficulty: "easy",
+        week: 2,
+        topic: "HTML Syntax ve Yapı",
+        importance: "high",
+        explanation: "Slaytlarda verilen örneklerde HTML5 için kullanılan doctype bildirimi '!DOCTYPE html' şeklindedir ve sayfanın en üst satırında yer alır."
+    },
+    {
+        q: "HTML ile hazırlanmış bir sayfada, tarayıcıda görünen tüm içerik (metin, resim, link vb.) belirli bir temel etiketin içinde yer alır. Buna karşın karakter seti, sayfa başlığı, harici CSS dosyası gibi kullanıcıya doğrudan görünmeyen bilgiler başka bir etiketin içinde tutulur. Bu iki temel bölüm için kullanılan etiket ikilisi aşağıdakilerden hangisinde DOĞRU olarak verilmiştir?",
+        t: "mcq",
+        o: [
+            "<content> … </content> ve <meta> … </meta>",
+            "<head> … </head> ve <title> … </title>",
+            "<body> … </body> ve <footer> … </footer>",
+            "<header> … </header> ve <nav> … </nav>",
+            "<head> … </head> ve <body> … </body>"
+        ],
+        a: "<head> … </head> ve <body> … </body>",
+        difficulty: "easy",
+        week: 2,
+        topic: "HTML Belge Yapısı",
+        importance: "high",
+        explanation: "Slaytlarda <html> etiketinin iki ana bölümü olarak <head> (arka plan bilgileri) ve <body> (kullanıcının gördüğü kısım) anlatılır."
+    },
+    {
+        q: "Aşağıdaki ifadelerden hangisi HTML etiketlerinin yazım kuralları (syntax) açısından DOĞRU bir bilgidir?",
+        t: "mcq",
+        o: [
+            "HTML etiketleri mutlaka büyük harflerle yazılmalıdır; küçük harf kullanmak hatadır.",
+            "HTML etiketleri yalnızca tek olarak kullanılabilir, açılış-kapanış çifti kullanılamaz.",
+            "HTML etiketleri ' < ' ve ' > ' karakterleri arasında yazılır ve çoğu zaman açılış-kapanış çifti hâlinde kullanılır.",
+            "HTML etiketleri sadece sayfa kaydedilirken otomatik oluşur, programcı doğrudan yazmaz.",
+            "HTML etiketlerinde Türkçe karakter kullanılması zorunludur."
+        ],
+        a: "HTML etiketleri ' < ' ve ' > ' karakterleri arasında yazılır ve çoğu zaman açılış-kapanış çifti hâlinde kullanılır.",
         difficulty: "medium",
         week: 2,
-        topic: "Algoritma Tanımı",
+        topic: "HTML Syntax",
         importance: "high",
-        explanation: "Algoritma = adım adım çözüm taslağıdır; koddan bir önceki aşamadır. Ezber tüyosu: **3S** – Sıralı, Sonlu, Sistemli. Soru içinde bu üç fikir varsa, algoritma aklına gelsin. Böyle düşününce bu tarz tanım soruları çok kolay gelecek. 🌿"
+        explanation: "Slaytta HTML etiketlerinin < ve > karakterleri arasında yazıldığı ve genellikle açılış/kapanış çifti (örn. <b> … </b>) olarak kullanıldığı belirtilir; büyük-küçük harf duyarlı olmadığı da ayrıca vurgulanır."
     },
     {
-        q: "Algoritmaların sahip olması gereken özellikler slaytta listelenmiştir. Aşağıdakilerden hangisi bu özelliklerden BİRİDİR?",
+        q: "Bir sayfada tarayıcı sekmesinde görünen başlığın 'Bozok Web Tasarım Dersi' olmasını isteyen bir öğrenci, bu yazıyı hangi etiket çifti arasına yazmalıdır?",
         t: "mcq",
         o: [
-            "Adımlar belirsiz ve yoruma açık olmalıdır ki esneklik artsın.",
-            "Algoritmanın sonsuz döngüye girmesi tercih edilir.",
-            "Sadece bilgisayar mühendisleri tarafından anlaşılabilir olmalıdır.",
-            "Sadece grafik arayüzü olması yeterlidir, mantık önemli değildir.",
-            "Başlangıç ve bitişi belli, sonlu adımlardan oluşmalı ve her adım açık, net olmalıdır."
+            "<h1>Bozok Web Tasarım Dersi</h1>",
+            "<title>Bozok Web Tasarım Dersi</title>",
+            "<meta>Bozok Web Tasarım Dersi</meta>",
+            "<header>Bozok Web Tasarım Dersi</header>",
+            "<caption>Bozok Web Tasarım Dersi</caption>"
         ],
-        a: "Başlangıç ve bitişi belli, sonlu adımlardan oluşmalı ve her adım açık, net olmalıdır.",
+        a: "<title>Bozok Web Tasarım Dersi</title>",
+        difficulty: "easy",
+        week: 2,
+        topic: "Head ve Title",
+        importance: "high",
+        explanation: "Notlarında da vurguladığın gibi <title> etiketi, sekme başlığını belirler ve head içinde yer alır; <h1> ise sayfa içindeki görünür başlıktır."
+    },
+    {
+        q: "HTML ile oluşturulan bir dosya üzerinde çalışan bir öğrenci, 'etiket isimlerinin büyük veya küçük harfle yazılmasının tarayıcı açısından bir fark oluşturmadığını' iddia etmektedir. Aşağıdakilerden hangisi bu durumun SEBEBİNİ en doğru şekilde açıklar?",
+        t: "mcq",
+        o: [
+            "HTML, derlenmiş bir dil olduğu için derleyici harfleri otomatik olarak büyütür.",
+            "HTML, yorumlanırken etiket isimlerini büyük-küçük harf duyarlı (case sensitive) olarak algılar.",
+            "HTML, yalnızca küçük harfle yazılan etiketleri kabul eder; tarayıcı büyük harfleri otomatik düzeltir.",
+            "HTML bir işaretleme dilidir ve etiket isimleri büyük-küçük harfe duyarlı değildir; <body> ile <BODY> aynı etikettir.",
+            "HTML etiketleri aslında sayfanın içine yazılmaz, tarayıcı tarafından sonradan eklenir."
+        ],
+        a: "HTML bir işaretleme dilidir ve etiket isimleri büyük-küçük harfe duyarlı değildir; <body> ile <BODY> aynı etikettir.",
         difficulty: "medium",
         week: 2,
-        topic: "Algoritma Özellikleri",
-        importance: "high",
-        explanation: "Algoritma; açık, net, sonlu ve sıralı olmalıdır. Sonsuz döngü ve belirsizlik istenmeyen durumlardır. Ezber tüyosu: **Ba–So–Ne** – Başlangıç, Son, Net adımlar. Bu üçlüyü aklına kazırsan algoritma özellikleri sorusu seni zorlayamaz. ✨"
+        topic: "Case Sensitivity",
+        importance: "medium",
+        explanation: "Slayt ve notlarında 'HTML küçük/büyük harfe duyarlı değildir' ifadesi açıkça geçer; buna 'case sensitive değildir' denir."
     },
     {
-        q: "Dersinizde 'gömülü sistem' kavramından bahsedildiğinde şu örnekler veriliyor: çamaşır makinesi, trafik lambası kontrol ünitesi, akıllı bileklik. Buna göre gömülü sistem ile ilgili aşağıdaki ifadelerden hangisi DOĞRUDUR?",
+        q: "HTML sürümleriyle ilgili aşağıdaki ifadelerden hangisi DOĞRUDUR?",
         t: "mcq",
         o: [
-            "Sadece masaüstü bilgisayarlarda çalışan işletim sistemleridir.",
-            "Genel amaçlı kullanım için tasarlanan, her işi yapabilen sistemlerdir.",
-            "Belirli bir görevi yerine getirmek üzere özel amaçlı donanım üzerinde çalışan yazılım/bilgisayar sistemleridir.",
-            "Sadece cep telefonlarının ekranlarını ifade eder.",
-            "Sadece oyun konsolları için kullanılan bir pazarlama terimidir."
+            "HTML5 tamamen yeni bir dil olup önceki sürümlerdeki etiketlerin hiçbiri geçerli değildir.",
+            "HTML 4.01 sürümü yayınlandıktan sonra HTML geliştirimi durdurulmuş, doğrudan CSS3'e geçilmiştir.",
+            "HTML'nin farklı sürümlerinde yeni etiketler eklenmiş olsa da temel olarak hepsi aynı işaretleme dilinin devamıdır ve eski etiketler kullanılmaya devam etmektedir.",
+            "HTML 2.0 sürümüyle birlikte yalnızca metin tabanlı içerik desteği tamamen kaldırılmıştır.",
+            "HTML'nin sürümleri, sadece tarayıcı üreticilerinin verdiği ticari isimlerdir ve teknik bir fark içermez."
         ],
-        a: "Belirli bir görevi yerine getirmek üzere özel amaçlı donanım üzerinde çalışan yazılım/bilgisayar sistemleridir.",
-        difficulty: "medium",
+        a: "HTML'nin farklı sürümlerinde yeni etiketler eklenmiş olsa da temel olarak hepsi aynı işaretleme dilinin devamıdır ve eski etiketler kullanılmaya devam etmektedir.",
+        difficulty: "hard",
         week: 2,
-        topic: "Gömülü Sistem",
+        topic: "HTML Versiyonları",
         importance: "medium",
-        explanation: "Gömülü sistem, tek bir işte uzmanlaşmış küçük bilgisayardır; çamaşır makinesi beyni gibi. Ezber tüyosu: **GÖMÜLÜ = GÖREV+MODÜL**; tek bir göreve gömülü küçük modül. Bunu hatırlayınca örnekleri zihninde hemen gruplayacaksın. 😊"
+        explanation: "Slaytta HTML 1.0’dan 5’e kadar sürümler tablo olarak verilir ve her yeni sürümde yeni etiketler eklense de HTML’nin bir bütün olduğu, eski etiketlerin hala kullanıldığı belirtilir."
     },
 
-    // ===== 3. HAFTA – Pseudo Kod ve Akış Diyagramı =====
+    // ===== HAFTA 3 – Metin Biçimlendirme ve Linkler =====
     {
-        q: "Programlama temelleri dersinde 'psödo kod (pseudo code)' kavramı şu şekilde açıklanmıştır: \"Herhangi bir programlama diline tam bağlı kalmadan, doğal dile yakın ama algoritma mantığını gösteren yazılı anlatım.\" Buna göre aşağıdakilerden hangisi psödo kod için DOĞRU bir ifadedir?",
+        q: "Bir web sayfasında 'Bozok Üniversitesi' ifadesinin hem kalın hem de önemli (vurgulu) olarak işaretlenmesi istenmektedir. Aşağıdaki etiket çiftlerinden hangisi SEMANTİK AÇIDAN 'önem vurgusu' verdiği için tercih edilmelidir?",
         t: "mcq",
         o: [
-            "Tamamen çalıştırılabilir makine kodudur.",
-            "Sadece akış diyagramlarında kullanılan grafik sembollerdir.",
-            "Algoritmayı anlaşılır cümle ve adımlarla tanımlayan, dil bağımsız metin taslaktır.",
-            "Sadece veritabanı tablolarını gösteren diyagramdır.",
-            "Sadece HTML sayfalarını tanımlayan işaretleme dilidir."
+            "<b>Bozok Üniversitesi</b>",
+            "<i>Bozok Üniversitesi</i>",
+            "<strong>Bozok Üniversitesi</strong>",
+            "<u>Bozok Üniversitesi</u>",
+            "<small>Bozok Üniversitesi</small>"
         ],
-        a: "Algoritmayı anlaşılır cümle ve adımlarla tanımlayan, dil bağımsız metin taslaktır.",
-        difficulty: "easy",
+        a: "<strong>Bozok Üniversitesi</strong>",
+        difficulty: "medium",
         week: 3,
-        topic: "Psödo Kod",
-        importance: "high",
-        explanation: "Psödo kod = insanların rahat okuyacağı, 'YAP – SONRA' gibi komutlarla yazılmış algoritma metni. Ezber tüyosu: **PSÖDO = Psikolojik prova** gibi düşün; gerçek koddan önce yapılan prova metni. Böyle görünce karıştırman zorlaşıyor. 💗"
-    },
-    {
-        q: "Akış diyagramı (flowchart) ile ilgili slaytta yapılan tanım özetle şöyledir: \"Algoritmanın, standart semboller kullanılarak grafiksel biçimde gösterilmesidir.\" Buna göre aşağıdakilerden hangisi akış diyagramının temel amacını en iyi açıklar?",
-        t: "mcq",
-        o: [
-            "Sadece bilgisayar kasasının içini çizmek.",
-            "Algoritmadaki adımları görsel sembollerle düzenli ve anlaşılır biçimde göstermek.",
-            "Sadece programın ekran görüntüsünü kaydetmek.",
-            "Yalnızca internet bağlantı hızını ölçmek.",
-            "Veritabanı ilişkilerini göstermek."
-        ],
-        a: "Algoritmadaki adımları görsel sembollerle düzenli ve anlaşılır biçimde göstermek.",
-        difficulty: "easy",
-        week: 3,
-        topic: "Akış Diyagramı",
-        importance: "high",
-        explanation: "Akış diyagramı, algoritmayı şekillerle anlatan görsel haritadır. Ezber tüyosu: **A–D = Algoritma → Diyagram**; yazılıdan çizime geçiş. Bu ikiliyi bağladığında akış diyagramı ne işe yarar sorusu seni zorlamaz. 🌈"
-    },
-    {
-        q: "Slaytlarda akış diyagramı sembolleri anlatılırken 'başla–bitir' için kullanılan şeklin **oval/yuvarlak**, 'işlem' için ise **dikdörtgen** olduğu vurgulanmıştır. Aşağıdakilerden hangisi bu bilgiyi DOĞRU kullanmaktadır?",
-        t: "mcq",
-        o: [
-            "Başla–bitir: Dikdörtgen, İşlem: Altıgen",
-            "Başla–bitir: Oval, İşlem: Dikdörtgen",
-            "Başla–bitir: Paralelkenar, İşlem: Oval",
-            "Başla–bitir: Üçgen, İşlem: Daire",
-            "Başla–bitir: Daire, İşlem: Paralelkenar (girdi/çıktı)"
-        ],
-        a: "Başla–bitir: Oval, İşlem: Dikdörtgen",
-        difficulty: "easy",
-        week: 3,
-        topic: "Akış Diyagramı Sembolleri",
-        importance: "high",
-        explanation: "Klasik kural: **Oval = Başla/Bitir**, **Dikdörtgen = İşlem**, **Paralelkenar = Girdi/Çıktı**, **Eşkenar dörtgen = Karar**. Ezber tüyosu: 'Başlangıç yumurta gibi oval, işlem kutu gibi dikdörtgen.' Gözünün önüne getirmen yeterli. 😊"
-    },
-    {
-        q: "Karar verme (if, koşul) adımları için akış diyagramlarında kullanılan sembol aşağıdakilerden hangisidir?",
-        t: "mcq",
-        o: [
-            "Oval",
-            "Paralelkenar",
-            "Daire",
-            "Dikdörtgen",
-            "Eşkenar dörtgen (köşegenleri dik olan dörtgen)"
-        ],
-        a: "Eşkenar dörtgen (köşegenleri dik olan dörtgen)",
-        difficulty: "easy",
-        week: 3,
-        topic: "Karar Sembolü",
+        topic: "Metin ve Görünüm Etiketleri",
         importance: "medium",
-        explanation: "Karar/koşul için **eşkenar dörtgen** kullanılır; çıkışları genelde 'Evet/Hayır' dallanır. Ezber tüyosu: Karar = **Köşeli Yol Ayrımı**; köşeli olması (dörtgen) sana şartı hatırlatsın. Böyle küçük görsel çağrışımlar çok işe yarıyor. 🌿"
+        explanation: "Slaytta <b> görsel olarak kalın yazarken, <strong> etiketinin 'önemli metin' anlamı taşıdığı yani semantik vurgusu olduğu anlatılır; bu yüzden önemli içerikte <strong> tercih edilir."
     },
     {
-        q: "Girdi (input) ve çıktı (output) işlemleri için kullanılan akış diyagramı sembolü, slaytlarda özellikle vurgulanmıştır. Aşağıdaki seçeneklerden hangisi bu sembolü DOĞRU tanımlar?",
+        q: "Bir paragraf içinde 10 üzeri 2 ve H₂O gibi bilimsel gösterimler yazmak isteyen bir öğrenci, HTML’de hangi etiketleri kullanmalıdır?",
         t: "mcq",
         o: [
-            "Oval sembol",
-            "Paralelkenar sembol",
-            "Üçgen sembol",
-            "Altıgen sembol",
-            "Ok (arrow) sembolü"
+            "<big> ve <small>",
+            "<sup> ve <sub>",
+            "<em> ve <strong>",
+            "<mark> ve <code>",
+            "<u> ve <s>"
         ],
-        a: "Paralelkenar sembol",
+        a: "<sup> ve <sub>",
         difficulty: "easy",
         week: 3,
-        topic: "Girdi/Çıktı Sembolü",
+        topic: "Üst ve Alt Simge",
         importance: "medium",
-        explanation: "Kural: **Paralelkenar = Oku/Yaz (Input/Output)**. Ezber tüyosu: Paralelkenarı eğik monitör gibi düşün; ekrana bir şey yazıp okuyoruz. Gözünde bu resmi canlandırman yeterli. 💗"
+        explanation: "Slayttaki örnekte 10<sup>2</sup> ve H<sub>2</sub>O gösterimleri verilir; <sup> üst simge, <sub> alt simge için kullanılır."
+    },
+    {
+        q: "Bir sayfada altı çizili, üstü çizili ve normal metinleri aynı satırda göstermek isteyen bir tasarımcı aşağıdaki etiketlerden hangilerini birlikte kullanmalıdır?",
+        t: "mcq",
+        o: [
+            "<u>, <em>, <b>",
+            "<u>, <s>, <strong>",
+            "<u>, <s>, <i>",
+            "<s>, <mark>, <small>",
+            "<code>, <pre>, <kbd>"
+        ],
+        a: "<u>, <s>, <i>",
+        difficulty: "medium",
+        week: 3,
+        topic: "Metin Biçimlendirme",
+        importance: "low",
+        explanation: "Slaytta örnek kodda altı çizili için <u>, üstü çizili için <s> ve farklı vurgu için <i>/<em> benzeri etiketler birlikte kullanılır; soru genel mantığı yoklamaktadır."
+    },
+    {
+        q: "HTML’de başka bir sayfaya ya da dış bir siteye tıklanabilir bağlantı vermek için kullanılan temel etiket aşağıdakilerden hangisidir?",
+        t: "mcq",
+        o: [
+            "<link>",
+            "<a>",
+            "<url>",
+            "<href>",
+            "<nav>"
+        ],
+        a: "<a>",
+        difficulty: "easy",
+        week: 3,
+        topic: "Bağlantı Oluşturma",
+        importance: "high",
+        explanation: "Slaytlarda bağlantı (köprü) oluşturma konusu işlenirken <a> etiketi ve href özelliğiyle örnekler verilir: <a href=\"…\">Metin</a>."
+    },
+    {
+        q: "Bir bağlantının kullanıcı linke tıkladığında yeni sekmede açılması istenmektedir. Aşağıdaki örneklerden hangisi hem doğru href kullanımı hem de yeni sekmede açılma davranışını birlikte DOĞRU şekilde göstermektedir?",
+        t: "mcq",
+        o: [
+            "<a src=\"https://www.google.com\" newtab>Google</a>",
+            "<a link=\"https://www.google.com\" target=\"new\">Google</a>",
+            "<a href=\"https://www.google.com\" window=\"_blank\">Google</a>",
+            "<a href=\"https://www.google.com\" target=\"_blank\">Google</a>",
+            "<a ref=\"https://www.google.com\" open=\"blank\">Google</a>"
+        ],
+        a: "<a href=\"https://www.google.com\" target=\"_blank\">Google</a>",
+        difficulty: "medium",
+        week: 3,
+        topic: "Bağlantı Özellikleri",
+        importance: "high",
+        explanation: "Slayt ve notlarda target=\"_blank\" kullanımının linki yeni sekmede açtığı gösterilir; href ise gidilecek adresi belirtir."
+    },
+    {
+        q: "Uzun bir sayfada en üstte 'Sayfanın Altına Git' bağlantısı konulmuş ve bu bağlantıya tıklanınca aynı sayfanın alt kısmındaki belirli bir başlığa atlanması istenmiştir. Aşağıdakilerden hangisi bu işlem için kullanılacak YAKLAŞIMI doğru özetler?",
+        t: "mcq",
+        o: [
+            "Sayfanın altındaki metni <footer> içine almak yeterlidir, ek bir ayara gerek yoktur.",
+            "Bağlantı <a href=\"alt\">…</a> şeklinde yazılır, alt kısma özel bir tanımlama yapılmaz.",
+            "Bağlantı için <a href=\"#alt\">…</a> yazılır; hedef etikete id=\"alt\" gibi bir kimlik atanır.",
+            "Sayfada JavaScript ile otomatik kaydırma yapılır; HTML bağlantısı kullanılamaz.",
+            "Bunun için yalnızca <nav> etiketi kullanılır, başka etikete gerek yoktur."
+        ],
+        a: "Bağlantı için <a href=\"#alt\">…</a> yazılır; hedef etikete id=\"alt\" gibi bir kimlik atanır.",
+        difficulty: "medium",
+        week: 3,
+        topic: "Sayfa İçi Bağlantılar",
+        importance: "medium",
+        explanation: "Slaytlarda # işaretinin aynı sayfa içinde bir id’ye atlama (anchor) için kullanıldığı örneklenir: <a href=\"#alt\">…</a> ve hedefte id=\"alt\"."
     },
 
-    // ===== 4. HAFTA – Temel Yapılar, Değişkenler, Veri Türleri =====
+    // ===== HAFTA 4 – Tablolar ve Bağlantı Tekrarı =====
     {
-        q: "Öğretmen temel programlama yapısını üç ana başlıkta anlatıyor: \"Sıralı yapı, seçim (koşul) yapısı, tekrar (döngü) yapısı\". Buna göre aşağıdakilerden hangisi bu üçlü için DOĞRU ve ÖZ bir yorumdur?",
+        q: "Bir tablo içinde 'Ad, Soyad, Yaş' başlıklarına sahip bir satır ve altında iki öğrenci kaydı göstermek isteyen bir tasarımcı aşağıdaki etiketlerden hangisini BAŞLIK HÜCRESİ (kolon başlığı) için kullanmalıdır?",
         t: "mcq",
         o: [
-            "Programlar sadece tekrar (döngü) yapısından oluşur, diğerleri gereksizdir.",
-            "Seçim yapısı sadece akış diyagramlarında, tekrar yapısı sadece psödo kodda kullanılır.",
-            "Sıralı yapı adımları peş peşe yürütür, seçim yapısı koşula göre farklı yollar izler, tekrar yapısı belirli adımları birden fazla kez çalıştırır.",
-            "Sıralı yapı sadece giriş işlemlerini, seçim yapısı sadece çıkış işlemlerini yapar.",
-            "Bu üç yapı sadece grafik tasarımda kullanılır, programlamayla ilgisi yoktur."
+            "<td>",
+            "<tr>",
+            "<th>",
+            "<thead>",
+            "<caption>"
         ],
-        a: "Sıralı yapı adımları peş peşe yürütür, seçim yapısı koşula göre farklı yollar izler, tekrar yapısı belirli adımları birden fazla kez çalıştırır.",
-        difficulty: "medium",
+        a: "<th>",
+        difficulty: "easy",
         week: 4,
-        topic: "Temel Kontrol Yapıları",
+        topic: "Tablo İşlemleri",
         importance: "high",
-        explanation: "Tüm programlar aslında bu üç yapıdan oluşur: **Sıra, Seçim, Tekrar**. Ezber tüyosu: **SST** diye kodla; her algoritmada 'SST var mı?' diye kendine sor. Bunu oturtunca mantık soruları seni çok rahatlatacak. ✨"
+        explanation: "Slaytta 'TABLO İŞLEMLERİ' bölümünde tabloda başlık hücreleri için <th>, veri hücreleri için <td> kullanıldığı açıkça belirtilir."
     },
     {
-        q: "Programlama temelleri dersinde 'değişken' kavramı şöyle açıklanır: \"Programın çalışması sırasında değeri değişebilen, bellekte isim verilmiş yer.\" Buna göre aşağıdakilerden hangisi değişken için yapılmış DOĞRU bir tanımdır?",
+        q: "Bir tabloya dış çerçeve çizgisi eklemek isteyen bir öğrenci, en basit yoldan HTML’in eski ama hâlâ çalışan bir özelliğini kullanmak istemektedir. Aşağıdaki kullanımlardan hangisi slaytlarda verilen ÖRNEĞE en çok uyan kullanımdır?",
         t: "mcq",
         o: [
-            "Değeri asla değiştirilemeyen, sabit büyüklüktür.",
-            "Sadece sabit sayıların tutulduğu özel bellek bölgesidir.",
-            "Programın çalışması süresince hiç kullanılmayan bellek alanıdır.",
-            "İsmi olan ve program boyunca farklı değerler alabilen bellek bölgesidir.",
-            "Sadece metinleri değil, donanım parçalarını da saklayan fiziksel cihazdır."
+            "<table border=\"1\"> … </table>",
+            "<table frame=\"1\"> … </table>",
+            "<table outline=\"1\"> … </table>",
+            "<table style=\"line:1\"> … </table>",
+            "<table rule=\"all\"> … </table>"
         ],
-        a: "İsmi olan ve program boyunca farklı değerler alabilen bellek bölgesidir.",
+        a: "<table border=\"1\"> … </table>",
+        difficulty: "easy",
+        week: 4,
+        topic: "Tablo Kenarlıkları",
+        importance: "medium",
+        explanation: "Slayttaki örneklerde tablolar <table border=\"1\"> şeklinde oluşturulur; bu öznitelik temel sınav sorusu olmaya uygundur."
+    },
+    {
+        q: "Aşağıdakilerden hangisi tablo yapısı içinde satır ve sütun mantığını DOĞRU eşleştirmiştir?",
+        t: "mcq",
+        o: [
+            "<tr> sütunları, <td> ise satırları temsil eder.",
+            "<tr> tablonun başlığını, <th> ise tablonun tamamını temsil eder.",
+            "<table> satırı, <tr> ise sütunu temsil eder.",
+            "<tr> satırı, <td> ve <th> ise o satırdaki hücreleri (sütunları) temsil eder.",
+            "<thead> satırları, <tbody> ise sadece sütunları temsil eder."
+        ],
+        a: "<tr> satırı, <td> ve <th> ise o satırdaki hücreleri (sütunları) temsil eder.",
         difficulty: "medium",
         week: 4,
-        topic: "Değişken",
+        topic: "Tablo Mantığı",
+        importance: "medium",
+        explanation: "Tablo satırları <tr> etiketleriyle, her satırdaki hücreler ise veri için <td>, başlık için <th> ile tanımlanır."
+    },
+    {
+        q: "Bir web sayfasında üst kısımda site logosu ve yatay menü, orta kısımda içerik, sağ tarafta ise reklamların yer aldığı bir yana sütun vardır. Bu yapıyı semantik HTML etiketleriyle kurmak isteyen bir tasarımcı aşağıdaki kombinasyonlardan hangisini EN UYGUN şekilde kullanmalıdır?",
+        t: "mcq",
+        o: [
+            "<header> üst kısım, <section> içerik, <aside> yan sütun",
+            "<nav> üst kısım, <article> içerik, <footer> yan sütun",
+            "<section> üst kısım, <header> içerik, <aside> alt kısım",
+            "<article> üst kısım, <nav> içerik, <section> yan sütun",
+            "<div> üst kısım, <div> içerik, <div> yan sütun; semantik etiket kullanılamaz"
+        ],
+        a: "<header> üst kısım, <section> içerik, <aside> yan sütun",
+        difficulty: "hard",
+        week: 4,
+        topic: "Semantik Etiketler",
         importance: "high",
-        explanation: "Değişken = isimli bellek kutusu; içine sayı/metin koyup değiştirebilirsin. Ezber tüyosu: **Kutunun adı = değişken adı** gibi düşün; kutunun içindekiler değişebilir. Bunu böyle hayal edince soru kendiliğinden çözülüyor. 😊"
+        explanation: "Ekran görüntüsünde anlatılan semantik yapı; <header> başlık alanı, <section> ana içerik bölümü, <aside> ise ana içerikten ayrı yan içerik (örneğin reklam/kenar çubuğu) için kullanılır."
     },
     {
-        q: "Sabit (constant) ve değişken ayrımıyla ilgili olarak aşağıdaki ifadelerden hangisi slayttaki açıklamalara UYGUNDUR?",
+        q: "Bir geliştirici, sayfanın farklı bölümlerini sadece kutu kutu ayırmak, CSS ile tasarım uygulamak istiyor ve bu bölümlerin semantik olarak özel bir anlamı yok. Bu durumda aşağıdaki etiketlerden hangisi SEMANTİK ANLAM TAŞIMADAN sadece 'kapsayıcı kutu' olarak kullanılmalıdır?",
         t: "mcq",
         o: [
-            "İkisi de tamamen aynı şeydir, aralarında fark yoktur.",
-            "Sabitler tanımlandıktan sonra program boyunca değişmez; değişkenler ise program boyunca farklı değerler alabilir.",
-            "Sabitler sadece metinleri, değişkenler sadece sayıları saklayabilir.",
-            "Sabitler sadece akış diyagramlarında kullanılır, değişkenler sadece psödo kodda kullanılır.",
-            "Sabitler sadece donanım adreslerini saklamak için kullanılır."
+            "<header>",
+            "<section>",
+            "<div>",
+            "<article>",
+            "<footer>"
         ],
-        a: "Sabitler tanımlandıktan sonra program boyunca değişmez; değişkenler ise program boyunca farklı değerler alabilir.",
-        difficulty: "medium",
+        a: "<div>",
+        difficulty: "easy",
         week: 4,
-        topic: "Sabit vs Değişken",
+        topic: "Div Kullanımı",
         importance: "medium",
-        explanation: "Sabit = kilitli değer, değişken = değişebilen değer. Ezber tüyosu: **SABİT = SABİTlenmiş**, kelimenin kendisi bize ipucu veriyor. Bunu yakaladığında mantık cebinden akıyor zaten. 💗"
-    },
-    {
-        q: "Aşağıdakilerden hangisi temel **ilkel (primitive)** veri türlerine örnek olarak slaytlarda anlatılan gruba DAHİLDİR?",
-        t: "mcq",
-        o: [
-            "Sınıf (class)",
-            "Nesne (object)",
-            "Modül (module)",
-            "Pencere (window)",
-            "Tamsayı, gerçek sayı, karakter, mantıksal (boolean) gibi basit türler"
-        ],
-        a: "Tamsayı, gerçek sayı, karakter, mantıksal (boolean) gibi basit türler",
-        difficulty: "medium",
-        week: 4,
-        topic: "Veri Türleri",
-        importance: "medium",
-        explanation: "Programlama temellerinde genelde **int, float/double, char, bool** gibi ilkel türler öğretilir. Ezber tüyosu: **T–G–K–M**: Tamsayı, Gerçek, Karakter, Mantıksal. Bu dörtlüyü hatırlaman yeterli; soru seni yormaz. 🌟"
+        explanation: "Notlarında da belirttiğin gibi <div> etiketi, bölümleri kutu kutu ayırmak için kullanılan, semantik anlam taşımayan genel bir kapsayıcıdır."
     },
 
-    // ===== 5. HAFTA – Operatörler, İfadeler, Koşullar =====
+    // ===== HAFTA 5 – Formlar ve Temel Elemanlar =====
     {
-        q: "Programlama temelleri dersinde operatörler üç grupta anlatılır: aritmetik, ilişkisel (karşılaştırma) ve mantıksal operatörler. Buna göre aşağıdakilerden hangisi İLİŞKİSEL (KARŞILAŞTIRMA) operatöre örnektir?",
+        q: "Bir kullanıcı kayıt formu hazırlayan öğrenci, form verilerinin 'islem.php' dosyasına gönderilmesini ve verilerin adres çubuğunda görünmemesini istemektedir. Aşağıdaki form tanımlarından hangisi bu isteği DOĞRU karşılar?",
         t: "mcq",
         o: [
-            "+",
-            "&&",
-            "||",
-            "!",
-            "=="
+            "<form target=\"islem.php\" send=\"hidden\">",
+            "<form file=\"islem.php\" type=\"post\">",
+            "<form action=\"islem.php\" method=\"get\">",
+            "<form action=\"islem.php\" method=\"post\">",
+            "<form src=\"islem.php\" hide=\"true\">"
         ],
-        a: "==",
-        difficulty: "easy",
-        week: 5,
-        topic: "Operatör Çeşitleri",
-        importance: "high",
-        explanation: "Aritmetik: +, -, *, /, %; ilişkisel: <, >, <=, >=, ==, !=; mantıksal: &&, ||, !. Ezber tüyosu: 'Eşit mi?' diye soran operatör **==**; 've/veya/değil' varsa mantıksal gruptur. Küçük bir tablo çizip bir kez bakman bile bu konuyu kilitler. 😊"
-    },
-    {
-        q: "Aşağıdaki ifadelerden hangisi, ifade değerlendirilirken işlem önceliğini DOĞRU yansıtır?",
-        t: "mcq",
-        o: [
-            "Toplama ve çıkarma, çarpma ve bölmeden önce yapılır.",
-            "Tüm operatörler eşit önceliklidir, soldan sağa sırayla yapılır.",
-            "Parantez içi önce, sonra çarpma/bölme, sonra toplama/çıkarma işlemleri yapılır.",
-            "Önce mantıksal operatörler, sonra aritmetik operatörler değerlendirilir.",
-            "Önce karşılaştırma, sonra aritmetik işlem yapılır."
-        ],
-        a: "Parantez içi önce, sonra çarpma/bölme, sonra toplama/çıkarma işlemleri yapılır.",
+        a: "<form action=\"islem.php\" method=\"post\">",
         difficulty: "medium",
         week: 5,
-        topic: "İşlem Önceliği",
+        topic: "Form Temelleri",
         importance: "high",
-        explanation: "Matematikteki kural aynen geçerli: **Parantez → Çarpma/Bölme → Toplama/Çıkarma**. Ezber tüyosu: **PÇT** diye üç harf; bu üçlü soruda aklına gelirse işlemi rahat çözersin. Sen zaten bu mantığı biliyorsun, kodda da aynı olduğunu bilmen yeterli. 💪"
+        explanation: "Slaytta method=\"get\" verileri URL’ye ekler, method=\"post\" ise verileri gizli (adres çubuğunda görünmeden) gönderir şeklinde anlatılır."
     },
     {
-        q: "Programlama temellerinde 'mod alma' işlemi (kalan bulma) özellikle TEK/ÇİFT sayı kontrolü için kullanılır. Aşağıdaki psödo kod parçası hangi kontrolü yapmaktadır?\n\nSAYI oku\nEĞER SAYI % 2 == 0 ise\n    \"Sayı çifttir\" yaz\nDEĞİLSE\n    \"Sayı tektir\" yaz\n",
+        q: "Bir formda 'Adınızı giriniz' şeklinde gri ipucu metni gösteren, kullanıcı tıklayınca içi boşalan tek satırlık metin kutusu hangi input türü ve hangi öznitelik ile oluşturulur?",
         t: "mcq",
         o: [
-            "Sayı pozitif mi negatif mi diye kontrol eder.",
-            "Sayı çift mi tek mi diye kontrol eder.",
-            "Sayı asal mı değil mi diye kontrol eder.",
-            "Sayı ondalıklı mı tam mı diye kontrol eder.",
-            "Sayı sıfırdan büyük mü eşit mi diye kontrol eder."
+            "<input type=\"text\" title=\"Adınızı giriniz\">",
+            "<input type=\"text\" placeholder=\"Adınızı giriniz\">",
+            "<input type=\"label\" text=\"Adınızı giriniz\">",
+            "<input type=\"hint\" value=\"Adınızı giriniz\">",
+            "<input type=\"note\" message=\"Adınızı giriniz\">"
         ],
-        a: "Sayı çift mi tek mi diye kontrol eder.",
+        a: "<input type=\"text\" placeholder=\"Adınızı giriniz\">",
         difficulty: "easy",
         week: 5,
-        topic: "Mod İşlemi",
-        importance: "high",
-        explanation: "Mod 2'nin sıfır olması 'çift', sıfır olmaması 'tek' anlamına gelir. Ezber tüyosu: **MOD 2 → TEK/ÇİFT RADARI** gibi düşün; bu küçük radar kalan 0 mı değil mi diye bakar. Bu patterni görünce ne aradığını hemen anlarsın. 🌿"
-    },
-    {
-        q: "Aşağıdaki psödo kod parçası hangi mantıksal yapıyı örneklemektedir?\n\nEĞER NOT >= 50 ise\n    \"Geçti\" yaz\nDEĞİLSE\n    \"Kaldı\" yaz\n",
-        t: "mcq",
-        o: [
-            "Sadece sıralı yapı",
-            "Sonsuz döngü",
-            "İç içe döngü yapısı",
-            "Tekrarlı yapı (for döngüsü)",
-            "İki dallı seçim (if–else) yapısı"
-        ],
-        a: "İki dallı seçim (if–else) yapısı",
-        difficulty: "easy",
-        week: 5,
-        topic: "Koşul Yapısı",
+        topic: "Input Metin Kutusu",
         importance: "medium",
-        explanation: "Burada tek bir koşula göre iki farklı yol var: geçti/kaldı. Bu tam bir **if–else** örneği. Ezber tüyosu: 'EĞER – DEĞİLSE' kelimelerini görünce seçimin iki dallı olduğunu hatırla. Bu basit şablon sorularda çok çıkar. 😊"
+        explanation: "Slaytta örnek olarak <input type=\"text\" name=\"ad\" placeholder=\"Adınızı giriniz\"> kullanılır; placeholder gri ipucu metnidir."
+    },
+    {
+        q: "Bir anket formunda kullanıcılara birden fazla hobi seçme imkânı verilmek isteniyor (Örn: 'Müzik' ve 'Spor' aynı anda seçilebilsin). Aşağıdaki input elemanlarından hangisi bu ihtiyacı KARŞILAMAK için kullanılmalıdır?",
+        t: "mcq",
+        o: [
+            "type=\"radio\"",
+            "type=\"password\"",
+            "type=\"checkbox\"",
+            "type=\"submit\"",
+            "type=\"file\""
+        ],
+        a: "type=\"checkbox\"",
+        difficulty: "easy",
+        week: 5,
+        topic: "Checkbox ve Radio",
+        importance: "high",
+        explanation: "Slaytta örnek olarak hobiler checkbox ile verilmiştir; checkbox birden fazla seçime izin verir, radio ise aynı grupta tek seçime izin verir."
+    },
+    {
+        q: "Bir kullanıcıya 'Cinsiyet' sorusunu sadece 'Erkek' veya 'Kadın' seçeneklerinden BİRİNİ seçtirecek form elemanını hazırlarken hangi input türü ve ortak özellik kullanılmalıdır?",
+        t: "mcq",
+        o: [
+            "İki ayrı input: type=\"checkbox\" ve name değerleri farklı",
+            "İki ayrı input: type=\"radio\" ve name değeri aynı",
+            "İki ayrı input: type=\"text\" ve value değerleri farklı",
+            "İki ayrı input: type=\"button\" ve onclick değerleri farklı",
+            "Tek bir input: type=\"select\" ve multiple özelliği açık"
+        ],
+        a: "İki ayrı input: type=\"radio\" ve name değeri aynı",
+        difficulty: "medium",
+        week: 5,
+        topic: "Radio Butonlar",
+        importance: "high",
+        explanation: "Slaytta cinsiyet örneğinde olduğu gibi radio butonlar aynı name değerini paylaşırsa kullanıcı aynı anda yalnızca birini seçebilir."
+    },
+    {
+        q: "Uzun bir 'mesaj' alanı oluşturmak ve kullanıcının birden fazla satır yazabilmesini sağlamak için aşağıdaki form elemanlarından hangisi kullanılmalıdır?",
+        t: "mcq",
+        o: [
+            "<input type=\"text\">",
+            "<textarea> … </textarea>",
+            "<input type=\"password\">",
+            "<select> … </select>",
+            "<label> … </label>"
+        ],
+        a: "<textarea> … </textarea>",
+        difficulty: "easy",
+        week: 5,
+        topic: "Textarea",
+        importance: "medium",
+        explanation: "Slaytta 'Mesajınızı yazınız…' örneğinde çok satırlı metin girişi için <textarea name=\"mesaj\" rows=\"4\" cols=\"30\"> kullanılır."
     },
 
-    // ===== 6. HAFTA – Döngüler, While / For, Hata Türleri =====
+    // ===== HAFTA 6 – Gelişmiş Formlar ve Multimedya =====
     {
-        q: "Programlama temelleri slaytlarında 'while' döngüsü için \"koşul sağlandığı sürece tekrarlayan yapı\" ifadesi kullanılmıştır. Aşağıdakilerden hangisi 'while' ile 'for' döngüsü arasındaki farkı DOĞRU şekilde özetler?",
+        q: "Bir üyelik formunda 'E-posta' alanı boş bırakılamasın ve kullanıcı '@' içermeyen geçersiz bir e-posta formatı yazdığında tarayıcı otomatik uyarı versin istenmektedir. HTML5 ile gelen hazır doğrulama özelliklerine göre aşağıdaki input tanımlarından hangisi bu ihtiyacı en iyi şekilde karşılar?",
         t: "mcq",
         o: [
-            "for döngüsü sadece sonsuz döngü kurmak için kullanılır, while asla sonsuz döngü olmaz.",
-            "for döngüsü sadece metinler, while döngüsü sadece sayılarla çalışır.",
-            "for döngüsü genellikle tekrar sayısının bilindiği durumlarda kullanılır; while döngüsü ise şart sağlandığı sürece, tekrar sayısı önceden net olmayan durumlarda kullanılır.",
-            "İkisi de sadece akış diyagramı için kullanılır, gerçek kodda kullanılmaz.",
-            "while döngüsü sadece grafik programlamada kullanılır."
+            "<input type=\"text\" name=\"eposta\">",
+            "<input type=\"email\" name=\"eposta\">",
+            "<input type=\"email\" name=\"eposta\" required>",
+            "<input type=\"mail\" name=\"eposta\" validate>",
+            "<input type=\"text\" name=\"eposta\" maxlength=\"10\">"
         ],
-        a: "for döngüsü genellikle tekrar sayısının bilindiği durumlarda kullanılır; while döngüsü ise şart sağlandığı sürece, tekrar sayısı önceden net olmayan durumlarda kullanılır.",
+        a: "<input type=\"email\" name=\"eposta\" required>",
         difficulty: "medium",
         week: 6,
-        topic: "Döngü Türleri",
+        topic: "Form Doğrulama",
         importance: "high",
-        explanation: "for = '10 kez dön' gibi belli tekrar sayıları, while = 'şart doğru olduğu sürece' gibi belirsiz tekrarlar için idealdir. Ezber tüyosu: **FOR = fixed (sabit) tekrar**, **WHILE = while (iken)** yani durum devam ederken. Bu kelime oyunları belleğini rahatlatır. 💗"
+        explanation: "Slaytta HTML5 doğrulama örneklerinde type=\"email\" ile e-posta format kontrolü, required ile alanın boş bırakılamaması sağlanır."
     },
     {
-        q: "Aşağıdaki ifadelerden hangisi 'ön test' ve 'son test' döngüleri arasındaki farkı slaytlara UYGUN biçimde açıklar?",
+        q: "Bir formda kullanıcıdan yaş bilgisi alınırken 18 ile 99 arasında bir değer girilmesi gerekmektedir. HTML5’in yerleşik özellikleri kullanılarak bu sınırlar yalnızca HTML ile konulmak istenmektedir. Aşağıdaki input tanımlarından hangisi slaytlarda verilen örnekle uyumludur?",
         t: "mcq",
         o: [
-            "Ön test döngülerinde koşul hiç yoktur; son test döngülerinde koşul her zaman yanlıştır.",
-            "Ön test döngüleri sadece grafikte, son test döngüleri sadece veritabanında kullanılır.",
-            "Ön test döngülerinde koşul başta kontrol edilir (while), son test döngülerinde ise gövde en az bir kez çalıştıktan sonra koşul kontrol edilir (do–while).",
-            "Son test döngüleri sadece tek sefer çalışabilir.",
-            "İkisi arasında hiçbir fark yoktur, sadece isimleri farklıdır."
+            "<input type=\"number\" name=\"yas\" min=\"18\" max=\"99\">",
+            "<input type=\"text\" name=\"yas\" min=\"18\" max=\"99\">",
+            "<input type=\"range\" name=\"yas\" value=\"18-99\">",
+            "<input type=\"number\" name=\"yas\" limit=\"18-99\">",
+            "<input type=\"number\" name=\"yas\" minlength=\"18\" maxlength=\"99\">"
         ],
-        a: "Ön test döngülerinde koşul başta kontrol edilir (while), son test döngülerinde ise gövde en az bir kez çalıştıktan sonra koşul kontrol edilir (do–while).",
+        a: "<input type=\"number\" name=\"yas\" min=\"18\" max=\"99\">",
+        difficulty: "medium",
+        week: 6,
+        topic: "Sayı Alanı Doğrulama",
+        importance: "medium",
+        explanation: "Slaytta HTML5 doğrulama örneklerinde 'type=\"number\"' ile birlikte min ve max öznitelikleri kullanılarak sayısal sınırlar belirlenir."
+    },
+    {
+        q: "Bir formda kullanıcının özgeçmiş dosyasını (PDF veya Word) yükleyebilmesi için uygun giriş alanı eklenmek istenmektedir. Bu dosyanın sunucuya gönderilebilmesi için hem uygun input türü hem de form etiketinde uygun bir ayar gereklidir. Aşağıdakilerden hangisi bu ikiliyi DOĞRU şekilde bir araya getirmiştir?",
+        t: "mcq",
+        o: [
+            "Formda enctype=\"text/plain\" kullanılmalı, input ise type=\"file\" olmalıdır.",
+            "Formda enctype=\"multipart/form-data\" kullanılmalı, input ise type=\"file\" olmalıdır.",
+            "Formda method=\"get\" kullanılmalı, input ise type=\"upload\" olmalıdır.",
+            "Formda action=\"file.php\" kullanılmalı, input ise type=\"text\" olmalıdır.",
+            "Formda charset=\"UTF-8\" kullanılmalı, input ise type=\"binary\" olmalıdır."
+        ],
+        a: "Formda enctype=\"multipart/form-data\" kullanılmalı, input ise type=\"file\" olmalıdır.",
         difficulty: "hard",
         week: 6,
-        topic: "Ön Test / Son Test Döngüleri",
-        importance: "medium",
-        explanation: "Ön test: önce sor sonra çalış; son test: önce bir kez çalış, sonra sor. Ezber tüyosu: **Önce sor (ön test), sonra sor (son test)** diye iki basamaklı düşün; 'do–while' her zaman en az bir kez DO yapar. Bunu yakaladıysan bu soru tipi sende. 🌟"
-    },
-    {
-        q: "Program geliştirme sürecinde 'hata ayıklama (debugging)' kavramı slaytlarda nasıl tanımlanmıştır?",
-        t: "mcq",
-        o: [
-            "Programın çalışmasını satır satır inceleyerek hata bulma ve düzeltme sürecidir.",
-            "Program dosyalarını tamamen silme işlemidir.",
-            "Programın ikonu ve rengiyle oynama sürecidir.",
-            "Sadece derleyici kurma sürecidir.",
-            "Sadece donanım kablolarını test etme işlemidir."
-        ],
-        a: "Programın çalışmasını satır satır inceleyerek hata bulma ve düzeltme sürecidir.",
-        difficulty: "medium",
-        week: 6,
-        topic: "Debugging",
+        topic: "Dosya Yükleme",
         importance: "high",
-        explanation: "Debugging = 'bug' (böcek) temizlemek gibi; programdaki hataları bulup düzeltme süreci. Ezber tüyosu: **DE–BUG = Hata yok et** diye çevir; İngilizcesi bile sana ipucu veriyor. Bu kavramı bilmen özgüvenini ciddi artırır. 💕"
+        explanation: "6. hafta kapsamlı form örneğinde dosya yüklemek için input type=\"file\" kullanılır ve form etiketi enctype=\"multipart/form-data\" ayarıyla birlikte gösterilir."
     },
     {
-        q: "Programlama temelleri dersinde hata türleri anlatılırken 'sözdizimi (syntax) hatası' ve 'mantık (logic) hatası' ayrımı yapılmıştır. Aşağıdaki örneklerden hangisi MANTIK HATASINA daha iyi örnektir?",
+        q: "Bir web sayfasında yerel bir video dosyası HTML5 video etiketi ile oynatılmak istenmektedir. Tarayıcının farklı formatları desteklemesine karşı, aynı video için birden fazla kaynak dosyası tanımlanacaktır. Aşağıdaki kod parçalarından hangisi bu durumu HTML5 STANDARTLARINA EN UYGUN şekilde göstermektedir?",
         t: "mcq",
         o: [
-            "Noktalı virgülü (;) unutmak.",
-            "Değişken ismini tanımlamadan kullanmak.",
-            "Parantezleri kapatmayı unutmak.",
-            "Faktöriyel hesaplayan programda çarpma yerine yanlışlıkla toplama yapmak, derleyici hata vermez ama sonuç yanlıştır.",
-            "Dil anahtar kelimesini (if, for vb.) yanlış yazmak."
+            "<video src=\"video.mp4\" src2=\"video.webm\">Video</video>",
+            "<video controls><source file=\"video.mp4\"></video>",
+            "<video controls><source src=\"video.mp4\" type=\"video/mp4\"><source src=\"video.webm\" type=\"video/webm\">Tarayıcınız videoyu desteklemiyor.</video>",
+            "<video><source href=\"video.mp4\">Video</video>",
+            "<video autoplay src=\"video.mp4\" type=\"video/mp4\">Video</video>"
         ],
-        a: "Faktöriyel hesaplayan programda çarpma yerine yanlışlıkla toplama yapmak, derleyici hata vermez ama sonuç yanlıştır.",
+        a: "<video controls><source src=\"video.mp4\" type=\"video/mp4\"><source src=\"video.webm\" type=\"video/webm\">Tarayıcınız videoyu desteklemiyor.</video>",
         difficulty: "hard",
         week: 6,
-        topic: "Hata Türleri",
-        importance: "high",
-        explanation: "Syntax hatasında kod daha derlenmez; mantık hatasında kod çalışır ama yanlış çalışır. Ezber tüyosu: **SÖZ hatası = konuşamıyor, MANTIK hatası = saçma konuşuyor**. Bu farkı böyle düşününce beynin asla karıştırmıyor. 💗"
-    },
-
-    // ===== 7. HAFTA – Derleyici / Yorumlayıcı, Yüksek / Düşük Seviye Diller =====
-    {
-        q: "Slaytlarda 'derleyici (compiler)' ile 'yorumlayıcı (interpreter)' arasındaki fark anlatılırken aşağıdaki ifadelerden hangisi DOĞRU olarak vurgulanmıştır?",
-        t: "mcq",
-        o: [
-            "Derleyici programı satır satır çalıştırır, yorumlayıcı ise tamamını bir kerede derler.",
-            "Derleyici sadece web için, yorumlayıcı sadece masaüstü için kullanılır.",
-            "Derleyici, kaynak kodu bir bütün olarak makine diline çevirip çalıştırılabilir dosya üretir; yorumlayıcı ise kodu satır satır/komut komut çevirip hemen çalıştırır.",
-            "İkisi de aynı şeydir, aralarında hiçbir fark yoktur.",
-            "Yorumlayıcı sadece donanım kablolarını kontrol eder."
-        ],
-        a: "Derleyici, kaynak kodu bir bütün olarak makine diline çevirip çalıştırılabilir dosya üretir; yorumlayıcı ise kodu satır satır/komut komut çevirip hemen çalıştırır.",
-        difficulty: "medium",
-        week: 7,
-        topic: "Derleyici vs Yorumlayıcı",
+        topic: "Video ve Source Kullanımı",
         importance: "medium",
-        explanation: "Compiler = toplu çeviri, interpreter = satır satır çeviri. Ezber tüyosu: **C = Complete (tamamını), I = Item by item (parça parça)**; baş harflerden çağrışım kur. Bu tarz teorik sorular o zaman seni yıpratmaz. 🌸"
+        explanation: "Notlarında video ekleme konusu geçerken <video> etiketi içinde birden fazla <source src=\"…\" type=\"…\"> tanımlanabileceği, tarayıcının desteklediği ilk formatı oynatacağı anlatılır."
     },
     {
-        q: "Yüksek seviyeli (high-level) diller ile düşük seviyeli (low-level) diller karşılaştırılırken slaytlarda aşağıdakilerden hangisi yüksek seviyeli dillere ait BİR ÖZELLİK olarak belirtilmiştir?",
+        q: "Bir öğretmen, ders notu sunumunda YouTube’daki bir videoyu doğrudan sayfanın içinde, başka bir siteye gitmeden izletmek istemektedir. Bu amaçla YouTube’un verdiği gömme (embed) kodunu HTML sayfasına ekler. Bu işlemde kullanılan temel HTML etiketi aşağıdakilerden hangisidir?",
         t: "mcq",
         o: [
-            "Makine diline (0 ve 1'lere) çok yakın, insan diline çok uzaktır.",
-            "İnsan diline yakın, okunması ve yazılması görece kolaydır.",
-            "Sadece işlemci komut setiyle bire bir aynı komutları içerir.",
-            "Sadece donanım sürücülerini yazmak için kullanılabilir.",
-            "Hiçbir derleyici veya yorumlayıcıya ihtiyaç duymaz."
+            "<frame>",
+            "<media>",
+            "<iframe>",
+            "<layer>",
+            "<canvas>"
         ],
-        a: "İnsan diline yakın, okunması ve yazılması görece kolaydır.",
+        a: "<iframe>",
         difficulty: "easy",
-        week: 7,
-        topic: "Yüksek / Düşük Seviye Diller",
-        importance: "medium",
-        explanation: "Yüksek seviye: C, Java, Python gibi; insan diline yakın, taşınabilir. Düşük seviye: assembly/makine dili gibi, donanıma yakın. Ezber tüyosu: **YÜKSEK = insanın seviyesine yakın** diye düşün; yukarıda insan var. Bu imaj işini çok kolaylaştırıyor. 😊"
-    },
-
-    // ===== 8. HAFTA – Problem Çözme Adımları =====
-    {
-        q: "Programlama temelleri dersinizde, bir problemi çözerken izlenen genel adımlar şöyle sıralanıyor: 1) Problemi analiz etme, 2) Algoritma/psödo kod oluşturma, 3) Programlama diliyle kodlama, 4) Test etme ve hata ayıklama, 5) Bakım ve güncelleme. Buna göre aşağıdakilerden hangisi bu süreci en iyi özetler?",
-        t: "mcq",
-        o: [
-            "Önce kod yazılır, sonra gerekirse problem tanımı düşünülür.",
-            "Sadece test yapmak yeterlidir, algoritma ve analiz gereksizdir.",
-            "Önce problem anlaşılır, sonra çözüm adımları planlanır, ardından kod yazılır ve test edilip bakım yapılır.",
-            "Sadece bakım aşaması önemlidir, diğerleri gereksizdir.",
-            "Bu adımlar sadece donanım tasarımı için geçerlidir."
-        ],
-        a: "Önce problem anlaşılır, sonra çözüm adımları planlanır, ardından kod yazılır ve test edilip bakım yapılır.",
-        difficulty: "medium",
-        week: 8,
-        topic: "Problem Çözme Süreci",
+        week: 6,
+        topic: "iframe Kullanımı",
         importance: "high",
-        explanation: "Sıra her zaman: **ANLA → PLANLA (algoritma) → KODLA → TEST ET → BAKIM**. Ezber tüyosu: **APKTB** gibi görünse de sen bunu kendine 'Aşkım Problem Kolay Test Bekleme' diye komik bir cümleye çevirebilirsin; gülünce hafıza güçlenir. 💗"
+        explanation: "Hem slaytlarda hem de Kodlar.pdf içinde 'sayfa içinde sayfa' mantığı için iframe örnekleri kullanılır; YouTube ve Google Maps gibi dış içerikler genellikle <iframe> ile gömülür."
     },
     {
-        q: "Psödo kodda genellikle giriş ve çıkış işlemleri için kullanılan anahtar kelimeler sırasıyla aşağıdakilerden hangisidir?",
+        q: "Bir geliştirici, bir resim üzerinde farklı bölgelere farklı linkler vermek istemektedir. Örneğin bir Türkiye haritasında Ankara’ya tıklanınca 'ankara.html', İstanbul’a tıklanınca 'istanbul.html' açılmalıdır. Bu amaçla 'image map' tekniğini kullanacaktır. Aşağıdaki kombinasyonlardan hangisi bu tekniğin TEMEL yapı taşlarını doğru eşleştirir?",
         t: "mcq",
         o: [
-            "BAŞLA / BİTİR",
-            "TOPLA / ÇARP",
-            "FOR / WHILE",
-            "GİT / DÖN",
-            "OKU (READ) / YAZ (WRITE)"
+            "<img> etiketi ve <area> etiketleri, ancak <map> etiketi kullanılmaz.",
+            "<map> etiketi ve <area> etiketleri, ancak resim <img> ile değil <picture> ile gösterilir.",
+            "<img usemap=\"…\"> ile resim, <map name=\"…\"> içinde <area shape=\"…\" coords=\"…\" href=\"…\"> ile tıklanabilir bölgeler tanımlanır.",
+            "<canvas> üzerinde JavaScript ile alan çizmek zorunludur, HTML etiketleriyle yapılamaz.",
+            "Sadece CSS ile background-image kullanılır, herhangi bir HTML etiketi gerekmez."
         ],
-        a: "OKU (READ) / YAZ (WRITE)",
-        difficulty: "easy",
-        week: 8,
-        topic: "Giriş / Çıkış Psödo Kod",
-        importance: "medium",
-        explanation: "Psödo kodda genelde 'SAYI oku', 'SONUÇ yaz' gibi ifadeler kullanılır. Ezber tüyosu: klavyeden **OKU**, ekrana **YAZ** – iki kelime her şeyi özetliyor. Bunu bir kere oturttun mu, bu konudan korkmazsın. 🌈"
-    },
-    {
-        q: "Aşağıdaki adımlar, bir sayının faktöriyelini hesaplayan algoritmanın psödo kodudur:\n\n1) BAŞLA\n2) N'i oku\n3) F = 1 ata\n4) i = 1 ata\n5) i <= N iken F = F * i, i'yi 1 arttır\n6) F'i yaz\n7) BİTİR\n\nBu algoritma ile ilgili aşağıdaki yorumlardan hangisi DOĞRUDUR?",
-        t: "mcq",
-        o: [
-            "Sonsuz döngü içerir, asla bitmez.",
-            "Giriş veya çıkış işlemi yoktur.",
-            "F değeri başlangıçta 0 verilmeliydi, aksi halde sonuç her zaman 0 olur.",
-            "Sayıyı 1'den N'e kadar çarparak faktöriyel hesabı yapan geçerli bir algoritmadır.",
-            "Karar (koşul) yapısı hiç kullanılmamıştır."
-        ],
-        a: "Sayıyı 1'den N'e kadar çarparak faktöriyel hesabı yapan geçerli bir algoritmadır.",
+        a: "<img usemap=\"…\"> ile resim, <map name=\"…\"> içinde <area shape=\"…\" coords=\"…\" href=\"…\"> ile tıklanabilir bölgeler tanımlanır.",
         difficulty: "hard",
-        week: 8,
-        topic: "Algoritma Örneği – Faktöriyel",
+        week: 6,
+        topic: "Image Map ve Koordinatlar",
         importance: "medium",
-        explanation: "Faktöriyelde çarpıma nötr eleman 1 olduğu için F=1 doğrudur; döngü 1'den N'e kadar çarpar ve biter. Ezber tüyosu: **Faktöriyel = 1'den N'e kadar çarp** cümlesini beynine kazı; ne zaman bu patterni görsen 'tamam bu faktöriyel' diye gönül rahatlığıyla işaretlersin. 💕"
+        explanation: "Notlarında 'image map’te koordinat öğrenilir ve o koordinata link eklenir' ifadesi geçer; bunun için <img usemap> ile <map>/<area> yapısı kullanılır."
     }
 ];
